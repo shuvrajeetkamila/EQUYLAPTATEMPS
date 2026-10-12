@@ -178,10 +178,11 @@ output directory. Parent/data caches are reused and reverified. Ordinary CI stay
 and small. Opt-in Actions commit markers are `[parent-probe]`, `[pretrained-cpu-probe]`,
 `[pretrained-pilot]`. See `notebooks/pretrained-study-colab.ipynb` for the executable workflow.
 
-Reconstruct the actually published 8-step child without retraining:
+Reconstruct either actual child without retraining (the 8-step structural child or selected negative-pilot reference):
 
 ```bash
 python scripts/reconstruct_reference.py --reference examples/pretrained-structural-reference --device cuda
+python scripts/reconstruct_reference.py --reference examples/pretrained-pilot-reference --device cuda
 # Optional private standalone export (contains frozen parent-derived weights):
 python scripts/reconstruct_reference.py --reference examples/pretrained-structural-reference --device cuda --out artifacts/private-restored-child
 ```
