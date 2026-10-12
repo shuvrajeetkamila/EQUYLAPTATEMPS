@@ -30,6 +30,7 @@ class LoadedParents:
     donor: torch.nn.Module
     tokenizer: Tokenizer
     provenance: dict
+    donor_tokenizer: Tokenizer | None = None
 
 
 def load_local_model(path: str | Path, dtype: torch.dtype = torch.float32):
@@ -93,7 +94,7 @@ def load_parents(
         "recipient_sha256": sha256_file(a_path / "config.json"),
         "donor_sha256": sha256_file(b_path / "config.json"),
     }
-    return LoadedParents(a, b, a_tokenizer, provenance)
+    return LoadedParents(a, b, a_tokenizer, provenance, b_tokenizer)
 
 
 def build_local(recipe: Recipe, *, dtype: torch.dtype = torch.float32, device: str = "cpu"):

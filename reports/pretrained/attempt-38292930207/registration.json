@@ -1,0 +1,84 @@
+{
+  "benchmark": {
+    "decoding": "greedy argmax, temperature not sampled, cache-free full-prefix recomputation",
+    "gsm_score": "numeric equality: final ####, then boxed, then last numeric occurrence; strict diagnostic",
+    "gsm_test_samples": 4,
+    "max_input_tokens": 1024,
+    "max_new_tokens": 32,
+    "shots": 0,
+    "wiki_score": "native token NLL/perplexity and bits per UTF-8 byte on nonoverlapping windows; BOS/EOS; not official word PPL",
+    "wiki_test_samples": 16
+  },
+  "calibration": {
+    "batch_size": 1,
+    "gradient_checkpointing": true,
+    "gsm_dev_rows": 4,
+    "gsm_train_rows": 16,
+    "learning_rate": 0.0003,
+    "max_length": 512,
+    "objective": "human GSM8K train reference tokens + WikiText train next tokens; no teacher targets",
+    "selection": "lowest equally weighted math/language development token NLL; same recipient tokenizer",
+    "steps": 16,
+    "wiki_characters": 192,
+    "wiki_dev_chunks": 4,
+    "wiki_train_chunks": 8
+  },
+  "criteria": {
+    "complementarity": "source capability, retention, and functional criteria all pass",
+    "functional": "paired bootstrap 95% lower bounds > 0: math full minus donor bypass; language prefix/suffix bypass minus full",
+    "improvement": "both primary scores better than both parents with positive paired confidence bounds",
+    "language_retention_ratio": 1.1,
+    "limitations": "single-seed exploratory confidence; contiguous WikiText windows correlated; pretraining contamination unknown",
+    "math_retention_fraction": 0.5,
+    "maximum_language_bpb": 3.0,
+    "minimum_math_accuracy": 0.1,
+    "minimum_samples": 64
+  },
+  "dataset_cache": "data/local/pretrained-benchmarks",
+  "device": "cpu",
+  "disallowed": [
+    "LoRA",
+    "distillation",
+    "weight averaging",
+    "ensembles",
+    "task or answer routing"
+  ],
+  "donor_candidates": [
+    [
+      13,
+      15
+    ],
+    [
+      20,
+      22
+    ]
+  ],
+  "dtype": "float32",
+  "mamba_license_origin": {
+    "license": "apache-2.0",
+    "limitation": "HF-converted repository has no direct license tag/document. Original official checkpoint supplies lineage evidence; do not redistribute frozen weights.",
+    "model_id": "state-spaces/mamba-130m",
+    "revision": "c4dcd5d65dff7d0bff5a4c97e30d82e57190f1b0"
+  },
+  "parent_cache": "models/pretrained",
+  "parents": {
+    "donor": {
+      "model_id": "Qwen/Qwen2.5-Math-1.5B",
+      "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"
+    },
+    "recipient": {
+      "model_id": "state-spaces/mamba-130m-hf",
+      "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"
+    }
+  },
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "recipient_cut": [
+    11,
+    13
+  ],
+  "registered_date": "2026-10-12",
+  "reverse_policy": "structural-only after first child validates; no scaling without measured primary retention/contribution",
+  "schema_version": 1,
+  "scope": "CPU exploratory pilot; underpowered for registered inheritance criteria",
+  "seed": 42
+}
