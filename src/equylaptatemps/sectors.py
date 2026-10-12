@@ -134,8 +134,8 @@ def activation_statistics(model, input_batches: list[dict]) -> dict:
         model.train(was_training)
     for record in accumulators:
         count = record["elements"]
-        if not count:
-            raise ValueError("Missing block activation observations")
+        if not count or record["nonfinite"]:
+            raise ValueError("Missing/nonfinite block activation observations")
         record["input_mean"] = record["input_sum"] / count
         record["output_mean"] = record["output_sum"] / count
         record["input_rms"] = (record["input_squares"] / count) ** 0.5

@@ -144,22 +144,36 @@ class SurgicalChild(nn.Module):
             attention_mask[:, 1:] > attention_mask[:, :-1]
         ):
             raise ValueError("Only nonempty, right-padded sequences are supported")
-        if ablation not in {"none", "bypass_graft", "zero_graft"}:
+        if ablation not in {
+            "none",
+            "bypass_graft",
+            "zero_graft",
+            "bypass_prefix",
+            "bypass_suffix",
+            "zero_input_seam",
+            "zero_output_seam",
+        }:
             raise ValueError(f"Unknown graft ablation {ablation!r}")
         if self.training and ablation != "none":
             raise ValueError(
                 "Graft ablations are evaluation-only; training must execute every block"
             )
         hidden = self.embedding(input_ids)
-        hidden = self.prefix(hidden, attention_mask)
+        if ablation != "bypass_prefix":
+            hidden = self.prefix(hidden, attention_mask)
         hidden = self.input_seam(hidden)
+        if ablation == "zero_input_seam":
+            hidden = torch.zeros_like(hidden)
         checkpointing = self.training and self.gradient_checkpointing
         if ablation != "bypass_graft":
             hidden = self.graft(hidden, attention_mask, gradient_checkpointing=checkpointing)
         if ablation == "zero_graft":
             hidden = torch.zeros_like(hidden)
         hidden = self.output_seam(hidden)
-        hidden = self.suffix(hidden, attention_mask, gradient_checkpointing=checkpointing)
+        if ablation == "zero_output_seam":
+            hidden = torch.zeros_like(hidden)
+        if ablation != "bypass_suffix":
+            hidden = self.suffix(hidden, attention_mask, gradient_checkpointing=checkpointing)
         hidden = self.final_norm(hidden).to(self.lm_head.weight.dtype)
         logits = self.lm_head(hidden).float()
         loss = None

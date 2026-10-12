@@ -43,6 +43,21 @@ SOURCES = {
     },
 }
 
+# Measured from the pinned source Git blobs (not expected scores).
+EXPECTED_SHA256 = {
+    "gsm8k": {
+        "train": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465",
+        "test": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+        "license": "86bbb73e855821d7c401912fd4bf82e34313e6e3b6fd6f909f2b6cc9e209a53b",
+    },
+    "wikitext2": {
+        "train": "9e9fa1ad55b1c2c95b08e37dd8e653f638fac2c6de904b79e813611eefbc985f",
+        "validation": "f0737ed31fc1329026e95cb8b98e19c2a182c39c240ab909dc31abf2f8af58e8",
+        "test": "d790b833ef8cf03a90db7bf1271b7520b83c45ce07ba3c1a9699df81e239eca0",
+        "attribution": "ed96062abea03d4f4e8ca80f0caad8b07ec59687b8064319c7ee6f6d900b6286",
+    },
+}
+
 
 def github_json(endpoint: str) -> dict:
     """Use configured gh when available; public REST without credentials works in Colab."""
@@ -81,6 +96,9 @@ def git_blob(repository: str, revision: str, path: str) -> bytes:
 def acquire_benchmarks(target: str | Path) -> dict:
     target = Path(target)
     target.mkdir(parents=True, exist_ok=True)
+    if (target / "manifest.json").exists():
+        manifest, _ = load_benchmarks(target)
+        return manifest
     manifest = {"schema_version": 1, "sources": {}}
     for name, source in SOURCES.items():
         evidence = dict(source)
@@ -113,13 +131,22 @@ def load_benchmarks(target: str | Path) -> tuple[dict, dict]:
     target = Path(target)
     manifest = json.loads((target / "manifest.json").read_text())
     data = {}
+    if set(manifest["sources"]) != set(SOURCES):
+        raise ValueError("Missing registered benchmark source")
     for name, source in manifest["sources"].items():
         data[name] = {}
         if source["revision"] != SOURCES[name]["revision"]:
             raise ValueError("Benchmark revision differs from registered source")
         for split, entry in source["local_files"].items():
-            file = Path(entry["path"])
-            if sha256_file(file) != entry["sha256"]:
+            file = (target / name / Path(SOURCES[name]["files"][split]).name).resolve()
+            if file != Path(entry["path"]).resolve():
+                raise ValueError(
+                    "Dataset manifest paths must remain in their declared source directory"
+                )
+            if (
+                sha256_file(file) != entry["sha256"]
+                or entry["sha256"] != EXPECTED_SHA256[name][split]
+            ):
                 raise ValueError("Benchmark checksum mismatch")
             if split in {"license", "attribution"}:
                 continue
