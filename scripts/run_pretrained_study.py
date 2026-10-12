@@ -40,6 +40,7 @@ from equylaptatemps.recipe import LayerSpan, Recipe
 from equylaptatemps.references import save_reference
 from equylaptatemps.sectors import (
     activation_statistics,
+    annotate_selection,
     identity_sector,
     sector_inventory,
     trace_child,
@@ -372,6 +373,10 @@ def run(config: dict, out: Path, result: dict):
         "omitted_oversize_train_ids": omitted,
         "omitted_oversize_dev_ids": dev_omitted,
     }
+    donor_inventory = annotate_selection(donor_inventory, result["search"])
+    write_json(
+        out / "sector-inventory.json", {"recipient": host_inventory, "donor": donor_inventory}
+    )
     result["structure"] = child.structure_report()
     checkpoint("calibration")
     probe = torch.tensor(

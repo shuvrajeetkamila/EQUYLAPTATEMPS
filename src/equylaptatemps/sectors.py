@@ -167,3 +167,39 @@ def trace_child(child):
     finally:
         for hook in hooks:
             hook.remove()
+
+
+def annotate_selection(inventory: dict, search: dict) -> dict:
+    """Attach actual development selection decisions; never infer capability from block names."""
+    import copy
+    import math
+
+    result = copy.deepcopy(inventory)
+    candidates = {tuple(candidate["span"]): candidate for candidate in search["candidates"]}
+    selected = tuple(search["selected"])
+    available = {tuple(sector["block_boundaries"]) for sector in result["sectors"]}
+    if selected not in available or selected not in candidates:
+        raise ValueError("Selected sector is absent from the measured inventory/search")
+    completed = [candidate for candidate in search["candidates"] if candidate["status"] == "PASS"]
+    if not completed or any(not math.isfinite(c["development_selection_score"]) for c in completed):
+        raise ValueError("Selection needs finite completed candidate scores")
+    winner = min(completed, key=lambda c: c["development_selection_score"])
+    if tuple(winner["span"]) != selected:
+        raise ValueError("Selected sector violates the registered lowest-development-score rule")
+    for sector in result["sectors"]:
+        span = tuple(sector["block_boundaries"])
+        if span not in candidates:
+            sector["selection_status"] = "NOT_RUN"
+            sector["selection_reason"] = "Compatible but not calibrated in this bounded search"
+            continue
+        candidate = candidates[span]
+        score = candidate["development_selection_score"]
+        if candidate["status"] != "PASS" or not math.isfinite(score):
+            raise ValueError("Selection needs a finite completed development observation")
+        sector["selection_status"] = "SELECTED" if span == selected else "REJECTED"
+        sector["selection_reason"] = search["selection_reason"]
+        sector["development_selection_score"] = score
+        sector["selection_interpretation"] = (
+            "Development-fit selection, not isolated capability proof"
+        )
+    return result

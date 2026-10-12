@@ -20,6 +20,14 @@ A runnable research implementation of **whole-block transplantation between Mamb
 
 **Licensing caveat:** Qwen's pinned snapshot has Apache-2.0. The HF-converted Mamba repository lacks a direct license document/tag; the official original Mamba checkpoint declares Apache-2.0. This is lineage evidence, not a license document in the conversion. Frozen weights are deliberately not redistributed. WikiText retains CC-BY-SA-3.0/GFDL terms; GSM8K is MIT.
 
+### Audited follow-up: matched donor control (2026-10-13)
+
+The repository was independently re-audited at `20f456b`, not the historical `b077573`. New execution-contract and inheritance-verdict guards were committed before further real-weight work.
+
+A connected **64-fresh-window language diagnosis** restored the actual selected child and trained a frozen random donor-sector control with exactly the original interface budget. Results (bits/byte, lower is better): **Mamba 1.792**, **Qwen 2.343**, **real learned-sector child 3.280**, **matched random-sector control 3.044**. Registered language retention and learned-sector advantage both **FAIL**. Ablation dependence did not turn into useful inherited ability. Mathematics was not rerun in this language-only diagnosis; the prior actual math pilot remains separately preserved.
+
+The actual reference-dependent child also passed **exact fresh-process logits AND generation repeatability** with new operator/config contracts; all frozen parent/control tensors remained unchanged. [Follow-up report](reports/2026-10-13-stranger-surgery-followup.md), [raw records](reports/pretrained/run-38301210044/results.json), and [audit](reports/audits/2026-10-13-initial-audit.md). No larger/reverse capability experiment launched blindly; no random sector is called a pretrained transplant.
+
 ### What is actually implemented
 
 - Intact native Mamba state-space blocks and Qwen2 attention/MLP blocks; either transplantation direction works.

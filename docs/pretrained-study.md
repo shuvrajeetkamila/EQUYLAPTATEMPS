@@ -205,3 +205,32 @@ Current physical transplantation success does not establish inherited math/langu
 capabilities, useful complementarity, deployment readiness, or superiority. Token/hidden
 semantic alignment, calibration scale, full matched controls, cache correctness/throughput,
 pretraining contamination and multi-seed retention still require research.
+
+## 2026-10-13 audit and matched-sector diagnostic
+
+The completed follow-up used 64 fresh WikiText TEST windows (offset16) and a same-budget
+frozen random native donor sector. Child3.279577BPB versus Mamba1.792145 and Qwen2.343091;
+matched random sector3.043678. Registered language retention and learned-sector advantage
+FAIL; mathematical/dual-capability inheritance NOT_RUN in this isolated study. See
+`reports/2026-10-13-stranger-surgery-followup.md` and `reports/pretrained/run-38301210044/`.
+This preserves old benchmarks and removes a generic-random-feature control confound;
+it does not establish impossibility of future heterogeneous surgery.
+
+On a connected >=12GiB RAM CPU machine, with the repository installed:
+
+```bash
+python scripts/run_language_diagnostic.py --out artifacts/language-diagnostic-002
+python scripts/verify_study.py artifacts/language-diagnostic-002 --datasets data/local/pretrained-benchmarks
+```
+
+Ordinary CI remains offline; opt in to connected execution with `[language-diagnostic]`.
+New saves use bridge-reference format2 with canonical native operator/config contracts.
+Unchanged published format1 pretrained references must go through fresh `load_parents`,
+which captures and verifies source execution settings. Cache paths are nonsemantic;
+RoPE/norm changes are not. Edited inheritance summaries are recomputed/rejected, not trusted.
+Source checksum consistency cannot prove an entirely maliciously forged output bundle is honest.
+
+The v2 descriptor in the raw follow-up report is metadata-only; reuse the unchanged
+`examples/pretrained-pilot-reference/interfaces.safetensors` if reconstructing it.
+No new frozen/duplicate interface binary was committed. The two existing examples
+remain the downloadable actual child interface artifacts.
