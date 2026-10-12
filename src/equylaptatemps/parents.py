@@ -13,7 +13,13 @@ from .backbones import extract_parent
 from .model import child_from_parents
 from .provenance import snapshot_evidence
 from .recipe import Recipe
-from .tokenization import Tokenizer, check_tokenizer, load_tokenizer, tokenizer_fingerprint
+from .tokenization import (
+    ByteTokenizer,
+    Tokenizer,
+    check_tokenizer,
+    load_tokenizer,
+    tokenizer_fingerprint,
+)
 
 DTYPES = {"float32": torch.float32, "bfloat16": torch.bfloat16, "float16": torch.float16}
 
@@ -59,7 +65,19 @@ def load_parents(
         "recipient": snapshot_evidence(recipe.recipient, a_path),
         "donor": snapshot_evidence(recipe.donor, b_path),
     }
+    if not recipe.synthetic and any(
+        evidence["revision_evidence"] != "locally_verified_pinned_download_record"
+        for evidence in snapshots.values()
+    ):
+        raise ValueError(
+            "Pretrained parents require verified pinned snapshot provenance; "
+            "a manually declared revision is insufficient"
+        )
     a_tokenizer, b_tokenizer = load_tokenizer(a_path), load_tokenizer(b_path)
+    if not recipe.synthetic and any(
+        isinstance(t, ByteTokenizer) for t in (a_tokenizer, b_tokenizer)
+    ):
+        raise ValueError("Synthetic byte-tokenizer fixtures cannot be labeled pretrained parents")
     a = load_local_model(a_path, dtype).to(device)
     b = load_local_model(b_path, dtype).to(device)
     recipe.validate(a.config, b.config)

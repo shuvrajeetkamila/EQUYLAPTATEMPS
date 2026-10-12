@@ -1,4 +1,6 @@
-# EQUYLAPTATEMPS
+# HETEROGENEOUS AI MODEL SURGERY
+
+Repository and Python/CLI names (`EQUYLAPTATEMPS`, `equylaptatemps`) are retained solely for compatibility with the existing work. The project is **HETEROGENEOUS AI MODEL SURGERY**.
 
 ## Stranger-model surgery — not LoRA, distillation, or weight merging
 

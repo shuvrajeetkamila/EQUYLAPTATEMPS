@@ -153,3 +153,35 @@ def test_parent_notice_bytes_preserved_for_crlf_documents(local_parents, tmp_pat
     save_artifact(child, tokenizer, tmp_path / "with-crlf", provenance)
     assert (tmp_path / "with-crlf/parent-notices/recipient/LICENSE").read_bytes() == content
     assert load_artifact(tmp_path / "with-crlf").manifest["provenance"] == provenance
+
+
+def test_pretrained_ids_cannot_bypass_snapshot_provenance(local_parents):
+    from dataclasses import replace
+
+    recipe, *_ = local_parents
+    recipe = replace(
+        recipe,
+        recipient=replace(
+            recipe.recipient, model_id="state-spaces/mamba-130m-hf", revision="a1" * 20
+        ),
+        donor=replace(recipe.donor, model_id="Qwen/Qwen2.5-Math-1.5B", revision="b2" * 20),
+    )
+    with pytest.raises(ValueError, match="verified pinned snapshot provenance"):
+        load_parents(recipe)
+
+
+def test_pretrained_ids_cannot_label_byte_fixtures_as_real(local_parents):
+    from dataclasses import replace
+
+    recipe, a_path, b_path = local_parents
+    recipe = replace(
+        recipe,
+        recipient=replace(
+            recipe.recipient, model_id="state-spaces/mamba-130m-hf", revision="a1" * 20
+        ),
+        donor=replace(recipe.donor, model_id="Qwen/Qwen2.5-Math-1.5B", revision="b2" * 20),
+    )
+    record_snapshot(recipe.recipient, a_path)
+    record_snapshot(recipe.donor, b_path)
+    with pytest.raises(ValueError, match="fixtures cannot be labeled pretrained"):
+        load_parents(recipe)
