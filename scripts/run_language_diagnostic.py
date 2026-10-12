@@ -13,6 +13,7 @@ import subprocess
 import sys
 import time
 from dataclasses import asdict
+from importlib.metadata import version
 from pathlib import Path
 
 import torch
@@ -286,7 +287,14 @@ def main():
         "project": config["project"],
         "status": "NOT_RUN",
         "phase": "preflight",
-        "source_commit": os.environ.get("GITHUB_SHA"),
+        "source_commit": (
+            os.environ.get("GITHUB_SHA")
+            or subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
+        ),
+        "software_versions": {
+            name: version(name)
+            for name in ("torch", "transformers", "huggingface-hub", "safetensors")
+        },
         "run_id": os.environ.get("GITHUB_RUN_ID"),
         "registration_sha256": sha256_file(out / "registration.json"),
         "math_benchmark": config["math_benchmark"],
