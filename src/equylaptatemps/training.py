@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import json
+import time
 from dataclasses import dataclass
+from pathlib import Path
 
 import torch
 
 from .audit import frozen_fingerprint, module_fingerprint
-from .data import Record, collate, encode_records, ensure_disjoint
+from .data import EncodedRecord, Record, collate, encode_records, ensure_disjoint
 from .evaluation import evaluate_encoded
 from .model import SurgicalChild
 from .tokenization import Tokenizer
@@ -53,6 +56,38 @@ def fit_seams(
         if validation is not None
         else None
     )
+    return fit_encoded_seams(child, tokenizer, encoded, options, heldout=heldout)
+
+
+def fit_encoded_seams(
+    child: SurgicalChild,
+    tokenizer: Tokenizer,
+    encoded: list[EncodedRecord],
+    options: TrainingOptions,
+    *,
+    heldout: list[EncodedRecord] | None = None,
+    journal: str | Path | None = None,
+) -> dict:
+    """Real-text/human-reference next-token loss; callers enforce split provenance."""
+    options.validate()
+    child.assert_trainable_contract()
+    if not encoded or any(len(row.ids) > options.max_length for row in encoded):
+        raise ValueError("Calibration needs nonempty records inside the registered context budget")
+    started = time.monotonic()
+    if journal is not None:
+        journal = Path(journal)
+        journal.parent.mkdir(parents=True, exist_ok=True)
+        if journal.exists():
+            raise FileExistsError(
+                "Use a new calibration journal; do not overwrite failed-run evidence"
+            )
+
+    def append_event(event):
+        if journal is not None:
+            with journal.open("a", encoding="utf-8") as handle:
+                handle.write(json.dumps(event, allow_nan=False) + "\n")
+
+    append_event({"event": "started", "steps": options.steps, "seed": options.seed})
     frozen_before = frozen_fingerprint(child)
     graft_before = module_fingerprint(child.graft.layers)
     initial = evaluate_encoded(child, encoded, tokenizer, batch_size=options.batch_size)
@@ -80,6 +115,14 @@ def fit_seams(
                 raise RuntimeError("A seam did not receive gradients through the frozen sector")
             torch.nn.utils.clip_grad_norm_(child.seam_parameters(), 1.0, error_if_nonfinite=True)
             optimizer.step()
+            append_event(
+                {
+                    "event": "step",
+                    "step": step + 1,
+                    "batch_token_nll": float(loss.detach()),
+                    "elapsed_seconds": time.monotonic() - started,
+                }
+            )
             # A bounded trace keeps reports small even for long calibration runs.
             if (
                 step == 0
@@ -87,6 +130,9 @@ def fit_seams(
                 or (step + 1) % max(1, options.steps // 20) == 0
             ):
                 losses.append({"step": step + 1, "batch_token_nll": float(loss.detach())})
+    except Exception as error:
+        append_event({"event": "failed", "error_type": type(error).__name__, "error": str(error)})
+        raise
     finally:
         child.eval()
     if (
@@ -100,8 +146,18 @@ def fit_seams(
         if heldout is None
         else evaluate_encoded(child, heldout, tokenizer, batch_size=options.batch_size)
     )
+    append_event({"event": "finished", "frozen_tensors_unchanged": True})
     return {
-        "objective": "ground-truth response-token cross entropy",
+        "objective": "explicit real-text/human-reference next-token cross entropy",
+        "optimizer": {"name": "AdamW", "betas": [0.9, 0.999], "eps": 1e-8, "weight_decay": 0},
+        "elapsed_seconds": time.monotonic() - started,
+        "parent_kind": "synthetic" if child.recipe.synthetic else "pretrained",
+        "trainable_tensors": [
+            {"name": name, "shape": list(p.shape), "dtype": str(p.dtype), "parameters": p.numel()}
+            for name, p in child.named_parameters()
+            if p.requires_grad
+        ],
+        "parameter_counts": child.structure_report(),
         "optimizer_scope": "two newly initialized full-rank dense seams only",
         "steps": options.steps,
         "batch_size": options.batch_size,

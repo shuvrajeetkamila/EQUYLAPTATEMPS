@@ -32,10 +32,12 @@ SUPPORT_FILES = [
 ]
 
 
-def acquire(model_id: str, root: Path) -> ParentSpec:
+def acquire(model_id: str, root: Path, revision: str | None = None) -> ParentSpec:
     if model_id not in REGISTRY or REGISTRY[model_id].synthetic:
         raise ValueError("Choose a pretrained parent from the reviewed provenance registry")
-    info = HfApi().model_info(model_id, files_metadata=True)
+    info = HfApi().model_info(model_id, files_metadata=True, revision=revision)
+    if revision is not None and info.sha != revision:
+        raise ValueError("Hub returned a revision different from the registered immutable parent")
     revision = info.sha
     # Record an immutable commit BEFORE downloading; never save a recipe that references 'main'.
     directory = (root / f"{model_id.rsplit('/', 1)[1]}--{revision[:12]}").resolve()
