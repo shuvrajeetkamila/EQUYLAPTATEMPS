@@ -111,3 +111,22 @@ def test_unvalidated_real_zero_input_control_is_explicitly_blocked(child_bundle)
         assert torch.isfinite(
             child(torch.tensor([[8, 9, 10]]), ablation="zero_input_seam").logits
         ).all()
+
+
+def test_cached_request_rejects_mid_request_parameter_mutation(child_bundle):
+    child, *_ = child_bundle
+    decoder = CachedDecoder(child)
+    decoder.prefill(torch.tensor([[8, 9, 10]]))
+    with torch.no_grad():
+        child.input_seam.projection.bias.add_(0.1)
+    with pytest.raises(ValueError, match="parameters changed"):
+        decoder.step(torch.tensor([[11]]))
+
+
+def test_cached_model_and_control_binding_cannot_be_swapped(child_bundle):
+    child, *_ = child_bundle
+    decoder = CachedDecoder(child)
+    with pytest.raises(AttributeError):
+        decoder.model = child
+    with pytest.raises(AttributeError):
+        decoder.ablation = "bypass_graft"

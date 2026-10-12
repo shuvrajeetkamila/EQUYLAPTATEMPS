@@ -28,6 +28,14 @@ A connected **64-fresh-window language diagnosis** restored the actual selected 
 
 The actual reference-dependent child also passed **exact fresh-process logits AND generation repeatability** with new operator/config contracts; all frozen parent/control tensors remained unchanged. [Follow-up report](reports/2026-10-13-stranger-surgery-followup.md), [raw records](reports/pretrained/run-38301210044/results.json), and [audit](reports/audits/2026-10-13-initial-audit.md). No larger/reverse capability experiment launched blindly; no random sector is called a pretrained transplant.
 
+### Completion-aware math work (2026-10-13)
+
+A separately registered longer-output GSM8K diagnostic uses **16 fresh questions**, two human TRAIN few-shot examples, up to **256 new tokens**, and completed final-number scoring—not arbitrary intermediate-number matches. [Registration](configs/pretrained-completed-math-validated.json), [decoder/limitations](docs/incremental-decoding.md).
+
+Native request-local Qwen KV and Mamba convolution/SSM caches accelerate the same child. Original weights, block indices/configs, one-path topology and default full-prefix training/inference remain unchanged. Supported cache scope: **CPUfloat32, batch1, no padding**. Real cached-versus-original numerical/token checks gate every benchmark; passing unit fixtures alone do not establish real correctness/capability.
+
+The first real-weight attempt **38307630994** failed the **zero-input-interface** numerical gate before scoring test answers. It is preserved in `reports/pretrained/attempt-38307630994/`. That cached control is explicitly blocked; the original uncached control remains. No tolerance was loosened. The registered restricted retry is separate; results are published only after raw-source verification. None of this implies inherited math skill or reverses the negative language results.
+
 ### What is actually implemented
 
 - Intact native Mamba state-space blocks and Qwen2 attention/MLP blocks; either transplantation direction works.

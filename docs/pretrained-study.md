@@ -234,3 +234,24 @@ The v2 descriptor in the raw follow-up report is metadata-only; reuse the unchan
 `examples/pretrained-pilot-reference/interfaces.safetensors` if reconstructing it.
 No new frozen/duplicate interface binary was committed. The two existing examples
 remain the downloadable actual child interface artifacts.
+
+## Completion-aware math/cache extension
+
+See `docs/incremental-decoding.md` for CPUfloat32/batch1 native state caching,
+full-prefix oracle checks, request isolation and the explicit unvalidated zero-input
+control restriction. The default un-cached model/training path and earlier records
+remain unchanged. New math uses16 fresh TEST questions, two human TRAIN fewshots,
+up to256 new tokens, and completed numeric final-marker scoring only. It is a
+different exploratory protocol, not the old four-case flexible-match score.
+
+```bash
+python scripts/run_completed_math.py --config configs/pretrained-completed-math-validated.json --out artifacts/completed-math-002
+python scripts/verify_study.py artifacts/completed-math-002 --datasets data/local/pretrained-benchmarks
+```
+
+The first attempt failed its zero-input cached oracle before any test answer was
+scored; retained failure is under `reports/pretrained/attempt-38307630994/`.
+Do not call failed cached controls validated, loosen tolerances for score publication,
+or describe completion-aware short diagnostics as min64/multi-seed inheritance.
+GPU cache validation remains NOT_RUN. Unchanged frozen tensors and independent
+standalone child reload/generation are rechecked for each completed real run.
