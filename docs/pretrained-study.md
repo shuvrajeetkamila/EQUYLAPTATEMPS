@@ -30,6 +30,21 @@ The actual **9,465,560-byte** newly trained interface checkpoint is published in
 parameter tensors. It is **not standalone**: the original pinned parents must be acquired.
 No frozen parent tensors are uploaded. The earlier tiny synthetic ZIP remains unchanged.
 
+## Completed controlled pilot: negative capability evidence
+
+Connected run **38293921543** completed all parent baselines, candidate calibration,
+child/control held-out records, fresh-process reload, frozen-parent audit, and reverse
+structural forward. Selected Qwen sector [20,22) had the lowest development loss;
+16 steps/candidate used human GSM8K TRAIN references and WikiText TRAIN text only.
+Child math was **0/4**, language **3.444856383352949 BPB**, versus Mamba **1.765828132006639**
+and Qwen **2.5806685715288404**. Both parents had 1/4 flexible numeric matches and strict
+format 0%; incomplete/coincidental numeric matches mean those are not compelling math evidence.
+Child generations repeated `the` and commas. The ~25-minute CPU pilot is negative,
+underpowered evidence, NOT successful inheritance. Ablations worsened language likelihood
+but do not establish useful transferred skills. Formal criteria remain NOT_RUN at min64.
+See `reports/pretrained/run-38293921543/` and the dated report for exact prompts/records,
+confidence intervals, candidate losses, all controls, failures and limitations.
+
 ## Parents, identity and licensing
 
 | Role | Exact model | Immutable revision | Architecture |

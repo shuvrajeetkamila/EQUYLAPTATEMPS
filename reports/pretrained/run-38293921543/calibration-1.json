@@ -1,0 +1,256 @@
+{
+  "batch_size": 1,
+  "capability_claim": "none; calibration loss is not a capability benchmark",
+  "donor_sector_sha256": "eed714c602b75a714a36db8d4fbd2949818b935ad146fe7c1efd21313890e969",
+  "elapsed_seconds": 232.02033327599997,
+  "final_train": {
+    "ablation": "none",
+    "groups": {
+      "domain:language": {
+        "examples": 8,
+        "nll_sum": 3598.1118774414062,
+        "perplexity": 14690.627824976931,
+        "target_tokens": 375,
+        "token_nll": 9.594965006510417
+      },
+      "domain:math": {
+        "examples": 16,
+        "nll_sum": 11613.449829101562,
+        "perplexity": 2655.0420455775848,
+        "target_tokens": 1473,
+        "token_nll": 7.884215769926383
+      },
+      "overall": {
+        "examples": 24,
+        "nll_sum": 15211.561706542969,
+        "perplexity": 3756.9568482612294,
+        "target_tokens": 1848,
+        "token_nll": 8.231364559817624
+      }
+    },
+    "metric": "recipient-token response NLL; not proof of task mastery"
+  },
+  "frozen_tensors_sha256": "ba6c0f8331f18c222ed4c2b46016464e709702199bdf83e6236033b1a055867d",
+  "frozen_tensors_unchanged": true,
+  "gradient_checkpointing": true,
+  "initial_train": {
+    "ablation": "none",
+    "groups": {
+      "domain:language": {
+        "examples": 8,
+        "nll_sum": 6958.365234375,
+        "perplexity": 114449086.76556522,
+        "target_tokens": 375,
+        "token_nll": 18.555640625
+      },
+      "domain:math": {
+        "examples": 16,
+        "nll_sum": 23783.42138671875,
+        "perplexity": 10285510.326737024,
+        "target_tokens": 1473,
+        "token_nll": 16.1462466983834
+      },
+      "overall": {
+        "examples": 24,
+        "nll_sum": 30741.78662109375,
+        "perplexity": 16771069.737174828,
+        "target_tokens": 1848,
+        "token_nll": 16.635165920505276
+      }
+    },
+    "metric": "recipient-token response NLL; not proof of task mastery"
+  },
+  "learning_rate": 0.0003,
+  "max_length": 512,
+  "objective": "explicit real-text/human-reference next-token cross entropy",
+  "optimizer": {
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "name": "AdamW",
+    "weight_decay": 0
+  },
+  "optimizer_scope": "two newly initialized full-rank dense seams only",
+  "parameter_counts": {
+    "context_limit": 4096,
+    "donor_family": "qwen2",
+    "donor_width": 1536,
+    "frozen_parameters": 215187712,
+    "parent_weight_arithmetic": false,
+    "prefix_blocks": 11,
+    "production_bypass": false,
+    "recipient_family": "mamba",
+    "recipient_width": 768,
+    "removed_recipient_blocks": 2,
+    "suffix_blocks": 11,
+    "trainable_dense_seam_parameters": 2366208,
+    "transplanted_blocks": 2,
+    "unique_parameters": 217553920
+  },
+  "parent_kind": "pretrained",
+  "seed": 42,
+  "steps": 16,
+  "trace": [
+    {
+      "batch_token_nll": 17.066659927368164,
+      "step": 1
+    },
+    {
+      "batch_token_nll": 11.890419960021973,
+      "step": 2
+    },
+    {
+      "batch_token_nll": 15.470370292663574,
+      "step": 3
+    },
+    {
+      "batch_token_nll": 44.51942825317383,
+      "step": 4
+    },
+    {
+      "batch_token_nll": 12.536321640014648,
+      "step": 5
+    },
+    {
+      "batch_token_nll": 11.672393798828125,
+      "step": 6
+    },
+    {
+      "batch_token_nll": 14.179905891418457,
+      "step": 7
+    },
+    {
+      "batch_token_nll": 10.040095329284668,
+      "step": 8
+    },
+    {
+      "batch_token_nll": 9.2400541305542,
+      "step": 9
+    },
+    {
+      "batch_token_nll": 9.809412002563477,
+      "step": 10
+    },
+    {
+      "batch_token_nll": 12.703652381896973,
+      "step": 11
+    },
+    {
+      "batch_token_nll": 8.285127639770508,
+      "step": 12
+    },
+    {
+      "batch_token_nll": 10.08881664276123,
+      "step": 13
+    },
+    {
+      "batch_token_nll": 8.722768783569336,
+      "step": 14
+    },
+    {
+      "batch_token_nll": 8.04723072052002,
+      "step": 15
+    },
+    {
+      "batch_token_nll": 7.899080276489258,
+      "step": 16
+    }
+  ],
+  "trainable_tensors": [
+    {
+      "dtype": "torch.float32",
+      "name": "input_seam.norm.weight",
+      "parameters": 768,
+      "shape": [
+        768
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "input_seam.norm.bias",
+      "parameters": 768,
+      "shape": [
+        768
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "input_seam.projection.weight",
+      "parameters": 1179648,
+      "shape": [
+        1536,
+        768
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "input_seam.projection.bias",
+      "parameters": 1536,
+      "shape": [
+        1536
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "output_seam.norm.weight",
+      "parameters": 1536,
+      "shape": [
+        1536
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "output_seam.norm.bias",
+      "parameters": 1536,
+      "shape": [
+        1536
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "output_seam.projection.weight",
+      "parameters": 1179648,
+      "shape": [
+        768,
+        1536
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "output_seam.projection.bias",
+      "parameters": 768,
+      "shape": [
+        768
+      ]
+    }
+  ],
+  "validation": {
+    "ablation": "none",
+    "groups": {
+      "domain:language": {
+        "examples": 4,
+        "nll_sum": 1843.4446105957031,
+        "perplexity": 12753.513810765222,
+        "target_tokens": 195,
+        "token_nll": 9.45356210561899
+      },
+      "domain:math": {
+        "examples": 4,
+        "nll_sum": 3582.4573364257812,
+        "perplexity": 3994.7062089153605,
+        "target_tokens": 432,
+        "token_nll": 8.29272531580042
+      },
+      "overall": {
+        "examples": 8,
+        "nll_sum": 5425.901947021484,
+        "perplexity": 5731.606355399693,
+        "target_tokens": 627,
+        "token_nll": 8.653751111677009
+      }
+    },
+    "metric": "recipient-token response NLL; not proof of task mastery"
+  }
+}

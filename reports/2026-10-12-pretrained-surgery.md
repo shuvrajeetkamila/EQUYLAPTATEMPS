@@ -6,7 +6,7 @@
 
 A genuine pretrained stranger-model child **was built, executed, calibrated on real text, saved, and reloaded in a fresh process**. This is a material advance over the preserved random-parent prototype. The first measured integrated child has **217,553,920 parameters**, of which **215,187,712 are frozen pretrained tensors** and **2,366,208 are newly initialized full-sized interfaces/norms**. Neither LoRA, distillation, averaging, ensembles, nor answer/task routing was used.
 
-**Useful capability inheritance remains unproven.** Eight calibration steps reduced a tiny real-text fitting loss, but the short generation sample was `io`. This is not a usable-language or mathematical-reasoning result. Benchmark test targets were not used for calibration. The subsequent controlled CPU experiment is documented separately below; no unexecuted metric is represented as zero.
+**Useful capability inheritance remains unproven.** Eight calibration steps reduced a tiny real-text fitting loss, but the short generation sample was `io`. This is not a usable-language or mathematical-reasoning result. Benchmark test targets were not used for calibration. The completed controlled CPU pilot below produced negative capability results; no unexecuted metric is represented as zero.
 
 ## A. Independent audit and corrections — completed before real-parent work
 
@@ -106,13 +106,42 @@ Run **38292930207**, source **de830174d43b8a4ce9c5172b2256fa8899b0e7ec**, failed
 
 That attempt measured Mamba **1/4 flexible numeric matches (25%; Wilson 95% 4.56–69.94%)**, **strict match 0%**, and language **1.7658307429651134 bits/byte** on the 16 selected WikiText windows. These are partial native-parent observations only, not child results or established mathematical ability. All child/donor/ablation metrics in that failed attempt remain **NOT_RUN / null**. The donor tokenizer field was corrected with a regression test; failure evidence was not erased.
 
-### Controlled retry
+### Completed controlled retry — verified negative result
 
-A corrected registered CPU retry was started as run **38293921543**, source **95b2831a7f54ae7755e6892e364d993a779a3193**. Its results will be appended only after external JSON/observation checksums and recomputed summaries are verified. Until that verified record is present, its completion, scores, candidate selection, reverse execution and inheritance criteria are **NOT_RUN/pending**, not assumed.
+Corrected run **38293921543**, source **95b2831a7f54ae7755e6892e364d993a779a3193**, completed all 12 execution stages. Observed study time was **1,498.081661872 seconds** (about 24.97 minutes; whole Actions job 25m44s). Public bot JSON bundle checksum, raw-file digests, metric recomputation and original pinned dataset references/text hashes were verified independently here. All records live under `reports/pretrained/run-38293921543/`; the previous failed attempt is preserved separately.
+
+| Variant | GSM8K flexible matches (4 cases) | Strict #### accuracy | WikiText bits/byte (16 windows; lower is better) |
+|---|---:|---:|---:|
+| Original Mamba recipient | 1/4 (25%) | 0% | 1.765828132006639 |
+| Original Qwen donor | 1/4 (25%) | 0% | 2.5806685715288404 |
+| Calibrated child | **0/4 (0%)** | 0% | **3.444856383352949** |
+| Uncalibrated child | 0/4 | 0% | 5.524332142264799 |
+| Donor bypass | 0/4 | 0% | 10.32563161071116 |
+| Recipient prefix bypass | 0/4 | 0% | 4.264506914218898 |
+| Recipient suffix bypass | 0/4 | 0% | 10.769998042271437 |
+| Zero input interface | 0/4 | 0% | 5.209031366423994 |
+| Zero output interface | 0/4 | 0% | 3.9425284076474734 |
+| Independent random interfaces | 0/4 | 0% | 5.712653009342807 |
+
+Math Wilson 95% intervals: for 1/4, **[0.04558726080970055, 0.6993581574175981]**; for 0/4, **[0, 0.4898908364545973]**. These are tiny-sample exploratory estimates, not convincing mathematical capability scores. Qwen's matching response stopped at an intermediate “Each child requires 5”; flexible extraction matched that number, not a completed correct rationale. Both parent strict-format scores are zero. The 32-token budget and prompt/scoring format severely limit interpretation; no published-model benchmark accuracy comparison is claimed.
+
+The child produced repetitive strings such as `the,, the, the,, the, the...` and commas, not useful answers. Its language BPB was **1.9508446608777879× Mamba's** (derived from raw summaries), and worse than Qwen too. Thus this pilot does not demonstrate retention or improvement; the point estimates miss both the math floor and the 1.10× language-retention target. Formal inheritance/source-capability/contribution/complementarity/improvement criteria are **NOT_RUN**, explicitly blocked by the predeclared **64-sample minimum**, rather than retrospectively lowering that minimum to claim success.
+
+Language ablations worsen likelihood relative to the full calibrated child. Derived paired-window bootstrap control-minus-child BPB differences (95% intervals): donor bypass **6.88077522735821 [4.871655295249589, 9.062780649531115]**; prefix bypass **0.8196505308659493 [0.7047022065474255, 0.9791546984080529]**; suffix bypass **7.3251416589184855 [6.758397980655381, 7.961463480203531]**. Math child-minus-donor-bypass difference is **0 [0,0]**. Full paired calculations are in `derived-pilot-analysis.json`. These correlated-window, single-seed effects show computational dependence/fit, **not inheritance of useful parent-specific capability**. Random interfaces are untrained, not a matched-training-budget random-sector control.
+
+#### Actual development search/calibration
+
+The cut remained Mamba [11,13). Independently calibrated donor candidates were [13,15) and [20,22). Equal-weight math/language development NLL scores were **9.439523602347089** and **8.873143710709705**. The predeclared lowest-development-NLL rule selected **Qwen [20,22)**; no test score selected it. No context-oversize math rows were omitted in this run.
+
+Each candidate trained only the eight new interfaces/norms for **16 steps**, LR **0.0003**, batch 1, seed 42, max context 512, checkpointing true. Real calibration data: **16 human GSM8K TRAIN answers + 8 WikiText TRAIN windows**, with **4 train-derived math development answers + 4 WikiText VALID windows**. Text windows are 192 characters. Selected candidate train token NLL **16.635165920505276 → 8.231364559817624**; development overall NLL **8.653751111677009**, math **8.29272531580042**, language **9.45356210561899**. Selected calibration time **232.02033327599997 seconds**. Candidate [13,15) calibration time **264.48450685299997 seconds**. Loss improvements alone remain fitting evidence.
+
+The selected [20,22) child has the same measured parameter counts as the first structural [13,15) child, but different transplanted tensor identities and newly trained interfaces. Original parents remained unchanged. Its frozen-child SHA is `ba6c0f8331f18c222ed4c2b46016464e709702199bdf83e6236033b1a055867d`. Fresh-process parent-free load again produced **identical logits**. The public reference descriptor is in the run records; actual new selected interface tensors are preserved separately under `examples/pretrained-pilot-reference/` after connected extraction/checking, without frozen weights.
+
+Both original-parent sector development NLL/identity ablations and scalar activations were actually measured; `sector-inventory.json` contains these real observations and complete tensor shapes. The native stock operations remain intact. This does not make the selected contiguous sector a biologically isolated “math organ.”
 
 ## H. Reverse surgery policy
 
-The runner implements resource-bounded opposite-direction **structural-only** checking after primary execution/export/reload validates. It does not train a second larger experiment or add sectors blindly. Reverse capability evaluation is NOT_RUN until justified by primary evidence. A finite reverse forward is not inherited capability.
+The runner implements resource-bounded opposite-direction **structural-only** checking after primary execution/export/reload validates. It does not train a second larger experiment or add sectors blindly. The completed pilot also measured a finite **Qwen → Mamba → Qwen** reverse structural forward (PASS). Reverse training/benchmarks remain **NOT_RUN** because primary capability evidence was negative/underpowered. A finite reverse forward is not inherited capability.
 
 ## I. Scientific integrity and tests
 

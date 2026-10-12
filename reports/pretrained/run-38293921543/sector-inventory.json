@@ -1,0 +1,933 @@
+{
+  "donor": {
+    "architecture_family": "qwen2",
+    "hidden_size": 1536,
+    "layer_count": 28,
+    "model_id": "Qwen/Qwen2.5-Math-1.5B",
+    "parameter_count": 1543714304,
+    "parent_kind": "pretrained",
+    "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2",
+    "sectors": [
+      {
+        "ablation_performance": {
+          "ablation": "none",
+          "groups": {
+            "domain:language": {
+              "examples": 4,
+              "nll_sum": 1324.12548828125,
+              "perplexity": 988.7948893292972,
+              "target_tokens": 192,
+              "token_nll": 6.896486918131511
+            },
+            "domain:math": {
+              "examples": 4,
+              "nll_sum": 477.5243225097656,
+              "perplexity": 2.3111886731728117,
+              "target_tokens": 570,
+              "token_nll": 0.8377619693153783
+            },
+            "overall": {
+              "examples": 8,
+              "nll_sum": 1801.6498107910156,
+              "perplexity": 10.637333381195036,
+              "target_tokens": 762,
+              "token_nll": 2.364369830434404
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        },
+        "activation_statistics": [
+          {
+            "calls": 2,
+            "delta_squares": 534556.0625,
+            "elements": 789504,
+            "input_mean": 0.02666685522453021,
+            "input_rms": 12.633983421177023,
+            "input_squares": 126018684.0,
+            "input_sum": 21053.5888671875,
+            "nonfinite": 0,
+            "output_mean": 0.020964683725676184,
+            "output_rms": 12.690062826973284,
+            "output_squares": 127139904.0,
+            "output_sum": 16551.70166015625,
+            "residual_change_rms": 0.822847705243714
+          },
+          {
+            "calls": 2,
+            "delta_squares": 560860.0625,
+            "elements": 789504,
+            "input_mean": 0.020964683725676184,
+            "input_rms": 12.690062826973284,
+            "input_squares": 127139904.0,
+            "input_sum": 16551.70166015625,
+            "nonfinite": 0,
+            "output_mean": 0.025191725150775043,
+            "output_rms": 12.722321722330602,
+            "output_squares": 127787120.0,
+            "output_sum": 19888.9677734375,
+            "residual_change_rms": 0.8428496109315197
+          }
+        ],
+        "baseline_performance": {
+          "ablation": "none",
+          "groups": {
+            "domain:language": {
+              "examples": 4,
+              "nll_sum": 1302.0850219726562,
+              "perplexity": 881.5597861827259,
+              "target_tokens": 192,
+              "token_nll": 6.781692822774251
+            },
+            "domain:math": {
+              "examples": 4,
+              "nll_sum": 417.0109558105469,
+              "perplexity": 2.0783995867195135,
+              "target_tokens": 570,
+              "token_nll": 0.7315981680886787
+            },
+            "overall": {
+              "examples": 8,
+              "nll_sum": 1719.0959777832031,
+              "perplexity": 9.545133723803646,
+              "target_tokens": 762,
+              "token_nll": 2.256031466907091
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        },
+        "block_boundaries": [
+          13,
+          15
+        ],
+        "candidate_capabilities": [
+          "mathematical-reasoning hypothesis"
+        ],
+        "capability_label_status": "hypothesis only; development NLL is not math accuracy",
+        "compatibility_status": "PASS",
+        "dependencies": "native RMSNorm/MLP/GQA, config-derived RoPE, causal key-padding mask",
+        "evaluation_method": "development activations and identity-replacement NLL",
+        "limitations": "Distributed features, not a math organ; token semantics differ.",
+        "parameter_count": 93595648,
+        "sector_id": "qwen2:13:15",
+        "sector_sha256": "e61216ee63ee7fece28e8d6c88402d806bdce70d94973c7b1b202f459ae71458",
+        "selection_reason": "Compatible structure, no capability selection yet",
+        "selection_status": "NOT_RUN",
+        "tensor_shapes": [
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.q_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              1536,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.q_proj.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.k_proj.weight",
+            "parameters": 393216,
+            "shape": [
+              256,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.k_proj.bias",
+            "parameters": 256,
+            "shape": [
+              256
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.v_proj.weight",
+            "parameters": 393216,
+            "shape": [
+              256,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.v_proj.bias",
+            "parameters": 256,
+            "shape": [
+              256
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.o_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              1536,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mlp.gate_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              8960,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mlp.up_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              8960,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mlp.down_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              1536,
+              8960
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.input_layernorm.weight",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.post_attention_layernorm.weight",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.q_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              1536,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.q_proj.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.k_proj.weight",
+            "parameters": 393216,
+            "shape": [
+              256,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.k_proj.bias",
+            "parameters": 256,
+            "shape": [
+              256
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.v_proj.weight",
+            "parameters": 393216,
+            "shape": [
+              256,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.v_proj.bias",
+            "parameters": 256,
+            "shape": [
+              256
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.o_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              1536,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mlp.gate_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              8960,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mlp.up_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              8960,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mlp.down_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              1536,
+              8960
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.input_layernorm.weight",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.post_attention_layernorm.weight",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          }
+        ]
+      },
+      {
+        "ablation_performance": {
+          "ablation": "none",
+          "groups": {
+            "domain:language": {
+              "examples": 4,
+              "nll_sum": 1338.4252319335938,
+              "perplexity": 1065.2499544862492,
+              "target_tokens": 192,
+              "token_nll": 6.970964749654134
+            },
+            "domain:math": {
+              "examples": 4,
+              "nll_sum": 525.2314071655273,
+              "perplexity": 2.512953134245708,
+              "target_tokens": 570,
+              "token_nll": 0.9214586090623287
+            },
+            "overall": {
+              "examples": 8,
+              "nll_sum": 1863.656639099121,
+              "perplexity": 11.539127144931193,
+              "target_tokens": 762,
+              "token_nll": 2.4457436208649885
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        },
+        "activation_statistics": [
+          {
+            "calls": 2,
+            "delta_squares": 2434429.25,
+            "elements": 789504,
+            "input_mean": 0.03741104160610649,
+            "input_rms": 13.094068301171557,
+            "input_squares": 135364112.0,
+            "input_sum": 29536.1669921875,
+            "nonfinite": 0,
+            "output_mean": 0.03313111331212382,
+            "output_rms": 13.229787522324857,
+            "output_squares": 138184736.0,
+            "output_sum": 26157.146484375,
+            "residual_change_rms": 1.755987465001219
+          },
+          {
+            "calls": 2,
+            "delta_squares": 3643049.625,
+            "elements": 789504,
+            "input_mean": 0.03313111331212382,
+            "input_rms": 13.229787522324857,
+            "input_squares": 138184736.0,
+            "input_sum": 26157.146484375,
+            "nonfinite": 0,
+            "output_mean": 0.090563970781022,
+            "output_rms": 13.579544202670052,
+            "output_squares": 145587712.0,
+            "output_sum": 71500.6171875,
+            "residual_change_rms": 2.148104358235507
+          }
+        ],
+        "baseline_performance": {
+          "ablation": "none",
+          "groups": {
+            "domain:language": {
+              "examples": 4,
+              "nll_sum": 1302.0850219726562,
+              "perplexity": 881.5597861827259,
+              "target_tokens": 192,
+              "token_nll": 6.781692822774251
+            },
+            "domain:math": {
+              "examples": 4,
+              "nll_sum": 417.0109558105469,
+              "perplexity": 2.0783995867195135,
+              "target_tokens": 570,
+              "token_nll": 0.7315981680886787
+            },
+            "overall": {
+              "examples": 8,
+              "nll_sum": 1719.0959777832031,
+              "perplexity": 9.545133723803646,
+              "target_tokens": 762,
+              "token_nll": 2.256031466907091
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        },
+        "block_boundaries": [
+          20,
+          22
+        ],
+        "candidate_capabilities": [
+          "mathematical-reasoning hypothesis"
+        ],
+        "capability_label_status": "hypothesis only; development NLL is not math accuracy",
+        "compatibility_status": "PASS",
+        "dependencies": "native RMSNorm/MLP/GQA, config-derived RoPE, causal key-padding mask",
+        "evaluation_method": "development activations and identity-replacement NLL",
+        "limitations": "Distributed features, not a math organ; token semantics differ.",
+        "parameter_count": 93595648,
+        "sector_id": "qwen2:20:22",
+        "sector_sha256": "eed714c602b75a714a36db8d4fbd2949818b935ad146fe7c1efd21313890e969",
+        "selection_reason": "Compatible structure, no capability selection yet",
+        "selection_status": "NOT_RUN",
+        "tensor_shapes": [
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.q_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              1536,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.q_proj.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.k_proj.weight",
+            "parameters": 393216,
+            "shape": [
+              256,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.k_proj.bias",
+            "parameters": 256,
+            "shape": [
+              256
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.v_proj.weight",
+            "parameters": 393216,
+            "shape": [
+              256,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.v_proj.bias",
+            "parameters": 256,
+            "shape": [
+              256
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.o_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              1536,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mlp.gate_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              8960,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mlp.up_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              8960,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mlp.down_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              1536,
+              8960
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.input_layernorm.weight",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.post_attention_layernorm.weight",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.q_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              1536,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.q_proj.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.k_proj.weight",
+            "parameters": 393216,
+            "shape": [
+              256,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.k_proj.bias",
+            "parameters": 256,
+            "shape": [
+              256
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.v_proj.weight",
+            "parameters": 393216,
+            "shape": [
+              256,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.v_proj.bias",
+            "parameters": 256,
+            "shape": [
+              256
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.o_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              1536,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mlp.gate_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              8960,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mlp.up_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              8960,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mlp.down_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              1536,
+              8960
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.input_layernorm.weight",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.post_attention_layernorm.weight",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          }
+        ]
+      }
+    ],
+    "vocab_size": 151936
+  },
+  "recipient": {
+    "architecture_family": "mamba",
+    "hidden_size": 768,
+    "layer_count": 24,
+    "model_id": "state-spaces/mamba-130m-hf",
+    "parameter_count": 129135360,
+    "parent_kind": "pretrained",
+    "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1",
+    "sectors": [
+      {
+        "ablation_performance": {
+          "ablation": "none",
+          "groups": {
+            "domain:language": {
+              "examples": 4,
+              "nll_sum": 919.0233764648438,
+              "perplexity": 111.37917734655795,
+              "target_tokens": 195,
+              "token_nll": 4.712940392127404
+            },
+            "domain:math": {
+              "examples": 4,
+              "nll_sum": 1139.7877044677734,
+              "perplexity": 13.99076492931487,
+              "target_tokens": 432,
+              "token_nll": 2.638397464045772
+            },
+            "overall": {
+              "examples": 8,
+              "nll_sum": 2058.811080932617,
+              "perplexity": 26.671357604973014,
+              "target_tokens": 627,
+              "token_nll": 3.2835902407218773
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        },
+        "activation_statistics": [
+          {
+            "calls": 2,
+            "delta_squares": 40905.39453125,
+            "elements": 327936,
+            "input_mean": 0.020387804387231808,
+            "input_rms": 1.2273376510397664,
+            "input_squares": 493988.921875,
+            "input_sum": 6685.89501953125,
+            "nonfinite": 0,
+            "output_mean": 0.026440494605845348,
+            "output_rms": 1.3742712833732826,
+            "output_squares": 619347.0,
+            "output_sum": 8670.7900390625,
+            "residual_change_rms": 0.3531797097887641
+          },
+          {
+            "calls": 2,
+            "delta_squares": 36559.390625,
+            "elements": 327936,
+            "input_mean": 0.026440494605845348,
+            "input_rms": 1.3742712833732826,
+            "input_squares": 619347.0,
+            "input_sum": 8670.7900390625,
+            "nonfinite": 0,
+            "output_mean": 0.03471241697122304,
+            "output_rms": 1.499212609762401,
+            "output_squares": 737081.5625,
+            "output_sum": 11383.451171875,
+            "residual_change_rms": 0.33389116434017674
+          }
+        ],
+        "baseline_performance": {
+          "ablation": "none",
+          "groups": {
+            "domain:language": {
+              "examples": 4,
+              "nll_sum": 871.2007751464844,
+              "perplexity": 87.15570945641055,
+              "target_tokens": 195,
+              "token_nll": 4.467696282802484
+            },
+            "domain:math": {
+              "examples": 4,
+              "nll_sum": 1070.079574584961,
+              "perplexity": 11.905923534541605,
+              "target_tokens": 432,
+              "token_nll": 2.477036052280002
+            },
+            "overall": {
+              "examples": 8,
+              "nll_sum": 1941.2803497314453,
+              "perplexity": 22.112452439970678,
+              "target_tokens": 627,
+              "token_nll": 3.0961409086625924
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        },
+        "block_boundaries": [
+          11,
+          13
+        ],
+        "candidate_capabilities": [
+          "sequence/language hypothesis"
+        ],
+        "capability_label_status": "hypothesis only; development NLL is not math accuracy",
+        "compatibility_status": "PASS",
+        "dependencies": "native RMSNorm, causal convolution, selective SSM; no cached state",
+        "evaluation_method": "development activations and identity-replacement NLL",
+        "limitations": "Distributed features, not a math organ; token semantics differ.",
+        "parameter_count": 7543296,
+        "sector_id": "mamba:11:13",
+        "sector_sha256": "5a18f9b53cfdd9ea810710ce62e70210aec1df3adc4211fafc0a8ebebeeb7c54",
+        "selection_reason": "Compatible structure, no capability selection yet",
+        "selection_status": "NOT_RUN",
+        "tensor_shapes": [
+          {
+            "dtype": "torch.float32",
+            "name": "0.norm.weight",
+            "parameters": 768,
+            "shape": [
+              768
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.A_log",
+            "parameters": 24576,
+            "shape": [
+              1536,
+              16
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.D",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.conv1d.weight",
+            "parameters": 6144,
+            "shape": [
+              1536,
+              1,
+              4
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.conv1d.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.in_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              3072,
+              768
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.x_proj.weight",
+            "parameters": 122880,
+            "shape": [
+              80,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.dt_proj.weight",
+            "parameters": 73728,
+            "shape": [
+              1536,
+              48
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.dt_proj.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.out_proj.weight",
+            "parameters": 1179648,
+            "shape": [
+              768,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.norm.weight",
+            "parameters": 768,
+            "shape": [
+              768
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.A_log",
+            "parameters": 24576,
+            "shape": [
+              1536,
+              16
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.D",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.conv1d.weight",
+            "parameters": 6144,
+            "shape": [
+              1536,
+              1,
+              4
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.conv1d.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.in_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              3072,
+              768
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.x_proj.weight",
+            "parameters": 122880,
+            "shape": [
+              80,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.dt_proj.weight",
+            "parameters": 73728,
+            "shape": [
+              1536,
+              48
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.dt_proj.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.out_proj.weight",
+            "parameters": 1179648,
+            "shape": [
+              768,
+              1536
+            ]
+          }
+        ]
+      }
+    ],
+    "vocab_size": 50280
+  }
+}

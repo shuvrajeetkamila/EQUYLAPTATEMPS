@@ -1,0 +1,32 @@
+name: Preserve measured negative-result pilot interfaces
+
+on:
+  push:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  preserve:
+    if: contains(github.event.head_commit.message, '[preserve-pilot]') && github.ref == 'refs/heads/arena/97efdf4a-equylaptatemps'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/97efdf4a-equylaptatemps
+      - name: Retrieve actual selected child, not newly generated weights
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 38293921543 --name pretrained-controlled-pilot --dir artifacts/measured-pilot
+      - run: python scripts/preserve_pilot_reference.py
+      - name: Publish on the existing session branch only
+        run: |
+          test "$(git branch --show-current)" = arena/97efdf4a-equylaptatemps
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f examples/pretrained-pilot-reference/
+          git diff --cached --check
+          git commit -m 'Preserve actual negative-result pretrained pilot child interfaces'
+          git push origin arena/97efdf4a-equylaptatemps
