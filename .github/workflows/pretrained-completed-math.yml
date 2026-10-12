@@ -28,7 +28,7 @@ jobs:
         timeout-minutes: 50
         env:
           GH_TOKEN: ${{ github.token }}
-        run: python scripts/run_completed_math.py --out artifacts/completed-math --post-pr 1
+        run: python scripts/run_completed_math.py --config configs/pretrained-completed-math-validated.json --out artifacts/completed-math --post-pr 1
       - name: Preserve partial records if interrupted
         if: always() && steps.math.outcome != 'success'
         env:

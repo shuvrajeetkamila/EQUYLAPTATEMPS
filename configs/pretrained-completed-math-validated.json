@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "registered_date": "2026-10-13",
+  "scope": "Bounded longer-output completed-answer math diagnostic, restricted to oracle-validated cached controls; not dual-capability inheritance",
+  "reference": "examples/pretrained-pilot-reference",
+  "reference_interfaces_sha256": "5f2337211dd54ea0dd001244735cc3e7c3d2b74468eaea99053ad6a84411d537",
+  "dtype": "float32",
+  "device": "cpu",
+  "threads": 2,
+  "parent_cache": "models/pretrained",
+  "dataset_cache": "data/local/pretrained-benchmarks",
+  "prior_run": "38293921543",
+  "test_seed": 13,
+  "calibration_seed": 42,
+  "random_sector_seed": 1042,
+  "benchmark": {
+    "dataset": "original pinned GSM8K TEST",
+    "sample_count": 16,
+    "shots": 2,
+    "fewshot_source": "first two GSM8K TRAIN indices not used in prior calibration/development",
+    "exclude_previously_observed_test_ids": [
+      588,
+      1214,
+      57,
+      906
+    ],
+    "max_input_tokens": 2048,
+    "max_new_tokens": 256,
+    "decoding": "deterministic native cached CPUfloat32, after cache-free oracle checks",
+    "stop": "EOS, completed numeric #### line, closed numeric boxed scalar, or token budget",
+    "primary_scoring": "completed #### numeric line or closed boxed scalar; no arbitrary last-number credit",
+    "compare_to_old_pilot": "Different prompt/output/scoring protocol; do not compare scores as unchanged leaderboard measurements",
+    "cached_zero_input_restriction": "First run failed numerical oracle for zero_input_seam before ANY test score; no tolerance relaxation"
+  },
+  "variants": [
+    "recipient_parent",
+    "donor_parent",
+    "published_calibrated_child",
+    "uncalibrated_child",
+    "random_interface",
+    "matched_random_sector",
+    "bypass_graft",
+    "bypass_prefix",
+    "bypass_suffix",
+    "zero_output_seam"
+  ],
+  "matched_control_budget": {
+    "steps": 16,
+    "learning_rate": 0.0003,
+    "batch_size": 1,
+    "max_length": 512,
+    "gradient_checkpointing": true,
+    "data": "same original 16 human GSM8K TRAIN + 8 WikiText TRAIN records",
+    "optimizer": "original AdamW/seam-only scope, same training order/seed; no teacher outputs"
+  },
+  "cache_oracle": {
+    "prefill_tokens": 8,
+    "decode_tokens": 8,
+    "atol": 0.0005,
+    "rtol": 0.0005,
+    "require_argmax_equal": true,
+    "reason": "Different matrix shapes can change CPU floating rounding; abort benchmark on failed numerical/token equivalence"
+  },
+  "inheritance": {
+    "status": "NOT_RUN",
+    "reason": "Original registered minimum64 math cases/multiple seeds not met; language retention previously failed; diagnostic cannot redefine inheritance thresholds"
+  },
+  "training_of_published_child": {
+    "status": "NOT_RUN",
+    "reason": "Exact existing real child reused unchanged; only the matched random-sector control receives its original budget"
+  },
+  "reverse": {
+    "status": "NOT_RUN",
+    "reason": "Existing reverse structural check succeeded; no reverse capability scaling after primary failure"
+  },
+  "excluded_controls": {
+    "zero_input_seam": {
+      "status": "BLOCKED",
+      "reason": "Real-weight cached numerical equivalence failed in38307630994; original uncached control and prior recorded ablations preserved"
+    }
+  }
+}

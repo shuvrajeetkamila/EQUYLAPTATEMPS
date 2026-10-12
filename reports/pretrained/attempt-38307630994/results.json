@@ -1,0 +1,153 @@
+{
+  "cache_oracles": {
+    "bypass_graft": {
+      "argmax_equal": true,
+      "elapsed_seconds": 1.3917283259999067,
+      "forced_decode_tokens": 8,
+      "max_absolute_logit_error": 0.000423431396484375,
+      "prefill_tokens": 8,
+      "source": "reported prefix from HUMAN GSM8K TRAIN question, not benchmark truncation",
+      "status": "PASS"
+    },
+    "bypass_prefix": {
+      "argmax_equal": true,
+      "elapsed_seconds": 1.4471805490001088,
+      "forced_decode_tokens": 8,
+      "max_absolute_logit_error": 0.0002593994140625,
+      "prefill_tokens": 8,
+      "source": "reported prefix from HUMAN GSM8K TRAIN question, not benchmark truncation",
+      "status": "PASS"
+    },
+    "bypass_suffix": {
+      "argmax_equal": true,
+      "elapsed_seconds": 1.4669332170000189,
+      "forced_decode_tokens": 8,
+      "max_absolute_logit_error": 0.000110626220703125,
+      "prefill_tokens": 8,
+      "source": "reported prefix from HUMAN GSM8K TRAIN question, not benchmark truncation",
+      "status": "PASS"
+    },
+    "donor_parent": {
+      "argmax_equal": true,
+      "elapsed_seconds": 10.07630149399995,
+      "forced_decode_tokens": 8,
+      "max_absolute_logit_error": 8.463859558105469e-05,
+      "prefill_tokens": 8,
+      "source": "reported prefix from HUMAN GSM8K TRAIN question, not benchmark truncation",
+      "status": "PASS"
+    },
+    "matched_random_sector": {
+      "argmax_equal": true,
+      "elapsed_seconds": 2.0341567469999973,
+      "forced_decode_tokens": 8,
+      "max_absolute_logit_error": 0.000247955322265625,
+      "prefill_tokens": 8,
+      "source": "reported prefix from HUMAN GSM8K TRAIN question, not benchmark truncation",
+      "status": "PASS"
+    },
+    "published_calibrated_child": {
+      "argmax_equal": true,
+      "elapsed_seconds": 1.9530921159999934,
+      "forced_decode_tokens": 8,
+      "max_absolute_logit_error": 0.00023651123046875,
+      "prefill_tokens": 8,
+      "source": "reported prefix from HUMAN GSM8K TRAIN question, not benchmark truncation",
+      "status": "PASS"
+    },
+    "random_interface": {
+      "argmax_equal": true,
+      "elapsed_seconds": 1.9718629100000271,
+      "forced_decode_tokens": 8,
+      "max_absolute_logit_error": 0.000354766845703125,
+      "prefill_tokens": 8,
+      "source": "reported prefix from HUMAN GSM8K TRAIN question, not benchmark truncation",
+      "status": "PASS"
+    },
+    "recipient_parent": {
+      "argmax_equal": true,
+      "elapsed_seconds": 1.4741526070000646,
+      "forced_decode_tokens": 8,
+      "max_absolute_logit_error": 0.00023221969604492188,
+      "prefill_tokens": 8,
+      "source": "reported prefix from HUMAN GSM8K TRAIN question, not benchmark truncation",
+      "status": "PASS"
+    },
+    "uncalibrated_child": {
+      "argmax_equal": true,
+      "elapsed_seconds": 1.9513070269999844,
+      "forced_decode_tokens": 8,
+      "max_absolute_logit_error": 0.0002899169921875,
+      "prefill_tokens": 8,
+      "source": "reported prefix from HUMAN GSM8K TRAIN question, not benchmark truncation",
+      "status": "PASS"
+    }
+  },
+  "comparisons": {},
+  "elapsed_seconds": 494.14258447400005,
+  "error": {
+    "reason": "Incremental cache changed full-prefix model computation",
+    "type": "RuntimeError"
+  },
+  "hardware": {
+    "disk_free_bytes": 90231226368,
+    "dtype": "float32",
+    "gpu": false,
+    "ram_bytes": 16765411328,
+    "threads": 2
+  },
+  "inheritance": {
+    "reason": "Original registered minimum64 math cases/multiple seeds not met; language retention previously failed; diagnostic cannot redefine inheritance thresholds",
+    "status": "NOT_RUN"
+  },
+  "interrupted_or_failed_publication": true,
+  "kind": "real_pretrained_completed_math",
+  "parents": {
+    "donor": {
+      "model_id": "Qwen/Qwen2.5-Math-1.5B",
+      "parameters": 1543714304,
+      "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"
+    },
+    "recipient": {
+      "model_id": "state-spaces/mamba-130m-hf",
+      "parameters": 129135360,
+      "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"
+    }
+  },
+  "phase": "cache_oracle_gate",
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "published_child_training": {
+    "reason": "Exact existing real child reused unchanged; only the matched random-sector control receives its original budget",
+    "status": "NOT_RUN"
+  },
+  "registration_sha256": "0cecde029fe1a14db3961fc932675aee4ac1db777cbc769683837a99cd845f18",
+  "reverse": {
+    "reason": "Existing reverse structural check succeeded; no reverse capability scaling after primary failure",
+    "status": "NOT_RUN"
+  },
+  "run_id": "38307630994",
+  "schema_version": 3,
+  "software_versions": {
+    "huggingface-hub": "0.36.2",
+    "safetensors": "0.8.0",
+    "torch": "2.5.1+cpu",
+    "transformers": "4.48.3"
+  },
+  "source_commit": "1d2a960e24dd00c8b00b99dac9c2f01f9d982d0e",
+  "status": "FAIL",
+  "structure": {
+    "context_limit": 4096,
+    "donor_family": "qwen2",
+    "donor_width": 1536,
+    "frozen_parameters": 215187712,
+    "parent_weight_arithmetic": false,
+    "prefix_blocks": 11,
+    "production_bypass": false,
+    "recipient_family": "mamba",
+    "recipient_width": 768,
+    "removed_recipient_blocks": 2,
+    "suffix_blocks": 11,
+    "trainable_dense_seam_parameters": 2366208,
+    "transplanted_blocks": 2,
+    "unique_parameters": 217553920
+  }
+}

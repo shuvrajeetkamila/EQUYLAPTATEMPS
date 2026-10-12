@@ -75,6 +75,10 @@ class CachedDecoder:
     """One request for one unchanged model/control. Never share state between prompts."""
 
     def __init__(self, model, *, ablation: str = "none"):
+        if ablation == "zero_input_seam":
+            raise ValueError(
+                "Zero-input cached equivalence failed real-weight validation; use uncached control"
+            )
         if ablation not in ABLATIONS:
             raise ValueError("Unknown cached evaluation ablation")
         if not isinstance(model, SurgicalChild) and ablation != "none":

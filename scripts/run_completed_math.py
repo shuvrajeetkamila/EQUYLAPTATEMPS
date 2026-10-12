@@ -219,6 +219,7 @@ def execute(config, out, result):
         "zero_output_seam",
     ):
         variants[mode] = (child, parents.tokenizer, mode)
+    variants = {name: entry for name, entry in variants.items() if name in config["variants"]}
     result["cache_oracles"] = {}
     result["comparisons"] = {}
     result["phase"] = "cache_oracle_gate"
@@ -335,7 +336,7 @@ def execute(config, out, result):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--config", default="configs/pretrained-completed-math.json")
+    parser.add_argument("--config", default="configs/pretrained-completed-math-validated.json")
     parser.add_argument("--out", required=True)
     parser.add_argument("--post-pr", type=int)
     args = parser.parse_args()

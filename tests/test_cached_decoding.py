@@ -21,7 +21,6 @@ from equylaptatemps.synthetic import demo_recipe, tiny_parent
         "zero_graft",
         "bypass_prefix",
         "bypass_suffix",
-        "zero_input_seam",
         "zero_output_seam",
     ],
 )
@@ -101,3 +100,14 @@ def test_cached_generation_records_stopping_not_fake_capability(child_bundle):
     assert all(0 <= i < child.recipient_config.vocab_size for i in result.generated_ids)
     with pytest.raises(ValueError, match="positive"):
         cached_generate(child, tok, "X", max_new_tokens=0, max_input_tokens=64)
+
+
+def test_unvalidated_real_zero_input_control_is_explicitly_blocked(child_bundle):
+    child, *_ = child_bundle
+    with pytest.raises(ValueError, match="failed real-weight"):
+        CachedDecoder(child, ablation="zero_input_seam")
+    # Original uncached control remains intact and independently executable.
+    with torch.inference_mode():
+        assert torch.isfinite(
+            child(torch.tensor([[8, 9, 10]]), ablation="zero_input_seam").logits
+        ).all()
