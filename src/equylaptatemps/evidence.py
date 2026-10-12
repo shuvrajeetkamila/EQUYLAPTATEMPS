@@ -55,6 +55,10 @@ def validate_results(root: str | Path, *, dataset_root: str | Path | None = None
     """
     root = Path(root)
     result = json.loads((root / "results.json").read_text())
+    if result.get("kind") == "real_pretrained_completed_math":
+        from .math_evidence import validate_completed_math
+
+        return validate_completed_math(root, dataset_root=dataset_root)
     if result.get("kind") == "real_pretrained_language_diagnostic":
         from .diagnostics import validate_language_diagnostic
 

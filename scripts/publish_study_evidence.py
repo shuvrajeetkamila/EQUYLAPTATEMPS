@@ -20,7 +20,8 @@ def main():
     result = json.loads(path.read_text())
     result["interrupted_or_failed_publication"] = True
     if (
-        result.get("kind") == "real_pretrained_language_diagnostic"
+        result.get("kind")
+        in {"real_pretrained_language_diagnostic", "real_pretrained_completed_math"}
         and result["status"] == "NOT_RUN"
     ):
         result["status"] = "FAIL"
