@@ -135,6 +135,16 @@ def load_benchmarks(target: str | Path) -> tuple[dict, dict]:
         raise ValueError("Missing registered benchmark source")
     for name, source in manifest["sources"].items():
         data[name] = {}
+        if (
+            source["repository"] != SOURCES[name]["repository"]
+            or source["license"] != SOURCES[name]["license"]
+            or set(source["local_files"]) != set(SOURCES[name]["files"])
+        ):
+            raise ValueError("Cached dataset source/license/file inventory changed")
+        if "license_evidence" in SOURCES[name]:
+            card = target / name / "source-dataset-card.md"
+            if sha256_file(card) != source["license_evidence_sha256"]:
+                raise ValueError("Dataset license-card checksum mismatch")
         if source["revision"] != SOURCES[name]["revision"]:
             raise ValueError("Benchmark revision differs from registered source")
         for split, entry in source["local_files"].items():

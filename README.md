@@ -6,7 +6,19 @@ Repository and Python/CLI names (`EQUYLAPTATEMPS`, `equylaptatemps`) are retaine
 
 A runnable research implementation of **whole-block transplantation between Mamba and Qwen2**, two different architecture and declared weight-lineage families. A contiguous recipient sector is physically removed and replaced by a complete donor sector, connected by two new dense interfaces. The result is **one causal model**, not two models answering independently.
 
-**Status: tested architecture prototype, not a validated pretrained foundation model.** The offline demo uses randomly initialized, tiny versions of the actual Hugging Face Mamba and Qwen2 implementations. No pretrained math/reasoning transfer, superiority, or “best of both parents” result has been established. The pretrained-parent workflow requires separately acquired weights, suitable hardware, supervision, and benchmarks.
+**Status: a genuine pretrained heterogeneous child has run and reloaded; meaningful capability inheritance remains UNPROVEN.** On 2026-10-12, connected CPU execution loaded the actual pinned Mamba-130m-hf and Qwen2.5-Math-1.5B weights, transplanted whole blocks, calibrated only new interfaces on real WikiText training text, and reproduced bit-identical logits in a fresh process. No useful math/language inheritance or superiority is claimed. The original random-parent demo is preserved for engineering comparisons only.
+
+### Real pretrained progress (2026-10-12)
+
+- **217,553,920** integrated parameters: **215,187,712 frozen**, **2,366,208 new full-sized interface/norm parameters**.
+- Mamba prefix [0,11) → dense 768→1536 interface → **entire Qwen blocks [13,15)** → dense 1536→768 interface → Mamba suffix [13,24)/norm/head. Original Mamba [11,13) removed.
+- Eight real WikiText TRAIN calibration steps: diagnostic token NLL **13.13195 → 7.02681**; this is fitting, **not a benchmark or inheritance score**.
+- Both original-parent tensor hashes unchanged; private self-contained export and fresh-process inference verified exactly. Short generation was `io`: useful output has not been established.
+- **Actual new interface weights**, not a template: [bridge-only child checkpoint](examples/pretrained-structural-reference/README.md). Only 9.5 MB of new tensors is published; frozen parent weights are not bundled.
+- [Verified execution JSON](reports/pretrained/2026-10-12-cpu-structural.json), [connected run](https://github.com/shuvrajeetkamila/EQUYLAPTATEMPS/actions/runs/38290378364), [real study protocol/instructions](docs/pretrained-study.md), [runnable Colab notebook](notebooks/pretrained-study-colab.ipynb), and [registered configuration](configs/pretrained-study.json).
+- Held-out benchmark/ablation execution is separate from the structural result. Failed/partial attempts are preserved in `reports/pretrained/`; a 4-case CPU pilot is below the registered 64-sample inheritance minimum.
+
+**Licensing caveat:** Qwen's pinned snapshot has Apache-2.0. The HF-converted Mamba repository lacks a direct license document/tag; the official original Mamba checkpoint declares Apache-2.0. This is lineage evidence, not a license document in the conversion. Frozen weights are deliberately not redistributed. WikiText retains CC-BY-SA-3.0/GFDL terms; GSM8K is MIT.
 
 ### What is actually implemented
 
@@ -20,7 +32,7 @@ A runnable research implementation of **whole-block transplantation between Mamb
 - Portable child-only safetensors checkpoints, checksums, frozen-tensor audits, tokenizer fingerprints, and preservation of available parent license notices.
 - Offline tests, a CPU smoke test, and GitHub Actions.
 
-### The proposed pretrained pair
+### The actual pretrained pair (capability roles still hypotheses)
 
 | Role | Parent | Architecture | Intended contribution — not a measured result |
 |---|---|---|---|
@@ -77,7 +89,7 @@ CPU-only machines can install `torch==2.5.1` from the official PyTorch CPU wheel
 
 The demo creates a portable synthetic child, calibrates its seams for 40 steps, verifies all frozen tensors stayed unchanged, runs graft ablations, and verifies bit-identical logits after saving/loading. Its random byte-level output is **not evidence of math ability**.
 
-A recorded local run is in [reports/synthetic-smoke.json](reports/synthetic-smoke.json); interpret it with the [synthetic model card](docs/model-card.md). [Local validation evidence](reports/local-validation.json) records **106 passing offline tests**, lint/format checks, dependency versions, and source hashes. Raw generated weights live in ignored `artifacts/`. The explicitly requested tiny child is also available as a [portable synthetic ZIP](examples/equylaptatemps-synthetic-child-v0.1.0.zip), with [verification instructions](examples/README.md). This small archive is the only intentional checkpoint-in-Git exception; it is not a pretrained capability model.
+A recorded local run is in [reports/synthetic-smoke.json](reports/synthetic-smoke.json); interpret it with the [synthetic model card](docs/model-card.md). [Local validation evidence](reports/local-validation.json) records **106 passing offline tests**, lint/format checks, dependency versions, and source hashes. Raw generated weights live in ignored `artifacts/`. The explicitly requested tiny child is also available as a [portable synthetic ZIP](examples/equylaptatemps-synthetic-child-v0.1.0.zip), with [verification instructions](examples/README.md). The synthetic archive remains unchanged. The other explicit small checkpoint exception contains only newly trained real-child interfaces, never frozen parent weights.
 
 ## 2. Prepare real parents on a machine with Hub access
 
@@ -117,9 +129,9 @@ equylaptatemps train \
   --gradient-checkpointing --device cuda
 ```
 
-`validate` checks declared identity and recipe structure; `build` additionally checks actual local architectures, sector bounds, vocabularies, and available snapshot evidence. A revision supplied manually is **recorded**, not automatically verified against a remote repository.
+`validate` checks declared identity and recipe structure; `build` also requires verified pinned snapshot inventories for pretrained IDs, rejects byte-tokenizer fixtures, and checks actual architectures, sector bounds and vocabularies. A manually declared revision alone is insufficient. Inventories/checksums are not signed origin attestations.
 
-Build loads both full parents before discarding unused sectors. Plan RAM/VRAM for those loads **and** activations/attention/logits during calibration, not just the seam parameters. There is no quantized, sharded, or low-memory parent loader. CPU float32 is supported but large-parent runs may be prohibitively slow. GPU and large-pretrained execution have not been validated by the checked-in smoke report.
+Build loads both full parents before discarding unused sectors. Plan RAM/VRAM for those loads **and** activations/attention/logits during calibration, not just the seam parameters. There is no quantized, sharded, or low-memory parent loader. CPU float32 is supported but large-parent runs may be prohibitively slow. Large-pretrained CPU structural execution is now measured in the dated real-parent report; GPU execution remains unvalidated. The older synthetic smoke report proves only engineering behavior.
 
 Ground-truth JSONL format:
 

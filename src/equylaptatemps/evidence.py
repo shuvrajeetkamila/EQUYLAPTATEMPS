@@ -2,12 +2,14 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 import math
 import random
 from pathlib import Path
 
 from .audit import sha256_file
+from .benchdata import load_benchmarks, text_chunks
 from .benchmarks import summarize_language, summarize_math
 
 STATUSES = {"PASS", "FAIL", "BLOCKED", "NOT_RUN"}
@@ -45,7 +47,7 @@ def checked_path(root: Path, relative: str) -> Path:
     return path
 
 
-def validate_results(root: str | Path) -> dict:
+def validate_results(root: str | Path, *, dataset_root: str | Path | None = None) -> dict:
     """Fail missing/tampered summaries, partial records, invented aggregates, and unsafe paths.
 
     A malicious author can forge every output and recalculate every checksum. This
@@ -61,6 +63,16 @@ def validate_results(root: str | Path) -> dict:
             raise ValueError("Invalid stage status")
         if stage["status"] in {"NOT_RUN", "BLOCKED", "FAIL"} and not stage.get("reason"):
             raise ValueError("Nonpassing stage requires an explicit reason")
+    registered = json.loads(config.read_text())
+    datasets = None
+    wiki_texts = None
+    if dataset_root is not None:
+        _, datasets = load_benchmarks(dataset_root)
+        wiki_texts = text_chunks(
+            datasets["wikitext2"]["test"],
+            characters=registered["calibration"]["wiki_characters"],
+            limit=result["sample_counts"]["wikitext2"],
+        )
     comparisons = result["comparisons"]
     if set(comparisons) != set(REQUIRED_VARIANTS):
         raise ValueError("Missing required comparison variant")
@@ -82,6 +94,22 @@ def validate_results(root: str | Path) -> dict:
             rows = read_rows(path)
             if len({row["id"] for row in rows}) != len(rows):
                 raise ValueError("Duplicated benchmark observations")
+            if datasets is not None:
+                for row in rows:
+                    if task == "gsm8k":
+                        original = datasets["gsm8k"]["test"][row["id"]]
+                        question_digest = hashlib.sha256(original["question"].encode()).hexdigest()
+                        if (
+                            row["reference"] != original["answer"]
+                            or row["question_sha256"] != question_digest
+                        ):
+                            raise ValueError("Substituted held-out reference/question identity")
+                    else:
+                        text = wiki_texts[row["id"]]
+                        if row["text_sha256"] != hashlib.sha256(text.encode()).hexdigest():
+                            raise ValueError("Substituted language benchmark text")
+                        if row["text_bytes"] != len(text.encode()):
+                            raise ValueError("Incorrect language byte denominator")
             summary = summarize_math(rows) if task == "gsm8k" else summarize_language(rows)
             if summary != entry["metrics"]:
                 raise ValueError(

@@ -476,7 +476,7 @@ def run(config: dict, out: Path, result: dict):
         "child_frozen_sha256": frozen_fingerprint(child),
     }
     result["inheritance"] = inheritance_criteria(result, out, config["criteria"])
-    checkpoint("integrity", **validate_results(out))
+    checkpoint("integrity", **validate_results(out, dataset_root=config["dataset_cache"]))
 
 
 def publish_bundle(out: Path, pr: int):
