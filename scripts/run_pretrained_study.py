@@ -139,7 +139,9 @@ def run(config: dict, out: Path, result: dict):
         raise RuntimeError("Mamba original-checkpoint licensing evidence not verified")
     specs = [
         acquire(
-            config["parents"][role]["model_id"], out / "models", config["parents"][role]["revision"]
+            config["parents"][role]["model_id"],
+            Path(config["parent_cache"]),
+            config["parents"][role]["revision"],
         )
         for role in ("recipient", "donor")
     ]
