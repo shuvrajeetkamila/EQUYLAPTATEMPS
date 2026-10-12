@@ -75,7 +75,7 @@ CPU-only machines can install `torch==2.5.1` from the official PyTorch CPU wheel
 
 The demo creates a portable synthetic child, calibrates its seams for 40 steps, verifies all frozen tensors stayed unchanged, runs graft ablations, and verifies bit-identical logits after saving/loading. Its random byte-level output is **not evidence of math ability**.
 
-A recorded local run is in [reports/synthetic-smoke.json](reports/synthetic-smoke.json); interpret it with the [synthetic model card](docs/model-card.md). [Local validation evidence](reports/local-validation.json) records **105 passing offline tests**, lint/format checks, dependency versions, and source hashes. Generated weight files live in ignored `artifacts/`, not Git.
+A recorded local run is in [reports/synthetic-smoke.json](reports/synthetic-smoke.json); interpret it with the [synthetic model card](docs/model-card.md). [Local validation evidence](reports/local-validation.json) records **106 passing offline tests**, lint/format checks, dependency versions, and source hashes. Raw generated weights live in ignored `artifacts/`. The explicitly requested tiny child is also available as a [portable synthetic ZIP](examples/equylaptatemps-synthetic-child-v0.1.0.zip), with [verification instructions](examples/README.md). This small archive is the only intentional checkpoint-in-Git exception; it is not a pretrained capability model.
 
 ## 2. Prepare real parents on a machine with Hub access
 
@@ -171,6 +171,6 @@ See the [experiment protocol](docs/experiment-protocol.md) before making transfe
 
 A checkpoint contains `child.json`, `model.safetensors`, the recipient tokenizer, and available parent notices. It can reload without either parent directory. There is no call to `torch.load`, no model-generated supervision, and no parent-weight interpolation in the surgery code.
 
-Git contains the implementation, recipes, small hand-authored data examples, documentation, tests, CI, and a synthetic audit report. Local parent snapshots, private datasets, virtual environments, and generated checkpoints are deliberately ignored. Recreate the tiny child with `demo`; put any permitted large trained artifact in an appropriate model store rather than ordinary Git.
+Git contains the implementation, recipes, small hand-authored data examples, documentation, tests, CI, synthetic audit reports, and one explicitly requested small synthetic checkpoint archive. Local parent snapshots, private datasets, virtual environments, and all other generated checkpoints are deliberately ignored. Recreate the tiny child with `demo`; put any permitted large trained artifact in an appropriate model store rather than ordinary Git.
 
 **No pretrained child checkpoint, benchmark superiority, or guaranteed capability inheritance is being claimed.**

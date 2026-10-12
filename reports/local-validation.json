@@ -3,6 +3,14 @@
   "branch": "arena/97efdf4a-equylaptatemps",
   "checks": {
     "acquisition_script": "help and mocked Hub/LFS acquisition tested; no real parent download",
+    "distributed_synthetic_child": {
+      "git_exception_reason": "Explicitly requested child artifact; release-upload host inaccessible. Tiny archive only.",
+      "path": "examples/equylaptatemps-synthetic-child-v0.1.0.zip",
+      "pretrained_weights": false,
+      "sha256": "a3af87ff2cc0d35cbbf4e0dcf2b67460e2af9aeafc2762439675470b5a4d5be6",
+      "size_bytes": 88457,
+      "standalone_reload_verified": true
+    },
     "local_cli_workflows": [
       "validate",
       "build",
@@ -23,11 +31,11 @@
     "pip_check": "passed: no broken requirements",
     "pytest": {
       "command": "HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 pytest -q --junitxml=artifacts/pytest-results.xml",
-      "duration_seconds": 2.134,
+      "duration_seconds": 2.146,
       "errors": 0,
       "failures": 0,
       "skipped": 0,
-      "tests": 105
+      "tests": 106
     },
     "ruff_check": "passed: ruff check .",
     "ruff_format": "passed: ruff format --check ."
@@ -59,7 +67,7 @@
   "repository": "shuvrajeetkamila/EQUYLAPTATEMPS",
   "source_sha256": {
     ".github/workflows/tests.yml": "84d9e5ccadfb30b45507bbb69b35cb75d2456478579d323549ea7a17f0860e1e",
-    "README.md": "c1dac59e2de348ccabb03321abf707e2672dc3cd2cb2d50e7d0c6b8ff3fe1b03",
+    "README.md": "bb49cd01e2d8215eaa224ff5f500a034dcdfbc50098fad47cd0a09552d111c9b",
     "configs/mamba-qwen-math.template.json": "9f565ea58f2dc8b803cc46a0f3c5f6509f31351333474521118bc4ae7af39897",
     "configs/synthetic-demo.json": "3859e7eb74d72c74c48766092d3b9ffc904833b44b6a51d1d739f0bc8a2aceeb",
     "data/test.example.jsonl": "30dd65cc8df22f099d82f680a5ce7a3e8ef34d72d4a5f3a8a3b996885187d4e0",
@@ -67,7 +75,8 @@
     "data/validation.example.jsonl": "fda20076151f33de79cb4b33fe20f787ec83799ce3a3a0ef791cc90ece5f5c2c",
     "docs/architecture.md": "9fd6affddaefa0e9c553d65a5f91c34c07838d1f4ebc3a60b6905dce113047fe",
     "docs/experiment-protocol.md": "b4d45b8aff58ebf87f98af7fc8430d38294bee871ecf3b5c49f60d5df652e278",
-    "docs/model-card.md": "54c4ab31fc62e75bbb462c6ba73ebcb2fda8d58e81c5d993d7de5e547b2999bc",
+    "docs/model-card.md": "5a1aeda3e8b4ae9c5c4b764006aacede147b9be469cb768bc2e1aeed7c7ba9c8",
+    "examples/README.md": "1f1db80e0818276959ed62e542c6ce68803aece0be821418e84ad43f124e9de1",
     "pyproject.toml": "c529790c40b206fed734e50e2b6a8467a1cd792f84d954d1eb6bb93e42183b37",
     "scripts/prepare_parents.py": "4306a4a86b154a4ebad290a2866d1050b87b15c6d0c46a4c570000a03ff84c43",
     "src/equylaptatemps/__init__.py": "7a7397435812a40ffb8a381cf92b1ef597bfef8ac3c35ce5cd65e904ce10df77",
@@ -90,6 +99,7 @@
     "tests/test_artifacts.py": "ddea3c2fd1167c41be692fcf6bb111f9f2771a5e5407022d3f3cf89f36cef454",
     "tests/test_cli.py": "48ffd0d55e0de5f25161e5a001a4a6a2e5971055f6e8506b3d93a5bf8f496c3f",
     "tests/test_data_training_evaluation.py": "845f9d27a211b1d046622cb176ccfbc79048bc1042789488ea04badd3ebd300e",
+    "tests/test_distributed_child.py": "49b9769939324f61193d45f53bf3ece8ec2726b8ace7d91ba82d3984f943cc63",
     "tests/test_provenance.py": "58dafc93b7ac3a32fd76597d940647929ace9a626cb20f749bd5bf9285a3bde6",
     "tests/test_recipe.py": "7ff3560e1c76d9d9b2163d86c2d99ff7bad5d15df6ff32cf7377927310b6620d",
     "tests/test_search.py": "9fbfb687d0ace922326e8e31bf9c05d574da11f2b933a18fb6bb03c5111205b0",

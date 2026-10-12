@@ -9,7 +9,7 @@ HF_HUB_OFFLINE=1 TRANSFORMERS_OFFLINE=1 pytest -q
 equylaptatemps demo --out artifacts/my-smoke --report artifacts/my-report.json
 ```
 
-Tests must not download weights/tokenizers or require a GPU. Use tiny, randomly initialized stock configs. Do not check in parent snapshots, private datasets, or generated checkpoints.
+Tests must not download weights/tokenizers or require a GPU. Use tiny, randomly initialized stock configs. Do not check in parent snapshots, private datasets, or generated checkpoints. The explicitly requested small synthetic archive in `examples/` is the sole exception; do not add large checkpoints or treat it as a pretrained model.
 
 A new supported parent requires a reviewed lineage entry, source evidence, explicit license review, an architecture runtime implementation, and tests against native parent execution. Do not add an `allow-cousins`, `trust-remote-code`, or provenance-bypass flag.
 

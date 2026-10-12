@@ -53,4 +53,4 @@ equylaptatemps demo --out artifacts/demo --steps 40 --seed 17 \
 
 Use a new output directory. Reproducibility of floating-point values can vary with hardware/dependency versions; local save/load logits must remain identical under the same runtime. The report pins the observed environment.
 
-The tiny checkpoint is generated locally and ignored by Git. Repository software is Apache-2.0. Real pretrained derivative checkpoints, if made later, are governed additionally by both parent licenses and their own training-data rights; this card does not grant permission to distribute them.
+Raw generated checkpoints are ignored by Git. One small, explicitly requested synthetic ZIP is included in `examples/` for portable verification; it contains no pretrained parent weights. Repository software is Apache-2.0. Real pretrained derivative checkpoints, if made later, are governed additionally by both parent licenses and their own training-data rights; this card does not grant permission to distribute them.
