@@ -76,6 +76,7 @@ def validate_results(root: str | Path, *, dataset_root: str | Path | None = None
     comparisons = result["comparisons"]
     if set(comparisons) != set(REQUIRED_VARIANTS):
         raise ValueError("Missing required comparison variant")
+    ordered_samples = {}
     for tasks in comparisons.values():
         if set(tasks) != set(TASKS):
             raise ValueError("Missing benchmark task")
@@ -110,6 +111,16 @@ def validate_results(root: str | Path, *, dataset_root: str | Path | None = None
                             raise ValueError("Substituted language benchmark text")
                         if row["text_bytes"] != len(text.encode()):
                             raise ValueError("Incorrect language byte denominator")
+            identities = [
+                (
+                    row["id"],
+                    row.get("question_sha256") if task == "gsm8k" else row.get("text_sha256"),
+                )
+                for row in rows
+            ]
+            if task in ordered_samples and identities != ordered_samples[task]:
+                raise ValueError("Comparison variants use different ordered benchmark samples")
+            ordered_samples[task] = identities
             summary = summarize_math(rows) if task == "gsm8k" else summarize_language(rows)
             if summary != entry["metrics"]:
                 raise ValueError(
@@ -121,6 +132,23 @@ def validate_results(root: str | Path, *, dataset_root: str | Path | None = None
         entry["status"] != "PASS" for tasks in comparisons.values() for entry in tasks.values()
     ):
         raise ValueError("Incomplete comparisons cannot make benchmark stage PASS")
+    if "criteria" in registered and "inheritance" in result:
+        stored = result["inheritance"]
+        if "structural_transplantation" in stored:
+            expected = inheritance_criteria(result, root, registered["criteria"])
+            if stored != expected:
+                raise ValueError(
+                    "Substituted inheritance verdict does not match registered evidence"
+                )
+        elif stored.get("status") != "NOT_RUN" or stored.get("metrics") is not None:
+            raise ValueError("Incomplete study cannot claim an inheritance verdict")
+    if "benchmark" in registered:
+        expected_counts = {
+            "gsm8k": registered["benchmark"]["gsm_test_samples"],
+            "wikitext2": registered["benchmark"]["wiki_test_samples"],
+        }
+        if result["sample_counts"] != expected_counts:
+            raise ValueError("Reported sample counts differ from registered protocol")
     return {
         "status": "PASS",
         "scope": "internal consistency and checksums only",

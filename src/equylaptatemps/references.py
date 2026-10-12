@@ -8,6 +8,7 @@ from pathlib import Path
 from safetensors.torch import load_file, save_file
 
 from .audit import frozen_fingerprint, module_fingerprint, sha256_file
+from .contracts import child_contract, contract_sha256, parent_contract
 from .model import child_from_parents
 from .recipe import Recipe
 
@@ -25,7 +26,9 @@ def save_reference(child, target: str | Path, provenance: dict) -> dict:
     }
     save_file(seams, str(target / "interfaces.safetensors"))
     descriptor = {
-        "format_version": 1,
+        "format_version": 2,
+        "execution_contract": child_contract(child),
+        "execution_contract_sha256": contract_sha256(child_contract(child)),
         "project": "HETEROGENEOUS AI MODEL SURGERY",
         "self_contained": False,
         "parent_kind": "synthetic" if child.recipe.synthetic else "pretrained",
@@ -47,7 +50,10 @@ def load_reference(target: str | Path, parents):
     """Require verified parents; source paths are descriptive only."""
     target = Path(target)
     descriptor = json.loads((target / "reference.json").read_text())
-    if descriptor.get("format_version") != 1 or descriptor.get("self_contained") is not False:
+    if (
+        descriptor.get("format_version") not in {1, 2}
+        or descriptor.get("self_contained") is not False
+    ):
         raise ValueError("Invalid bridge-only checkpoint format")
     if sha256_file(target / "interfaces.safetensors") != descriptor["interfaces_sha256"]:
         raise ValueError("Bridge-only checkpoint checksum mismatch")
@@ -55,17 +61,36 @@ def load_reference(target: str | Path, parents):
     expected_kind = "synthetic" if recipe.synthetic else "pretrained"
     if descriptor["parent_kind"] != expected_kind:
         raise ValueError("Reference checkpoint parent-kind label mismatch")
+    source_contracts = parents.source_execution_contracts
+    if source_contracts is not None:
+        for role in ("recipient", "donor"):
+            if parent_contract(getattr(parents, role)) != source_contracts[role]:
+                raise ValueError(
+                    "Reference parent execution settings changed after verified loading"
+                )
+    elif descriptor["format_version"] == 1 and not recipe.synthetic:
+        raise ValueError(
+            "Legacy pretrained references require fresh verified load_parents contracts"
+        )
     expected_tokens = descriptor["provenance"]["tokenizers"]
     if parents.provenance["tokenizers"] != expected_tokens:
         raise ValueError("Reference checkpoint tokenizer contracts differ")
     for role in ("recipient", "donor"):
         expected = descriptor["provenance"].get("snapshots", {}).get(role)
         actual = parents.provenance.get("snapshots", {}).get(role)
-        if expected is not None and expected.get("snapshot_files_sha256") != actual.get(
+        if expected is not None and expected.get("snapshot_files_sha256") != (actual or {}).get(
             "snapshot_files_sha256"
         ):
             raise ValueError("Reference checkpoint parent snapshot hashes differ")
     child = child_from_parents(recipe, parents.recipient, parents.donor)
+    if descriptor["format_version"] == 2:
+        recorded = descriptor.get("execution_contract")
+        if (
+            not isinstance(recorded, dict)
+            or contract_sha256(recorded) != descriptor.get("execution_contract_sha256")
+            or child_contract(child) != recorded
+        ):
+            raise ValueError("Reference checkpoint execution contract/config mismatch")
     if str(child.embedding.weight.dtype).removeprefix("torch.") != descriptor["dtype"]:
         raise ValueError("Reference checkpoint loading precision differs")
     if (

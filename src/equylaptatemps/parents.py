@@ -10,6 +10,7 @@ from transformers import AutoConfig, AutoModelForCausalLM
 
 from .audit import module_fingerprint, sha256_file
 from .backbones import extract_parent
+from .contracts import parent_contract
 from .model import child_from_parents
 from .provenance import snapshot_evidence
 from .recipe import Recipe
@@ -31,6 +32,7 @@ class LoadedParents:
     tokenizer: Tokenizer
     provenance: dict
     donor_tokenizer: Tokenizer | None = None
+    source_execution_contracts: dict | None = None
 
 
 def load_local_model(path: str | Path, dtype: torch.dtype = torch.float32):
@@ -94,7 +96,14 @@ def load_parents(
         "recipient_sha256": sha256_file(a_path / "config.json"),
         "donor_sha256": sha256_file(b_path / "config.json"),
     }
-    return LoadedParents(a, b, a_tokenizer, provenance, b_tokenizer)
+    return LoadedParents(
+        a,
+        b,
+        a_tokenizer,
+        provenance,
+        b_tokenizer,
+        {"recipient": parent_contract(a), "donor": parent_contract(b)},
+    )
 
 
 def build_local(recipe: Recipe, *, dtype: torch.dtype = torch.float32, device: str = "cpu"):
