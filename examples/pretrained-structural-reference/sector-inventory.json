@@ -1,0 +1,452 @@
+{
+  "donor": {
+    "architecture_family": "qwen2",
+    "hidden_size": 1536,
+    "layer_count": 28,
+    "model_id": "Qwen/Qwen2.5-Math-1.5B",
+    "parameter_count": 1543714304,
+    "parent_kind": "pretrained",
+    "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2",
+    "sectors": [
+      {
+        "ablation_performance": null,
+        "activation_statistics": null,
+        "baseline_performance": null,
+        "block_boundaries": [
+          13,
+          15
+        ],
+        "candidate_capabilities": [
+          "mathematical-reasoning hypothesis"
+        ],
+        "compatibility_status": "PASS",
+        "dependencies": "native RMSNorm/MLP/GQA, config-derived RoPE, causal key-padding mask",
+        "evaluation_method": "development activations and identity-replacement NLL",
+        "limitations": "Distributed features, not a math organ; token semantics differ.",
+        "parameter_count": 93595648,
+        "sector_id": "qwen2:13:15",
+        "sector_sha256": "e61216ee63ee7fece28e8d6c88402d806bdce70d94973c7b1b202f459ae71458",
+        "selection_reason": "Compatible structure, no capability selection yet",
+        "selection_status": "NOT_RUN",
+        "tensor_shapes": [
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.q_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              1536,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.q_proj.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.k_proj.weight",
+            "parameters": 393216,
+            "shape": [
+              256,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.k_proj.bias",
+            "parameters": 256,
+            "shape": [
+              256
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.v_proj.weight",
+            "parameters": 393216,
+            "shape": [
+              256,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.v_proj.bias",
+            "parameters": 256,
+            "shape": [
+              256
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.self_attn.o_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              1536,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mlp.gate_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              8960,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mlp.up_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              8960,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mlp.down_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              1536,
+              8960
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.input_layernorm.weight",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.post_attention_layernorm.weight",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.q_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              1536,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.q_proj.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.k_proj.weight",
+            "parameters": 393216,
+            "shape": [
+              256,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.k_proj.bias",
+            "parameters": 256,
+            "shape": [
+              256
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.v_proj.weight",
+            "parameters": 393216,
+            "shape": [
+              256,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.v_proj.bias",
+            "parameters": 256,
+            "shape": [
+              256
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.self_attn.o_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              1536,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mlp.gate_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              8960,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mlp.up_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              8960,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mlp.down_proj.weight",
+            "parameters": 13762560,
+            "shape": [
+              1536,
+              8960
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.input_layernorm.weight",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.post_attention_layernorm.weight",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          }
+        ]
+      }
+    ],
+    "vocab_size": 151936
+  },
+  "recipient": {
+    "architecture_family": "mamba",
+    "hidden_size": 768,
+    "layer_count": 24,
+    "model_id": "state-spaces/mamba-130m-hf",
+    "parameter_count": 129135360,
+    "parent_kind": "pretrained",
+    "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1",
+    "sectors": [
+      {
+        "ablation_performance": null,
+        "activation_statistics": null,
+        "baseline_performance": null,
+        "block_boundaries": [
+          11,
+          13
+        ],
+        "candidate_capabilities": [
+          "sequence/language hypothesis"
+        ],
+        "compatibility_status": "PASS",
+        "dependencies": "native RMSNorm, causal convolution, selective SSM; no cached state",
+        "evaluation_method": "development activations and identity-replacement NLL",
+        "limitations": "Distributed features, not a math organ; token semantics differ.",
+        "parameter_count": 7543296,
+        "sector_id": "mamba:11:13",
+        "sector_sha256": "5a18f9b53cfdd9ea810710ce62e70210aec1df3adc4211fafc0a8ebebeeb7c54",
+        "selection_reason": "Compatible structure, no capability selection yet",
+        "selection_status": "NOT_RUN",
+        "tensor_shapes": [
+          {
+            "dtype": "torch.float32",
+            "name": "0.norm.weight",
+            "parameters": 768,
+            "shape": [
+              768
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.A_log",
+            "parameters": 24576,
+            "shape": [
+              1536,
+              16
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.D",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.conv1d.weight",
+            "parameters": 6144,
+            "shape": [
+              1536,
+              1,
+              4
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.conv1d.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.in_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              3072,
+              768
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.x_proj.weight",
+            "parameters": 122880,
+            "shape": [
+              80,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.dt_proj.weight",
+            "parameters": 73728,
+            "shape": [
+              1536,
+              48
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.dt_proj.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "0.mixer.out_proj.weight",
+            "parameters": 1179648,
+            "shape": [
+              768,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.norm.weight",
+            "parameters": 768,
+            "shape": [
+              768
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.A_log",
+            "parameters": 24576,
+            "shape": [
+              1536,
+              16
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.D",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.conv1d.weight",
+            "parameters": 6144,
+            "shape": [
+              1536,
+              1,
+              4
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.conv1d.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.in_proj.weight",
+            "parameters": 2359296,
+            "shape": [
+              3072,
+              768
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.x_proj.weight",
+            "parameters": 122880,
+            "shape": [
+              80,
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.dt_proj.weight",
+            "parameters": 73728,
+            "shape": [
+              1536,
+              48
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.dt_proj.bias",
+            "parameters": 1536,
+            "shape": [
+              1536
+            ]
+          },
+          {
+            "dtype": "torch.float32",
+            "name": "1.mixer.out_proj.weight",
+            "parameters": 1179648,
+            "shape": [
+              768,
+              1536
+            ]
+          }
+        ]
+      }
+    ],
+    "vocab_size": 50280
+  }
+}
