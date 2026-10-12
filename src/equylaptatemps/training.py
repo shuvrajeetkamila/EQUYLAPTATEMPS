@@ -151,7 +151,13 @@ def fit_encoded_seams(
         "objective": "explicit real-text/human-reference next-token cross entropy",
         "optimizer": {"name": "AdamW", "betas": [0.9, 0.999], "eps": 1e-8, "weight_decay": 0},
         "elapsed_seconds": time.monotonic() - started,
-        "parent_kind": "synthetic" if child.recipe.synthetic else "pretrained",
+        "parent_kind": (
+            "random_sector_control"
+            if getattr(child, "random_graft_control", False)
+            else "synthetic"
+            if child.recipe.synthetic
+            else "pretrained"
+        ),
         "trainable_tensors": [
             {"name": name, "shape": list(p.shape), "dtype": str(p.dtype), "parameters": p.numel()}
             for name, p in child.named_parameters()

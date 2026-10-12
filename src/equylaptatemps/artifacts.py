@@ -49,6 +49,8 @@ def save_artifact(
         raise FileExistsError(f"Checkpoint destination already exists: {target}")
     if training_status not in {"uncalibrated", "seam_calibrated"}:
         raise ValueError("Invalid training status")
+    if getattr(child, "random_graft_control", False):
+        raise ValueError("Random-sector controls cannot be exported as pretrained children")
     check_tokenizer(tokenizer, child.recipient_config.vocab_size)
     audit = audit_child(child)
     if (

@@ -17,6 +17,8 @@ def save_reference(child, target: str | Path, provenance: dict) -> dict:
     target = Path(target)
     if target.exists():
         raise FileExistsError("Use a new bridge-only checkpoint directory")
+    if getattr(child, "random_graft_control", False):
+        raise ValueError("Random-sector controls cannot be exported as pretrained children")
     child.assert_trainable_contract()
     target.mkdir(parents=True)
     seams = {

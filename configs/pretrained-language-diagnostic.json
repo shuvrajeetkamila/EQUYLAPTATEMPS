@@ -1,0 +1,69 @@
+{
+  "schema_version": 1,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "registered_date": "2026-10-13",
+  "scope": "Language-only failure diagnosis and matched-budget random-sector control; not dual-capability inheritance",
+  "prior_run": "38293921543",
+  "prior_source_commit": "95b2831a7f54ae7755e6892e364d993a779a3193",
+  "reference": "examples/pretrained-pilot-reference",
+  "reference_interfaces_sha256": "5f2337211dd54ea0dd001244735cc3e7c3d2b74468eaea99053ad6a84411d537",
+  "dtype": "float32",
+  "device": "cpu",
+  "threads": 2,
+  "seed": 42,
+  "random_sector_seed": 1042,
+  "parent_cache": "models/pretrained",
+  "dataset_cache": "data/local/pretrained-benchmarks",
+  "training_budget": {
+    "steps": 16,
+    "batch_size": 1,
+    "learning_rate": 0.0003,
+    "max_length": 512,
+    "gradient_checkpointing": true,
+    "data": "exact original 16 human GSM8K TRAIN + 8 WikiText TRAIN records",
+    "optimizer": "AdamW, betas 0.9/0.999, epsilon 1e-8, weight_decay 0, gradient_clip 1",
+    "scope": "new full-sized interfaces only; random donor blocks frozen too"
+  },
+  "benchmark": {
+    "dataset": "registered WikiText-2 TEST mirror",
+    "window_characters": 192,
+    "window_offset": 16,
+    "window_count": 64,
+    "score": "UTF-8 bits per byte, BOS context, EOS target; not official word-level PPL",
+    "reason": "Exclude all 16 previously inspected TEST windows; no new test-target training"
+  },
+  "variants": [
+    "recipient_parent",
+    "donor_parent",
+    "published_calibrated_child",
+    "uncalibrated_child",
+    "random_interface",
+    "matched_random_sector",
+    "bypass_graft",
+    "bypass_prefix",
+    "bypass_suffix",
+    "zero_input_seam",
+    "zero_output_seam"
+  ],
+  "criteria": {
+    "minimum_windows": 64,
+    "language_retention_ratio": 1.1,
+    "maximum_language_bpb": 3.0,
+    "learned_sector_evidence": "matched-random-sector minus learned-sector BPB paired bootstrap95 lower bound > 0",
+    "parent_contribution": "bypass minus full BPB paired bootstrap95 lower bound > 0",
+    "interpretation": "Language-specific diagnostic only, no mathematics/inheritance claim; correlated windows/single seed"
+  },
+  "math_benchmark": {
+    "status": "NOT_RUN",
+    "reason": "This follow-up isolates the language failure and random-sector confound; previous short math results preserved separately"
+  },
+  "reverse": {
+    "status": "NOT_RUN",
+    "reason": "Existing reverse structural check succeeded; no reverse scaling while primary task retention fails"
+  },
+  "generation": {
+    "prompts": ["The study of mathematics", "Language is a way to"],
+    "max_new_tokens": 8,
+    "scored_as_benchmark": false
+  }
+}

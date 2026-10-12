@@ -55,6 +55,10 @@ def validate_results(root: str | Path, *, dataset_root: str | Path | None = None
     """
     root = Path(root)
     result = json.loads((root / "results.json").read_text())
+    if result.get("kind") == "real_pretrained_language_diagnostic":
+        from .diagnostics import validate_language_diagnostic
+
+        return validate_language_diagnostic(root, dataset_root=dataset_root)
     config = checked_path(root, result["registration_file"])
     if sha256_file(config) != result["registration_sha256"]:
         raise ValueError("Registered protocol/config checksum mismatch")
