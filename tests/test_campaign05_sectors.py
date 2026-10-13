@@ -33,8 +33,10 @@ def test_variable_sector_widths_execute_and_match_twin_parameters():
     for sector in [(1, 2), (1, 3), (0, 4)]:
         pretrained, twin = _child(sector), _child(sector, random_twin=True)
         assert len(pretrained.graft.layers) == sector[1] - sector[0]
+
         def trainable(c):
             return sum(p.numel() for p in c.parameters() if p.requires_grad)
+
         assert trainable(pretrained) == trainable(twin)
         ids = torch.tensor([[8, 9, 10, 11]])
         with torch.inference_mode():
