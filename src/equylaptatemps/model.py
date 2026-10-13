@@ -80,6 +80,11 @@ class SurgicalChild(nn.Module):
         )
         self.output_seam.to(device=embedding.weight.device, dtype=embedding.weight.dtype)
         self.gradient_checkpointing = False
+        # Campaign 4 mandatory-use option: the suffix receives only the donor
+        # sector's *change* to its input (graft output minus graft input), so
+        # an identity donor yields a zero signal. Default off (Campaigns 1-3
+        # semantics unchanged); set only by registered interface installs.
+        self.donor_delta = False
         self.train(False)
 
     @property
@@ -164,11 +169,17 @@ class SurgicalChild(nn.Module):
         hidden = self.input_seam(hidden)
         if ablation == "zero_input_seam":
             hidden = torch.zeros_like(hidden)
+        donor_input = hidden
         checkpointing = self.training and self.gradient_checkpointing
         if ablation != "bypass_graft":
             hidden = self.graft(hidden, attention_mask, gradient_checkpointing=checkpointing)
         if ablation == "zero_graft":
             hidden = torch.zeros_like(hidden)
+        if self.donor_delta and ablation == "none":
+            # Only the donor's transformation reaches the suffix. Under the
+            # bypass/zero ablations the un-subtracted signal is retained so
+            # donor-removed and donor-neutralized remain distinct tests.
+            hidden = hidden - donor_input
         hidden = self.output_seam(hidden)
         if ablation == "zero_output_seam":
             hidden = torch.zeros_like(hidden)

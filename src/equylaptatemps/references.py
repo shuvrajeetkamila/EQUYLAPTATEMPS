@@ -96,6 +96,10 @@ def load_reference(target: str | Path, parents):
             from .sequence_seams import install_sequence_interfaces
 
             install_sequence_interfaces(child, config)
+        elif config.get("family") == "bottleneck":
+            from .sequence_seams import install_bottleneck_interfaces
+
+            install_bottleneck_interfaces(child, config)
         else:
             from .alignment import install_interfaces
 

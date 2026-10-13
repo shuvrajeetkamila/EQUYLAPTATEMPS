@@ -169,6 +169,7 @@ def install_sequence_interfaces(child, design: dict):
         seam.to(device=child.device, dtype=child.embedding.weight.dtype)
     child.input_seam, child.output_seam = seams
     child.interfaces_config = dict(design)
+    child.donor_delta = bool(design.get("donor_delta", False))
     child.assert_trainable_contract()
     child.eval()
     return child
@@ -193,4 +194,100 @@ def sequence_design_report(child) -> dict:
         "trainable_fraction_of_child": trainable / total,
         "causality": "left-padded depthwise conv / causal-masked attention / left-to-right GRU",
         "parent_blocks_modified": False,
+    }
+
+
+class BottleneckSequenceSeam(nn.Module):
+    """Norm -> down-projection -> causal mixer -> up-projection.
+
+    The narrow bottleneck (width << both parent widths) caps how much
+    information the two interfaces can pass between themselves, so the
+    donor sector is the only high-capacity transformation on the path.
+    It cannot by itself prove donor use; the random-twin and ablation
+    gates remain mandatory.
+    """
+
+    def __init__(self, source_width: int, destination_width: int, design: dict):
+        super().__init__()
+        self.design = dict(design)
+        bottleneck = int(design["bottleneck"])
+        self.norm = nn.LayerNorm(source_width)
+        self.down = nn.Linear(source_width, bottleneck, bias=True)
+        nn.init.xavier_uniform_(self.down.weight)
+        nn.init.zeros_(self.down.bias)
+        self.mixer = make_mixer(design["kind"], bottleneck, design)
+        self.up = nn.Linear(bottleneck, destination_width, bias=True)
+        nn.init.xavier_uniform_(self.up.weight)
+        nn.init.zeros_(self.up.bias)
+
+    def forward(self, hidden: torch.Tensor) -> torch.Tensor:
+        hidden = hidden.to(self.down.weight.dtype)
+        state = self.down(self.norm(hidden))
+        return self.up(state + self.mixer(state))
+
+
+def install_bottleneck_interfaces(child, design: dict):
+    """Install bottleneck seams; optionally enable the donor-delta pathway."""
+    if design.get("family") != "bottleneck" or design.get("kind") not in SEQUENCE_KINDS:
+        raise ValueError(f"Unregistered bottleneck interface design {design!r}")
+    if (
+        not 4
+        <= int(design["bottleneck"])
+        < min(child.recipient_config.hidden_size, child.donor_config.hidden_size)
+    ):
+        raise ValueError("Bottleneck must be narrower than both parent widths")
+    with torch.random.fork_rng(devices=[]):
+        torch.manual_seed(child.recipe.seed)
+        seams = [
+            BottleneckSequenceSeam(
+                child.recipient_config.hidden_size, child.donor_config.hidden_size, design
+            ),
+            BottleneckSequenceSeam(
+                child.donor_config.hidden_size, child.recipient_config.hidden_size, design
+            ),
+        ]
+    for seam in seams:
+        seam.to(device=child.device, dtype=child.embedding.weight.dtype)
+    child.input_seam, child.output_seam = seams
+    child.interfaces_config = dict(design)
+    child.donor_delta = bool(design.get("donor_delta", False))
+    child.assert_trainable_contract()
+    child.eval()
+    return child
+
+
+def initialize_bottleneck(child, statistics):
+    """Covariance whitening on `down`, scalar RMS gains on `up`.
+
+    Same unpaired aggregate statistics and formulas as Campaign 2/3's
+    covariance initialization; no hidden activations are used as targets.
+    """
+    from .alignment import whitening_matrix
+
+    streams = statistics["summary"]["streams"]
+    with torch.no_grad():
+        for role, key in [
+            ("input_seam", "child_input_normalized"),
+            ("output_seam", "child_output_normalized"),
+        ]:
+            seam = getattr(child, role)
+            inverse = whitening_matrix(statistics["tensors"][key + "/covariance"])
+            seam.down.weight.copy_(seam.down.weight @ inverse)
+        in_scale = streams["donor_native_input"]["global_rms"] / max(
+            streams["child_donor_input"]["global_rms"], 1e-6
+        )
+        out_scale = streams["recipient_native_output"]["global_rms"] / max(
+            streams["child_host_suffix_input"]["global_rms"], 1e-6
+        )
+        if not 0.05 < in_scale < 100 or not 0.05 < out_scale < 100:
+            raise ValueError("Unsafe observed scale calibration")
+        child.input_seam.up.weight.mul_(in_scale)
+        child.output_seam.up.weight.mul_(out_scale)
+    return {
+        "kind": "unpaired_distribution_initialization",
+        "method": "bottleneck_covariance_orthogonal",
+        "teacher_targets": False,
+        "input_gain": in_scale,
+        "output_gain": out_scale,
+        "limitation": "Marginal moment conditioning is NOT semantic alignment evidence",
     }
