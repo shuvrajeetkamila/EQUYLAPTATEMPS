@@ -44,6 +44,10 @@ Measured native Qwen sector input RMS was about **29.6**, while the hybrid suppl
 
 Machine-readable evidence: `campaigns/campaign_02/campaign_02_results.json`, baseline replay `campaigns/campaign_02/baselines/replay_38354043771/`, and development matrix `campaigns/campaign_02/matrix_38358962201/`. Candidate binaries are retained in the identified Actions recovery artifact; no frozen parent weights were added to Git.
 
+### Campaign 3: sequence-aware bridges and the donor-bypass diagnosis (2026-10-13)
+
+Three causal sequence-aware bridges (depthwise causal convolution, bottleneck causal attention, bottleneck GRU) were screened against the retrained Campaign 2 dense-covariance control under frozen preregistered gates, on development data only. All three passed the historical language-retention gate for the first time (1.416–1.444× host vs the 1.50 ceiling; best macro development NLL: attention **5.5409** vs dense control **5.7396**), but none was promoted: removing the donor sector changed performance by <0.2% at every budget, the donor transforms only ≈9% of its input signal, and an identically trained random-sector twin beat the pretrained child at both 32 steps (**4.9024** vs 5.5409) and 96 steps (**4.0137** vs 4.3551). **Outcome C again: structural surgery without useful inheritance** — now with the mechanism (seam-to-seam bypass of a near-identity donor) measured directly. Held-out confirmation was NOT_RUN by design. Full report: [Campaign 3](HETEROGENEOUS_AI_MODEL_SURGERY_CAMPAIGN_03.md); machine-readable evidence: `campaigns/campaign_03/campaign_03_results.json`.
+
 ### What is actually implemented
 
 - Intact native Mamba state-space blocks and Qwen2 attention/MLP blocks; either transplantation direction works.
