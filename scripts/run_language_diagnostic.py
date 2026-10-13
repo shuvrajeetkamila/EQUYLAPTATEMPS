@@ -37,7 +37,7 @@ from equylaptatemps.sectors import trace_child
 from equylaptatemps.training import TrainingOptions, fit_encoded_seams
 
 
-def execute(config, out, result):
+def execute(config, out, result, *, diagnostic_callback=None, additional_callback=None):
     if config["dtype"] != "float32" or config["device"] != "cpu":
         raise ValueError("This registered diagnostic supports common float32 CPU only")
     ram = os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES")
@@ -152,6 +152,8 @@ def execute(config, out, result):
         out / "fresh-inputs.json",
         {"ids": diagnostic_ids.tolist(), "prompts": config["generation"]["prompts"]},
     )
+    if diagnostic_callback is not None:
+        diagnostic_callback(child, parents, data, out)
     result["phase"] = "matched_random_sector_calibration"
     write_json(out / "results.json", result)
     control = random_qwen_sector_control(
@@ -211,6 +213,8 @@ def execute(config, out, result):
         "zero_output_seam",
     ):
         variants[mode] = (child, parents.tokenizer, mode)
+    if additional_callback is not None:
+        additional_callback(variants, parents, data, out)
     result["comparisons"] = {}
     result["phase"] = "fresh_heldout_language"
     for role, (model, tokenizer, mode) in variants.items():

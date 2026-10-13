@@ -1,0 +1,50 @@
+name: Campaign 2 negative baseline and representation diagnosis
+
+on:
+  push:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  baseline:
+    if: contains(github.event.head_commit.message, '[campaign02-baseline]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 60
+    env:
+      TOKENIZERS_PARALLELISM: 'false'
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -e '.[dev]'
+      - name: Replay actual negative baseline and measure unpaired representations
+        id: baseline
+        timeout-minutes: 55
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/campaign02_baseline.py --out artifacts/campaign02-baseline --post-pr 1
+      - name: Publish partial records on bounded interruption
+        if: always() && steps.baseline.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/publish_study_evidence.py --out artifacts/campaign02-baseline --post-pr 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: campaign02-baseline-evidence
+          path: |
+            artifacts/campaign02-baseline/*.json
+            artifacts/campaign02-baseline/observations/
+            artifacts/campaign02-baseline/math_replay/
+            artifacts/campaign02-baseline/failure_analysis/
+            artifacts/campaign02-baseline/fresh-reference/results.json
+            artifacts/campaign02-baseline/control-calibration.json
+            artifacts/campaign02-baseline/control-calibration.jsonl
+            artifacts/campaign02-baseline/reference-v2/reference.json
+          # Never frozen weights or duplicate parent/private-child binaries.
