@@ -36,6 +36,14 @@ Native request-local Qwen KV and Mamba convolution/SSM caches accelerate the sam
 
 The first real-weight attempt **38307630994** failed the **zero-input-interface** numerical gate before scoring test answers. It is preserved in `reports/pretrained/attempt-38307630994/`. That cached control is explicitly blocked; the original uncached control remains. No tolerance was loosened. The registered restricted retry is separate; results are published only after raw-source verification. None of this implies inherited math skill or reverses the negative language results.
 
+### Campaign 2: representation-alignment audit and negative confirmation (2026-10-13)
+
+The original real-parent negative baseline was rerun without retraining the published child. On 64 fresh WikiText windows, Mamba scored **1.792**, Qwen **2.343**, the learned-sector child **3.280**, and a same-budget frozen random-sector control **3.044** bits/byte. A completed-answer diagnostic reproduced **Qwen 12/16 versus child 0/16**. Fresh reconstruction reproduced logits and generation; all original tensors remained unchanged. The full report is [Campaign 2](HETEROGENEOUS_AI_MODEL_SURGERY_CAMPAIGN_02.md).
+
+Measured native Qwen sector input RMS was about **29.6**, while the hybrid supplied about **0.82** on the same unlabeled TRAIN text. Source-covariance/RMS conditioning improved the primary topology’s development loss, but failed the preregistered promotion gate; no candidate was promoted to a new held-out claim. One-block, early-boundary, and reverse structures were cheaply screened and remained poor before calibration. **Outcome C: structural surgery without useful inheritance.** Larger sectors, two-layer bridges, second-seed confirmation, general reasoning, and GPU/Colab remain **NOT_RUN**, rather than being launched blindly after the gate failed.
+
+Machine-readable evidence: `campaigns/campaign_02/campaign_02_results.json`, baseline replay `campaigns/campaign_02/baselines/replay_38354043771/`, and development matrix `campaigns/campaign_02/matrix_38358962201/`. Candidate binaries are retained in the identified Actions recovery artifact; no frozen parent weights were added to Git.
+
 ### What is actually implemented
 
 - Intact native Mamba state-space blocks and Qwen2 attention/MLP blocks; either transplantation direction works.

@@ -255,3 +255,7 @@ Do not call failed cached controls validated, loosen tolerances for score public
 or describe completion-aware short diagnostics as min64/multi-seed inheritance.
 GPU cache validation remains NOT_RUN. Unchanged frozen tensors and independent
 standalone child reload/generation are rechecked for each completed real run.
+
+## Campaign 2 continuation (2026-10-13)
+
+Campaign 2 froze and reran the real negative baseline, including 64 language windows and the 16-question completed-answer mathematics diagnostic. It then compared legacy, residual-scale, source-covariance, and fixed-orthogonal full-sized interfaces on development data only. Source covariance was strongest but failed the fixed promotion gate, so no new held-out success was claimed. Outcome: **C, structural surgery without useful inheritance**. See the repository-root `HETEROGENEOUS_AI_MODEL_SURGERY_CAMPAIGN_02.md` and `campaigns/campaign_02/campaign_02_results.json`.
