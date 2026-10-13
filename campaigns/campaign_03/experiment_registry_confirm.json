@@ -1,0 +1,20 @@
+{
+  "campaign": 3,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "registered_date": "2026-10-13",
+  "phase": "diagnostic_confirm",
+  "note": "Diagnostic phase after screen FAIL (run 38367618192). These runs cannot retroactively promote any candidate under the frozen preregistration; they test why the donor is bypassed and whether the failure is budget, seed, or pretrained-content. Any future promotion requires a new preregistered replication.",
+  "parents": {
+    "recipient": {"id": "state-spaces/mamba-130m-hf", "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"},
+    "donor": {"id": "Qwen/Qwen2.5-Math-1.5B", "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"}
+  },
+  "compute": {"device": "cpu", "dtype": "float32", "threads": 2, "parallel_experiments": 1, "max_session_seconds": 3300, "minimum_ram_bytes": 12884901888, "minimum_disk_bytes": 12884901888},
+  "data": {"seed": 42, "gsm_train_rows": 32, "gsm_dev_rows": 16, "wiki_train_windows": 32, "wiki_dev_windows": 16, "wiki_characters": 192, "statistic_text_windows": 8},
+  "training": {"steps": 32, "batch_size": 1, "learning_rate": 0.0003, "max_length": 512, "gradient_checkpointing": true, "diagnostic_train_rows": 8, "checkpoint_every": 8, "objective": "direct child real-text and human GSM8K TRAIN next-token targets only"},
+  "experiments": [
+    {"id": "c03_attn_cov_42_long", "stage": "calibration", "seed": 42, "steps": 96, "recipient_cut": [11, 13], "donor_sector": [20, 22], "interface": {"family": "sequence", "kind": "causal_attention", "bottleneck": 128, "heads": 4, "max_positions": 512}, "initialization": "covariance_orthogonal", "question": "Does tripling the calibration budget break donor-bypass equivalence?"},
+    {"id": "c03_attn_cov_123", "stage": "calibration", "seed": 123, "steps": 32, "recipient_cut": [11, 13], "donor_sector": [20, 22], "interface": {"family": "sequence", "kind": "causal_attention", "bottleneck": 128, "heads": 4, "max_positions": 512}, "initialization": "covariance_orthogonal", "question": "Is the screen result seed-dependent?"},
+    {"id": "c03_attn_cov_42_randomtwin", "stage": "calibration", "seed": 42, "steps": 32, "random_sector": true, "random_sector_seed": 2024, "recipient_cut": [11, 13], "donor_sector": [20, 22], "interface": {"family": "sequence", "kind": "causal_attention", "bottleneck": 128, "heads": 4, "max_positions": 512}, "initialization": "covariance_orthogonal", "question": "Does the pretrained donor beat an identically trained random-sector twin?"}
+  ],
+  "registration_revision": "diagnostic phase 1: budget, seed, and pretrained-content controls for the bypass failure"
+}
