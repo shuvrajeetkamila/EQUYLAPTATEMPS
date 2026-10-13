@@ -91,9 +91,15 @@ def load_reference(target: str | Path, parents):
             raise ValueError("Reference checkpoint parent snapshot hashes differ")
     child = child_from_parents(recipe, parents.recipient, parents.donor)
     if "interfaces_config" in descriptor:
-        from .alignment import install_interfaces
+        config = descriptor["interfaces_config"]
+        if config.get("family") == "sequence":
+            from .sequence_seams import install_sequence_interfaces
 
-        install_interfaces(child, descriptor["interfaces_config"])
+            install_sequence_interfaces(child, config)
+        else:
+            from .alignment import install_interfaces
+
+            install_interfaces(child, config)
     if descriptor["format_version"] == 2:
         recorded = descriptor.get("execution_contract")
         if (

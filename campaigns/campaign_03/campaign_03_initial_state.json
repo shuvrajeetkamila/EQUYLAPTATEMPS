@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "campaign": 3,
+  "date": "2026-10-13",
+  "verified_branch": "arena/97efdf4a-equylaptatemps",
+  "verified_head": "5ac671aa9963b90577393f40740d397bdc047341",
+  "remote_head_matches": true,
+  "working_tree_clean_at_audit": true,
+  "pr": {"number": 1, "state": "OPEN", "head": "5ac671aa9963b90577393f40740d397bdc047341"},
+  "ci": {"run": "38363810539", "python_3_10": "pass", "python_3_11": "pass"},
+  "local_tests_at_audit": 211,
+  "local_tests_after_sequence_seam_tests": 221,
+  "parents": {
+    "recipient": {"model_id": "state-spaces/mamba-130m-hf", "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1", "parameters": 129135360, "width": 768, "blocks": 24},
+    "donor": {"model_id": "Qwen/Qwen2.5-Math-1.5B", "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2", "parameters": 1543714304, "width": 1536, "blocks": 28}
+  },
+  "child_topology": "Mamba embedding/blocks [0,11) -> input seam 768->1536 -> intact Qwen blocks [20,22) -> output seam 1536->768 -> Mamba blocks [13,24)/norm/head; Mamba [11,13) absent; donor embedding/head absent",
+  "environment": {"cpus": 2, "ram_gb": 3.8, "gpu": false, "huggingface_reachable_locally": false, "real_parent_execution": "opted-in GitHub Actions CPU workflows only"},
+  "artifacts_recovered": ["published pilot interface checkpoint (sha256 verified)", "published structural interface checkpoint (sha256 verified)", "synthetic baseline ZIP", "all Campaign 2 registries, journals, raw records and reports"],
+  "artifacts_unavailable_locally": ["Campaign 2 candidate binaries/optimizer states: present only in GitHub Actions artifact campaign02-alignment-recovery (run 38358962201, 200690671 bytes, not expired, API-verified 2026-10-13); not downloaded in this sandbox; not required because Campaign 3 retrains its dense control"],
+  "campaign_02_outcome": "C"
+}

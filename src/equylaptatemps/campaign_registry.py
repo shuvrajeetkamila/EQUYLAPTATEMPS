@@ -13,10 +13,11 @@ from .evidence import checked_path
 
 
 class CampaignRegistry:
-    def __init__(self, root, experiments):
+    def __init__(self, root, experiments, *, filename="campaign_02_results.json", campaign=2):
         self.root = Path(root)
         self.root.mkdir(parents=True, exist_ok=True)
-        self.file = self.root / "campaign_02_results.json"
+        self.file = self.root / filename
+        self.campaign = campaign
         configs = {e["id"]: e for e in experiments}
         if len(configs) != len(experiments):
             raise ValueError("Duplicate immutable experiment ID")
@@ -45,7 +46,7 @@ class CampaignRegistry:
             self.save()
 
     def save(self):
-        temp = self.root / "campaign_02_results.new.json"
+        temp = self.root / (self.file.name.removesuffix(".json") + ".new.json")
         temp.write_text(json.dumps(self.state, indent=2, allow_nan=False) + "\n")
         os.replace(temp, self.file)
 
