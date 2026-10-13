@@ -99,8 +99,7 @@ def main():
                 "magnitude small and below the 2% gate at seed 123"
             ),
             "useful_task_performance": (
-                "FAIL (all candidates language 1.82-1.85x host; macro "
-                "7.70-8.02 vs 5.7396 ceiling)"
+                "FAIL (all candidates language 1.82-1.85x host; macro 7.70-8.02 vs 5.7396 ceiling)"
             ),
             "promotion": "NONE",
             "rationale": (
