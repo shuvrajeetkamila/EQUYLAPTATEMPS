@@ -53,6 +53,8 @@ def audit_child(child) -> dict:
         "recipient_config": child.recipient_config.to_dict(),
         "donor_config": child.donor_config.to_dict(),
     }
+    if hasattr(child, "interfaces_config"):
+        execution_config["interfaces_config"] = child.interfaces_config
     config_hash = hashlib.sha256(
         json.dumps(execution_config, sort_keys=True, allow_nan=False).encode()
     ).hexdigest()

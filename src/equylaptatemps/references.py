@@ -36,6 +36,11 @@ def save_reference(child, target: str | Path, provenance: dict) -> dict:
         "parent_kind": "synthetic" if child.recipe.synthetic else "pretrained",
         "capability_status": "UNPROVEN",
         "recipe": child.recipe.to_dict(),
+        **(
+            {"interfaces_config": child.interfaces_config}
+            if hasattr(child, "interfaces_config")
+            else {}
+        ),
         "dtype": str(child.embedding.weight.dtype).removeprefix("torch."),
         "structure": child.structure_report(),
         "provenance": provenance,
@@ -85,6 +90,10 @@ def load_reference(target: str | Path, parents):
         ):
             raise ValueError("Reference checkpoint parent snapshot hashes differ")
     child = child_from_parents(recipe, parents.recipient, parents.donor)
+    if "interfaces_config" in descriptor:
+        from .alignment import install_interfaces
+
+        install_interfaces(child, descriptor["interfaces_config"])
     if descriptor["format_version"] == 2:
         recorded = descriptor.get("execution_contract")
         if (

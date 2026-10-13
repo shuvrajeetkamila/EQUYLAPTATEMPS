@@ -83,6 +83,11 @@ def save_artifact(
             "recipient_tokenizer_sha256": tokenizer_fingerprint(tokenizer),
             "weights_sha256": sha256_file(staging / "model.safetensors"),
             "metrics": metrics,
+            **(
+                {"interfaces_config": child.interfaces_config}
+                if hasattr(child, "interfaces_config")
+                else {}
+            ),
         }
         write_json(staging / "child.json", manifest)
         # Guard against an output created during the save operation.
@@ -158,6 +163,10 @@ def load_artifact(path: str | Path, *, device: str = "cpu") -> StoredChild:
     if manifest["dtype"] not in DTYPES:
         raise ValueError("Unsupported checkpoint dtype")
     child = empty_child(recipe, manifest["recipient_config"], manifest["donor_config"])
+    if "interfaces_config" in manifest:
+        from .alignment import install_interfaces
+
+        install_interfaces(child, manifest["interfaces_config"])
     child.to(dtype=DTYPES[manifest["dtype"]])
     load_model(child, str(path / "model.safetensors"), strict=True, device="cpu")
     tokenizer = load_tokenizer(path / "tokenizer")
