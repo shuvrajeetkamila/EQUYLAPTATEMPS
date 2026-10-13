@@ -1,0 +1,18 @@
+{
+  "campaign": 3,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "registered_date": "2026-10-13",
+  "phase": "diagnostic_confirm_2",
+  "note": "Single matched control closing the budget-by-content matrix: the 96-step attention child improved markedly but remained bypass-equivalent, so this runs its identically trained 96-step random-sector twin. Diagnostic only; cannot promote any candidate.",
+  "parents": {
+    "recipient": {"id": "state-spaces/mamba-130m-hf", "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"},
+    "donor": {"id": "Qwen/Qwen2.5-Math-1.5B", "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"}
+  },
+  "compute": {"device": "cpu", "dtype": "float32", "threads": 2, "parallel_experiments": 1, "max_session_seconds": 3300, "minimum_ram_bytes": 12884901888, "minimum_disk_bytes": 12884901888},
+  "data": {"seed": 42, "gsm_train_rows": 32, "gsm_dev_rows": 16, "wiki_train_windows": 32, "wiki_dev_windows": 16, "wiki_characters": 192, "statistic_text_windows": 8},
+  "training": {"steps": 32, "batch_size": 1, "learning_rate": 0.0003, "max_length": 512, "gradient_checkpointing": true, "diagnostic_train_rows": 8, "checkpoint_every": 8, "objective": "direct child real-text and human GSM8K TRAIN next-token targets only"},
+  "experiments": [
+    {"id": "c03_attn_cov_42_long_randomtwin", "stage": "calibration", "seed": 42, "steps": 96, "random_sector": true, "random_sector_seed": 2024, "recipient_cut": [11, 13], "donor_sector": [20, 22], "interface": {"family": "sequence", "kind": "causal_attention", "bottleneck": 128, "heads": 4, "max_positions": 512}, "initialization": "covariance_orthogonal", "question": "At the longer budget, does pretrained donor content beat an identically trained random sector?"}
+  ],
+  "registration_revision": "diagnostic phase 2: long-budget matched random-sector twin"
+}
