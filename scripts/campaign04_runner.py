@@ -248,7 +248,7 @@ def run(args):
             )
             report = {
                 "training_tokens_processed": sum(
-                    int((training[i].labels != -100).sum())
+                    int((torch.tensor(training[i].labels) != -100).sum())
                     for event in fit["trace"]
                     for i in event["record_indices"]
                 )
