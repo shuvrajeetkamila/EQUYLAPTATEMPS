@@ -1,0 +1,94 @@
+{
+  "campaign": 5,
+  "compute": {
+    "device": "cpu",
+    "dtype": "float32",
+    "max_session_seconds": 3300,
+    "minimum_disk_bytes": 12884901888,
+    "minimum_ram_bytes": 12884901888,
+    "parallel_experiments": 1,
+    "threads": 2
+  },
+  "data": {
+    "gsm_dev_rows": 16,
+    "gsm_train_rows": 32,
+    "seed": 42,
+    "statistic_text_windows": 8,
+    "wiki_characters": 192,
+    "wiki_dev_windows": 16,
+    "wiki_train_windows": 32
+  },
+  "experiments": [
+    {
+      "donor_sector": [
+        20,
+        26
+      ],
+      "id": "c05_w6_late_123",
+      "initialization": "bottleneck_covariance",
+      "interface": {
+        "bottleneck": 128,
+        "donor_delta": true,
+        "family": "bottleneck",
+        "heads": 4,
+        "kind": "causal_attention",
+        "max_positions": 512
+      },
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 123,
+      "stage": "calibration"
+    },
+    {
+      "donor_sector": [
+        20,
+        26
+      ],
+      "id": "c05_w6_late_123_randomtwin",
+      "initialization": "bottleneck_covariance",
+      "interface": {
+        "bottleneck": 128,
+        "donor_delta": true,
+        "family": "bottleneck",
+        "heads": 4,
+        "kind": "causal_attention",
+        "max_positions": 512
+      },
+      "random_sector": true,
+      "random_sector_seed": 2024,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 123,
+      "stage": "calibration"
+    }
+  ],
+  "note": "Exploratory seed-123 replication of the largest screen benefit (w6 late, +4.50%). It failed Gate D, so this cannot promote it; it tests stability against best-of-six screening noise.",
+  "parents": {
+    "donor": {
+      "id": "Qwen/Qwen2.5-Math-1.5B",
+      "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"
+    },
+    "recipient": {
+      "id": "state-spaces/mamba-130m-hf",
+      "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"
+    }
+  },
+  "phase": "replication_diagnostic",
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "registered_date": "2026-10-13",
+  "registration_revision": "screen frozen in campaign_05_preregistration.md",
+  "training": {
+    "batch_size": 1,
+    "checkpoint_every": 8,
+    "diagnostic_train_rows": 8,
+    "gradient_checkpointing": true,
+    "learning_rate": 0.0003,
+    "max_length": 512,
+    "objective": "direct child real-text and human GSM8K TRAIN next-token targets only",
+    "steps": 32
+  }
+}
