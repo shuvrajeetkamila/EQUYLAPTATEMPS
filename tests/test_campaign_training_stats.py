@@ -1,6 +1,5 @@
 """Mechanical fixture tests only; no synthetic capability scores claimed by Campaign2."""
 
-
 import pytest
 import torch
 
