@@ -1,0 +1,1693 @@
+{
+  "capability_status": "UNPROVEN",
+  "dtype": "float32",
+  "execution_contract": {
+    "donor_config": {
+      "_attn_implementation_autoset": true,
+      "add_cross_attention": false,
+      "architectures": [
+        "Qwen2ForCausalLM"
+      ],
+      "attention_dropout": 0.0,
+      "bad_words_ids": null,
+      "begin_suppress_tokens": null,
+      "bos_token_id": 151643,
+      "chunk_size_feed_forward": 0,
+      "cross_attention_hidden_size": null,
+      "decoder_start_token_id": null,
+      "diversity_penalty": 0.0,
+      "do_sample": false,
+      "early_stopping": false,
+      "encoder_no_repeat_ngram_size": 0,
+      "eos_token_id": 151643,
+      "exponential_decay_length_penalty": null,
+      "finetuning_task": null,
+      "forced_bos_token_id": null,
+      "forced_eos_token_id": null,
+      "hidden_act": "silu",
+      "hidden_size": 1536,
+      "id2label": {
+        "0": "LABEL_0",
+        "1": "LABEL_1"
+      },
+      "initializer_range": 0.02,
+      "intermediate_size": 8960,
+      "is_decoder": false,
+      "is_encoder_decoder": false,
+      "label2id": {
+        "LABEL_0": 0,
+        "LABEL_1": 1
+      },
+      "length_penalty": 1.0,
+      "max_length": 20,
+      "max_position_embeddings": 4096,
+      "max_window_layers": 21,
+      "min_length": 0,
+      "model_type": "qwen2",
+      "no_repeat_ngram_size": 0,
+      "num_attention_heads": 12,
+      "num_beam_groups": 1,
+      "num_beams": 1,
+      "num_hidden_layers": 28,
+      "num_key_value_heads": 2,
+      "num_return_sequences": 1,
+      "output_attentions": false,
+      "output_hidden_states": false,
+      "output_scores": false,
+      "pad_token_id": null,
+      "prefix": null,
+      "problem_type": null,
+      "pruned_heads": {},
+      "remove_invalid_values": false,
+      "repetition_penalty": 1.0,
+      "return_dict": true,
+      "return_dict_in_generate": false,
+      "rms_norm_eps": 1e-06,
+      "rope_scaling": null,
+      "rope_theta": 10000,
+      "sep_token_id": null,
+      "sliding_window": null,
+      "suppress_tokens": null,
+      "task_specific_params": null,
+      "temperature": 1.0,
+      "tf_legacy_loss": false,
+      "tie_encoder_decoder": false,
+      "tie_word_embeddings": true,
+      "tokenizer_class": null,
+      "top_k": 50,
+      "top_p": 1.0,
+      "torch_dtype": "float32",
+      "torchscript": false,
+      "typical_p": 1.0,
+      "use_bfloat16": false,
+      "use_cache": false,
+      "use_mrope": false,
+      "use_sliding_window": false,
+      "vocab_size": 151936
+    },
+    "operations": {
+      "": {
+        "attributes": {},
+        "class": "equylaptatemps.model.SurgicalChild"
+      },
+      "embedding": {
+        "attributes": {},
+        "class": "torch.nn.modules.sparse.Embedding"
+      },
+      "final_norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "graft": {
+        "attributes": {},
+        "class": "equylaptatemps.backbones.StackSegment"
+      },
+      "graft.layers": {
+        "attributes": {},
+        "class": "torch.nn.modules.container.ModuleList"
+      },
+      "graft.layers.0": {
+        "attributes": {
+          "hidden_size": 1536
+        },
+        "class": "transformers.models.qwen2.modeling_qwen2.Qwen2DecoderLayer"
+      },
+      "graft.layers.0.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-06
+        },
+        "class": "transformers.models.qwen2.modeling_qwen2.Qwen2RMSNorm"
+      },
+      "graft.layers.0.mlp": {
+        "attributes": {
+          "hidden_size": 1536,
+          "intermediate_size": 8960
+        },
+        "class": "transformers.models.qwen2.modeling_qwen2.Qwen2MLP"
+      },
+      "graft.layers.0.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "graft.layers.0.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.0.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.0.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.0.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-06
+        },
+        "class": "transformers.models.qwen2.modeling_qwen2.Qwen2RMSNorm"
+      },
+      "graft.layers.0.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 128,
+          "layer_idx": 20,
+          "scaling": 0.08838834764831845
+        },
+        "class": "transformers.models.qwen2.modeling_qwen2.Qwen2Attention"
+      },
+      "graft.layers.0.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.0.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.0.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.0.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1": {
+        "attributes": {
+          "hidden_size": 1536
+        },
+        "class": "transformers.models.qwen2.modeling_qwen2.Qwen2DecoderLayer"
+      },
+      "graft.layers.1.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-06
+        },
+        "class": "transformers.models.qwen2.modeling_qwen2.Qwen2RMSNorm"
+      },
+      "graft.layers.1.mlp": {
+        "attributes": {
+          "hidden_size": 1536,
+          "intermediate_size": 8960
+        },
+        "class": "transformers.models.qwen2.modeling_qwen2.Qwen2MLP"
+      },
+      "graft.layers.1.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "graft.layers.1.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-06
+        },
+        "class": "transformers.models.qwen2.modeling_qwen2.Qwen2RMSNorm"
+      },
+      "graft.layers.1.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 128,
+          "layer_idx": 21,
+          "scaling": 0.08838834764831845
+        },
+        "class": "transformers.models.qwen2.modeling_qwen2.Qwen2Attention"
+      },
+      "graft.layers.1.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.rotary": {
+        "attributes": {},
+        "class": "transformers.models.qwen2.modeling_qwen2.Qwen2RotaryEmbedding"
+      },
+      "input_seam": {
+        "attributes": {},
+        "class": "equylaptatemps.sequence_seams.SequenceSeam"
+      },
+      "input_seam.mixer": {
+        "attributes": {
+          "head_dim": 32
+        },
+        "class": "equylaptatemps.sequence_seams.BottleneckCausalAttentionMixer"
+      },
+      "input_seam.mixer.down": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "input_seam.mixer.norm": {
+        "attributes": {
+          "eps": 1e-05,
+          "normalized_shape": [
+            128
+          ]
+        },
+        "class": "torch.nn.modules.normalization.LayerNorm"
+      },
+      "input_seam.mixer.out": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "input_seam.mixer.position": {
+        "attributes": {},
+        "class": "torch.nn.modules.sparse.Embedding"
+      },
+      "input_seam.mixer.qkv": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "input_seam.norm": {
+        "attributes": {
+          "eps": 1e-05,
+          "normalized_shape": [
+            768
+          ]
+        },
+        "class": "torch.nn.modules.normalization.LayerNorm"
+      },
+      "input_seam.projection": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "lm_head": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "output_seam": {
+        "attributes": {},
+        "class": "equylaptatemps.sequence_seams.SequenceSeam"
+      },
+      "output_seam.mixer": {
+        "attributes": {
+          "head_dim": 32
+        },
+        "class": "equylaptatemps.sequence_seams.BottleneckCausalAttentionMixer"
+      },
+      "output_seam.mixer.down": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "output_seam.mixer.norm": {
+        "attributes": {
+          "eps": 1e-05,
+          "normalized_shape": [
+            128
+          ]
+        },
+        "class": "torch.nn.modules.normalization.LayerNorm"
+      },
+      "output_seam.mixer.out": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "output_seam.mixer.position": {
+        "attributes": {},
+        "class": "torch.nn.modules.sparse.Embedding"
+      },
+      "output_seam.mixer.qkv": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "output_seam.norm": {
+        "attributes": {
+          "eps": 1e-05,
+          "normalized_shape": [
+            1536
+          ]
+        },
+        "class": "torch.nn.modules.normalization.LayerNorm"
+      },
+      "output_seam.projection": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix": {
+        "attributes": {},
+        "class": "equylaptatemps.backbones.StackSegment"
+      },
+      "prefix.layers": {
+        "attributes": {},
+        "class": "torch.nn.modules.container.ModuleList"
+      },
+      "prefix.layers.0": {
+        "attributes": {
+          "layer_idx": 0,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "prefix.layers.0.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 0,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "prefix.layers.0.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.0.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "prefix.layers.0.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.0.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.0.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.0.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.0.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "prefix.layers.1": {
+        "attributes": {
+          "layer_idx": 1,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "prefix.layers.1.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 1,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "prefix.layers.1.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.1.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "prefix.layers.1.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.1.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.1.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.1.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.1.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "prefix.layers.10": {
+        "attributes": {
+          "layer_idx": 10,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "prefix.layers.10.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 10,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "prefix.layers.10.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.10.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "prefix.layers.10.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.10.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.10.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.10.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.10.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "prefix.layers.2": {
+        "attributes": {
+          "layer_idx": 2,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "prefix.layers.2.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 2,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "prefix.layers.2.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.2.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "prefix.layers.2.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.2.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.2.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.2.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.2.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "prefix.layers.3": {
+        "attributes": {
+          "layer_idx": 3,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "prefix.layers.3.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 3,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "prefix.layers.3.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.3.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "prefix.layers.3.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.3.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.3.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.3.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.3.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "prefix.layers.4": {
+        "attributes": {
+          "layer_idx": 4,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "prefix.layers.4.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 4,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "prefix.layers.4.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.4.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "prefix.layers.4.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.4.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.4.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.4.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.4.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "prefix.layers.5": {
+        "attributes": {
+          "layer_idx": 5,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "prefix.layers.5.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 5,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "prefix.layers.5.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.5.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "prefix.layers.5.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.5.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.5.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.5.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.5.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "prefix.layers.6": {
+        "attributes": {
+          "layer_idx": 6,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "prefix.layers.6.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 6,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "prefix.layers.6.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.6.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "prefix.layers.6.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.6.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.6.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.6.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.6.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "prefix.layers.7": {
+        "attributes": {
+          "layer_idx": 7,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "prefix.layers.7.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 7,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "prefix.layers.7.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.7.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "prefix.layers.7.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.7.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.7.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.7.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.7.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "prefix.layers.8": {
+        "attributes": {
+          "layer_idx": 8,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "prefix.layers.8.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 8,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "prefix.layers.8.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.8.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "prefix.layers.8.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.8.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.8.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.8.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.8.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "prefix.layers.9": {
+        "attributes": {
+          "layer_idx": 9,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "prefix.layers.9.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 9,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "prefix.layers.9.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.9.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "prefix.layers.9.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.9.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.9.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.9.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.9.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "suffix": {
+        "attributes": {},
+        "class": "equylaptatemps.backbones.StackSegment"
+      },
+      "suffix.layers": {
+        "attributes": {},
+        "class": "torch.nn.modules.container.ModuleList"
+      },
+      "suffix.layers.0": {
+        "attributes": {
+          "layer_idx": 13,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "suffix.layers.0.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 13,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "suffix.layers.0.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.0.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "suffix.layers.0.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.0.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.0.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.0.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.0.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "suffix.layers.1": {
+        "attributes": {
+          "layer_idx": 14,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "suffix.layers.1.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 14,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "suffix.layers.1.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.1.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "suffix.layers.1.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.1.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.1.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.1.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.1.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "suffix.layers.10": {
+        "attributes": {
+          "layer_idx": 23,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "suffix.layers.10.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 23,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "suffix.layers.10.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.10.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "suffix.layers.10.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.10.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.10.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.10.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.10.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "suffix.layers.2": {
+        "attributes": {
+          "layer_idx": 15,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "suffix.layers.2.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 15,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "suffix.layers.2.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.2.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "suffix.layers.2.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.2.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.2.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.2.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.2.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "suffix.layers.3": {
+        "attributes": {
+          "layer_idx": 16,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "suffix.layers.3.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 16,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "suffix.layers.3.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.3.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "suffix.layers.3.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.3.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.3.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.3.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.3.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "suffix.layers.4": {
+        "attributes": {
+          "layer_idx": 17,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "suffix.layers.4.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 17,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "suffix.layers.4.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.4.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "suffix.layers.4.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.4.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.4.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.4.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.4.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "suffix.layers.5": {
+        "attributes": {
+          "layer_idx": 18,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "suffix.layers.5.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 18,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "suffix.layers.5.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.5.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "suffix.layers.5.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.5.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.5.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.5.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.5.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "suffix.layers.6": {
+        "attributes": {
+          "layer_idx": 19,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "suffix.layers.6.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 19,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "suffix.layers.6.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.6.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "suffix.layers.6.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.6.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.6.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.6.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.6.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "suffix.layers.7": {
+        "attributes": {
+          "layer_idx": 20,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "suffix.layers.7.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 20,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "suffix.layers.7.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.7.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "suffix.layers.7.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.7.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.7.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.7.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.7.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "suffix.layers.8": {
+        "attributes": {
+          "layer_idx": 21,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "suffix.layers.8.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 21,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "suffix.layers.8.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.8.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "suffix.layers.8.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.8.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.8.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.8.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.8.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      },
+      "suffix.layers.9": {
+        "attributes": {
+          "layer_idx": 22,
+          "residual_in_fp32": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaBlock"
+      },
+      "suffix.layers.9.mixer": {
+        "attributes": {
+          "conv_kernel_size": 4,
+          "hidden_size": 768,
+          "intermediate_size": 1536,
+          "layer_idx": 22,
+          "ssm_state_size": 16,
+          "time_step_rank": 48,
+          "use_bias": false,
+          "use_conv_bias": true
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaMixer"
+      },
+      "suffix.layers.9.mixer.act": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.9.mixer.conv1d": {
+        "attributes": {},
+        "class": "torch.nn.modules.conv.Conv1d"
+      },
+      "suffix.layers.9.mixer.dt_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.9.mixer.in_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.9.mixer.out_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.9.mixer.x_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.9.norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.mamba.modeling_mamba.MambaRMSNorm"
+      }
+    },
+    "recipe": {
+      "donor": {
+        "model_id": "Qwen/Qwen2.5-Math-1.5B",
+        "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"
+      },
+      "donor_sector": [
+        20,
+        22
+      ],
+      "recipient": {
+        "model_id": "state-spaces/mamba-130m-hf",
+        "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"
+      },
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "schema_version": 1,
+      "seed": 42
+    },
+    "recipient_config": {
+      "_attn_implementation_autoset": true,
+      "add_cross_attention": false,
+      "architectures": [
+        "MambaForCausalLM"
+      ],
+      "bad_words_ids": null,
+      "begin_suppress_tokens": null,
+      "bos_token_id": 0,
+      "chunk_size_feed_forward": 0,
+      "conv_kernel": 4,
+      "cross_attention_hidden_size": null,
+      "d_inner": 1536,
+      "d_model": 768,
+      "decoder_start_token_id": null,
+      "diversity_penalty": 0.0,
+      "do_sample": false,
+      "early_stopping": false,
+      "encoder_no_repeat_ngram_size": 0,
+      "eos_token_id": 0,
+      "expand": 2,
+      "exponential_decay_length_penalty": null,
+      "finetuning_task": null,
+      "forced_bos_token_id": null,
+      "forced_eos_token_id": null,
+      "fused_add_norm": true,
+      "hidden_act": "silu",
+      "hidden_size": 768,
+      "id2label": {
+        "0": "LABEL_0",
+        "1": "LABEL_1"
+      },
+      "initializer_range": 0.1,
+      "intermediate_size": 1536,
+      "is_decoder": false,
+      "is_encoder_decoder": false,
+      "label2id": {
+        "LABEL_0": 0,
+        "LABEL_1": 1
+      },
+      "layer_norm_epsilon": 1e-05,
+      "length_penalty": 1.0,
+      "max_length": 20,
+      "min_length": 0,
+      "model_type": "mamba",
+      "n_layer": 24,
+      "no_repeat_ngram_size": 0,
+      "num_beam_groups": 1,
+      "num_beams": 1,
+      "num_hidden_layers": 24,
+      "num_return_sequences": 1,
+      "output_attentions": false,
+      "output_hidden_states": false,
+      "output_scores": false,
+      "pad_token_id": 0,
+      "pad_vocab_size_multiple": 8,
+      "prefix": null,
+      "problem_type": null,
+      "pruned_heads": {},
+      "remove_invalid_values": false,
+      "repetition_penalty": 1.0,
+      "rescale_prenorm_residual": false,
+      "residual_in_fp32": true,
+      "return_dict": true,
+      "return_dict_in_generate": false,
+      "rms_norm": true,
+      "sep_token_id": null,
+      "ssm_cfg": {},
+      "state_size": 16,
+      "suppress_tokens": null,
+      "task_specific_params": null,
+      "temperature": 1.0,
+      "tf_legacy_loss": false,
+      "tie_encoder_decoder": false,
+      "tie_word_embeddings": true,
+      "time_step_floor": 0.0001,
+      "time_step_init_scheme": "random",
+      "time_step_max": 0.1,
+      "time_step_min": 0.001,
+      "time_step_rank": 48,
+      "time_step_scale": 1.0,
+      "tokenizer_class": null,
+      "top_k": 50,
+      "top_p": 1.0,
+      "torch_dtype": "float32",
+      "torchscript": false,
+      "typical_p": 1.0,
+      "use_bfloat16": false,
+      "use_bias": false,
+      "use_cache": false,
+      "use_conv_bias": true,
+      "use_mambapy": false,
+      "vocab_size": 50280
+    }
+  },
+  "execution_contract_sha256": "71132ddcc3f2d311f1732a6c1636d6990c0f0b6e7e436ea4f98069206aeeb39e",
+  "format_version": 2,
+  "frozen_sha256": "ba6c0f8331f18c222ed4c2b46016464e709702199bdf83e6236033b1a055867d",
+  "graft_sha256": "eed714c602b75a714a36db8d4fbd2949818b935ad146fe7c1efd21313890e969",
+  "interfaces_config": {
+    "bottleneck": 128,
+    "family": "sequence",
+    "heads": 4,
+    "kind": "causal_attention",
+    "max_positions": 512
+  },
+  "interfaces_sha256": "e854958ef86211414907e1f5c6cdee0cb97f0832e312cf8f3693625f6ab06314",
+  "parent_kind": "pretrained",
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "provenance": {
+    "config_files": {
+      "donor_sha256": "81d1dc3c9d4797466a24bfc140776894d15ac4ccce58a0220462b2106f2f4831",
+      "recipient_sha256": "784825b6b6cdde47a1602278db0e66d6764169af4a8e662404701bc636a2686a"
+    },
+    "different_architectures": true,
+    "disjoint_declared_weight_lineages": true,
+    "limitation": "Registry and local artifact checks cannot prove undisclosed weight ancestry or absence of shared training data. A revision is recorded, not remotely attested.",
+    "lineage_evidence": {
+      "donor": "https://github.com/QwenLM/Qwen2.5-Math",
+      "recipient": "https://github.com/state-spaces/mamba"
+    },
+    "snapshots": {
+      "donor": {
+        "hub_lfs_hashes_recorded": 1,
+        "license_notices": {
+          "LICENSE": {
+            "sha256": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+            "text": "\n                                 Apache License\n                           Version 2.0, January 2004\n                        http://www.apache.org/licenses/\n\n   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION\n\n   1. Definitions.\n\n      \"License\" shall mean the terms and conditions for use, reproduction,\n      and distribution as defined by Sections 1 through 9 of this document.\n\n      \"Licensor\" shall mean the copyright owner or entity authorized by\n      the copyright owner that is granting the License.\n\n      \"Legal Entity\" shall mean the union of the acting entity and all\n      other entities that control, are controlled by, or are under common\n      control with that entity. For the purposes of this definition,\n      \"control\" means (i) the power, direct or indirect, to cause the\n      direction or management of such entity, whether by contract or\n      otherwise, or (ii) ownership of fifty percent (50%) or more of the\n      outstanding shares, or (iii) beneficial ownership of such entity.\n\n      \"You\" (or \"Your\") shall mean an individual or Legal Entity\n      exercising permissions granted by this License.\n\n      \"Source\" form shall mean the preferred form for making modifications,\n      including but not limited to software source code, documentation\n      source, and configuration files.\n\n      \"Object\" form shall mean any form resulting from mechanical\n      transformation or translation of a Source form, including but\n      not limited to compiled object code, generated documentation,\n      and conversions to other media types.\n\n      \"Work\" shall mean the work of authorship, whether in Source or\n      Object form, made available under the License, as indicated by a\n      copyright notice that is included in or attached to the work\n      (an example is provided in the Appendix below).\n\n      \"Derivative Works\" shall mean any work, whether in Source or Object\n      form, that is based on (or derived from) the Work and for which the\n      editorial revisions, annotations, elaborations, or other modifications\n      represent, as a whole, an original work of authorship. For the purposes\n      of this License, Derivative Works shall not include works that remain\n      separable from, or merely link (or bind by name) to the interfaces of,\n      the Work and Derivative Works thereof.\n\n      \"Contribution\" shall mean any work of authorship, including\n      the original version of the Work and any modifications or additions\n      to that Work or Derivative Works thereof, that is intentionally\n      submitted to Licensor for inclusion in the Work by the copyright owner\n      or by an individual or Legal Entity authorized to submit on behalf of\n      the copyright owner. For the purposes of this definition, \"submitted\"\n      means any form of electronic, verbal, or written communication sent\n      to the Licensor or its representatives, including but not limited to\n      communication on electronic mailing lists, source code control systems,\n      and issue tracking systems that are managed by, or on behalf of, the\n      Licensor for the purpose of discussing and improving the Work, but\n      excluding communication that is conspicuously marked or otherwise\n      designated in writing by the copyright owner as \"Not a Contribution.\"\n\n      \"Contributor\" shall mean Licensor and any individual or Legal Entity\n      on behalf of whom a Contribution has been received by Licensor and\n      subsequently incorporated within the Work.\n\n   2. Grant of Copyright License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      copyright license to reproduce, prepare Derivative Works of,\n      publicly display, publicly perform, sublicense, and distribute the\n      Work and such Derivative Works in Source or Object form.\n\n   3. Grant of Patent License. Subject to the terms and conditions of\n      this License, each Contributor hereby grants to You a perpetual,\n      worldwide, non-exclusive, no-charge, royalty-free, irrevocable\n      (except as stated in this section) patent license to make, have made,\n      use, offer to sell, sell, import, and otherwise transfer the Work,\n      where such license applies only to those patent claims licensable\n      by such Contributor that are necessarily infringed by their\n      Contribution(s) alone or by combination of their Contribution(s)\n      with the Work to which such Contribution(s) was submitted. If You\n      institute patent litigation against any entity (including a\n      cross-claim or counterclaim in a lawsuit) alleging that the Work\n      or a Contribution incorporated within the Work constitutes direct\n      or contributory patent infringement, then any patent licenses\n      granted to You under this License for that Work shall terminate\n      as of the date such litigation is filed.\n\n   4. Redistribution. You may reproduce and distribute copies of the\n      Work or Derivative Works thereof in any medium, with or without\n      modifications, and in Source or Object form, provided that You\n      meet the following conditions:\n\n      (a) You must give any other recipients of the Work or\n          Derivative Works a copy of this License; and\n\n      (b) You must cause any modified files to carry prominent notices\n          stating that You changed the files; and\n\n      (c) You must retain, in the Source form of any Derivative Works\n          that You distribute, all copyright, patent, trademark, and\n          attribution notices from the Source form of the Work,\n          excluding those notices that do not pertain to any part of\n          the Derivative Works; and\n\n      (d) If the Work includes a \"NOTICE\" text file as part of its\n          distribution, then any Derivative Works that You distribute must\n          include a readable copy of the attribution notices contained\n          within such NOTICE file, excluding those notices that do not\n          pertain to any part of the Derivative Works, in at least one\n          of the following places: within a NOTICE text file distributed\n          as part of the Derivative Works; within the Source form or\n          documentation, if provided along with the Derivative Works; or,\n          within a display generated by the Derivative Works, if and\n          wherever such third-party notices normally appear. The contents\n          of the NOTICE file are for informational purposes only and\n          do not modify the License. You may add Your own attribution\n          notices within Derivative Works that You distribute, alongside\n          or as an addendum to the NOTICE text from the Work, provided\n          that such additional attribution notices cannot be construed\n          as modifying the License.\n\n      You may add Your own copyright statement to Your modifications and\n      may provide additional or different license terms and conditions\n      for use, reproduction, or distribution of Your modifications, or\n      for any such Derivative Works as a whole, provided Your use,\n      reproduction, and distribution of the Work otherwise complies with\n      the conditions stated in this License.\n\n   5. Submission of Contributions. Unless You explicitly state otherwise,\n      any Contribution intentionally submitted for inclusion in the Work\n      by You to the Licensor shall be under the terms and conditions of\n      this License, without any additional terms or conditions.\n      Notwithstanding the above, nothing herein shall supersede or modify\n      the terms of any separate license agreement you may have executed\n      with Licensor regarding such Contributions.\n\n   6. Trademarks. This License does not grant permission to use the trade\n      names, trademarks, service marks, or product names of the Licensor,\n      except as required for reasonable and customary use in describing the\n      origin of the Work and reproducing the content of the NOTICE file.\n\n   7. Disclaimer of Warranty. Unless required by applicable law or\n      agreed to in writing, Licensor provides the Work (and each\n      Contributor provides its Contributions) on an \"AS IS\" BASIS,\n      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or\n      implied, including, without limitation, any warranties or conditions\n      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A\n      PARTICULAR PURPOSE. You are solely responsible for determining the\n      appropriateness of using or redistributing the Work and assume any\n      risks associated with Your exercise of permissions under this License.\n\n   8. Limitation of Liability. In no event and under no legal theory,\n      whether in tort (including negligence), contract, or otherwise,\n      unless required by applicable law (such as deliberate and grossly\n      negligent acts) or agreed to in writing, shall any Contributor be\n      liable to You for damages, including any direct, indirect, special,\n      incidental, or consequential damages of any character arising as a\n      result of this License or out of the use or inability to use the\n      Work (including but not limited to damages for loss of goodwill,\n      work stoppage, computer failure or malfunction, or any and all\n      other commercial damages or losses), even if such Contributor\n      has been advised of the possibility of such damages.\n\n   9. Accepting Warranty or Additional Liability. While redistributing\n      the Work or Derivative Works thereof, You may choose to offer,\n      and charge a fee for, acceptance of support, warranty, indemnity,\n      or other liability obligations and/or rights consistent with this\n      License. However, in accepting such obligations, You may act only\n      on Your own behalf and on Your sole responsibility, not on behalf\n      of any other Contributor, and only if You agree to indemnify,\n      defend, and hold each Contributor harmless for any liability\n      incurred by, or claims asserted against, such Contributor by reason\n      of your accepting any such warranty or additional liability.\n\n   END OF TERMS AND CONDITIONS\n\n   APPENDIX: How to apply the Apache License to your work.\n\n      To apply the Apache License to your work, attach the following\n      boilerplate notice, with the fields enclosed by brackets \"[]\"\n      replaced with your own identifying information. (Don't include\n      the brackets!)  The text should be enclosed in the appropriate\n      comment syntax for the file format. We also recommend that a\n      file or class name and description of purpose be included on the\n      same \"printed page\" as the copyright notice for easier\n      identification within third-party archives.\n\n   Copyright 2024 Alibaba Cloud\n\n   Licensed under the Apache License, Version 2.0 (the \"License\");\n   you may not use this file except in compliance with the License.\n   You may obtain a copy of the License at\n\n       http://www.apache.org/licenses/LICENSE-2.0\n\n   Unless required by applicable law or agreed to in writing, software\n   distributed under the License is distributed on an \"AS IS\" BASIS,\n   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n   See the License for the specific language governing permissions and\n   limitations under the License."
+          }
+        },
+        "redistribution_warning": "Retained notices do not grant redistribution rights; inspect each parent license.",
+        "revision_evidence": "locally_verified_pinned_download_record",
+        "signed_attestation": false,
+        "snapshot_files_sha256": {
+          "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+          "README.md": "2fa98ea4581329d6c9e2d58d28be62484d68ff596f59bc9e4d1f20ff950a0b80",
+          "config.json": "81d1dc3c9d4797466a24bfc140776894d15ac4ccce58a0220462b2106f2f4831",
+          "generation_config.json": "8c970692323e3ea0e9b8b0a4dca79388d31226e41f83c9fd6014804280ebf6e8",
+          "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+          "model.safetensors": "f7aa8d665ab44d3b461bed742fe93cdcedc15d2e31e50dc372c126e6f720857b",
+          "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+          "tokenizer_config.json": "a668be4b083078aca7c38853dd929184e81534d72525a9c1ddb84ea6fd1de6f8",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        },
+        "source_record_sha256": "5a09eebfc7a6e00d7ea42b1f7915c8ca2c58337f20ae596f08b496484362b1af"
+      },
+      "recipient": {
+        "hub_lfs_hashes_recorded": 1,
+        "license_notices": {},
+        "redistribution_warning": "No parent license documents found. Resolve rights before redistributing weights.",
+        "revision_evidence": "locally_verified_pinned_download_record",
+        "signed_attestation": false,
+        "snapshot_files_sha256": {
+          "README.md": "7f2f803907d92a538c2f0d6c9eb5e7b2c40bbb66a73311dacb3f7947c392b5fd",
+          "config.json": "784825b6b6cdde47a1602278db0e66d6764169af4a8e662404701bc636a2686a",
+          "generation_config.json": "248fa733db101c19a8e3c2f311a180fdd7c769323ec2873edf7060cec9f5ee32",
+          "model.safetensors": "1a5ed29c492ef4d485df3b7c2c8109771696589855b2162ad1ba618b6067cbea",
+          "tokenizer.json": "b074ad869d4f45d1265ca5c9814f78604f3d7e187acc063b15dd232b27585fcf",
+          "tokenizer_config.json": "9d7016c33747c6309346e59bd7bf63bfc33c9d9366ecb7e514b3b84dc6b46acb"
+        },
+        "source_record_sha256": "1a69c218f965c10c205f555c46c911215c3847954892e551245b46dc24c60424"
+      }
+    },
+    "synthetic": false,
+    "tokenizers": {
+      "donor_sha256": "8db5d7990b5f75c69beb91cbd540471cef4952b8b9b701f2181dcde2c9b5bb3d",
+      "recipient_sha256": "50d31c4c0bdbf55a3e0309f010ebed886546c81f9ce32302d93f25c186e43398"
+    }
+  },
+  "recipe": {
+    "donor": {
+      "local_path": "/home/runner/work/EQUYLAPTATEMPS/EQUYLAPTATEMPS/models/pretrained/Qwen2.5-Math-1.5B--4a83ca6e4526",
+      "model_id": "Qwen/Qwen2.5-Math-1.5B",
+      "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"
+    },
+    "donor_sector": [
+      20,
+      22
+    ],
+    "recipient": {
+      "local_path": "/home/runner/work/EQUYLAPTATEMPS/EQUYLAPTATEMPS/models/pretrained/mamba-130m-hf--1e76775f628f",
+      "model_id": "state-spaces/mamba-130m-hf",
+      "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"
+    },
+    "recipient_cut": [
+      11,
+      13
+    ],
+    "schema_version": 1,
+    "seed": 42
+  },
+  "reconstruction": "Acquire/hash pinned parents at dtype, then call load_reference",
+  "self_contained": false,
+  "structure": {
+    "context_limit": 4096,
+    "donor_family": "qwen2",
+    "donor_width": 1536,
+    "frozen_parameters": 215187712,
+    "parent_weight_arithmetic": false,
+    "prefix_blocks": 11,
+    "production_bypass": false,
+    "recipient_family": "mamba",
+    "recipient_width": 768,
+    "removed_recipient_blocks": 2,
+    "suffix_blocks": 11,
+    "trainable_dense_seam_parameters": 3189248,
+    "transplanted_blocks": 2,
+    "unique_parameters": 218376960
+  }
+}
