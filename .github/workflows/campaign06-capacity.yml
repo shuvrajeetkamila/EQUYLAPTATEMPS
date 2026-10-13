@@ -1,0 +1,41 @@
+name: Campaign 6 capacity control
+
+on:
+  push:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  capacity:
+    if: contains(github.event.head_commit.message, '[campaign06-capacity]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 75
+    env:
+      TOKENIZERS_PARALLELISM: 'false'
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -e '.[dev]'
+      - name: Run Campaign 6 capacity controls
+        id: research
+        timeout-minutes: 65
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/campaign06_runner.py --registry campaigns/campaign_06/experiment_registry.json --out artifacts/campaign06-capacity --post-pr 1
+      - name: Publish partial research metadata
+        if: always() && steps.research.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/publish_campaign02.py --out artifacts/campaign06-capacity --post-pr 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: campaign06-capacity-recovery
+          path: artifacts/campaign06-capacity/
