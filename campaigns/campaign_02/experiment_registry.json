@@ -3,26 +3,196 @@
   "project": "HETEROGENEOUS AI MODEL SURGERY",
   "registered_date": "2026-10-13",
   "parents": {
-    "recipient": {"id": "state-spaces/mamba-130m-hf", "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"},
-    "donor": {"id": "Qwen/Qwen2.5-Math-1.5B", "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"}
+    "recipient": {
+      "id": "state-spaces/mamba-130m-hf",
+      "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"
+    },
+    "donor": {
+      "id": "Qwen/Qwen2.5-Math-1.5B",
+      "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"
+    }
   },
-  "compute": {"device": "cpu", "dtype": "float32", "threads": 2, "parallel_experiments": 1, "max_session_seconds": 3000, "minimum_ram_bytes": 12884901888, "minimum_disk_bytes": 12884901888},
-  "data": {"seed": 42, "gsm_train_rows": 32, "gsm_dev_rows": 8, "wiki_train_windows": 32, "wiki_dev_windows": 8, "wiki_characters": 192, "statistic_text_windows": 8, "final_wiki_offset": 80, "final_wiki_windows": 64, "final_math_questions": 16},
-  "training": {"steps": 32, "batch_size": 1, "learning_rate": 0.0003, "max_length": 512, "gradient_checkpointing": true, "diagnostic_train_rows": 8, "checkpoint_every": 8, "objective": "direct child real-text and human GSM8K TRAIN next-token targets only"},
-  "selection": {"rule": "lowest macro development language BPB and human-answer byte NLL; no TEST selection", "maximum_dev_language_parent_ratio": 1.5, "minimum_dev_improvement_vs_matched_legacy": 0.05, "maximum_candidates_promoted": 1},
-  "acceptance": {"minimum_language_windows": 64, "language_parent_ratio": 1.1, "maximum_language_bpb": 3.0, "minimum_math_accuracy": 0.1, "math_donor_retention_fraction": 0.5, "matched_random_and_ablation_paired_ci_lower_gt": 0, "minimum_independent_seeds_for_outcome_A": 2, "require_genuine_frozen_blocks": true},
+  "compute": {
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 2,
+    "parallel_experiments": 1,
+    "max_session_seconds": 3000,
+    "minimum_ram_bytes": 12884901888,
+    "minimum_disk_bytes": 12884901888
+  },
+  "data": {
+    "seed": 42,
+    "gsm_train_rows": 32,
+    "gsm_dev_rows": 8,
+    "wiki_train_windows": 32,
+    "wiki_dev_windows": 8,
+    "wiki_characters": 192,
+    "statistic_text_windows": 8,
+    "final_wiki_offset": 80,
+    "final_wiki_windows": 64,
+    "final_math_questions": 16
+  },
+  "training": {
+    "steps": 32,
+    "batch_size": 1,
+    "learning_rate": 0.0003,
+    "max_length": 512,
+    "gradient_checkpointing": true,
+    "diagnostic_train_rows": 8,
+    "checkpoint_every": 8,
+    "objective": "direct child real-text and human GSM8K TRAIN next-token targets only"
+  },
+  "selection": {
+    "rule": "lowest macro development language BPB and human-answer byte NLL; no TEST selection",
+    "maximum_dev_language_parent_ratio": 1.5,
+    "minimum_dev_improvement_vs_matched_legacy": 0.05,
+    "maximum_candidates_promoted": 1,
+    "maximum_math_dev_ratio_vs_legacy": 1.05
+  },
+  "acceptance": {
+    "minimum_language_windows": 64,
+    "language_parent_ratio": 1.1,
+    "maximum_language_bpb": 3.0,
+    "minimum_math_accuracy": 0.1,
+    "math_donor_retention_fraction": 0.5,
+    "matched_random_and_ablation_paired_ci_lower_gt": 0,
+    "minimum_independent_seeds_for_outcome_A": 2,
+    "require_genuine_frozen_blocks": true
+  },
   "experiments": [
-    {"id": "primary_legacy_42", "stage": "calibration", "seed": 42, "recipient_cut": [11,13], "donor_sector": [20,22], "architecture": "layernorm_linear", "initialization": "random"},
-    {"id": "primary_scale_42", "stage": "calibration", "seed": 42, "recipient_cut": [11,13], "donor_sector": [20,22], "architecture": "layernorm_linear", "initialization": "residual_scale"},
-    {"id": "primary_covariance_42", "stage": "calibration", "seed": 42, "recipient_cut": [11,13], "donor_sector": [20,22], "architecture": "layernorm_linear", "initialization": "covariance_orthogonal"},
-    {"id": "primary_linear_42", "stage": "calibration", "seed": 42, "recipient_cut": [11,13], "donor_sector": [20,22], "architecture": "linear", "initialization": "fixed_orthogonal"},
-    {"id": "one_block_screen_42", "stage": "structural_screen", "seed": 42, "recipient_cut": [11,12], "donor_sector": [20,21], "architecture": "layernorm_linear", "initialization": "random"},
-    {"id": "early_screen_42", "stage": "structural_screen", "seed": 42, "recipient_cut": [3,5], "donor_sector": [3,5], "architecture": "layernorm_linear", "initialization": "random"},
-    {"id": "reverse_screen_42", "stage": "structural_screen", "seed": 42, "reverse": true, "recipient_cut": [13,15], "donor_sector": [11,13], "architecture": "layernorm_linear", "initialization": "random"},
-    {"id": "identity_bridge", "stage": "invalid_control", "reason": "768 and1536 unequal; true identity has incompatible shape/semantics; no fake identity claim"},
-    {"id": "two_layer_bridge", "stage": "deferred", "reason": "More trainable parameters confound attribution; first evaluate statistical initialization at equal dense budget"},
-    {"id": "larger_sector", "stage": "deferred", "reason": "No scaling before credible development retention; current learned sector failed matched random control"},
-    {"id": "second_seed", "stage": "conditional", "seed": 43, "reason": "Only promote if development criterion succeeds within resource budget"},
-    {"id": "general_reasoning", "stage": "deferred", "reason": "Bounded CPU campaign prioritizes genuine negative replay/alignment/dual-task testing"}
-  ]
+    {
+      "id": "one_block_screen_42",
+      "stage": "structural_screen",
+      "seed": 42,
+      "recipient_cut": [
+        11,
+        12
+      ],
+      "donor_sector": [
+        20,
+        21
+      ],
+      "architecture": "layernorm_linear",
+      "initialization": "random"
+    },
+    {
+      "id": "early_screen_42",
+      "stage": "structural_screen",
+      "seed": 42,
+      "recipient_cut": [
+        3,
+        5
+      ],
+      "donor_sector": [
+        3,
+        5
+      ],
+      "architecture": "layernorm_linear",
+      "initialization": "random"
+    },
+    {
+      "id": "reverse_screen_42",
+      "stage": "structural_screen",
+      "seed": 42,
+      "reverse": true,
+      "recipient_cut": [
+        13,
+        15
+      ],
+      "donor_sector": [
+        11,
+        13
+      ],
+      "architecture": "layernorm_linear",
+      "initialization": "random"
+    },
+    {
+      "id": "identity_bridge",
+      "stage": "invalid_control",
+      "reason": "768 and1536 unequal; true identity has incompatible shape/semantics; no fake identity claim"
+    },
+    {
+      "id": "primary_legacy_42",
+      "stage": "calibration",
+      "seed": 42,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "donor_sector": [
+        20,
+        22
+      ],
+      "architecture": "layernorm_linear",
+      "initialization": "random"
+    },
+    {
+      "id": "primary_scale_42",
+      "stage": "calibration",
+      "seed": 42,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "donor_sector": [
+        20,
+        22
+      ],
+      "architecture": "layernorm_linear",
+      "initialization": "residual_scale"
+    },
+    {
+      "id": "primary_covariance_42",
+      "stage": "calibration",
+      "seed": 42,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "donor_sector": [
+        20,
+        22
+      ],
+      "architecture": "layernorm_linear",
+      "initialization": "covariance_orthogonal"
+    },
+    {
+      "id": "primary_linear_42",
+      "stage": "calibration",
+      "seed": 42,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "donor_sector": [
+        20,
+        22
+      ],
+      "architecture": "linear",
+      "initialization": "fixed_orthogonal"
+    },
+    {
+      "id": "two_layer_bridge",
+      "stage": "deferred",
+      "reason": "More trainable parameters confound attribution; first evaluate statistical initialization at equal dense budget"
+    },
+    {
+      "id": "larger_sector",
+      "stage": "deferred",
+      "reason": "No scaling before credible development retention; current learned sector failed matched random control"
+    },
+    {
+      "id": "general_reasoning",
+      "stage": "deferred",
+      "reason": "Bounded CPU campaign prioritizes genuine negative replay/alignment/dual-task testing"
+    },
+    {
+      "id": "second_seed",
+      "stage": "conditional",
+      "seed": 43,
+      "reason": "Only promote if development criterion succeeds within resource budget"
+    }
+  ],
+  "registration_revision": "2: inexpensive topology screening before equal-budget interface calibration"
 }

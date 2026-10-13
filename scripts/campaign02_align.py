@@ -327,6 +327,9 @@ def run(args):
     if "primary_legacy_42" in completed:
         legacy = completed["primary_legacy_42"]["metrics"]["groups"]["domain:language"]["token_nll"]
         host = native_dev["recipient"]["groups"]["domain:language"]["token_nll"]
+        legacy_math = completed["primary_legacy_42"]["metrics"]["groups"]["domain:math"][
+            "token_nll"
+        ]
         eligible = []
         for id, r in completed.items():
             value = r["metrics"]["groups"]["domain:language"]["token_nll"]
@@ -335,7 +338,12 @@ def run(args):
             ] and value <= legacy * (
                 1 - config["selection"]["minimum_dev_improvement_vs_matched_legacy"]
             ):
-                eligible.append((value, id))
+                math_value = r["metrics"]["groups"]["domain:math"]["token_nll"]
+                if (
+                    math_value
+                    <= legacy_math * config["selection"]["maximum_math_dev_ratio_vs_legacy"]
+                ):
+                    eligible.append(((value + math_value) / 2, id))
         if eligible:
             promotion = {
                 "status": "PASS",
