@@ -1,63 +1,23 @@
-name: Campaign 7 pairing probe
-
+name: Campaign 7 candidate probe (opt-in)
 on:
+  workflow_dispatch:
   push:
-
+    branches: [arena/97efdf4a-equylaptatemps]
 permissions:
   contents: read
   pull-requests: write
-
 jobs:
   probe:
     if: contains(github.event.head_commit.message, '[campaign07-probe]')
-    runs-on: ubuntu-22.04
-    timeout-minutes: 20
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
     steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-      - run: pip install -q huggingface-hub==0.36.2 transformers==4.48.3
-      - uses: actions/checkout@v4
-      - name: Resolve candidate donor revisions and configs
-        run: |
-          python - <<'PY'
-          import json
-          from huggingface_hub import HfApi
-          from transformers import AutoConfig
-          api = HfApi()
-          out = open("probe_results.jsonl", "a")
-          for model_id in ("HuggingFaceTB/SmolLM-135M", "HuggingFaceTB/SmolLM-360M", "TinyLlama/TinyLlama-1.1B-Chat-v1.0"):
-              info = api.model_info(model_id)
-              cfg = AutoConfig.from_pretrained(model_id)
-              print(json.dumps({
-                  "id": model_id, "sha": info.sha,
-                  "license": (info.cardData or {}).get("license"),
-                  "model_type": cfg.model_type, "hidden_size": cfg.hidden_size,
-                  "num_hidden_layers": cfg.num_hidden_layers, "vocab_size": cfg.vocab_size,
-                  "num_attention_heads": getattr(cfg, "num_attention_heads", None),
-                  "num_key_value_heads": getattr(cfg, "num_key_value_heads", None),
-                  "max_position_embeddings": getattr(cfg, "max_position_embeddings", None),
-              }))
-              out.write(json.dumps({"id": model_id, "sha": info.sha}) + "\n")
-          PY
-
-      - name: Post probe results to PR (sandbox log endpoints are unreachable)
-        if: always()
+      - run: pip install -q huggingface_hub
+      - name: Probe candidates and post results to PR
         env:
           GH_TOKEN: ${{ github.token }}
-        run: |
-          python - <<'PY'
-          import json, urllib.request
-          rows = open("probe_results.jsonl").read() if __import__("os").path.exists("probe_results.jsonl") else "NO RESULTS FILE"
-          body = "<!-- campaign07-probe -->\n```jsonl\n" + rows + "\n```"
-          req = urllib.request.Request(
-              "https://api.github.com/repos/shuvrajeetkamila/EQUYLAPTATEMPS/issues/1/comments",
-              data=json.dumps({"body": body}).encode(), method="POST",
-              headers={"Authorization": "Bearer " + __import__("os").environ["GH_TOKEN"], "Accept": "application/vnd.github+json"})
-          print(urllib.request.urlopen(req).status)
-          PY
-      - uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: campaign07-probe-results
-          path: probe_results.jsonl
+        run: python scripts/campaign07_probe2.py
