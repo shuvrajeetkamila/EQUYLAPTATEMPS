@@ -1,0 +1,27 @@
+{
+  "campaign": 9,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "frozen_date": "2026-10-14",
+  "status": "FROZEN_BEFORE_TRAINING",
+  "hypothesis": "H9: reconstructing donor-native input/output second-order geometry in the interface initialization gives the pretrained sector a reproducible advantage over an equivalently treated random twin",
+  "pairing": {
+    "recipient": "state-spaces/mamba-130m-hf@1e76775f628fbf1350fbe4dbb3d971ba64af25a1",
+    "donor": "HuggingFaceTB/SmolLM-135M@1d461723eec654e65efdc40cf49301c89c0c92f4",
+    "recipient_cut": [11, 13],
+    "donor_sector": [24, 30]
+  },
+  "interface": {
+    "method": "donor_native_geometry",
+    "definition": "orthogonal pair; input seam whitened by child-input covariance then colored by donor-native input covariance; output seam whitened by child-output covariance then colored by recipient-native output covariance; out-of-range scalar RMS gains skipped/recorded (Campaign 8 Amendment 01 rule); statistics from 8 unlabeled TRAIN windows per child; identical procedure and donor-native matrices for pretrained and twin",
+    "trainable": "input_seam and output_seam only (888768 params)"
+  },
+  "conditions": {"A_B": "stored Campaign 7/8 original-interface records", "C_D": "new natgeom pair"},
+  "protocol": {"steps_primary": 32, "seeds": [42, 123], "random_sector_seed": 1234, "learning_rate": 0.0003, "batch_size": 1},
+  "gates": {
+    "G_B": "macro_pretrained <= 0.98 * macro_twin (same condition)",
+    "G_C": "language_ratio_vs_host <= 1.50 AND macro_pretrained <= 6.00",
+    "promotion": "G_B and G_C at seed 42 AND seed-123 replication benefit >= 1%",
+    "held_out": "NOT_RUN_NO_PROMOTION unless promoted"
+  },
+  "outcomes": {"A": "reproducible advantage + usefulness", "B": "reproducible advantage, not useful", "C": "valid, no reliable useful advantage", "D": "inconclusive (documented limitation)"}
+}

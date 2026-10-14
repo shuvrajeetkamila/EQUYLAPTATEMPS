@@ -61,6 +61,18 @@ def whitening_matrix(covariance, *, shrinkage=0.1, floor=0.01):
     return inverse.float()
 
 
+def coloring_matrix(covariance, *, floor=0.01):
+    """Symmetric square root of a covariance: the linear map that *gives* a
+    whitened stream this covariance (Campaign 9 donor-native geometry)."""
+    covariance = covariance.double()
+    scale = float(covariance.diag().mean())
+    if scale <= 0 or not torch.isfinite(covariance).all():
+        raise ValueError("Invalid observed covariance")
+    eigen, basis = torch.linalg.eigh((covariance + covariance.T) / 2)
+    root = (basis * eigen.clamp_min(floor * scale).sqrt()) @ basis.T
+    return root.float()
+
+
 def orthogonal_pair(child, *, seed):
     """A fixed coordinate-conditioning control, not identity across unequal token semantics."""
     r = child.recipient_config.hidden_size
@@ -91,10 +103,17 @@ def initialize_conditioned(child, method, *, statistics=None, seed=42):
         "residual_scale",
         "covariance_orthogonal",
         "covariance_orthogonal_noscale",
+        "donor_native_geometry",
     }
     if method not in allowed:
         raise ValueError("Unknown alignment initialization")
-    if method in {"fixed_orthogonal", "covariance_orthogonal", "covariance_orthogonal_noscale"}:
+    orthogonal_methods = {
+        "fixed_orthogonal",
+        "covariance_orthogonal",
+        "covariance_orthogonal_noscale",
+        "donor_native_geometry",
+    }
+    if method in orthogonal_methods:
         orthogonal_pair(child, seed=seed)
     record = {
         "kind": "unpaired_distribution_initialization",
@@ -118,6 +137,21 @@ def initialize_conditioned(child, method, *, statistics=None, seed=42):
                 inverse = whitening_matrix(statistics["tensors"][key + "/covariance"])
                 seam = getattr(child, role)
                 seam.projection.weight.copy_(seam.projection.weight @ inverse)
+        if method == "donor_native_geometry":
+            # Whiten the child-side stream, then color it with the *target*
+            # side's native covariance: donor-native geometry going in,
+            # recipient-native geometry coming out. Identical donor-native
+            # matrices for pretrained and twin children (architecture-level
+            # statistics); each child's whitening uses its own measured
+            # stream, so the sector weights are the only difference.
+            for role, child_key, native_key in [
+                ("input_seam", "child_input_normalized", "donor_native_input"),
+                ("output_seam", "child_output_normalized", "recipient_native_output"),
+            ]:
+                inverse = whitening_matrix(statistics["tensors"][child_key + "/covariance"])
+                color = coloring_matrix(statistics["tensors"][native_key + "/covariance"])
+                seam = getattr(child, role)
+                seam.projection.weight.copy_(color @ seam.projection.weight @ inverse)
         # Scalars only. No hidden target vector, no parent-response or hidden imitation loss.
         in_scale = streams["donor_native_input"]["global_rms"] / max(
             streams["child_donor_input"]["global_rms"], 1e-6
@@ -125,7 +159,7 @@ def initialize_conditioned(child, method, *, statistics=None, seed=42):
         out_scale = streams["recipient_native_output"]["global_rms"] / max(
             streams["child_host_suffix_input"]["global_rms"], 1e-6
         )
-        if method == "covariance_orthogonal_noscale":
+        if method in {"covariance_orthogonal_noscale", "donor_native_geometry"}:
             # Campaign 8 Amendment 01: a donor whose native residual stream is
             # far outside the Campaign-2-era safe gain range (e.g. SmolLM late
             # blocks, ~186x) would otherwise make calibration impossible.
