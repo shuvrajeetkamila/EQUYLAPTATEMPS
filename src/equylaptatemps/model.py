@@ -96,7 +96,7 @@ class SurgicalChild(nn.Module):
         limits = [
             config.max_position_embeddings
             for config in (self.recipient_config, self.donor_config)
-            if config.model_type == "qwen2"
+            if config.model_type in ("qwen2", "llama")
         ]
         return min(limits) if limits else None
 

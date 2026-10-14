@@ -8,7 +8,12 @@ from functools import partial
 import torch
 from torch import nn
 from torch.utils.checkpoint import checkpoint
-from transformers import MambaConfig, Qwen2Config
+from transformers import LlamaConfig, MambaConfig, Qwen2Config
+from transformers.models.llama.modeling_llama import (
+    LlamaDecoderLayer,
+    LlamaRMSNorm,
+    LlamaRotaryEmbedding,
+)
 from transformers.models.mamba.modeling_mamba import MambaBlock, MambaRMSNorm
 from transformers.models.qwen2.modeling_qwen2 import (
     Qwen2DecoderLayer,
@@ -16,16 +21,20 @@ from transformers.models.qwen2.modeling_qwen2 import (
     Qwen2RotaryEmbedding,
 )
 
+_ROTARY = {"qwen2": Qwen2RotaryEmbedding, "llama": LlamaRotaryEmbedding}
+
 
 def config_from_dict(data: dict):
     family = data.get("model_type")
-    classes = {"mamba": MambaConfig, "qwen2": Qwen2Config}
+    classes = {"mamba": MambaConfig, "qwen2": Qwen2Config, "llama": LlamaConfig}
     if family not in classes:
         raise ValueError(f"Unsupported architecture {family!r}")
     config = classes[family].from_dict(data)
     config.use_cache = False
     config._attn_implementation = "eager"
     if family == "qwen2" and config.use_sliding_window:
+        raise ValueError("Sliding-window attention is not implemented")
+    if family == "llama" and getattr(config, "sliding_window", None) is not None:
         raise ValueError("Sliding-window attention is not implemented")
     return config
 
@@ -58,18 +67,32 @@ def extract_parent(parent: nn.Module) -> ParentParts:
             parent.model.norm,
             parent.lm_head,
         )
+    if parent.config.model_type == "llama":
+        if any(type(layer.self_attn).__name__ != "LlamaAttention" for layer in parent.model.layers):
+            raise ValueError("Load Llama with attn_implementation='eager' for this pinned runtime")
+        return ParentParts(
+            parent.config,
+            parent.model.embed_tokens,
+            list(parent.model.layers),
+            parent.model.norm,
+            parent.lm_head,
+        )
     raise ValueError(f"Unsupported architecture {parent.config.model_type!r}")
 
 
 def make_block(config, index: int) -> nn.Module:
     if config.model_type == "mamba":
         return MambaBlock(config, index)
+    if config.model_type == "llama":
+        return LlamaDecoderLayer(config, index)
     return Qwen2DecoderLayer(config, index)
 
 
 def make_norm(config) -> nn.Module:
     if config.model_type == "mamba":
         return MambaRMSNorm(config.hidden_size, eps=config.layer_norm_epsilon)
+    if config.model_type == "llama":
+        return LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
     return Qwen2RMSNorm(config.hidden_size, eps=config.rms_norm_eps)
 
 
@@ -90,9 +113,8 @@ class StackSegment(nn.Module):
         self.config = config
         self.layers = nn.ModuleList(layers)
         device = next(self.layers.parameters()).device if layers else None
-        self.rotary = (
-            Qwen2RotaryEmbedding(config, device=device) if config.model_type == "qwen2" else None
-        )
+        rotary_cls = _ROTARY.get(config.model_type)
+        self.rotary = rotary_cls(config, device=device) if rotary_cls is not None else None
 
     def _apply(self, fn, recurse=True):
         super()._apply(fn, recurse=recurse)
@@ -100,13 +122,15 @@ class StackSegment(nn.Module):
             # RoPE frequencies are nonpersistent and derived from config. Recreate in fp32,
             # rather than irreversibly rounding them when .to(bfloat16) moves the child.
             device = self.rotary.inv_freq.device
-            self.rotary = Qwen2RotaryEmbedding(self.config, device=device).train(self.training)
+            self.rotary = _ROTARY[self.config.model_type](self.config, device=device).train(
+                self.training
+            )
         return self
 
     def forward(self, hidden, attention_mask, *, gradient_checkpointing: bool = False):
         if not self.layers:
             return hidden
-        if self.config.model_type == "qwen2":
+        if self.config.model_type in ("qwen2", "llama"):
             position_ids = attention_mask.long().cumsum(-1).sub(1).clamp_min(0)
             positions = torch.arange(hidden.shape[1], device=hidden.device)
             mask = causal_mask(hidden, attention_mask)

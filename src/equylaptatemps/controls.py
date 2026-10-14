@@ -10,14 +10,15 @@ from .model import child_from_parents
 
 
 def random_qwen_sector_control(recipe, recipient, donor, *, initialization_seed: int):
-    """Same shape/native operations, fresh frozen Qwen block parameters, same new seam seed.
+    """Same shape/native operations, fresh frozen donor block parameters, same seam seed.
 
     Uses the pinned Transformers model's standard initialization on only the chosen
     blocks, not a second gigabyte-sized random parent. Parent modules are not altered.
     Only interface parameters may train, with exactly the real child's training budget.
+    Supports Qwen2 (Campaigns 2-6) and Llama (Campaign 7) donor sectors.
     """
-    if donor.config.model_type != "qwen2":
-        raise ValueError("This matched control supports native Qwen donor sectors only")
+    if donor.config.model_type not in ("qwen2", "llama"):
+        raise ValueError("This matched control supports native Qwen2/Llama donor sectors only")
     child = child_from_parents(recipe, recipient, donor)
     config = config_from_dict(donor.config.to_dict())
     with torch.random.fork_rng(devices=[]):
@@ -34,3 +35,7 @@ def random_qwen_sector_control(recipe, recipient, donor, *, initialization_seed:
     child.random_graft_control = True
     child.assert_trainable_contract()
     return child.eval()
+
+
+# Campaign 7 alias: the control is family-general (Qwen2 and Llama sectors).
+random_sector_control = random_qwen_sector_control

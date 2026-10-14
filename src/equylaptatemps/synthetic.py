@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import torch
 import transformers
-from transformers import AutoModelForCausalLM, MambaConfig, Qwen2Config
+from transformers import AutoModelForCausalLM, LlamaConfig, MambaConfig, Qwen2Config
 
 from .audit import frozen_fingerprint, module_fingerprint
 from .backbones import extract_parent
@@ -45,6 +45,21 @@ def tiny_parent(family: str, seed: int):
         )
     elif family == "qwen2":
         config = Qwen2Config(
+            vocab_size=311,
+            hidden_size=24,
+            intermediate_size=48,
+            num_hidden_layers=4,
+            num_attention_heads=4,
+            num_key_value_heads=2,
+            max_position_embeddings=256,
+            bos_token_id=2,
+            eos_token_id=1,
+            pad_token_id=0,
+            use_cache=False,
+            attention_dropout=0.0,
+        )
+    elif family == "llama":
+        config = LlamaConfig(
             vocab_size=311,
             hidden_size=24,
             intermediate_size=48,

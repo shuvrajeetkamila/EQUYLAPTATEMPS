@@ -1,0 +1,57 @@
+{
+  "campaign": 7,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "frozen_date": "2026-10-14",
+  "status": "FROZEN_BEFORE_TRAINING",
+  "question": "Can an intact pretrained Llama-family sector contribute useful, measurable capability in a new Mamba-host pairing, against a matched random-sector twin?",
+  "parents": {
+    "recipient": {
+      "id": "state-spaces/mamba-130m-hf",
+      "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1",
+      "family": "mamba",
+      "hidden_size": 768,
+      "layers": 24
+    },
+    "donor": {
+      "id": "HuggingFaceTB/SmolLM-135M",
+      "revision": "1d461723eec654e65efdc40cf49301c89c0c92f4",
+      "family": "llama",
+      "hidden_size": 576,
+      "layers": 30,
+      "license": "apache-2.0"
+    }
+  },
+  "child": {
+    "recipient_cut": [11, 13],
+    "donor_sector": [24, 30],
+    "contiguous": true,
+    "interface": {"architecture": "layernorm_linear", "kind": "dense_full_size"},
+    "initialization": "random",
+    "trainable": "input_seam and output_seam only (full-size dense, ~0.89M params)",
+    "forbidden": ["lora", "distillation", "weight_averaging", "ensembles", "routing", "donor_delta_primary"]
+  },
+  "protocol": {
+    "steps": 32,
+    "batch_size": 1,
+    "learning_rate": 0.0003,
+    "max_length": 512,
+    "gradient_checkpointing": true,
+    "primary_seed": 42,
+    "replication_seed": 123,
+    "random_sector_seed": 1234,
+    "metric": "macro = mean(language, math) development token NLL, host tokenizer",
+    "data": {"gsm_train_rows": 32, "gsm_dev_rows": 16, "wiki_train_windows": 32, "wiki_dev_windows": 16}
+  },
+  "gates": {
+    "G_B_primary": "macro_pretrained <= 0.98 * macro_random_twin",
+    "G_C_usefulness": "language_ratio_vs_host <= 1.50 AND macro_pretrained <= 6.00",
+    "promotion": "G_B and G_C at seed 42 AND seed-123 replication benefit >= 1%",
+    "held_out": "opened once only after promotion; otherwise NOT_RUN_NO_PROMOTION"
+  },
+  "outcomes": {
+    "A": "promotion gates pass and held-out confirms usefulness (language BPB ratio <= 1.50 vs host)",
+    "B": "replicated donor-specific benefit (G_B) but usefulness fails",
+    "C": "valid experiment, no reliable pretrained advantage (G_B fails)",
+    "D": "inconclusive due to documented technical/data/compute/measurement limitation"
+  }
+}

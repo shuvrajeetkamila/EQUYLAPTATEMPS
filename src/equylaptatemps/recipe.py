@@ -27,7 +27,10 @@ for size in ("1.5B", "7B", "72B"):
         REGISTRY[f"Qwen/Qwen2.5-Math-{size}{suffix}"] = Identity(
             "qwen2", frozenset({"Qwen/Qwen"}), "https://github.com/QwenLM/Qwen2.5-Math"
         )
-for family in ("mamba", "qwen2"):
+REGISTRY["HuggingFaceTB/SmolLM-135M"] = Identity(
+    "llama", frozenset({"HuggingFaceTB/SmolLM"}), "https://huggingface.co/HuggingFaceTB/SmolLM-135M"
+)
+for family in ("mamba", "qwen2", "llama"):
     REGISTRY[f"synthetic://{family}"] = Identity(
         family, frozenset({f"random-initialization/{family}"}), "local random config", True
     )

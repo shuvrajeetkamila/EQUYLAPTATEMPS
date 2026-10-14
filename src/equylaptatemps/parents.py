@@ -40,11 +40,11 @@ def load_local_model(path: str | Path, dtype: torch.dtype = torch.float32):
     if not path.is_dir():
         raise ValueError(f"Local parent snapshot not found: {path}")
     config = AutoConfig.from_pretrained(str(path), local_files_only=True, trust_remote_code=False)
-    if config.model_type not in {"mamba", "qwen2"}:
+    if config.model_type not in {"mamba", "qwen2", "llama"}:
         raise ValueError(
-            "Only stock Mamba and Qwen2 are supported; custom remote code is forbidden"
+            "Only stock Mamba, Qwen2, and Llama are supported; custom remote code is forbidden"
         )
-    kwargs = {"attn_implementation": "eager"} if config.model_type == "qwen2" else {}
+    kwargs = {"attn_implementation": "eager"} if config.model_type in {"qwen2", "llama"} else {}
     return AutoModelForCausalLM.from_pretrained(
         str(path),
         local_files_only=True,
