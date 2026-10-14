@@ -7,7 +7,7 @@ absolute quality move toward the gates? Conditions: B trained-output
 pretrained, C trained-output raw twin, D trained-output **awake** twin
 (primary comparison B vs D); Campaign 9 is historical reference A.
 
-**Status:** preregistration frozen 2026-10-14; primary screen pending.
+**Status:** COMPLETE — Outcome B (fragile, control-dependent; see `final_report.md`).
 Files: `repository_audit.md`, `awake_control_design.md`,
 `preregistration.md`, `config/preregistration.json`,
 `experiment_registry.json`. Held-out: `NOT_RUN_NO_PROMOTION` unless every
