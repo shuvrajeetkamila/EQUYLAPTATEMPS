@@ -118,7 +118,7 @@ def native_sector_activity(donor, donor_tokenizer, texts, sector) -> dict:
 
 
 def calibrate_awake_sector(
-    child, tokenizer, texts, *, target: float, bounds=(0.05, 100.0), band=(0.5, 2.0)
+    child, tokenizer, texts, *, target: float, bounds=(0.05, 1000.0), band=(0.5, 2.0)
 ) -> dict:
     """Scale a random graft's residual-output projections to hit an activity target.
 
@@ -143,13 +143,16 @@ def calibrate_awake_sector(
     if not initial["all_finite"] or not u0 or not math.isfinite(u0) or u0 <= 0:
         record.update(calibrated=False, reason="initial activity not measurable/finite")
         return record
+    # The TOTAL applied scalar is what the frozen bounds govern (Campaign 10
+    # Amendment 01: an earlier version clipped each incremental step, letting
+    # the total exceed the bound). Two attempts: estimate, then one correction.
     total = 1.0
     achieved = initial
     for _attempt in range(2):
-        step = min(max(target / achieved["mean_relative_update"], bounds[0]), bounds[1])
-        # `step` is the factor still needed; apply only the incremental factor.
-        apply(step)
-        total *= step
+        desired_total = total * (target / achieved["mean_relative_update"])
+        desired_total = min(max(desired_total, bounds[0]), bounds[1])
+        apply(desired_total / total)
+        total = desired_total
         achieved = graft_activity(child, tokenizer, texts)
         record["achieved"] = achieved
         u = achieved["mean_relative_update"]
