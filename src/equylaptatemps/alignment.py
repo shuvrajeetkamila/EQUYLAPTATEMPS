@@ -86,9 +86,15 @@ def initialize_conditioned(child, method, *, statistics=None, seed=42):
     """
     if method == "random":
         return {"kind": "random_same_seed_full_dense", "teacher_targets": False}
-    if method not in {"fixed_orthogonal", "residual_scale", "covariance_orthogonal"}:
+    allowed = {
+        "fixed_orthogonal",
+        "residual_scale",
+        "covariance_orthogonal",
+        "covariance_orthogonal_noscale",
+    }
+    if method not in allowed:
         raise ValueError("Unknown alignment initialization")
-    if method in {"fixed_orthogonal", "covariance_orthogonal"}:
+    if method in {"fixed_orthogonal", "covariance_orthogonal", "covariance_orthogonal_noscale"}:
         orthogonal_pair(child, seed=seed)
     record = {
         "kind": "unpaired_distribution_initialization",
@@ -104,7 +110,7 @@ def initialize_conditioned(child, method, *, statistics=None, seed=42):
         raise ValueError("Distribution-aware init requires real TRAIN measurements")
     streams = statistics["summary"]["streams"]
     with torch.no_grad():
-        if method == "covariance_orthogonal":
+        if method in {"covariance_orthogonal", "covariance_orthogonal_noscale"}:
             for role, key in [
                 ("input_seam", "child_input_normalized"),
                 ("output_seam", "child_output_normalized"),
@@ -119,6 +125,30 @@ def initialize_conditioned(child, method, *, statistics=None, seed=42):
         out_scale = streams["recipient_native_output"]["global_rms"] / max(
             streams["child_host_suffix_input"]["global_rms"], 1e-6
         )
+        if method == "covariance_orthogonal_noscale":
+            # Campaign 8 Amendment 01: a donor whose native residual stream is
+            # far outside the Campaign-2-era safe gain range (e.g. SmolLM late
+            # blocks, ~186x) would otherwise make calibration impossible.
+            # Per-token RMSNorm at every donor block entry cancels pure input
+            # scale, so an out-of-range gain is skipped and recorded instead of
+            # raising; whitening and the orthogonal pair still apply.
+            applied = {}
+            for role, gain in (("input_seam", in_scale), ("output_seam", out_scale)):
+                if 0.05 < gain < 100:
+                    getattr(child, role).projection.weight.mul_(gain)
+                    applied[role] = gain
+                else:
+                    applied[role] = None
+            record.update(
+                input_gain=in_scale,
+                output_gain=out_scale,
+                applied_gains=applied,
+                limitation=(
+                    "Out-of-range RMS gains skipped (RMSNorm cancels input scale); "
+                    "moment conditioning is NOT semantic alignment evidence"
+                ),
+            )
+            return record
         if not 0.05 < in_scale < 100 or not 0.05 < out_scale < 100:
             raise ValueError("Unsafe observed scale calibration")
         child.input_seam.projection.weight.mul_(in_scale)

@@ -66,3 +66,16 @@ def test_calibration_requires_statistics():
         pass
     else:
         raise AssertionError("calibration without measured statistics must be refused")
+
+
+def test_noscale_variant_skips_out_of_range_gain_without_raising():
+    # Campaign 8 Amendment 01: SmolLM-like statistics (native RMS ~196 vs
+    # child ~1.06 -> gain ~186) must not make calibration impossible.
+    child = _child()
+    stats = _fake_statistics(child)
+    stats["summary"]["streams"]["donor_native_input"]["global_rms"] = 196.5
+    stats["summary"]["streams"]["child_donor_input"]["global_rms"] = 1.056
+    out = initialize_conditioned(child, "covariance_orthogonal_noscale", statistics=stats, seed=42)
+    assert out["applied_gains"]["input_seam"] is None  # 186x gain skipped, recorded
+    assert out["applied_gains"]["output_seam"] == 1.0  # in-range gain still applied
+    child.assert_trainable_contract()
