@@ -16,6 +16,7 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install -q huggingface-hub==0.36.2 transformers==4.48.3
+      - uses: actions/checkout@v4
       - name: Resolve candidate donor revisions and configs
         run: |
           python - <<'PY'
@@ -23,6 +24,7 @@ jobs:
           from huggingface_hub import HfApi
           from transformers import AutoConfig
           api = HfApi()
+          out = open("probe_results.jsonl", "a")
           for model_id in ("HuggingFaceTB/SmolLM-135M", "HuggingFaceTB/SmolLM-360M", "TinyLlama/TinyLlama-1.1B-Chat-v1.0"):
               info = api.model_info(model_id)
               cfg = AutoConfig.from_pretrained(model_id)
@@ -35,4 +37,11 @@ jobs:
                   "num_key_value_heads": getattr(cfg, "num_key_value_heads", None),
                   "max_position_embeddings": getattr(cfg, "max_position_embeddings", None),
               }))
+              out.write(json.dumps({"id": model_id, "sha": info.sha}) + "\n")
           PY
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: campaign07-probe-results
+          path: probe_results.jsonl
