@@ -62,9 +62,7 @@ def test_geometry_init_deterministic_interface_only_and_recorded():
     out_b = initialize_conditioned(child_b, "donor_native_geometry", statistics=stats, seed=42)
     assert out_a["method"] == out_b["method"] == "donor_native_geometry"
     assert out_a["teacher_targets"] is False
-    for (n, p), (m, q) in zip(
-        child_a.named_parameters(), child_b.named_parameters(), strict=True
-    ):
+    for (n, p), (m, q) in zip(child_a.named_parameters(), child_b.named_parameters(), strict=True):
         assert n == m and torch.equal(p, q)
     child_a.assert_trainable_contract()
 
@@ -76,9 +74,7 @@ def test_geometry_init_actually_transforms_the_seams():
         child, "donor_native_geometry", statistics=_fake_statistics(child), seed=42
     )
     changed = [
-        n
-        for n, p in child.named_parameters()
-        if "seam" in n and not torch.equal(p, before[n])
+        n for n, p in child.named_parameters() if "seam" in n and not torch.equal(p, before[n])
     ]
     assert changed
 
