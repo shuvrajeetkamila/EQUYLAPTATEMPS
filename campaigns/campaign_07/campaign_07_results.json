@@ -1,0 +1,157 @@
+{
+  "campaign": 7,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "pairing": {
+    "recipient": "state-spaces/mamba-130m-hf@1e76775f628fbf1350fbe4dbb3d971ba64af25a1",
+    "donor": "HuggingFaceTB/SmolLM-135M@1d461723eec654e65efdc40cf49301c89c0c92f4",
+    "donor_sector": [
+      24,
+      30
+    ],
+    "recipient_cut": [
+      11,
+      13
+    ],
+    "interface": "dense full-size layernorm_linear seams (768<->576)",
+    "trainable_parameters": 888768
+  },
+  "host_language_dev_nll": 4.559452953338623,
+  "runs": {
+    "c07_dense_pre_42": {
+      "job": "38542143640",
+      "status": "COMPLETED",
+      "macro_dev_nll": 8.571928846717842,
+      "language_dev_nll": 8.656831817626953,
+      "math_dev_nll": 8.487025875808733,
+      "language_ratio_vs_host": 1.8986558050320612,
+      "bypass_macro": 10.930373628125746,
+      "zero_macro": 44.07238019641846,
+      "graft_relative_update": 54.28478026390076,
+      "structure": {
+        "context_limit": 2048,
+        "donor_family": "llama",
+        "donor_width": 576,
+        "frozen_parameters": 142832640,
+        "parent_weight_arithmetic": false,
+        "prefix_blocks": 11,
+        "production_bypass": false,
+        "recipient_family": "mamba",
+        "recipient_width": 768,
+        "removed_recipient_blocks": 2,
+        "suffix_blocks": 11,
+        "trainable_dense_seam_parameters": 888768,
+        "transplanted_blocks": 6,
+        "unique_parameters": 143721408
+      }
+    },
+    "c07_dense_rand_42": {
+      "job": "38542143640",
+      "status": "COMPLETED",
+      "macro_dev_nll": 7.534914669204061,
+      "language_dev_nll": 7.925784187316895,
+      "math_dev_nll": 7.144045151091227,
+      "language_ratio_vs_host": 1.7383191072326565,
+      "bypass_macro": 7.65132374793188,
+      "zero_macro": 14.366036059149684,
+      "graft_relative_update": 0.4716259278357029,
+      "structure": {
+        "context_limit": 2048,
+        "donor_family": "llama",
+        "donor_width": 576,
+        "frozen_parameters": 142832640,
+        "parent_weight_arithmetic": false,
+        "prefix_blocks": 11,
+        "production_bypass": false,
+        "recipient_family": "mamba",
+        "recipient_width": 768,
+        "removed_recipient_blocks": 2,
+        "suffix_blocks": 11,
+        "trainable_dense_seam_parameters": 888768,
+        "transplanted_blocks": 6,
+        "unique_parameters": 143721408
+      }
+    },
+    "c07_dense_pre_123": {
+      "job": "38544932532",
+      "status": "COMPLETED",
+      "macro_dev_nll": 9.402307779428732,
+      "language_dev_nll": 10.108108139038086,
+      "math_dev_nll": 8.696507419819376,
+      "language_ratio_vs_host": 2.2169563323054837,
+      "bypass_macro": 10.50891330762993,
+      "zero_macro": 10.210976899266932,
+      "graft_relative_update": 57.59372568130493,
+      "structure": {
+        "context_limit": 2048,
+        "donor_family": "llama",
+        "donor_width": 576,
+        "frozen_parameters": 142832640,
+        "parent_weight_arithmetic": false,
+        "prefix_blocks": 11,
+        "production_bypass": false,
+        "recipient_family": "mamba",
+        "recipient_width": 768,
+        "removed_recipient_blocks": 2,
+        "suffix_blocks": 11,
+        "trainable_dense_seam_parameters": 888768,
+        "transplanted_blocks": 6,
+        "unique_parameters": 143721408
+      }
+    },
+    "c07_dense_rand_123": {
+      "job": "38544932532",
+      "status": "COMPLETED",
+      "macro_dev_nll": 7.889960530422964,
+      "language_dev_nll": 8.11564910888672,
+      "math_dev_nll": 7.664271951959208,
+      "language_ratio_vs_host": 1.7799611396349722,
+      "bypass_macro": 7.987140143525367,
+      "zero_macro": 12.239430019198267,
+      "graft_relative_update": 0.4723406173288822,
+      "structure": {
+        "context_limit": 2048,
+        "donor_family": "llama",
+        "donor_width": 576,
+        "frozen_parameters": 142832640,
+        "parent_weight_arithmetic": false,
+        "prefix_blocks": 11,
+        "production_bypass": false,
+        "recipient_family": "mamba",
+        "recipient_width": 768,
+        "removed_recipient_blocks": 2,
+        "suffix_blocks": 11,
+        "trainable_dense_seam_parameters": 888768,
+        "transplanted_blocks": 6,
+        "unique_parameters": 143721408
+      }
+    }
+  },
+  "gates": {
+    "42": {
+      "pretrained_macro": 8.571928846717842,
+      "twin_macro": 7.534914669204061,
+      "benefit_fraction": -0.13762785951009648,
+      "G_B_pass": false,
+      "G_C_pass": false
+    },
+    "123": {
+      "pretrained_macro": 9.402307779428732,
+      "twin_macro": 7.889960530422964,
+      "benefit_fraction": -0.1916799511447866,
+      "G_B_pass": false,
+      "G_C_pass": false
+    }
+  },
+  "promotion": false,
+  "outcome": {
+    "classification": "C",
+    "held_out_status": "NOT_RUN_NO_PROMOTION",
+    "rationale": "Valid two-seed experiment; the matched random twin beat the pretrained SmolLM sector at both seeds (benefit -13.8% and -19.2%), so G-B fails and no reliable pretrained advantage exists for this pairing/design."
+  },
+  "evidence": {
+    "screen_job": "38542143640",
+    "screen_bundle_sha256": "d568e599954074b274ad4b69330d69977c5b034e7f9ef0e7c3ca1bbad0be6792",
+    "replication_job": "38544932532",
+    "replication_bundle_sha256": "3c59160e6d561399478d636a978b35b7eb66035549e050be0445cd87492236e2"
+  }
+}

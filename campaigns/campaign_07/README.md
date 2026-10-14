@@ -1,8 +1,7 @@
 # Campaign 7 — Cross-Pairing Replication
 
 **Pairing (frozen):** Mamba-130M host × SmolLM-135M (Llama) donor — the first
-donor-family change in the project. **Status:** preregistration frozen
-2026-10-14; screen pending.
+donor-family change in the project. **Status:** COMPLETE — Outcome C (see final report).
 
 | File | Contents |
 |---|---|
