@@ -1,0 +1,38 @@
+name: Campaign 7 pairing probe
+
+on:
+  push:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    if: contains(github.event.head_commit.message, '[campaign07-probe]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q huggingface-hub==0.36.2 transformers==4.48.3
+      - name: Resolve candidate donor revisions and configs
+        run: |
+          python - <<'PY'
+          import json
+          from huggingface_hub import HfApi
+          from transformers import AutoConfig
+          api = HfApi()
+          for model_id in ("HuggingFaceTB/SmolLM-135M", "HuggingFaceTB/SmolLM-360M", "TinyLlama/TinyLlama-1.1B-Chat-v1.0"):
+              info = api.model_info(model_id)
+              cfg = AutoConfig.from_pretrained(model_id)
+              print(json.dumps({
+                  "id": model_id, "sha": info.sha,
+                  "license": (info.cardData or {}).get("license"),
+                  "model_type": cfg.model_type, "hidden_size": cfg.hidden_size,
+                  "num_hidden_layers": cfg.num_hidden_layers, "vocab_size": cfg.vocab_size,
+                  "num_attention_heads": getattr(cfg, "num_attention_heads", None),
+                  "num_key_value_heads": getattr(cfg, "num_key_value_heads", None),
+                  "max_position_embeddings": getattr(cfg, "max_position_embeddings", None),
+              }))
+          PY
