@@ -104,6 +104,7 @@ def initialize_conditioned(child, method, *, statistics=None, seed=42):
         "covariance_orthogonal",
         "covariance_orthogonal_noscale",
         "donor_native_geometry",
+        "natgeom_in_trained_out",
     }
     if method not in allowed:
         raise ValueError("Unknown alignment initialization")
@@ -112,7 +113,15 @@ def initialize_conditioned(child, method, *, statistics=None, seed=42):
         "covariance_orthogonal",
         "covariance_orthogonal_noscale",
         "donor_native_geometry",
+        "natgeom_in_trained_out",
     }
+    saved_output = None
+    if method == "natgeom_in_trained_out":
+        # Campaign 10: the output pathway must start from the generic
+        # constructed DenseSeam default (fully trained, no geometry
+        # preconditioning). Preserve it before the orthogonal pair rewrites
+        # both seams; it is restored after the input seam is geometrized.
+        saved_output = {k: v.detach().clone() for k, v in child.output_seam.state_dict().items()}
     if method in orthogonal_methods:
         orthogonal_pair(child, seed=seed)
     record = {
@@ -137,6 +146,15 @@ def initialize_conditioned(child, method, *, statistics=None, seed=42):
                 inverse = whitening_matrix(statistics["tensors"][key + "/covariance"])
                 seam = getattr(child, role)
                 seam.projection.weight.copy_(seam.projection.weight @ inverse)
+        if method == "natgeom_in_trained_out":
+            # Campaign 10: input seam gets Campaign 9's donor-native geometry
+            # exactly; the output seam is restored below to its generic
+            # trained initialization.
+            inverse = whitening_matrix(statistics["tensors"]["child_input_normalized/covariance"])
+            color = coloring_matrix(statistics["tensors"]["donor_native_input/covariance"])
+            child.input_seam.projection.weight.copy_(
+                color @ child.input_seam.projection.weight @ inverse
+            )
         if method == "donor_native_geometry":
             # Whiten the child-side stream, then color it with the *target*
             # side's native covariance: donor-native geometry going in,
@@ -159,6 +177,22 @@ def initialize_conditioned(child, method, *, statistics=None, seed=42):
         out_scale = streams["recipient_native_output"]["global_rms"] / max(
             streams["child_host_suffix_input"]["global_rms"], 1e-6
         )
+        if method == "natgeom_in_trained_out":
+            child.output_seam.load_state_dict(saved_output)
+            applied_in = in_scale if 0.05 < in_scale < 100 else None
+            if applied_in is not None:
+                child.input_seam.projection.weight.mul_(applied_in)
+            record.update(
+                input_gain=in_scale,
+                output_gain=None,
+                applied_gains={"input_seam": applied_in, "output_seam": None},
+                output_pathway="trained_default_init_no_geometry",
+                limitation=(
+                    "Input geometry only; output pathway is generically initialized "
+                    "and trained. Moment conditioning is NOT semantic alignment evidence"
+                ),
+            )
+            return record
         if method in {"covariance_orthogonal_noscale", "donor_native_geometry"}:
             # Campaign 8 Amendment 01: a donor whose native residual stream is
             # far outside the Campaign-2-era safe gain range (e.g. SmolLM late
