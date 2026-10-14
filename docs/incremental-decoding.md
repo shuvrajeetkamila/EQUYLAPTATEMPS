@@ -88,8 +88,8 @@ No parent weights/raw large datasets/duplicate interface files are committed.
 
 ```python
 from equylaptatemps.decoding import cached_generate
-result = cached_generate(child.eval(), tokenizer, prompt,
-                         max_input_tokens=2048, max_new_tokens=256)
+
+result = cached_generate(child.eval(), tokenizer, prompt, max_input_tokens=2048, max_new_tokens=256)
 print(result.text, result.stop_reason)
 ```
 
