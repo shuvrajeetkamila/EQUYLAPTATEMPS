@@ -37,12 +37,12 @@
       "job": 38792029752
     },
     "V7": {
-      "status": "RUNNING",
+      "status": "PLANNED",
       "kind": "diagnostic_trained_seed42_32steps",
       "job": null
     },
     "V8": {
-      "status": "RUNNING",
+      "status": "PLANNED",
       "kind": "diagnostic_trained_seed42_32steps",
       "job": null
     }
@@ -72,6 +72,12 @@
       "scope": "V0-V6 diagnostics",
       "status": "FAILED",
       "note": "Root cause of silence found: workflow permissions declared issues:write, but PR-comment posting uses the proven pull-requests:write configuration (all Campaign 11-13 workflows); failure reporting therefore 403'd. Fixed; added the established partial-metadata fallback publisher. Diagnostic retry, no scientific change."
+    },
+    {
+      "job": 38793216559,
+      "scope": "V7-V8 trained pair",
+      "status": "FAILED",
+      "note": "KeyError 'compute': the Campaign 14 registry omitted the compute block the derived runner requires; both experiments NOT_RUN, zero compute spent. Registry fixed; retry under the frozen design."
     }
   ],
   "gates": {
