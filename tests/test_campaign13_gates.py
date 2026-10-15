@@ -39,9 +39,7 @@ def test_gate_thresholds_per_seed():
 
 
 def test_arrangement_sensitivity_adverse_rule():
-    adverse = [
-        {"seed": s, "vs_B_percent": -3.0, "vs_C_percent": -2.5} for s in (42, 123, 31415)
-    ]
+    adverse = [{"seed": s, "vs_B_percent": -3.0, "vs_C_percent": -2.5} for s in (42, 123, 31415)]
     assert module.arrangement_sensitivity(adverse) == "adverse_detected"
     mixed = [dict(r) for r in adverse]
     mixed[1]["vs_C_percent"] = 0.5

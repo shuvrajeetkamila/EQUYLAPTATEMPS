@@ -203,8 +203,14 @@ def main():
     positive_control_pass = bool(control_valid and gate_pass and causal_pass)
     rationale = {
         "A": "Positive control passes and usefulness gates pass.",
-        "B": "Positive control passes (pipeline preserves learned structure same-family); usefulness fails.",
-        "C": "Controls valid; intact sector shows no reproducible advantage over its scrambled selves.",
+        "B": (
+            "Positive control passes (pipeline preserves learned structure "
+            "same-family); usefulness fails."
+        ),
+        "C": (
+            "Controls valid; intact sector shows no reproducible advantage "
+            "over its scrambled selves."
+        ),
         "D": "A scrambled control failed a frozen validity criterion; inconclusive.",
     }[classification]
 
@@ -223,7 +229,9 @@ def main():
         "campaign": 13,
         "project": "HETEROGENEOUS AI MODEL SURGERY",
         "type": "same_family_positive_control",
-        "hypothesis": "H13: pipeline preserves learned structure in a compatible same-family setting",
+        "hypothesis": (
+            "H13: pipeline preserves learned structure in a compatible same-family setting"
+        ),
         "host_language_dev_nll": host_language,
         "host_macro_dev_nll": host_macro,
         "donor_native_macro_dev_nll": donor_native_macro,
