@@ -176,6 +176,22 @@ def main():
     args = parser.parse_args()
     out = Path(args.out)
     out.mkdir(parents=True, exist_ok=True)
+    try:
+        run(out, args)
+    except BaseException:
+        import traceback
+
+        write_json(
+            out / "failure.json",
+            {"stage": getattr(main, "_stage", "startup"), "traceback": traceback.format_exc()},
+        )
+        if args.post_pr:
+            publish_bundle(out, args.post_pr)
+        raise
+
+
+def run(out, args):
+    main._stage = "setup"
     source = (
         os.environ.get("GITHUB_SHA")
         or subprocess.check_output(["git", "rev-parse", "HEAD"], text=True).strip()
@@ -250,6 +266,7 @@ def main():
         "variants": {},
     }
     clock = time.monotonic()
+    main._stage = "native_baseline"
     first = evaluate_variant(parents.recipient)
     second = evaluate_variant(parents.recipient)
     report["variants"]["V0"] = {
@@ -259,6 +276,7 @@ def main():
         "macro_repeat_abs_diff": abs(first["macro_dev_nll"] - second["macro_dev_nll"]),
     }
     for name, vspec in VARIANTS.items():
+        main._stage = f"variant_{name}"
         start = time.monotonic()
         child, init_record = build_child(vspec, roles, parents, stats_text)
         entry = evaluate_variant(child)
@@ -276,8 +294,10 @@ def main():
             }
         )
         report["variants"][name] = entry
+        write_json(out / "diagnostics_partial.json", report)
         del child
         gc.collect()
+    main._stage = "finalize"
     report["parents_unchanged"] = module_fingerprint(parents.recipient) == recipient_before
     report["runtime_seconds"] = time.monotonic() - clock
     report["peak_rss_bytes"] = resource.getrusage(resource.RUSAGE_SELF).ru_maxrss * 1024
