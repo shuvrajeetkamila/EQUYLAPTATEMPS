@@ -219,3 +219,76 @@ def shuffled_sector_control(recipe, recipient, donor, *, shuffle_seed: int):
     child.shuffled_sector_control = True
     child.assert_trainable_contract()
     return child.eval()
+
+
+def row_shuffled_sector_control(recipe, recipient, donor, *, shuffle_seed: int):
+    """Row-statistics-preserved, structure-destroyed donor control (Campaign 12).
+
+    Deep-copies the transplanted sector (the pinned donor parent is never
+    mutated) and permutes every eligible 2D weight matrix independently
+    within each output row. Each row keeps its exact value multiset (hence
+    its mean, variance, and L1/L2 norms, and the tensor's multiset and
+    Frobenius norm) while the learned input-coordinate arrangement inside
+    each output unit is destroyed. RMSNorm gain vectors (1D) are excluded.
+    """
+    import copy
+    import hashlib
+
+    def digest(param) -> str:
+        return hashlib.sha256(param.detach().cpu().contiguous().numpy().tobytes()).hexdigest()
+
+    child = child_from_parents(recipe, recipient, donor)
+    blocks = copy.deepcopy(child.graft.layers)
+    generator = torch.Generator().manual_seed(shuffle_seed)
+    tensors = []
+    for block_index, block in enumerate(blocks):
+        for name, param in block.named_parameters():
+            eligible = param.ndim == 2
+            before = digest(param)
+            multiset_ok = True
+            row_ok = True
+            if eligible:
+                with torch.no_grad():
+                    original = param.detach().clone()
+                    permuted = torch.empty_like(original)
+                    for row in range(original.shape[0]):
+                        order = torch.randperm(original.shape[1], generator=generator)
+                        permuted[row] = original[row][order]
+                    param.copy_(permuted)
+                    row_ok = bool(
+                        torch.equal(
+                            torch.sort(original, dim=1).values,
+                            torch.sort(permuted, dim=1).values,
+                        )
+                    )
+                    multiset_ok = bool(
+                        torch.equal(
+                            torch.sort(original.reshape(-1)).values,
+                            torch.sort(permuted.reshape(-1)).values,
+                        )
+                    )
+            tensors.append(
+                {
+                    "name": f"layers.{block_index}.{name}",
+                    "shape": list(param.shape),
+                    "eligible": eligible,
+                    "multiset_preserved": multiset_ok,
+                    "row_multisets_preserved": row_ok,
+                    "sha256_before": before,
+                    "sha256_after": digest(param),
+                }
+            )
+    blocks.requires_grad_(False).eval()
+    child.graft.layers = blocks
+    child.control_record = {
+        "kind": "within_row_permutation",
+        "shuffle_seed": shuffle_seed,
+        "tensors": tensors,
+        "all_multisets_preserved": all(t["multiset_preserved"] for t in tensors),
+        "all_row_multisets_preserved": all(t["row_multisets_preserved"] for t in tensors),
+        "eligible_tensors": sum(1 for t in tensors if t["eligible"]),
+        "excluded_tensors": sum(1 for t in tensors if not t["eligible"]),
+    }
+    child.row_shuffled_sector_control = True
+    child.assert_trainable_contract()
+    return child.eval()
