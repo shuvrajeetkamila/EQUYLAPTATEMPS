@@ -30,6 +30,7 @@ jobs:
           OMP_NUM_THREADS: "2"
           MKL_NUM_THREADS: "2"
           HF_HUB_DISABLE_TELEMETRY: "1"
+          GH_TOKEN: ${{ github.token }}
         run: python scripts/campaign14_runner.py --registry campaigns/campaign_14/experiment_registry_trained.json --out campaigns/campaign_14/trained_out --post-pr 1
       - name: Publish partial training metadata
         if: always() && steps.research.outcome != 'success'
