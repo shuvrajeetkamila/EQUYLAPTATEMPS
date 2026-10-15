@@ -163,3 +163,59 @@ def calibrate_awake_sector(
             break
     record.update(calibrated=False, scale_applied=total, reason="activity outside frozen band")
     return record
+
+
+def shuffled_sector_control(recipe, recipient, donor, *, shuffle_seed: int):
+    """Statistics-preserved, structure-destroyed donor control (Campaign 11).
+
+    Deep-copies the transplanted sector (the pinned donor parent is never
+    mutated) and permutes every eligible 2D weight matrix within itself,
+    preserving each tensor's exact value multiset while destroying learned
+    arrangement. RMSNorm gain vectors (1D) are excluded and recorded.
+    """
+    import copy
+    import hashlib
+
+    def digest(param) -> str:
+        return hashlib.sha256(param.detach().cpu().contiguous().numpy().tobytes()).hexdigest()
+
+    child = child_from_parents(recipe, recipient, donor)
+    blocks = copy.deepcopy(child.graft.layers)
+    generator = torch.Generator().manual_seed(shuffle_seed)
+    tensors = []
+    for block_index, block in enumerate(blocks):
+        for name, param in block.named_parameters():
+            eligible = param.ndim == 2
+            before = digest(param)
+            multiset_ok = True
+            if eligible:
+                with torch.no_grad():
+                    flat = param.detach().reshape(-1).clone()
+                    permuted = flat[torch.randperm(flat.numel(), generator=generator)]
+                    param.copy_(permuted.reshape(param.shape))
+                    multiset_ok = bool(
+                        torch.equal(torch.sort(flat).values, torch.sort(permuted).values)
+                    )
+            tensors.append(
+                {
+                    "name": f"layers.{block_index}.{name}",
+                    "shape": list(param.shape),
+                    "eligible": eligible,
+                    "multiset_preserved": multiset_ok,
+                    "sha256_before": before,
+                    "sha256_after": digest(param),
+                }
+            )
+    blocks.requires_grad_(False).eval()
+    child.graft.layers = blocks
+    child.control_record = {
+        "kind": "within_tensor_permutation",
+        "shuffle_seed": shuffle_seed,
+        "tensors": tensors,
+        "all_multisets_preserved": all(t["multiset_preserved"] for t in tensors),
+        "eligible_tensors": sum(1 for t in tensors if t["eligible"]),
+        "excluded_tensors": sum(1 for t in tensors if not t["eligible"]),
+    }
+    child.shuffled_sector_control = True
+    child.assert_trainable_contract()
+    return child.eval()

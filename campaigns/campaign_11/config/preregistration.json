@@ -1,0 +1,28 @@
+{
+  "campaign": 11,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "frozen_date": "2026-10-14",
+  "status": "FROZEN_BEFORE_TRAINING",
+  "hypothesis": "H11: intact pretrained sector beats its within-tensor-permuted (statistics-preserved, structure-destroyed) self under identical treatment",
+  "pairing": {
+    "recipient": "state-spaces/mamba-130m-hf@1e76775f628fbf1350fbe4dbb3d971ba64af25a1",
+    "donor": "HuggingFaceTB/SmolLM-135M@1d461723eec654e65efdc40cf49301c89c0c92f4",
+    "recipient_cut": [11, 13],
+    "donor_sector": [24, 30]
+  },
+  "control": {
+    "method": "within-tensor permutation of 42 eligible 2D matrices (7/block); 12 RMSNorm gain vectors excluded and preserved",
+    "shuffle_seed": 20241014,
+    "preserves": "per-tensor exact value multiset (mean/var/RMS/min/max/quantiles/Frobenius), shapes, dtype, architecture, parameter count",
+    "validity": "multiset checks pass; trained graft relative update finite and >= 0.05; finite ordered ablations; parent fingerprints unchanged"
+  },
+  "interface": "natgeom_in_trained_out (Campaign 10 condition B interface)",
+  "conditions": {"A": "stored Campaign 10 B (intact)", "B": "new shuffled control", "C": "stored Campaign 10 C (random twin)", "D": "bypass ablations"},
+  "protocol": {"steps": [32, 96], "seeds": [42, 123], "random_sector_seed": 1234},
+  "gates": {
+    "G_B": "benefit vs shuffled control >= 2% (seed 42) and >= 1% (seed 123)",
+    "G_C": "language_ratio_vs_host <= 1.50 AND macro <= 6.00",
+    "held_out": "NOT_RUN_NO_PROMOTION unless all promotion gates pass"
+  },
+  "outcomes": {"A": "replicated learned-structure advantage + usefulness", "B": "replicated learned-structure advantage, not useful", "C": "valid control, no reliable learned-structure advantage", "D": "control invalid / inconclusive"}
+}
