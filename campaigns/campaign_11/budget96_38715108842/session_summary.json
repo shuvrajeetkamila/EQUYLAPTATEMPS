@@ -1,0 +1,177 @@
+{
+  "final_TEST_status": "NOT_RUN_NO_PROMOTION unless frozen Campaign 7 gates pass",
+  "parents_unchanged": true,
+  "phase_summary": {
+    "candidates": {
+      "c11_shuf_42_96": {
+        "bypass_macro": 11.28317949248845,
+        "graft_relative_update": 0.5650786682963371,
+        "language_dev_nll": 8.203702697753906,
+        "language_ratio_vs_host": 1.7992734614679617,
+        "macro_dev_nll": 7.714087257429252,
+        "math_dev_nll": 7.224471817104599,
+        "zero_macro": 26.890967856586464
+      }
+    },
+    "final_TEST_status": "NOT_RUN_NO_PROMOTION unless frozen Campaign 7 gates pass",
+    "host_language_dev_nll": 4.559452953338623
+  },
+  "registry": {
+    "outcome": "NOT_CLASSIFIED",
+    "reason": "Execution is not capability evidence; criteria decide promotion",
+    "records": {
+      "c11_shuf_42_96": {
+        "artifacts": {
+          "runs/c11_shuf_42_96/config.json": "4f053b26088683a8d38ae96caab63051bd27c5bb50a968b4f04c3874261a4726",
+          "runs/c11_shuf_42_96/reference/interfaces.safetensors": "9b0f9ee589b24238dbba2f3ce2d8b079cb2745a09b3b25d6ef7c7210b8f193c6",
+          "runs/c11_shuf_42_96/reference/reference.json": "45a55994beed211b39fb71ecb9f322e71c661b216908e32a65b0fb16e257d2f7",
+          "runs/c11_shuf_42_96/results.json": "4f4f9e98d57c13978557e82bb9545c6bb1d4a9e68dbf428e7547b45b57cdb538"
+        },
+        "config_sha256": "807d21456773f2249a8383b8fbd4041bbbd0f58b50b65d6bf51c449a331a1028",
+        "evaluation_status": "NOT_RUN",
+        "execution_status": "COMPLETED",
+        "metadata": {
+          "reproduction": "python scripts/campaign11_runner.py --registry campaigns/campaign_11/experiment_registry_budget96.json --out artifacts/campaign11-budget96",
+          "source_commit": "4153422bc94ca4ff0fb952102dc8ab3ee751aba6",
+          "structure": {
+            "context_limit": 2048,
+            "donor_family": "llama",
+            "donor_width": 576,
+            "frozen_parameters": 142832640,
+            "parent_weight_arithmetic": false,
+            "prefix_blocks": 11,
+            "production_bypass": false,
+            "recipient_family": "mamba",
+            "recipient_width": 768,
+            "removed_recipient_blocks": 2,
+            "suffix_blocks": 11,
+            "trainable_dense_seam_parameters": 888768,
+            "transplanted_blocks": 6,
+            "unique_parameters": 143721408
+          }
+        },
+        "metrics": {
+          "ablation": "none",
+          "ablations": {
+            "bypass_graft": {
+              "ablation": "bypass_graft",
+              "groups": {
+                "domain:language": {
+                  "examples": 16,
+                  "nll_sum": 8300.344787597656,
+                  "perplexity": 32062.133931187516,
+                  "target_tokens": 800,
+                  "token_nll": 10.37543098449707
+                },
+                "domain:math": {
+                  "examples": 16,
+                  "nll_sum": 21139.06915283203,
+                  "perplexity": 196993.89166836403,
+                  "target_tokens": 1734,
+                  "token_nll": 12.190928000479833
+                },
+                "overall": {
+                  "examples": 32,
+                  "nll_sum": 29439.413940429688,
+                  "perplexity": 111053.12683891556,
+                  "target_tokens": 2534,
+                  "token_nll": 11.617763985962782
+                }
+              },
+              "metric": "recipient-token response NLL; not proof of task mastery"
+            },
+            "zero_graft": {
+              "ablation": "zero_graft",
+              "groups": {
+                "domain:language": {
+                  "examples": 16,
+                  "nll_sum": 16793.006286621094,
+                  "perplexity": 1307336709.1650841,
+                  "target_tokens": 800,
+                  "token_nll": 20.991257858276366
+                },
+                "domain:math": {
+                  "examples": 16,
+                  "nll_sum": 56859.035400390625,
+                  "perplexity": 174104681993906.34,
+                  "target_tokens": 1734,
+                  "token_nll": 32.79067785489656
+                },
+                "overall": {
+                  "examples": 32,
+                  "nll_sum": 73652.04168701172,
+                  "perplexity": 4197564229506.5615,
+                  "target_tokens": 2534,
+                  "token_nll": 29.065525527628935
+                }
+              },
+              "metric": "recipient-token response NLL; not proof of task mastery"
+            }
+          },
+          "graft_delta": {
+            "interpretation": "descriptive only; magnitude alone is not usefulness evidence",
+            "mean_input_rms": 477.06701469421387,
+            "mean_output_rms": 539.8956928253174,
+            "mean_relative_update": 0.5650786682963371,
+            "texts": 16
+          },
+          "groups": {
+            "domain:language": {
+              "examples": 16,
+              "nll_sum": 6562.962158203125,
+              "perplexity": 3654.4566353516648,
+              "target_tokens": 800,
+              "token_nll": 8.203702697753906
+            },
+            "domain:math": {
+              "examples": 16,
+              "nll_sum": 12527.234130859375,
+              "perplexity": 1372.61343319416,
+              "target_tokens": 1734,
+              "token_nll": 7.224471817104599
+            },
+            "overall": {
+              "examples": 32,
+              "nll_sum": 19090.1962890625,
+              "perplexity": 1869.8645356614843,
+              "target_tokens": 2534,
+              "token_nll": 7.5336212664019335
+            }
+          },
+          "initial_validation": {
+            "ablation": "none",
+            "groups": {
+              "domain:language": {
+                "examples": 16,
+                "nll_sum": 16463.60858154297,
+                "perplexity": 866099821.2607415,
+                "target_tokens": 800,
+                "token_nll": 20.57951072692871
+              },
+              "domain:math": {
+                "examples": 16,
+                "nll_sum": 207612.01806640625,
+                "perplexity": 9.956986668038926e+51,
+                "target_tokens": 1734,
+                "token_nll": 119.73011422514777
+              },
+              "overall": {
+                "examples": 32,
+                "nll_sum": 224075.62664794922,
+                "perplexity": 2.532992200294305e+38,
+                "target_tokens": 2534,
+                "token_nll": 88.42763482555218
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        },
+        "reason": "Campaign 11 frozen-protocol run complete; gates evaluated by publisher",
+        "updated_clock_seconds": 1792058359.2539062
+      }
+    }
+  },
+  "runtime_seconds": 880.8026476590001,
+  "source_commit": "4153422bc94ca4ff0fb952102dc8ab3ee751aba6"
+}

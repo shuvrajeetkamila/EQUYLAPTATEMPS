@@ -1,0 +1,163 @@
+{
+  "campaign": 11,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "hypothesis": "H11: intact pretrained sector outperforms its statistics-preserved, structure-destroyed (within-tensor permuted) twin under identical treatment",
+  "host_language_dev_nll": 4.559452953338623,
+  "shuffle_seed": 20241014,
+  "runs": {
+    "c10_out_pre_42": {
+      "job": "38602501026",
+      "condition": "A",
+      "macro_dev_nll": 8.36645132298013,
+      "language_dev_nll": 8.730839576721191,
+      "math_dev_nll": 8.00206306923907,
+      "language_ratio_vs_host": 1.9148875240237104,
+      "bypass_macro": 12.67852796605164,
+      "zero_macro": 11.158402849679174,
+      "graft_relative_update": 0.48020580038428307,
+      "trainable_parameters": 888768,
+      "parent_weights_unchanged": true
+    },
+    "c10_out_pre_123": {
+      "job": "38606208077",
+      "condition": "A",
+      "macro_dev_nll": 8.313167626228024,
+      "language_dev_nll": 8.529601745605468,
+      "math_dev_nll": 8.09673350685058,
+      "language_ratio_vs_host": 1.8707511179993621,
+      "bypass_macro": 10.610647541978917,
+      "zero_macro": 21.09729618208906,
+      "graft_relative_update": 1.3396375998854637,
+      "trainable_parameters": 888768,
+      "parent_weights_unchanged": true
+    },
+    "c10_out_pre_42_96": {
+      "job": "38607522188",
+      "condition": "A",
+      "macro_dev_nll": 7.839222002502407,
+      "language_dev_nll": 8.365545921325683,
+      "math_dev_nll": 7.312898083679129,
+      "language_ratio_vs_host": 1.834769654811347,
+      "bypass_macro": 9.347586593055945,
+      "zero_macro": 16.011874390176423,
+      "graft_relative_update": 0.4925425937399268,
+      "trainable_parameters": 888768,
+      "parent_weights_unchanged": true
+    },
+    "c10_out_rand_42": {
+      "job": "38602501026",
+      "condition": "C_reference",
+      "macro_dev_nll": 8.809892766989913,
+      "language_dev_nll": 8.954759635925292,
+      "math_dev_nll": 8.665025898054534,
+      "language_ratio_vs_host": 1.9639986918536445,
+      "bypass_macro": 8.808996781653875,
+      "zero_macro": 34.403385262582816,
+      "graft_relative_update": 0.0009699236870801542,
+      "trainable_parameters": 888768,
+      "parent_weights_unchanged": true
+    },
+    "c10_out_rand_123": {
+      "job": "38606208077",
+      "condition": "C_reference",
+      "macro_dev_nll": 8.394519695075187,
+      "language_dev_nll": 8.799373092651367,
+      "math_dev_nll": 7.989666297499009,
+      "language_ratio_vs_host": 1.9299185989840777,
+      "bypass_macro": 8.394613711413216,
+      "zero_macro": 31.41196337747189,
+      "graft_relative_update": 0.0010198851159657352,
+      "trainable_parameters": 888768,
+      "parent_weights_unchanged": true
+    },
+    "c11_shuf_42": {
+      "job": "38713676113",
+      "condition": "B",
+      "macro_dev_nll": 8.680763344814208,
+      "language_dev_nll": 8.817324142456055,
+      "math_dev_nll": 8.544202547172361,
+      "language_ratio_vs_host": 1.9338557131069067,
+      "bypass_macro": 19.108514902583455,
+      "zero_macro": 49.63045461370871,
+      "graft_relative_update": 0.5613513104617596,
+      "trainable_parameters": 888768,
+      "parent_weights_unchanged": true
+    },
+    "c11_shuf_123": {
+      "job": "38713676113",
+      "condition": "B",
+      "macro_dev_nll": 8.309763358973026,
+      "language_dev_nll": 8.484406585693359,
+      "math_dev_nll": 8.135120132252695,
+      "language_ratio_vs_host": 1.860838717390585,
+      "bypass_macro": 10.200738745538697,
+      "zero_macro": 60.447032592491844,
+      "graft_relative_update": 0.5920007638633251,
+      "trainable_parameters": 888768,
+      "parent_weights_unchanged": true
+    },
+    "c11_shuf_42_96": {
+      "job": "38715108842",
+      "condition": "B",
+      "macro_dev_nll": 7.714087257429252,
+      "language_dev_nll": 8.203702697753906,
+      "math_dev_nll": 7.224471817104599,
+      "language_ratio_vs_host": 1.7992734614679617,
+      "bypass_macro": 11.28317949248845,
+      "zero_macro": 26.890967856586464,
+      "graft_relative_update": 0.5650786682963371,
+      "trainable_parameters": 888768,
+      "parent_weights_unchanged": true
+    }
+  },
+  "comparisons": [
+    {
+      "steps": 32,
+      "seed": "42",
+      "A_intact_macro": 8.36645132298013,
+      "B_shuffled_macro": 8.680763344814208,
+      "benefit_percent": 3.620787819562495,
+      "gate_seed42_min_2pct": true,
+      "gate_seed123_min_1pct": null,
+      "A_language_ratio_vs_host": 1.9148875240237104,
+      "A_G_C_pass": false
+    },
+    {
+      "steps": 32,
+      "seed": "123",
+      "A_intact_macro": 8.313167626228024,
+      "B_shuffled_macro": 8.309763358973026,
+      "benefit_percent": -0.0409670782179655,
+      "gate_seed42_min_2pct": null,
+      "gate_seed123_min_1pct": false,
+      "A_language_ratio_vs_host": 1.8707511179993621,
+      "A_G_C_pass": false
+    },
+    {
+      "steps": 96,
+      "seed": "42",
+      "A_intact_macro": 7.839222002502407,
+      "B_shuffled_macro": 7.714087257429252,
+      "benefit_percent": -1.622158797239947,
+      "gate_seed42_min_2pct": null,
+      "gate_seed123_min_1pct": null,
+      "A_language_ratio_vs_host": 1.834769654811347,
+      "A_G_C_pass": false
+    }
+  ],
+  "control_valid": true,
+  "primary_gate_pass": false,
+  "promotion": false,
+  "outcome": {
+    "classification": "C",
+    "held_out_status": "NOT_RUN_NO_PROMOTION",
+    "rationale": "Valid statistics-preserved control, but no reliable learned-structure advantage: the intact sector's benefit over its permuted twin did not meet the frozen per-seed thresholds at both 32-step seeds."
+  },
+  "evidence_bundles_sha256": {
+    "38602501026": "e8d1057794c449edf636f596a58efb779674f4ca30be9331ff28687c94789e01",
+    "38606208077": "25a6d57988d07a88059915abca984ad367bc96bb64a3e99797c22103cab62795",
+    "38607522188": "bf87886d6bebf8aa7979b88fec0d326f863efe66293cfafb865a036dd6bbf0f4",
+    "38713676113": "5876079a9ad7e0eaef361f5e4e8d3e8eb9a0e860f1c96d305479bb54d2d772c2",
+    "38715108842": "b8db0ce993e3bcf35c0af9a5b650dac0ce7599e4c504d6b20a454735f63e3c13"
+  }
+}
