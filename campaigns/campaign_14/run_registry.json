@@ -2,52 +2,52 @@
   "campaign": 14,
   "runs": {
     "V0": {
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "kind": "diagnostic_untrained",
-      "job": null
+      "job": 38792029752
     },
     "V1": {
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "kind": "diagnostic_untrained",
-      "job": null
+      "job": 38792029752
     },
     "V2": {
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "kind": "diagnostic_untrained",
-      "job": null
+      "job": 38792029752
     },
     "V3": {
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "kind": "diagnostic_untrained",
-      "job": null
+      "job": 38792029752
     },
     "V4": {
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "kind": "diagnostic_untrained",
-      "job": null
+      "job": 38792029752
     },
     "V5": {
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "kind": "diagnostic_untrained",
-      "job": null
+      "job": 38792029752
     },
     "V6": {
-      "status": "RUNNING",
+      "status": "COMPLETED",
       "kind": "diagnostic_untrained",
-      "job": null
+      "job": 38792029752
     },
     "V7": {
-      "status": "PLANNED",
+      "status": "RUNNING",
       "kind": "diagnostic_trained_seed42_32steps",
       "job": null
     },
     "V8": {
-      "status": "PLANNED",
+      "status": "RUNNING",
       "kind": "diagnostic_trained_seed42_32steps",
       "job": null
     }
   },
-  "diagnose_job": "fourth attempt pending",
+  "diagnose_job": 38792029752,
   "attempts": [
     {
       "job": 38785606164,
@@ -73,5 +73,10 @@
       "status": "FAILED",
       "note": "Root cause of silence found: workflow permissions declared issues:write, but PR-comment posting uses the proven pull-requests:write configuration (all Campaign 11-13 workflows); failure reporting therefore 403'd. Fixed; added the established partial-metadata fallback publisher. Diagnostic retry, no scientific change."
     }
-  ]
+  ],
+  "gates": {
+    "gate1_baseline_reproducibility": "PASS (repeat diff 0.0)",
+    "gate2_exact_native_reconstruction": "PASS (degradation 0.0, max logit diff 0.0, 273/273 tensors identical)",
+    "gate3_function_preserving_connector": "PASS (residual seams: degradation 0.0)"
+  }
 }
