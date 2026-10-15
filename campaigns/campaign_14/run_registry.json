@@ -37,14 +37,14 @@
       "job": 38792029752
     },
     "V7": {
-      "status": "PLANNED",
+      "status": "COMPLETED",
       "kind": "diagnostic_trained_seed42_32steps",
-      "job": null
+      "job": 38796151693
     },
     "V8": {
-      "status": "PLANNED",
+      "status": "COMPLETED",
       "kind": "diagnostic_trained_seed42_32steps",
-      "job": null
+      "job": 38796151693
     }
   },
   "diagnose_job": 38792029752,
@@ -60,6 +60,12 @@
       "scope": "V0-V6 diagnostics",
       "status": "FAILED",
       "note": "Failed again with no bundle posted; failure channel itself unreliable. Workflow now posts the log tail to PR #1 on failure. Diagnostic retry under the frozen design (no scientific change)."
+    },
+    {
+      "job": 38788676940,
+      "scope": "V0-V6 diagnostics",
+      "status": "FAILED",
+      "note": "Same evidence-posting failure family (failure-comment step committed this time but used gh CLI, which failed silently). Superseded by the permissions fix."
     },
     {
       "job": 38789761846,
@@ -90,5 +96,6 @@
     "gate1_baseline_reproducibility": "PASS (repeat diff 0.0)",
     "gate2_exact_native_reconstruction": "PASS (degradation 0.0, max logit diff 0.0, 273/273 tensors identical)",
     "gate3_function_preserving_connector": "PASS (residual seams: degradation 0.0)"
-  }
+  },
+  "trained_job": 38796151693
 }
