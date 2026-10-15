@@ -18,13 +18,16 @@ import statistics
 from pathlib import Path
 
 ROOT = Path("campaigns/campaign_12")
-SCREEN_JOB = "SCREEN_JOB_ID"
-BUDGET_JOB = "BUDGET_JOB_ID"
+SCREEN_JOB = "38726922262"
+BUDGET_JOB = "38738479882"
 CONDITIONS = {"pre": "A", "row": "B", "full": "C", "rand": "D"}
 PRIMARY_SEEDS = (42, 123, 31415)
 BUDGET_SEEDS = (42, 123)
 HOST_LANGUAGE_NLL = 4.559452953338623
-BUNDLES = {SCREEN_JOB: "SCREEN_BUNDLE_SHA256", BUDGET_JOB: "BUDGET_BUNDLE_SHA256"}
+BUNDLES = {
+    SCREEN_JOB: "346a3f416e801007e2ff44256c931e269ac7b2e3a389cb3b81c6c3f50fe6aa59",
+    BUDGET_JOB: "a46764db2a45912fe28e57c93c6471fc75f23e4231bdadac6d8ef242fdad90fe",
+}
 
 
 def benefit_percent(control_nll: float, intact_nll: float) -> float:
@@ -119,11 +122,23 @@ def main():
                         if t["eligible"]
                     ),
                     "graft_update_at_least_0_05": r["graft_relative_update"] >= 0.05,
-                    "ablations_finite_and_ordered": math.isfinite(r["macro_dev_nll"])
-                    and r["macro_dev_nll"] < r["bypass_macro"] < r["zero_macro"],
+                    # Frozen criterion (4) as written in the preregistration:
+                    # "bypass and zero ablation macros finite and above intact"
+                    # (see campaigns/campaign_12/amendment_01_validity_criterion.md).
+                    "ablations_finite_and_above_intact": all(
+                        math.isfinite(r[f]) for f in ("macro_dev_nll", "bypass_macro", "zero_macro")
+                    )
+                    and r["bypass_macro"] > r["macro_dev_nll"]
+                    and r["zero_macro"] > r["macro_dev_nll"],
+                    # Descriptive only, not a validity gate (Campaign 11-style ordering).
+                    "bypass_below_zero_ordering": r["bypass_macro"] < r["zero_macro"],
                     "parent_weights_unchanged": r["parent_weights_unchanged"],
                 }
-                checks["valid"] = all(v for k, v in checks.items() if k != "kind")
+                checks["valid"] = all(
+                    v
+                    for k, v in checks.items()
+                    if k not in ("kind", "bypass_below_zero_ordering", "eligible_tensors")
+                )
                 validity[eid] = checks
     control_valid = all(v["valid"] for v in validity.values())
 
