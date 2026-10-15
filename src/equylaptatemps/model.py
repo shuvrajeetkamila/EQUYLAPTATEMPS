@@ -208,7 +208,7 @@ class SurgicalChild(nn.Module):
     def structure_report(self) -> dict:
         total = sum(p.numel() for p in self.parameters())
         trainable = sum(p.numel() for p in self.parameters() if p.requires_grad)
-        return {
+        report = {
             "recipient_family": self.recipient_config.model_type,
             "donor_family": self.donor_config.model_type,
             "recipient_width": self.recipient_config.hidden_size,
@@ -225,6 +225,11 @@ class SurgicalChild(nn.Module):
             "production_bypass": False,
             "parent_weight_arithmetic": False,
         }
+        # Recorded only when enabled, so default structure reports (and the
+        # audits of previously published artifacts) remain byte-identical.
+        if self.recipe.positive_control:
+            report["positive_control"] = True
+        return report
 
 
 def child_from_parents(recipe: Recipe, recipient: nn.Module, donor: nn.Module) -> SurgicalChild:

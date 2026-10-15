@@ -30,6 +30,14 @@ for size in ("1.5B", "7B", "72B"):
 REGISTRY["HuggingFaceTB/SmolLM-135M"] = Identity(
     "llama", frozenset({"HuggingFaceTB/SmolLM"}), "https://huggingface.co/HuggingFaceTB/SmolLM-135M"
 )
+# Campaign 13 positive control: official instruction-tuned derivative of the
+# SmolLM-135M base above (same lineage by design; usable only through the
+# explicit Recipe.positive_control opt-in, never as a "stranger" parent).
+REGISTRY["HuggingFaceTB/SmolLM-135M-Instruct"] = Identity(
+    "llama",
+    frozenset({"HuggingFaceTB/SmolLM"}),
+    "https://huggingface.co/HuggingFaceTB/SmolLM-135M-Instruct",
+)
 for family in ("mamba", "qwen2", "llama"):
     REGISTRY[f"synthetic://{family}"] = Identity(
         family, frozenset({f"random-initialization/{family}"}), "local random config", True
@@ -121,6 +129,10 @@ class Recipe:
     donor_sector: LayerSpan
     seed: int = 42
     schema_version: int = 1
+    # Campaign 13 only: explicitly labeled same-family positive control.
+    # Default False; the cross-family "stranger" protections below apply
+    # unchanged unless this is deliberately set and recorded in provenance.
+    positive_control: bool = False
 
     @property
     def synthetic(self) -> bool:
@@ -131,15 +143,18 @@ class Recipe:
             raise ValueError("Only recipe schema_version 1 is supported")
         if type(self.seed) is not int or not 0 <= self.seed < 2**32:
             raise ValueError("seed must be an integer in [0, 2**32)")
+        if type(self.positive_control) is not bool:
+            raise ValueError("positive_control must be a boolean")
         self.recipient.validate()
         self.donor.validate()
         a, b = self.recipient.identity, self.donor.identity
         if a.synthetic != b.synthetic:
             raise ValueError("Do not label a synthetic/pretrained mixture as a pretrained child")
         if a.family == b.family or a.lineage & b.lineage:
-            raise ValueError(
-                "Cousin parents rejected: families and known weight lineages must differ"
-            )
+            if not self.positive_control:
+                raise ValueError(
+                    "Cousin parents rejected: families and known weight lineages must differ"
+                )
         for spec, span, config in (
             (self.recipient, self.recipient_cut, recipient_config),
             (self.donor, self.donor_sector, donor_config),
@@ -155,11 +170,13 @@ class Recipe:
 
     @classmethod
     def from_dict(cls, data: dict[str, Any], base: Path | None = None) -> Recipe:
-        _keys(
-            data,
-            {"schema_version", "recipient", "donor", "recipient_cut", "donor_sector", "seed"},
-            "recipe",
-        )
+        required = {"schema_version", "recipient", "donor", "recipient_cut", "donor_sector", "seed"}
+        if not isinstance(data, dict) or not required <= set(data) <= required | {
+            "positive_control"
+        }:
+            raise ValueError(
+                f"recipe must contain exactly these keys: {sorted(required | {'positive_control'})}"
+            )
         recipe = cls(
             recipient=ParentSpec.from_dict(data["recipient"], base),
             donor=ParentSpec.from_dict(data["donor"], base),
@@ -167,6 +184,7 @@ class Recipe:
             donor_sector=LayerSpan.from_list(data["donor_sector"]),
             seed=data["seed"],
             schema_version=data["schema_version"],
+            positive_control=data.get("positive_control", False),
         )
         recipe.validate()
         return recipe
@@ -178,7 +196,7 @@ class Recipe:
             return cls.from_dict(json.load(handle), path.parent)
 
     def to_dict(self) -> dict[str, Any]:
-        return {
+        data = {
             "schema_version": self.schema_version,
             "recipient": asdict(self.recipient),
             "donor": asdict(self.donor),
@@ -186,12 +204,22 @@ class Recipe:
             "donor_sector": [self.donor_sector.start, self.donor_sector.stop],
             "seed": self.seed,
         }
+        # Serialized only when enabled, so default recipes (and audits of
+        # previously published artifacts) remain byte-identical.
+        if self.positive_control:
+            data["positive_control"] = True
+        return data
 
     def stranger_report(self) -> dict[str, Any]:
         self.validate()
+        a, b = self.recipient.identity, self.donor.identity
         return {
-            "different_architectures": True,
-            "disjoint_declared_weight_lineages": True,
+            "different_architectures": a.family != b.family,
+            "disjoint_declared_weight_lineages": not (a.lineage & b.lineage),
+            "mode": (
+                "same_family_positive_control" if self.positive_control else "cross_family_stranger"
+            ),
+            "positive_control": self.positive_control,
             "lineage_evidence": {
                 "recipient": self.recipient.identity.evidence,
                 "donor": self.donor.identity.evidence,

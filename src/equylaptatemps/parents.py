@@ -87,11 +87,15 @@ def load_parents(
     check_tokenizer(a_tokenizer, a.config.vocab_size)
     check_tokenizer(b_tokenizer, b.config.vocab_size)
     a_hash, b_hash = tokenizer_fingerprint(a_tokenizer), tokenizer_fingerprint(b_tokenizer)
-    if a_hash == b_hash:
+    if a_hash == b_hash and not recipe.positive_control:
         raise ValueError("This strict stranger recipe also requires distinct tokenizer contracts")
     provenance = recipe.stranger_report()
     provenance["snapshots"] = snapshots
-    provenance["tokenizers"] = {"recipient_sha256": a_hash, "donor_sha256": b_hash}
+    provenance["tokenizers"] = {
+        "recipient_sha256": a_hash,
+        "donor_sha256": b_hash,
+        "tokenizers_identical": a_hash == b_hash,
+    }
     provenance["config_files"] = {
         "recipient_sha256": sha256_file(a_path / "config.json"),
         "donor_sha256": sha256_file(b_path / "config.json"),
