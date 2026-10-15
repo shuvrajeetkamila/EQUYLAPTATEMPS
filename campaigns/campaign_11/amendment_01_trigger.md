@@ -20,17 +20,18 @@ pull-request, and Actions *read* permissions, but not Actions
 
 ## Change
 
-The two Campaign 11 workflows gain an additional trigger: a `push`
-event touching a dedicated marker file
-(`campaigns/campaign_11/.triggers/campaign11-screen.txt` /
-`.../campaign11-budget96.txt`) on this branch, and their job
-condition accepts either the manual-dispatch confirmation input or
-such a marker push. Manual `workflow_dispatch` remains available for
-anyone with dispatch permission. The marker files are pushed only
-when the corresponding run is intended; each run still executes
-exactly the frozen registry conditions — the screen registry contains
-all of condition B's confirmatory runs, and the budget-96 run remains
-separately marker-gated.
+No workflow file changes. The Campaign 11 workflows already use this
+repository's established opt-in execution pattern (in place since the
+early campaigns): they trigger on `push`, and the job runs only when
+the pushed commit message contains the campaign tag
+(`[campaign11-screen]` / `[campaign11-budget96]`). Execution is
+therefore authorized by pushing a dedicated commit carrying the tag —
+an action the available token is permitted to perform — instead of
+via the dispatch endpoint. Each tagged push still executes exactly
+the frozen registry conditions: the screen registry contains all of
+condition B's confirmatory runs, and the budget-96 run remains
+separately tag-gated behind the dated budget amendment required by
+the experiment matrix.
 
 ## What does not change
 
