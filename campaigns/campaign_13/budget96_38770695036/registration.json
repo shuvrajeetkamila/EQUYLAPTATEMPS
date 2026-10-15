@@ -1,0 +1,208 @@
+{
+  "campaign": 13,
+  "compute": {
+    "device": "cpu",
+    "dtype": "float32",
+    "max_session_seconds": 12600,
+    "minimum_disk_bytes": 12884901888,
+    "minimum_ram_bytes": 12884901888,
+    "parallel_experiments": 1,
+    "threads": 2
+  },
+  "data": {
+    "gsm_dev_rows": 16,
+    "gsm_train_rows": 32,
+    "seed": 42,
+    "statistic_text_windows": 8,
+    "wiki_characters": 192,
+    "wiki_dev_windows": 16,
+    "wiki_train_windows": 32
+  },
+  "experiments": [
+    {
+      "donor_sector": [
+        24,
+        30
+      ],
+      "id": "c13_pre_42_96",
+      "initialization": "natgeom_in_trained_out",
+      "interface": {
+        "architecture": "layernorm_linear"
+      },
+      "random_sector": false,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 42,
+      "stage": "budget_96",
+      "steps": 96
+    },
+    {
+      "donor_sector": [
+        24,
+        30
+      ],
+      "id": "c13_pre_123_96",
+      "initialization": "natgeom_in_trained_out",
+      "interface": {
+        "architecture": "layernorm_linear"
+      },
+      "random_sector": false,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 123,
+      "stage": "budget_96",
+      "steps": 96
+    },
+    {
+      "donor_sector": [
+        24,
+        30
+      ],
+      "id": "c13_row_42_96",
+      "initialization": "natgeom_in_trained_out",
+      "interface": {
+        "architecture": "layernorm_linear"
+      },
+      "random_sector": false,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "row_shuffle_seed": 20241014,
+      "row_shuffled_sector": true,
+      "seed": 42,
+      "stage": "budget_96",
+      "steps": 96
+    },
+    {
+      "donor_sector": [
+        24,
+        30
+      ],
+      "id": "c13_row_123_96",
+      "initialization": "natgeom_in_trained_out",
+      "interface": {
+        "architecture": "layernorm_linear"
+      },
+      "random_sector": false,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "row_shuffle_seed": 20241014,
+      "row_shuffled_sector": true,
+      "seed": 123,
+      "stage": "budget_96",
+      "steps": 96
+    },
+    {
+      "donor_sector": [
+        24,
+        30
+      ],
+      "id": "c13_full_42_96",
+      "initialization": "natgeom_in_trained_out",
+      "interface": {
+        "architecture": "layernorm_linear"
+      },
+      "random_sector": false,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 42,
+      "shuffle_seed": 20241014,
+      "shuffled_sector": true,
+      "stage": "budget_96",
+      "steps": 96
+    },
+    {
+      "donor_sector": [
+        24,
+        30
+      ],
+      "id": "c13_full_123_96",
+      "initialization": "natgeom_in_trained_out",
+      "interface": {
+        "architecture": "layernorm_linear"
+      },
+      "random_sector": false,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 123,
+      "shuffle_seed": 20241014,
+      "shuffled_sector": true,
+      "stage": "budget_96",
+      "steps": 96
+    },
+    {
+      "donor_sector": [
+        24,
+        30
+      ],
+      "id": "c13_rand_42_96",
+      "initialization": "natgeom_in_trained_out",
+      "interface": {
+        "architecture": "layernorm_linear"
+      },
+      "random_sector": true,
+      "random_sector_seed": 1234,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 42,
+      "stage": "budget_96",
+      "steps": 96
+    },
+    {
+      "donor_sector": [
+        24,
+        30
+      ],
+      "id": "c13_rand_123_96",
+      "initialization": "natgeom_in_trained_out",
+      "interface": {
+        "architecture": "layernorm_linear"
+      },
+      "random_sector": true,
+      "random_sector_seed": 1234,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 123,
+      "stage": "budget_96",
+      "steps": 96
+    }
+  ],
+  "parents": {
+    "donor": {
+      "id": "HuggingFaceTB/SmolLM-135M-Instruct",
+      "revision": "fcc320f490e08fdb4b99d935b2c58d40bf35b0d0"
+    },
+    "recipient": {
+      "id": "HuggingFaceTB/SmolLM-135M",
+      "revision": "1d461723eec654e65efdc40cf49301c89c0c92f4"
+    }
+  },
+  "phase": "budget_96",
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "registered_date": "2026-10-14",
+  "training": {
+    "batch_size": 1,
+    "checkpoint_every": 8,
+    "diagnostic_train_rows": 8,
+    "gradient_checkpointing": true,
+    "learning_rate": 0.0003,
+    "max_length": 512,
+    "objective": "direct child real-text and human GSM8K TRAIN next-token targets only",
+    "steps": 32
+  }
+}
