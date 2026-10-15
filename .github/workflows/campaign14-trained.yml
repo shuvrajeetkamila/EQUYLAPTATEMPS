@@ -4,7 +4,7 @@ name: Campaign 14 trained repair pair
     branches: [arena/97efdf4a-equylaptatemps]
 permissions:
   contents: read
-  issues: write
+  pull-requests: write
 concurrency:
   group: campaign14-trained
   cancel-in-progress: false
@@ -24,12 +24,19 @@ jobs:
           python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
           python -m pip install transformers==4.48.3 safetensors==0.5.2 sentencepiece==0.2.0 numpy==2.2.6
       - name: Trained repair pair (seed 42, 32 steps)
+        id: research
         env:
           PYTHONPATH: src:scripts
           OMP_NUM_THREADS: "2"
           MKL_NUM_THREADS: "2"
           HF_HUB_DISABLE_TELEMETRY: "1"
         run: python scripts/campaign14_runner.py --registry campaigns/campaign_14/experiment_registry_trained.json --out campaigns/campaign_14/trained_out --post-pr 1
+      - name: Publish partial training metadata
+        if: always() && steps.research.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: src:scripts
+        run: python scripts/publish_campaign02.py --out campaigns/campaign_14/trained_out --post-pr 1
       - uses: actions/upload-artifact@v4
         if: always()
         with:

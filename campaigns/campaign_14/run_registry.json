@@ -47,7 +47,7 @@
       "job": null
     }
   },
-  "diagnose_job": "third retry pending",
+  "diagnose_job": "fourth attempt pending",
   "attempts": [
     {
       "job": 38785606164,
@@ -66,6 +66,12 @@
       "scope": "V0-V6 diagnostics",
       "status": "FAILED",
       "note": "Failure-log step ran but its `gh issue comment` call failed silently (masked by || true); also the diagnose step lacked GH_TOKEN, which publish_bundle requires. Workflow fixed to post via the proven urllib mechanism; GH_TOKEN added. Diagnostic retry, no scientific change."
+    },
+    {
+      "job": 38790902919,
+      "scope": "V0-V6 diagnostics",
+      "status": "FAILED",
+      "note": "Root cause of silence found: workflow permissions declared issues:write, but PR-comment posting uses the proven pull-requests:write configuration (all Campaign 11-13 workflows); failure reporting therefore 403'd. Fixed; added the established partial-metadata fallback publisher. Diagnostic retry, no scientific change."
     }
   ]
 }

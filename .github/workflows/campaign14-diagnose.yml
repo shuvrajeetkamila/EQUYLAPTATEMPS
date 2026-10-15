@@ -4,7 +4,7 @@ name: Campaign 14 reconstruction diagnostics
     branches: [arena/97efdf4a-equylaptatemps]
 permissions:
   contents: read
-  issues: write
+  pull-requests: write
 concurrency:
   group: campaign14-diagnose
   cancel-in-progress: false
@@ -24,6 +24,7 @@ jobs:
           python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
           python -m pip install transformers==4.48.3 safetensors==0.5.2 sentencepiece==0.2.0 numpy==2.2.6
       - name: Reconstruction diagnostics
+        id: research
         env:
           PYTHONPATH: src:scripts
           OMP_NUM_THREADS: "2"
@@ -37,6 +38,12 @@ jobs:
           code=${PIPESTATUS[0]}
           echo "diagnose exit code: $code" >> diag.log
           exit $code
+      - name: Publish partial diagnostics metadata
+        if: always() && steps.research.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: src:scripts
+        run: python scripts/publish_campaign02.py --out campaigns/campaign_14/diagnostics_out --post-pr 1
       - name: Post failure log tail
         if: failure()
         env:
