@@ -47,7 +47,7 @@
       "job": null
     }
   },
-  "diagnose_job": "second retry pending",
+  "diagnose_job": "third retry pending",
   "attempts": [
     {
       "job": 38785606164,
@@ -60,6 +60,12 @@
       "scope": "V0-V6 diagnostics",
       "status": "FAILED",
       "note": "Failed again with no bundle posted; failure channel itself unreliable. Workflow now posts the log tail to PR #1 on failure. Diagnostic retry under the frozen design (no scientific change)."
+    },
+    {
+      "job": 38789761846,
+      "scope": "V0-V6 diagnostics",
+      "status": "FAILED",
+      "note": "Failure-log step ran but its `gh issue comment` call failed silently (masked by || true); also the diagnose step lacked GH_TOKEN, which publish_bundle requires. Workflow fixed to post via the proven urllib mechanism; GH_TOKEN added. Diagnostic retry, no scientific change."
     }
   ]
 }

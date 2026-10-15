@@ -30,6 +30,7 @@ jobs:
           MKL_NUM_THREADS: "2"
           HF_HUB_DISABLE_TELEMETRY: "1"
           PYTHONUNBUFFERED: "1"
+          GH_TOKEN: ${{ github.token }}
         run: |
           set +e
           python scripts/campaign14_diagnose.py --out campaigns/campaign_14/diagnostics_out --post-pr 1 2>&1 | tee diag.log
@@ -42,7 +43,18 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           { echo "Campaign 14 diagnose failure (run ${{ github.run_id }}). Log tail:"; echo '```'; tail -c 6000 diag.log 2>/dev/null || echo "no diag.log"; echo '```'; } > failure_comment.md
-          gh issue comment 1 --body-file failure_comment.md || true
+          python3 - <<'PYEOF'
+          import json, os, urllib.request
+          body = open("failure_comment.md").read()
+          request = urllib.request.Request(
+              f"https://api.github.com/repos/{os.environ['GITHUB_REPOSITORY']}/issues/1/comments",
+              data=json.dumps({"body": body}).encode(),
+              method="POST",
+              headers={"Authorization": "Bearer " + os.environ["GH_TOKEN"], "Content-Type": "application/json"},
+          )
+          with urllib.request.urlopen(request, timeout=30) as response:
+              print("failure comment posted", response.status)
+          PYEOF
       - uses: actions/upload-artifact@v4
         if: always()
         with:
