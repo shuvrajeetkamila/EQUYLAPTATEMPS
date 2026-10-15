@@ -1,0 +1,27 @@
+{
+  "campaign": 14,
+  "type": "reconstruction_damage_localization",
+  "registered_date": "2026-10-14",
+  "model": {
+    "id": "HuggingFaceTB/SmolLM-135M",
+    "revision": "1d461723eec654e65efdc40cf49301c89c0c92f4"
+  },
+  "dtype": "float32",
+  "threads": 2,
+  "evaluation": {
+    "gsm_dev_rows": 16,
+    "wiki_dev_windows": 16,
+    "data_seed": 42,
+    "metric": "macro token NLL (mean of language/math), lower better",
+    "diagnostic_batch_examples": 4
+  },
+  "tolerances": {
+    "gate1_baseline_macro_abs_diff_max": 0.001,
+    "gate2_3_max_abs_logit_diff": 0.005,
+    "gate2_3_macro_abs_diff_max": 0.01
+  },
+  "variants_untrained": ["V0", "V1", "V2", "V3", "V4", "V5", "V6"],
+  "variants_trained": {"if_gates_1_to_3_pass": ["V7", "V8"], "seed": 42, "steps": 32},
+  "outcomes": ["RECONSTRUCTION_VALIDATED", "DAMAGE_LOCALIZED_REPAIR_UNPROVEN", "BLOCKED_AT_GATE_1", "BLOCKED_AT_GATE_2"],
+  "held_out_policy": "NOT_RUN_NO_PROMOTION"
+}
