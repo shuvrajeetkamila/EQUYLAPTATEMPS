@@ -2,8 +2,40 @@
 
 **Date:** 2026-10-14
 **Status:** pair selected on documented criteria; exact donor
-revision to be pinned by the exploratory probe (below) and frozen
-in the preregistration before any confirmatory run.
+revision pinned by the exploratory probe (job `38766385142`,
+bundle SHA-256 `3c4c1eaa…b081`, imported under `probe_38766385142/`)
+and frozen in the preregistration before any confirmatory run.
+
+## Probe findings (pair confirmed)
+
+- Resolved revisions: recipient `1d461723eec654e65efdc40cf49301c89c0c92f4`
+  (matches the recorded Campaign 7–12 pin); donor
+  `HuggingFaceTB/SmolLM-135M-Instruct@fcc320f490e08fdb4b99d935b2c58d40bf35b0d0`.
+- Architecture configs identical except metadata/special-token
+  fields (`_name_or_path`, `bos/eos/pad_token_id`,
+  `transformers_version`); all dimensions, depths, and vocabulary
+  match exactly. The child is governed by the recipient config.
+- Tokenizer fingerprints differ (Instruct adds chat-template /
+  special-token configuration); vocabulary size is identical and
+  the child uses the recipient tokenizer for everything, so all
+  confirmatory comparisons are tokenizer-matched. Native parent
+  scores (each with its own tokenizer) are reference-only.
+- **Sector delta is real:** mean relative RMS difference between
+  the donor sector and the recipient's own layers [24,30) is
+  5.64% (largest: k/q projections ≈ 9–10%). The learned difference
+  exists and is measurable in the grafted weights.
+- **Capability direction (important):** natively on the project dev
+  splits the Instruct donor is *worse* than the base recipient
+  (macro 3.0369 vs 2.7731; language 4.5172 vs 4.0773; math 1.5567
+  vs 1.4689) — instruction tuning traded plain language-model fit
+  for chat behavior. The positive control therefore tests
+  *structural detectability* (does the pipeline respond to learned
+  arrangement at all), with the direction of any effect interpreted
+  per the preregistered decision framework, not assumed positive.
+- All four children construct at seed 42: finite, identical graft
+  parameter counts (21,240,576), initial graft activity A 0.246 /
+  B 0.542 / C 0.536 / D 0.001, `positive_control: true` recorded,
+  parents unchanged.
 
 ## Selected pair
 

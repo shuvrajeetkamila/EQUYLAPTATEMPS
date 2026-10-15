@@ -75,7 +75,7 @@ def main():
     roles = []
     for model_id, revision in (
         ("HuggingFaceTB/SmolLM-135M", "1d461723eec654e65efdc40cf49301c89c0c92f4"),
-        ("HuggingFaceTB/SmolLM-135M-Instruct", "DONOR_REVISION_SHA"),
+        ("HuggingFaceTB/SmolLM-135M-Instruct", "fcc320f490e08fdb4b99d935b2c58d40bf35b0d0"),
     ):
         roles.append(acquire(model_id, Path("models/pretrained"), revision))
     base = Recipe(
