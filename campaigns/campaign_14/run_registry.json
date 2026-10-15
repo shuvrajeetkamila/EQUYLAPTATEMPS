@@ -47,13 +47,19 @@
       "job": null
     }
   },
-  "diagnose_job": "retry pending",
+  "diagnose_job": "second retry pending",
   "attempts": [
     {
       "job": 38785606164,
       "scope": "V0-V6 diagnostics",
       "status": "FAILED",
       "note": "Diagnose step failed before diagnostics.json was written (only provenance.json, 1247-byte artifact). Sandbox cannot read Actions logs; script hardened to self-report failures via bundle. Retry is a new attempt, not a rerun of a completed experiment."
+    },
+    {
+      "job": 38787291809,
+      "scope": "V0-V6 diagnostics",
+      "status": "FAILED",
+      "note": "Failed again with no bundle posted; failure channel itself unreliable. Workflow now posts the log tail to PR #1 on failure. Diagnostic retry under the frozen design (no scientific change)."
     }
   ]
 }
