@@ -29,7 +29,20 @@ jobs:
           OMP_NUM_THREADS: "2"
           MKL_NUM_THREADS: "2"
           HF_HUB_DISABLE_TELEMETRY: "1"
-        run: python scripts/campaign14_diagnose.py --out campaigns/campaign_14/diagnostics_out --post-pr 1
+          PYTHONUNBUFFERED: "1"
+        run: |
+          set +e
+          python scripts/campaign14_diagnose.py --out campaigns/campaign_14/diagnostics_out --post-pr 1 2>&1 | tee diag.log
+          code=${PIPESTATUS[0]}
+          echo "diagnose exit code: $code" >> diag.log
+          exit $code
+      - name: Post failure log tail
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          { echo "Campaign 14 diagnose failure (run ${{ github.run_id }}). Log tail:"; echo '```'; tail -c 6000 diag.log 2>/dev/null || echo "no diag.log"; echo '```'; } > failure_comment.md
+          gh issue comment 1 --body-file failure_comment.md || true
       - uses: actions/upload-artifact@v4
         if: always()
         with:
