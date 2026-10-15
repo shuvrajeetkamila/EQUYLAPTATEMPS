@@ -5,7 +5,7 @@ from __future__ import annotations
 import torch
 from torch import nn
 
-from .model import DenseSeam
+from .model import DenseSeam, ResidualDenseSeam
 
 
 class RMSCondition(nn.Module):
@@ -24,11 +24,28 @@ class RMSCondition(nn.Module):
 
 def install_interfaces(child, design):
     """Only pointwise interface operations change. Every native parent block stays intact."""
-    allowed = {"layernorm_linear", "linear", "rmsnorm_linear"}
+    allowed = {"layernorm_linear", "linear", "rmsnorm_linear", "residual_identity"}
     if design["architecture"] not in allowed:
         raise ValueError("Unregistered interface architecture")
     with torch.random.fork_rng(devices=[]):
         torch.manual_seed(child.recipe.seed)
+        if design["architecture"] == "residual_identity":
+            # Campaign 14 function-preserving seams: exact identity at init.
+            seams = [
+                ResidualDenseSeam(
+                    child.recipient_config.hidden_size, child.donor_config.hidden_size
+                ),
+                ResidualDenseSeam(
+                    child.donor_config.hidden_size, child.recipient_config.hidden_size
+                ),
+            ]
+            for seam in seams:
+                seam.to(device=child.device, dtype=child.embedding.weight.dtype)
+            child.input_seam, child.output_seam = seams
+            child.interfaces_config = dict(design)
+            child.assert_trainable_contract()
+            child.eval()
+            return child
         seams = [
             DenseSeam(child.recipient_config.hidden_size, child.donor_config.hidden_size),
             DenseSeam(child.donor_config.hidden_size, child.recipient_config.hidden_size),

@@ -34,6 +34,30 @@ class DenseSeam(nn.Module):
         return self.projection(self.norm(hidden))
 
 
+class ResidualDenseSeam(nn.Module):
+    """Function-preserving seam (Campaign 14): ``x + Linear(LayerNorm(x))``.
+
+    The projection is zero-initialized, so at initialization the seam is
+    the exact identity map on the residual stream while remaining fully
+    trainable (the projection receives nonzero gradients; the norm's
+    gradients vanish only at the exact initial point). Only defined for
+    same-width seams: a dimension-changing map cannot be the identity.
+    """
+
+    def __init__(self, source_width: int, destination_width: int):
+        super().__init__()
+        if source_width != destination_width:
+            raise ValueError("ResidualDenseSeam requires equal source and destination widths")
+        self.norm = nn.LayerNorm(source_width)
+        self.projection = nn.Linear(source_width, destination_width, bias=True)
+        nn.init.zeros_(self.projection.weight)
+        nn.init.zeros_(self.projection.bias)
+
+    def forward(self, hidden: torch.Tensor) -> torch.Tensor:
+        hidden = hidden.to(self.projection.weight.dtype)
+        return hidden + self.projection(self.norm(hidden))
+
+
 @dataclass
 class SurgeryOutput:
     logits: torch.Tensor

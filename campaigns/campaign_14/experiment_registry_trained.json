@@ -1,0 +1,71 @@
+{
+  "campaign": 14,
+  "parents": {
+    "recipient": {
+      "id": "HuggingFaceTB/SmolLM-135M",
+      "revision": "1d461723eec654e65efdc40cf49301c89c0c92f4"
+    },
+    "donor": {
+      "id": "HuggingFaceTB/SmolLM-135M",
+      "revision": "1d461723eec654e65efdc40cf49301c89c0c92f4"
+    },
+    "note": "Self-reconstruction: donor role is the recipient checkpoint itself (positive_control opt-in)."
+  },
+  "data": {
+    "seed": 42,
+    "gsm_train_rows": 32,
+    "gsm_dev_rows": 16,
+    "wiki_train_windows": 32,
+    "wiki_dev_windows": 16,
+    "wiki_characters": 192,
+    "statistic_text_windows": 8
+  },
+  "training": {
+    "steps": 32,
+    "batch_size": 1,
+    "learning_rate": 0.0003,
+    "max_length": 512,
+    "gradient_checkpointing": true,
+    "diagnostic_train_rows": 8,
+    "checkpoint_every": 8,
+    "objective": "direct child real-text and human GSM8K TRAIN next-token targets only"
+  },
+  "experiments": [
+    {
+      "id": "c14_v7",
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "donor_sector": [
+        24,
+        30
+      ],
+      "seed": 42,
+      "steps": 32,
+      "interface": {
+        "architecture": "residual_identity"
+      },
+      "initialization": "residual_identity",
+      "random_sector": false
+    },
+    {
+      "id": "c14_v8",
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "donor_sector": [
+        24,
+        30
+      ],
+      "seed": 42,
+      "steps": 32,
+      "interface": {
+        "architecture": "layernorm_linear"
+      },
+      "initialization": "natgeom_in_trained_out",
+      "random_sector": false
+    }
+  ]
+}
