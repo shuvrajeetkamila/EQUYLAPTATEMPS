@@ -9,7 +9,7 @@ Preparation complete:
 - [x] Historical held-out sets untouched
 
 Awaiting explicit user authorization to:
-- [ ] Build the Campaign 19 runner/workflows
-- [ ] Run D0 donor-validity and B identity gates
-- [ ] Train conditions C/D/E/H (10 runs, seeds {42,123,31415})
+- [x] Build the Campaign 19 runner/workflows
+- [x] Run D0 donor-validity and B identity gates
+- [x] Train conditions C/D/E/H (10 runs, seeds {42,123,31415})
 - [ ] Open the new held-out slice only if the primary success rule is met

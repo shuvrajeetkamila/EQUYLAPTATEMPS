@@ -1,6 +1,6 @@
-# Campaign 19 — First Controlled Foreign-Graft Pilot (PREPARED, NOT AUTHORIZED)
+# Campaign 19 — First Controlled Foreign-Graft Pilot (COMPLETE: DONOR_ADVANTAGE_NOT_SHOWN)
 
-Frozen preregistration for replacing SmolLM blocks [11,13) with a
+Frozen preregistration replaced SmolLM blocks [11,13) with a
 frozen Mamba sector under trainable connectors, with identity,
 scrambled, random, ablation, and restoration controls. Preparation
 (machinery + offline tests + this freeze) is complete; **no
