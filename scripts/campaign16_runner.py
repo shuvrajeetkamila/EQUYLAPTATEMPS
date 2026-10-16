@@ -341,6 +341,31 @@ def run(args):
             fit = fit_resumable(child, parents.tokenizer, training, opts, **fit_kwargs)
             checkpoint_evaluations.append({"step": opts.steps, "validation": fit["validation"]})
             checkpoint_diagnostics_list.append(checkpoint_diagnostics(opts.steps))
+            # Compact the saved trace (Campaign 16 attempt 2): the full
+            # per-parameter gradient dictionaries made evidence bundles too
+            # large to post reliably (failure F-C16-002). Keep indices,
+            # losses, global norms, and seam-aggregated gradient norms.
+            fit["trace"] = [
+                {
+                    "step": e["step"],
+                    "record_indices": e["record_indices"],
+                    "batch_token_nll": e["batch_token_nll"],
+                    "gradient_norm_before_clip": e["gradient_norm_before_clip"],
+                    "input_seam_grad_l2": sum(
+                        g["l2_norm"] ** 2
+                        for n, g in e["gradients"].items()
+                        if n.startswith("input_seam.")
+                    )
+                    ** 0.5,
+                    "output_seam_grad_l2": sum(
+                        g["l2_norm"] ** 2
+                        for n, g in e["gradients"].items()
+                        if n.startswith("output_seam.")
+                    )
+                    ** 0.5,
+                }
+                for e in fit["trace"]
+            ]
             report = {
                 "training_tokens_processed": sum(
                     int((torch.tensor(training[i].labels) != -100).sum())

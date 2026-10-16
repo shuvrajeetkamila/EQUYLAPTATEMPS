@@ -11,6 +11,18 @@
       "root_cause": "Threshold calibrated on runners where child and HF kernels agree bitwise; not a code or surgery defect (no src/ change since Campaign 15's passing regression).",
       "corrective_action": "Amendment 01 widens the logit proxy bound (2e-2 max, 1e-3 mean) with rationale; new regression attempt under amended gate.",
       "rerun_justified": true
+    },
+    {
+      "id": "F-C16-002",
+      "scope": "All three Campaign 16 LR panels, attempt 1 (jobs 38875375321, 38875377021, 38875378619)",
+      "date": "2026-10-16",
+      "category": "Permission or CI failure (evidence-posting channel)",
+      "detail": "Salvaged CampaignRegistry pages prove all 18 runs COMPLETED training. The end-of-run evidence bundles (~50 parts each) were truncated by API rate limiting while posting many large records (results.json embeds full per-step gradient traces); fallback bundles also truncated. Checkpoint scores for 10 of 18 runs are unrecoverable; 8 complete results.json files were salvaged (kept under attempt1_*; hash-unverifiable, not used for analysis).",
+      "scientific_computation_occurred": true,
+      "results_valid": "Completion statuses valid (registry); scores valid only for the 8 salvaged complete records (not used)",
+      "root_cause": "Record volume per run grew (full 96-step traces with per-parameter gradient summaries plus new diagnostics); three panels posting ~50-comment bundles concurrently hit GitHub secondary rate limits.",
+      "corrective_action": "Runner now saves a compact trace (indices, norms, seam-aggregated gradient norms) instead of per-parameter gradient dicts; panels rerun sequentially as attempt 2 under the identical frozen design.",
+      "rerun_justified": true
     }
   ]
 }
