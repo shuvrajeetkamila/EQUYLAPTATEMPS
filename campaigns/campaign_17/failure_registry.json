@@ -1,3 +1,17 @@
 {
-  "failures": []
+  "failures": [
+    {
+      "id": "F-C17-001",
+      "experiment": "c17-diagnostics-1",
+      "category": "infrastructure_trigger",
+      "stage": "workflow_trigger",
+      "detail": "Implementation commit bb5bfca introduced the Campaign 17 workflow; GitHub registered it only after that push, so no run was created. CI passed; no compute consumed and no experiment started.",
+      "compute_completed": false,
+      "usable_evidence": "None required; the frozen diagnostics ran unchanged under the replacement trigger commit.",
+      "root_cause": "New-workflow registration lag on the introducing push.",
+      "corrective_action": "Cosmetic artifact-name fix commit 5a8ebf4 carrying the same [campaign17-diagnose] tag triggered run 38899506528, which executed the frozen matrix exactly once.",
+      "rerun_justification": "No completed experiment repeated; the frozen job had never started.",
+      "replacement_run": "38899506528"
+    }
+  ]
 }
