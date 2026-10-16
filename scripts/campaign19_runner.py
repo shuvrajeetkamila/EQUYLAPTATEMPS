@@ -381,7 +381,7 @@ def train_one(
             max_length=512,
             gradient_checkpointing=True,
             learning_rate=LR,
-            steps=mark,
+            steps=96,
             seed=seed,
         )
         fit_resumable(
@@ -393,6 +393,7 @@ def train_one(
             output=run_dir / "calibration",
             contract=contract,
             checkpoint_every=8,
+            interrupt_after=mark if mark < 96 else None,
         )
         value = macro(evaluate_encoded(child, dev_encoded, parents.tokenizer))
         entry[f"macro_step{mark}"] = value
