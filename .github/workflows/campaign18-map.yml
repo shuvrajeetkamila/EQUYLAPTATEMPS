@@ -1,0 +1,93 @@
+name: Campaign 18 structural damage map
+"on":
+  push:
+    branches: [arena/97efdf4a-equylaptatemps]
+permissions:
+  contents: read
+  pull-requests: write
+concurrency:
+  group: campaign18-map
+  cancel-in-progress: false
+jobs:
+  map:
+    if: contains(github.event.head_commit.message, '[campaign18-map]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install transformers==4.48.3 safetensors==0.5.2 sentencepiece==0.2.0 numpy==2.2.6
+      - name: Structural damage map (development + validation)
+        id: research
+        env:
+          PYTHONPATH: src:scripts
+          OMP_NUM_THREADS: "2"
+          MKL_NUM_THREADS: "2"
+          HF_HUB_DISABLE_TELEMETRY: "1"
+          PYTHONUNBUFFERED: "1"
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          python scripts/campaign18_map.py --out campaigns/campaign_18/map_out --set map --post-pr 1 2>&1 | tee map.log
+          code=${PIPESTATUS[0]}
+          echo "map exit code: $code" >> map.log
+          exit $code
+      - name: Publish partial map metadata
+        if: always() && steps.research.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: src:scripts
+        run: python scripts/publish_campaign02.py --out campaigns/campaign_18/map_out --post-pr 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: campaign18-map
+          path: campaigns/campaign_18/map_out
+          retention-days: 3
+  heldout:
+    if: contains(github.event.head_commit.message, '[campaign18-heldout]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install pinned CPU runtime
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install transformers==4.48.3 safetensors==0.5.2 sentencepiece==0.2.0 numpy==2.2.6
+      - name: Held-out placement confirmation (single opening)
+        id: research
+        env:
+          PYTHONPATH: src:scripts
+          OMP_NUM_THREADS: "2"
+          MKL_NUM_THREADS: "2"
+          HF_HUB_DISABLE_TELEMETRY: "1"
+          PYTHONUNBUFFERED: "1"
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set +e
+          python scripts/campaign18_map.py --out campaigns/campaign_18/heldout_out --set heldout --post-pr 1 2>&1 | tee heldout.log
+          code=${PIPESTATUS[0]}
+          echo "heldout exit code: $code" >> heldout.log
+          exit $code
+      - name: Publish partial heldout metadata
+        if: always() && steps.research.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PYTHONPATH: src:scripts
+        run: python scripts/publish_campaign02.py --out campaigns/campaign_18/heldout_out --post-pr 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: campaign18-heldout
+          path: campaigns/campaign_18/heldout_out
+          retention-days: 3
