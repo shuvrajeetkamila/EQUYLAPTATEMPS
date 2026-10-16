@@ -1,13 +1,14 @@
-# Campaign 19 — Publication verification (preparation stage)
+# Campaign 19 — Publication verification (execution)
 
-- Preparation/preregistration commit:
-  `b0599b15bec40661affb9e2256013a4ffe5a4dbe` (this file's commit
-  follows; final published SHA is the HEAD containing this file).
-- Local HEAD equals remote `arena/97efdf4a-equylaptatemps` at that
-  commit (verified via `git ls-remote`); CI `38936960176` success.
-- PR #1 open, unmerged. No merge/force-push/history rewrite.
-- **No foreign-graft training, gate execution, or held-out access
-  has occurred.** Historical held-out sets untouched. Checksums:
-  `checksums.sha256` (14 files, verified).
-- Status: PREPARED, NOT AUTHORIZED — awaiting explicit user
-  authorization of the frozen preregistration.
+- Results commits: `feed89aa5b325419383dc213955477ea8cf0374b`
+  and README/checksum correction `334876abfb5069b8537b6481c77aab03ad92a240`
+  (this file's commit follows; final SHA is the HEAD containing it).
+- Local = remote verified at `334876a…`; CI `38965254935` success.
+- Experiment runs: gates `38947055805` (D0 PASS, B bitwise PASS),
+  training attempt 1 `38947619114` (failed pre-results, F-C19-001),
+  training `38950005531` (10/10 runs, SHA-verified bundles).
+- Verdict: `DONOR_ADVANTAGE_NOT_SHOWN` /
+  `VALID_NEGATIVE_NO_DONOR_ADVANTAGE`. Held-out:
+  `NOT_RUN_NO_PROMOTION` (never acquired). PR #1 open, unmerged,
+  retitled. No merge/force-push/history rewrite; no weights
+  committed. Checksums: `checksums.sha256` (109 files).
