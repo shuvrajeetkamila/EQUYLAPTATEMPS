@@ -17,7 +17,20 @@ from pathlib import Path
 ROOT = Path("campaigns/campaign_16")
 REGRESSION_DIR = "regression2_38874299399"
 REGRESSION_BUNDLE_SHA = "cfb07ce3554b32ea86e4c84141f77c3c75ba29dec8b46230662ad8337750cf9a"
-PANELS = {}  # lr_level -> (job dir, bundle sha)
+PANELS = {
+    "low_0.3x": (
+        "lrlow_38882548685",
+        "add332cc678ad1d478f84eec07f26e5915a3561d6cb9e26bee5474f8ee466d3e",
+    ),
+    "base_1x": (
+        "lrbase_38885462762",
+        "fe26b3e472c56f3e68afd2d798cb9df4d917d64099c468cde89d73ec2f946d4c",
+    ),
+    "high_3x": (
+        "lrhigh_38888327387",
+        "05a5fdd8e2fc908c6be6d684d066a788a672b24d01a0e2587699f10969eb5ba9",
+    ),
+}
 LR_LEVELS = ("low_0.3x", "base_1x", "high_3x")
 SEEDS = (42, 123, 31415)
 STEPS = (0, 8, 16, 32, 64, 96)
