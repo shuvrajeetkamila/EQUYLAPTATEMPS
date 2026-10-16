@@ -1,0 +1,20 @@
+{
+  "campaign": 18,
+  "foreign_conditions_run": 0,
+  "designs": [
+    {"id": "A_exact_location", "strategy": "Exact-location replacement of one recipient sector at native depth",
+     "structural_integrity": "verified pattern (Campaign 17 Mode C, self sector)",
+     "tensor_compatibility": "requires equal hidden width; NOT satisfied by the historical Mamba donor (768 vs 576)",
+     "status": "structurally sound, donor-incompatible without connector"},
+    {"id": "B_sector_substitution", "strategy": "Multi-block native-depth sector substitution",
+     "structural_integrity": "engine-supported", "tensor_compatibility": "as A, plus sector-length match",
+     "status": "deferred; harshest native-damage prior (+3.2..+8.4)"},
+    {"id": "C_boundary_connector", "strategy": "Frozen recipient at native depths + frozen foreign block + declared trainable residual connectors",
+     "structural_integrity": "engine-supported", "tensor_compatibility": "connector bridges 768<->576",
+     "status": "required companion to A for the historical pairing"},
+    {"id": "D_local_integration", "strategy": "Location chosen from low-damage interior map regions",
+     "structural_integrity": "inherits A/C", "tensor_compatibility": "inherits A/C",
+     "status": "location heuristic only; low movement damage is not foreign compatibility"}
+  ],
+  "selected_for_campaign_19_draft": "A+C at an interior sector, recipient [11,13) replaced by donor blocks under declared connectors, per campaign_19_pilot_preregistration_draft.md"
+}
