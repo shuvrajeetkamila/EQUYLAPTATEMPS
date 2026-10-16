@@ -300,7 +300,6 @@ def main():
         "d1_delta": d1_delta,
         "d2_delta": d2_delta,
     }
-    (C / "_publisher_ctx.json").write_text(json.dumps(ctx, indent=2))
     print(json.dumps(ctx, indent=2))
 
 
