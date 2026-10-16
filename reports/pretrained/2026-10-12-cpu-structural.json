@@ -1,0 +1,222 @@
+{
+  "benchmarks": {
+    "gsm8k": {
+      "score": null,
+      "status": "NOT_RUN"
+    },
+    "wikitext2": {
+      "score": null,
+      "status": "NOT_RUN"
+    }
+  },
+  "calibration": {
+    "characters_per_chunk": 64,
+    "dataset": "WikiText-2 TRAIN",
+    "dev_chunks": 4,
+    "development_loss": 8.35311758858817,
+    "elapsed_seconds": 6.440556681000032,
+    "final_loss": 7.0268093642368115,
+    "initial_loss": 13.131952429330477,
+    "kind": "measured",
+    "learning_rate": 0.001,
+    "objective": "explicit real-text/human-reference next-token cross entropy",
+    "optimizer": {
+      "betas": [
+        0.9,
+        0.999
+      ],
+      "eps": 1e-08,
+      "name": "AdamW",
+      "weight_decay": 0
+    },
+    "seed": 42,
+    "status": "PASS",
+    "steps": 8,
+    "train_chunks": 4,
+    "warning": "Tiny train/development diagnostic, NOT a WikiText/GSM8K performance benchmark"
+  },
+  "checkpoint": {
+    "parent_weights_uploaded": false,
+    "public_artifact": "reference-child: new interfaces + immutable parent references only",
+    "self_contained_private_checkpoint_tested": true
+  },
+  "dataset_sources": {
+    "gsm8k": {
+      "files": {
+        "license": "86bbb73e855821d7c401912fd4bf82e34313e6e3b6fd6f909f2b6cc9e209a53b",
+        "test": "3730d312f6e3440559ace48831e51066acaca737f6eabec99bccb9e4b3c39d14",
+        "train": "17f347dc51477c50d4efb83959dbb7c56297aba886e5544ee2aaed3024813465"
+      },
+      "license": "MIT",
+      "repository": "openai/grade-school-math",
+      "revision": "3101c7d5072418e28b9008a6636bde82a006892c"
+    },
+    "wikitext2": {
+      "files": {
+        "attribution": "ed96062abea03d4f4e8ca80f0caad8b07ec59687b8064319c7ee6f6d900b6286",
+        "test": "d790b833ef8cf03a90db7bf1271b7520b83c45ce07ba3c1a9699df81e239eca0",
+        "train": "9e9fa1ad55b1c2c95b08e37dd8e653f638fac2c6de904b79e813611eefbc985f",
+        "validation": "f0737ed31fc1329026e95cb8b98e19c2a182c39c240ab909dc31abf2f8af58e8"
+      },
+      "license": "CC-BY-SA-3.0 and GFDL (data), not the mirror's software license",
+      "repository": "pytorch/examples",
+      "revision": "acc295dc7b90714f1bf47f06004fc19a7fe235c4"
+    }
+  },
+  "environment": {
+    "cuda_available": false,
+    "disk_free_bytes": 91211210752,
+    "dtype": "float32",
+    "quantization": "none",
+    "ram_bytes": 16765415424,
+    "threads": 2,
+    "torch": "2.5.1+cpu"
+  },
+  "execution_trace": {
+    "graft": [
+      1,
+      1
+    ],
+    "prefix": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "suffix": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ]
+  },
+  "fresh_process_reload": {
+    "close_logits": true,
+    "finite_logits": true,
+    "identical_logits": true,
+    "last_token_argmax": 293,
+    "logits_sha256": "b2466d3aea07020fd5f74df6030e09efe791f5a57cd8b1ba814431a3ac7a5456",
+    "parent_kind": "pretrained",
+    "parents_loaded": false,
+    "shape": [
+      1,
+      4,
+      50280
+    ],
+    "status": "PASS"
+  },
+  "frozen_invariance": {
+    "calibrated_logits_sha256": "b2466d3aea07020fd5f74df6030e09efe791f5a57cd8b1ba814431a3ac7a5456",
+    "child_unchanged": true,
+    "donor_unchanged": true,
+    "frozen_sha256": "e758c9a5b1797652fd39d39c5200cfe8d46dbe0301f121513609d2a16a3eabf3",
+    "graft_sha256": "e61216ee63ee7fece28e8d6c88402d806bdce70d94973c7b1b202f459ae71458",
+    "recipient_unchanged": true
+  },
+  "generation_sample": {
+    "benchmark": false,
+    "output": "io",
+    "prompt": "The study of mathematics",
+    "quality_validated": false
+  },
+  "inheritance": {
+    "claim": "none; structural/calibration evidence only",
+    "status": "NOT_RUN"
+  },
+  "initial_forward": {
+    "finite_logits": true,
+    "shape": [
+      1,
+      4,
+      50280
+    ],
+    "status": "PASS"
+  },
+  "kind": "real_pretrained_structural_probe",
+  "mamba_license": {
+    "hf_conversion_license_tag": null,
+    "limitation": "HF conversion omits a license tag/document. Original official checkpoint supplies lineage license evidence. No parent weights redistributed.",
+    "upstream_license_tag": "apache-2.0",
+    "upstream_model_id": "state-spaces/mamba-130m",
+    "upstream_revision": "c4dcd5d65dff7d0bff5a4c97e30d82e57190f1b0"
+  },
+  "parents": {
+    "donor": {
+      "id": "Qwen/Qwen2.5-Math-1.5B",
+      "parameters": 1543714304,
+      "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2",
+      "weights_loaded": true
+    },
+    "recipient": {
+      "id": "state-spaces/mamba-130m-hf",
+      "parameters": 129135360,
+      "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1",
+      "weights_loaded": true
+    }
+  },
+  "phase": "finished",
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "run_id": "38290378364",
+  "schema_version": 1,
+  "sector_inventory_sha256": "72ee95c2c707cc83eda5de3a5e231824a9c6aeb009df8369564702add9c2863b",
+  "snapshot_evidence": {
+    "donor": {
+      "revision_evidence": "locally_verified_pinned_download_record",
+      "snapshot_files_sha256": {
+        "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+        "README.md": "2fa98ea4581329d6c9e2d58d28be62484d68ff596f59bc9e4d1f20ff950a0b80",
+        "config.json": "81d1dc3c9d4797466a24bfc140776894d15ac4ccce58a0220462b2106f2f4831",
+        "generation_config.json": "8c970692323e3ea0e9b8b0a4dca79388d31226e41f83c9fd6014804280ebf6e8",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model.safetensors": "f7aa8d665ab44d3b461bed742fe93cdcedc15d2e31e50dc372c126e6f720857b",
+        "tokenizer.json": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+        "tokenizer_config.json": "a668be4b083078aca7c38853dd929184e81534d72525a9c1ddb84ea6fd1de6f8",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "recipient": {
+      "revision_evidence": "locally_verified_pinned_download_record",
+      "snapshot_files_sha256": {
+        "README.md": "7f2f803907d92a538c2f0d6c9eb5e7b2c40bbb66a73311dacb3f7947c392b5fd",
+        "config.json": "784825b6b6cdde47a1602278db0e66d6764169af4a8e662404701bc636a2686a",
+        "generation_config.json": "248fa733db101c19a8e3c2f311a180fdd7c769323ec2873edf7060cec9f5ee32",
+        "model.safetensors": "1a5ed29c492ef4d485df3b7c2c8109771696589855b2162ad1ba618b6067cbea",
+        "tokenizer.json": "b074ad869d4f45d1265ca5c9814f78604f3d7e187acc063b15dd232b27585fcf",
+        "tokenizer_config.json": "9d7016c33747c6309346e59bd7bf63bfc33c9d9366ecb7e514b3b84dc6b46acb"
+      }
+    }
+  },
+  "source_commit": "f812e6b5d74e7465e02cd6f41df71589dc35ad60",
+  "status": "PASS",
+  "structure": {
+    "context_limit": 4096,
+    "donor_family": "qwen2",
+    "donor_width": 1536,
+    "frozen_parameters": 215187712,
+    "parent_weight_arithmetic": false,
+    "prefix_blocks": 11,
+    "production_bypass": false,
+    "recipient_family": "mamba",
+    "recipient_width": 768,
+    "removed_recipient_blocks": 2,
+    "suffix_blocks": 11,
+    "trainable_dense_seam_parameters": 2366208,
+    "transplanted_blocks": 2,
+    "unique_parameters": 217553920
+  },
+  "total_elapsed_seconds": 66.68252082900003
+}

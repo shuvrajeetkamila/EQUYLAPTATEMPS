@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "campaign": 3,
+  "plain_english_pathway": "Text is split into pieces by the Mamba (host) tokenizer and turned into vectors by the frozen Mamba embedding. Frozen Mamba blocks 0-10 process them (width 768). A new trainable input bridge (LayerNorm, full 768->1536 dense projection, then a causal sequence mixer in Campaign 3) rewrites each vector for the donor. Two intact pretrained Qwen blocks (20-21, width 1536, with their own rotary positions and causal attention) process them. A new trainable output bridge (1536->768) rewrites them back. Frozen Mamba blocks 13-23, the frozen Mamba final norm and the frozen Mamba output head produce next-token scores. Mamba blocks 11-12 and the Qwen embedding/head are absent. The model is one integrated pathway: no router, no ensemble, no answer selection.",
+  "stages": [
+    {"stage": "host embedding", "source": "pretrained Mamba, frozen", "width": 768, "trainable": false},
+    {"stage": "host prefix", "source": "Mamba blocks [0,11), frozen, native selective SSM + causal conv", "width": 768, "trainable": false},
+    {"stage": "input seam", "source": "NEW: LayerNorm(768) -> Linear 768->1536 -> residual causal sequence mixer (Campaign 3)", "width": "768->1536", "trainable": true},
+    {"stage": "donor sector", "source": "Qwen blocks [20,22) intact pretrained, frozen, native GQA/RoPE/causal mask", "width": 1536, "trainable": false},
+    {"stage": "output seam", "source": "NEW: LayerNorm(1536) -> Linear 1536->768 -> residual causal sequence mixer (Campaign 3)", "width": "1536->768", "trainable": true},
+    {"stage": "host suffix", "source": "Mamba blocks [13,24) + final norm + lm_head, frozen; head tied to host embedding", "width": 768, "trainable": false}
+  ],
+  "token_semantics": "Single pathway uses the host (Mamba) tokenizer and embedding end to end. Donor token IDs are never fed to the child; the donor sector receives continuous vectors, not tokens, so donor vocabulary semantics enter only through its pretrained block computations. This preserves one valid semantic pathway but means donor knowledge encoded relative to its own embedding must be re-expressed by the learned bridges - the central open problem of this campaign.",
+  "parameter_accounting_real_widths": {
+    "dense_control_trainable": 2366208,
+    "causal_conv_trainable": 2380032,
+    "causal_attention_trainable": 3189248,
+    "bottleneck_gru_trainable": 3156736,
+    "child_total_parameters": 217553920,
+    "frozen_parameters": 215187712
+  },
+  "donor_intactness": "Donor blocks are the actual loaded pretrained modules (not re-initialized copies); intactness is verified by module fingerprints before/after every run and by bridge-only reference reconstruction checks."
+}

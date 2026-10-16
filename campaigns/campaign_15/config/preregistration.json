@@ -1,0 +1,18 @@
+{
+  "campaign": 15,
+  "type": "same_family_self_control_connector_training_comparison",
+  "registered_date": "2026-10-15",
+  "model": {"id": "HuggingFaceTB/SmolLM-135M", "revision": "1d461723eec654e65efdc40cf49301c89c0c92f4"},
+  "placement": {"recipient_cut": [11, 13], "sector": [24, 30], "blocks_total": 34},
+  "conditions": {
+    "A_new": {"interface": "residual_identity", "initialization": "residual_identity"},
+    "B_old": {"interface": "layernorm_linear", "initialization": "natgeom_in_trained_out"}
+  },
+  "seeds": [42, 123, 31415],
+  "steps": 96,
+  "evaluation_steps": [0, 8, 16, 32, 64, 96],
+  "primary_endpoint_step": 32,
+  "training": {"learning_rate": 0.0003, "batch_size": 1, "max_length": 512, "gradient_checkpointing": true, "checkpoint_every": 8},
+  "tolerances": {"gateA_native_repeat_macro_abs": 0.001, "gateA_macro_abs": 0.01, "gateA_max_abs_logit": 0.005, "gateB_mean_delta0_min": 1.0},
+  "held_out_policy": "NOT_RUN_NO_PROMOTION"
+}

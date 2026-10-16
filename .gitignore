@@ -1,0 +1,36 @@
+# Local environments and caches
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+build/
+dist/
+.cache/
+
+# Parent snapshots, datasets, and generated checkpoints stay out of Git.
+models/
+artifacts/
+data/local/
+*.safetensors
+*.pt
+*.pth
+*.bin
+*.ckpt
+*.zip
+# Explicitly requested tiny synthetic child; never a large pretrained checkpoint.
+!examples/equylaptatemps-synthetic-child-v0.1.0.zip
+*.log
+
+# Credentials and editor/OS state
+.env
+.env.*
+!.env.example
+.DS_Store
+.idea/
+.vscode/
+
+# Explicit small NEW interfaces only; no pretrained/frozen weights in Git.
+!examples/pretrained-structural-reference/interfaces.safetensors
+!examples/pretrained-pilot-reference/interfaces.safetensors

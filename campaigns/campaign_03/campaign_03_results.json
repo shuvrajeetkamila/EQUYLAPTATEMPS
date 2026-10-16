@@ -1,0 +1,163 @@
+{
+  "schema_version": 1,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "campaign": 3,
+  "date": "2026-10-13",
+  "parents": {
+    "recipient": {
+      "model_id": "state-spaces/mamba-130m-hf",
+      "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"
+    },
+    "donor": {
+      "model_id": "Qwen/Qwen2.5-Math-1.5B",
+      "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"
+    }
+  },
+  "screen": {
+    "connected_run": "38367618192",
+    "status": "COMPLETED",
+    "selection_data": "development only (16 WikiText-2 validation windows + 16 GSM8K TRAIN-held-out rows)",
+    "host_language_dev_nll": 4.559452953338623,
+    "host_math_dev_nll": 2.4817984645891906,
+    "donor_language_dev_nll_own_tokenizer": 6.145067103858133,
+    "donor_math_dev_nll_own_tokenizer": 0.781392626221376,
+    "candidates": {
+      "c03_dense_cov_42": {
+        "language_dev_nll": 6.651742172241211,
+        "math_dev_nll": 4.827491989047744,
+        "macro_dev_nll": 5.739617080644478,
+        "bypass_graft_macro_dev_nll": 5.731687740053134,
+        "zero_graft_macro_dev_nll": 11.344237128877035,
+        "graft_relative_update": null,
+        "reference_reconstruction_identical_logits": true,
+        "trainable_parameters": 2366208
+      },
+      "c03_conv_cov_42": {
+        "language_dev_nll": 6.582227935791016,
+        "math_dev_nll": 4.711010907623044,
+        "macro_dev_nll": 5.64661942170703,
+        "bypass_graft_macro_dev_nll": 5.64056145138944,
+        "zero_graft_macro_dev_nll": 11.593467495378189,
+        "graft_relative_update": null,
+        "reference_reconstruction_identical_logits": true,
+        "trainable_parameters": 2380032
+      },
+      "c03_attn_cov_42": {
+        "language_dev_nll": 6.457705802917481,
+        "math_dev_nll": 4.624011029834153,
+        "macro_dev_nll": 5.540858416375817,
+        "bypass_graft_macro_dev_nll": 5.531277980056464,
+        "zero_graft_macro_dev_nll": 13.77844517290936,
+        "graft_relative_update": null,
+        "reference_reconstruction_identical_logits": true,
+        "trainable_parameters": 3189248
+      },
+      "c03_gru_cov_42": {
+        "language_dev_nll": 6.488286933898926,
+        "math_dev_nll": 4.606187954630956,
+        "macro_dev_nll": 5.54723744426494,
+        "bypass_graft_macro_dev_nll": 5.539072405409236,
+        "zero_graft_macro_dev_nll": 12.309967280193185,
+        "graft_relative_update": null,
+        "reference_reconstruction_identical_logits": true,
+        "trainable_parameters": 3156736
+      }
+    },
+    "promotion": {
+      "checks": {
+        "c03_attn_cov_42": {
+          "G1_language_retention_1.50x_host": true,
+          "G2_beats_dense_control": false,
+          "G3a_donor_used_vs_ablations": false,
+          "G4_math_signal_0.90x_dense": false,
+          "language_ratio_vs_host": 1.4163334656603654,
+          "macro_dev_nll": 5.540858416375817
+        },
+        "c03_conv_cov_42": {
+          "G1_language_retention_1.50x_host": true,
+          "G2_beats_dense_control": false,
+          "G3a_donor_used_vs_ablations": false,
+          "G4_math_signal_0.90x_dense": false,
+          "language_ratio_vs_host": 1.4436442273126717,
+          "macro_dev_nll": 5.64661942170703
+        },
+        "c03_gru_cov_42": {
+          "G1_language_retention_1.50x_host": true,
+          "G2_beats_dense_control": false,
+          "G3a_donor_used_vs_ablations": false,
+          "G4_math_signal_0.90x_dense": false,
+          "language_ratio_vs_host": 1.4230406586711086,
+          "macro_dev_nll": 5.54723744426494
+        }
+      },
+      "dense_control": {
+        "language": 6.651742172241211,
+        "macro": 5.739617080644478,
+        "math": 4.827491989047744
+      },
+      "host_language_dev_nll": 4.559452953338623,
+      "reason": "No sequence-aware candidate satisfies the frozen screen gates",
+      "selected": null,
+      "selection_data": "development only",
+      "status": "FAIL"
+    }
+  },
+  "diagnostic_confirm": {
+    "connected_runs": [
+      "38371104410",
+      "38375777144"
+    ],
+    "status": "COMPLETED_DIAGNOSTIC_ONLY",
+    "budget_by_content_macro_dev_nll": {
+      "pretrained_32_steps": 5.540858416375817,
+      "random_twin_32_steps": 4.902392136970881,
+      "pretrained_96_steps": 4.355110910299052,
+      "random_twin_96_steps": 4.01371860448052
+    },
+    "seed_123_attention": {
+      "language_dev_nll": 6.438570976257324,
+      "math_dev_nll": 4.313422232763165,
+      "macro_dev_nll": 5.375996604510245,
+      "bypass_graft_macro_dev_nll": 5.374480058918637,
+      "zero_graft_macro_dev_nll": 111.14644860044345,
+      "graft_relative_update": 0.090636373963207,
+      "reference_reconstruction_identical_logits": null,
+      "trainable_parameters": 3189248
+    },
+    "long_pretrained": {
+      "language_dev_nll": 5.7871461105346675,
+      "math_dev_nll": 2.9230757100634372,
+      "macro_dev_nll": 4.355110910299052,
+      "bypass_graft_macro_dev_nll": 4.354958776113209,
+      "zero_graft_macro_dev_nll": 14.995212366088726,
+      "graft_relative_update": 0.08700166456401348,
+      "reference_reconstruction_identical_logits": null,
+      "trainable_parameters": 3189248
+    },
+    "long_random_twin": {
+      "language_dev_nll": 5.525568904876709,
+      "math_dev_nll": 2.5018683040843293,
+      "macro_dev_nll": 4.01371860448052,
+      "bypass_graft_macro_dev_nll": 4.012668339543414,
+      "zero_graft_macro_dev_nll": 17.355954374601545,
+      "graft_relative_update": 0.01706380443647504,
+      "reference_reconstruction_identical_logits": null,
+      "trainable_parameters": 3189248
+    }
+  },
+  "heldout_confirmation": {
+    "status": "NOT_RUN",
+    "reason": "No candidate passed the frozen screen gates; per preregistration, held-out candidate evaluation is forbidden without promotion"
+  },
+  "outcome": {
+    "classification": "C",
+    "label": "Structural surgery without useful inheritance",
+    "structural_transplantation": "PASS",
+    "execution_and_reconstruction": "PASS",
+    "host_language_retention_development": "PASS for sequence candidates at screen budget (ratios 1.416-1.444 vs 1.50 gate); not held-out confirmed",
+    "functional_donor_contribution": "FAIL (bypass equivalence at every budget; relative donor update ~0.09)",
+    "pretrained_vs_random_sector": "FAIL (random twin beats pretrained child at 32 and 96 steps)",
+    "donor_math_retention": "FAIL (child math gains track the bypass path, not the donor)",
+    "rationale": "Sequence-aware bridges improve the child and pass development language retention, but the pretrained donor sector is a near-identity passenger: removing it costs nothing and replacing it with random blocks improves the child at both tested budgets."
+  }
+}

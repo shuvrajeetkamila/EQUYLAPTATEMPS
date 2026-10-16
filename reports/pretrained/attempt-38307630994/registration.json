@@ -1,0 +1,77 @@
+{
+  "benchmark": {
+    "compare_to_old_pilot": "Different prompt/output/scoring protocol; do not compare scores as unchanged leaderboard measurements",
+    "dataset": "original pinned GSM8K TEST",
+    "decoding": "deterministic native cached CPUfloat32, after cache-free oracle checks",
+    "exclude_previously_observed_test_ids": [
+      588,
+      1214,
+      57,
+      906
+    ],
+    "fewshot_source": "first two GSM8K TRAIN indices not used in prior calibration/development",
+    "max_input_tokens": 2048,
+    "max_new_tokens": 256,
+    "primary_scoring": "completed #### numeric line or closed boxed scalar; no arbitrary last-number credit",
+    "sample_count": 16,
+    "shots": 2,
+    "stop": "EOS, completed numeric #### line, closed numeric boxed scalar, or token budget"
+  },
+  "cache_oracle": {
+    "atol": 0.0005,
+    "decode_tokens": 8,
+    "prefill_tokens": 8,
+    "reason": "Different matrix shapes can change CPU floating rounding; abort benchmark on failed numerical/token equivalence",
+    "require_argmax_equal": true,
+    "rtol": 0.0005
+  },
+  "calibration_seed": 42,
+  "dataset_cache": "data/local/pretrained-benchmarks",
+  "device": "cpu",
+  "dtype": "float32",
+  "inheritance": {
+    "reason": "Original registered minimum64 math cases/multiple seeds not met; language retention previously failed; diagnostic cannot redefine inheritance thresholds",
+    "status": "NOT_RUN"
+  },
+  "matched_control_budget": {
+    "batch_size": 1,
+    "data": "same original 16 human GSM8K TRAIN + 8 WikiText TRAIN records",
+    "gradient_checkpointing": true,
+    "learning_rate": 0.0003,
+    "max_length": 512,
+    "optimizer": "original AdamW/seam-only scope, same training order/seed; no teacher outputs",
+    "steps": 16
+  },
+  "parent_cache": "models/pretrained",
+  "prior_run": "38293921543",
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "random_sector_seed": 1042,
+  "reference": "examples/pretrained-pilot-reference",
+  "reference_interfaces_sha256": "5f2337211dd54ea0dd001244735cc3e7c3d2b74468eaea99053ad6a84411d537",
+  "registered_date": "2026-10-13",
+  "reverse": {
+    "reason": "Existing reverse structural check succeeded; no reverse capability scaling after primary failure",
+    "status": "NOT_RUN"
+  },
+  "schema_version": 1,
+  "scope": "Bounded longer-output completed-answer math diagnostic; not confirmation of dual-capability inheritance",
+  "test_seed": 13,
+  "threads": 2,
+  "training_of_published_child": {
+    "reason": "Exact existing real child reused unchanged; only the matched random-sector control receives its original budget",
+    "status": "NOT_RUN"
+  },
+  "variants": [
+    "recipient_parent",
+    "donor_parent",
+    "published_calibrated_child",
+    "uncalibrated_child",
+    "random_interface",
+    "matched_random_sector",
+    "bypass_graft",
+    "bypass_prefix",
+    "bypass_suffix",
+    "zero_input_seam",
+    "zero_output_seam"
+  ]
+}

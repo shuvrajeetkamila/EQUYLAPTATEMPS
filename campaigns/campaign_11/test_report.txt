@@ -1,0 +1,34 @@
+Campaign 11 — Test Report
+Date: 2026-10-14
+Environment: local .venv (torch 2.5.1 CPU), PYTHONPATH=src
+
+Commands:
+  .venv/bin/python -m pytest tests/ -q
+  .venv/bin/python -m ruff check .
+  .venv/bin/python -m ruff format --check .
+
+Results:
+  Full test suite: 258 passed, 0 failed
+    (252 pre-Campaign-11 baseline + 4 shuffle-control tests
+     + 2 results-tracing tests)
+  ruff check: all checks passed
+  ruff format --check: all files formatted
+
+Campaign 11-specific tests:
+  tests/test_campaign11_shuffle.py (4 passed)
+    - donor parent tensors bit-identical after control application
+    - every eligible tensor's value multiset preserved exactly
+    - deterministic under frozen shuffle seed 20241014
+    - graft frozen after control; child forward pass executes
+  tests/test_campaign11_results.py (2 passed)
+    - outcome C traces to raw records in all six compared runs
+      (published macros recomputed from validation records;
+      parent_weights_unchanged true everywhere; seed 42 gate passes
+      alone, seed 123 fails, 96-step benefit negative)
+    - control_validation.json traces to initialization.json records
+      (42 eligible tensors, multisets preserved, seed 20241014,
+      graft updates >= 0.05)
+
+Note: a passing offline suite validates code and record integrity,
+not model capability. Scientific claims rest solely on the imported,
+SHA-256-verified Actions records (jobs 38713676113, 38715108842).

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "campaign": 2,
+  "date": "2026-10-13",
+  "initial_verified_head": "84205a51a44206f08a2f1c8219f0684fc1779626",
+  "audit_commit_before_campaign_experiments": "7e8bbb18ab63ecb91f8c88c356863dfbe594a80c",
+  "parents": {
+    "recipient": {"model_id": "state-spaces/mamba-130m-hf", "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1", "parameters": 129135360},
+    "donor": {"model_id": "Qwen/Qwen2.5-Math-1.5B", "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2", "parameters": 1543714304}
+  },
+  "baseline_reproduction": {
+    "status": "PASS",
+    "connected_run": "38354043771",
+    "source_commit": "a977e18a1d18aae554771940ebf8341d7bd5abc9",
+    "language": {
+      "dataset": "WikiText-2 TEST, 64 windows, offset 16, 192 characters",
+      "status": "COMPLETED_NEGATIVE_SCIENTIFIC_RESULT",
+      "bits_per_byte": {"recipient_parent": 1.7921447898729175, "donor_parent": 2.34309137844324, "published_calibrated_child": 3.2795770048682704, "matched_random_sector": 3.043678304653564},
+      "registered_language_retention": "FAIL",
+      "registered_learned_sector_advantage": "FAIL"
+    },
+    "math": {
+      "dataset": "GSM8K TEST, 16 fresh questions, two human TRAIN few-shots, 256 tokens, completed-final-marker scoring",
+      "status": "COMPLETED_NEGATIVE_SCIENTIFIC_RESULT",
+      "correct": {"recipient_parent": 0, "donor_parent": 12, "published_calibrated_child": 0, "matched_random_sector": 0},
+      "sample_count": 16
+    },
+    "fresh_reference_reconstruction": {"status": "PASS", "identical_logits": true, "generation_equal": true, "scope": "parent-reference-dependent, not standalone"}
+  },
+  "development_matrix": {
+    "status": "COMPLETED",
+    "connected_run": "38358962201",
+    "source_commit": "5819675d1edbbc786bf2c2ebce3098afb8d2f973",
+    "selection_data": "development only",
+    "native_development_token_nll": {
+      "recipient_language": 4.395173966451649,
+      "recipient_math": 2.2590971739395806,
+      "donor_language_own_tokenizer": 6.2879753819218385,
+      "donor_math_own_tokenizer": 0.6070895282768765
+    },
+    "candidates": {
+      "primary_legacy_42": {"macro_dev_nll": 7.588191318803115, "language_dev_nll": 7.76569505003405, "math_dev_nll": 7.4106875875721805, "training_seconds": 254.06100677699988},
+      "primary_scale_42": {"macro_dev_nll": 7.300857751888279, "language_dev_nll": 7.8482953457220415, "math_dev_nll": 6.753420158054517, "training_seconds": 238.951019826, "input_gain": 36.3988517843554, "output_gain": 1.2922185824515142},
+      "primary_covariance_42": {"macro_dev_nll": 5.678341171492751, "language_dev_nll": 6.765008367580017, "math_dev_nll": 4.591673975405485, "training_seconds": 392.32076666500006, "input_gain": 36.3988517843554, "output_gain": 1.2922185824515142},
+      "primary_linear_42": {"macro_dev_nll": 6.679227000862086, "language_dev_nll": 7.428838549745573, "math_dev_nll": 5.9296154519786, "training_seconds": 549.889271067, "trainable_parameters": 2361600}
+    },
+    "promotion": {"status": "FAIL", "selected": null, "reason": "No candidate satisfies the registered development language-parent and legacy-improvement gates"},
+    "final_heldout_evaluation": {"status": "NOT_RUN", "reason": "No candidate promoted from development screening"}
+  },
+  "structural_screens": {
+    "one_block_screen_42": {"status": "COMPLETED", "macro_uncalibrated_dev_nll": 65.31776571654552},
+    "early_screen_42": {"status": "COMPLETED", "macro_uncalibrated_dev_nll": 10.9533240704607425},
+    "reverse_screen_42": {"status": "COMPLETED", "macro_uncalibrated_dev_nll": 11.911910788014458},
+    "identity_bridge": {"status": "NOT_RUN", "reason": "768 and 1536 widths differ; no valid identity claim"},
+    "two_layer_bridge": {"status": "NOT_RUN", "reason": "Deferred to avoid trainable-parameter and attribution confounds"},
+    "larger_sector": {"status": "NOT_RUN", "reason": "No scaling before credible development retention and matched-control evidence"},
+    "second_seed": {"status": "NOT_RUN", "reason": "Conditional on promotion, which failed"},
+    "general_reasoning": {"status": "NOT_RUN", "reason": "Bounded campaign priority; no unsupported substitute benchmark used"}
+  },
+  "outcome": {
+    "classification": "C",
+    "label": "Structural surgery without useful inheritance",
+    "structural_transplantation": "PASS",
+    "execution": "PASS",
+    "functional_donor_contribution": "FAIL",
+    "donor_math_retention": "FAIL at bounded diagnostic scale",
+    "host_language_retention": "FAIL",
+    "improvement_over_parents": "FAIL",
+    "dual_capability_inheritance": "NOT_RUN",
+    "rationale": "The genuine child executes and reconstructs, but performs worse than both parents on language, loses to the matched random-sector control, and scores 0/16 where the donor scores 12/16. Statistical conditioning improves development loss but does not meet promotion criteria."
+  },
+  "claim_limitations": ["single calibration/random-sector seed", "correlated WikiText windows", "bounded 16-question math diagnostic", "CPU float32 only; GPU/Colab NOT_RUN", "candidate binary artifacts retained in identified Actions artifact, not downloaded from artifact storage in this sandbox", "checksums are consistency evidence, not proof against a maliciously forged complete evidence bundle"]
+}

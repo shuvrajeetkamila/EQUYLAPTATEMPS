@@ -1,0 +1,44 @@
+Campaign 13 — Test Report
+Date: 2026-10-14
+Environment: local .venv (torch 2.5.1 CPU), PYTHONPATH=src
+
+Commands:
+  .venv/bin/python -m pytest tests/ -q
+  .venv/bin/python -m ruff check .
+  .venv/bin/python -m ruff format --check .
+
+Results:
+  Full test suite: 277 passed, 0 failed
+    (266 pre-Campaign-13 baseline + 4 positive-control opt-in tests
+     + 5 frozen-gate-mechanics tests + 2 results-tracing tests)
+  ruff check: all checks passed
+  ruff format --check: all files formatted
+
+Campaign 13-specific tests:
+  tests/test_campaign13_positive_control.py (4 passed)
+    - cousin rejection remains the default (cross-family rules intact)
+    - positive_control opt-in permits a same-family recipe; recipe
+      dict round-trips; stranger_report stays honest in both modes
+    - same-family child constructs, executes, ablates finitely;
+      structure report records positive_control; donor unmutated
+  tests/test_campaign13_gates.py (5 passed)
+    - ablation_criterion implements the frozen wording exactly
+      (finite and above intact; bypass>zero still passes; NaN/inf fail)
+    - per-seed gate thresholds; adverse-sensitivity rule; outcome
+      classification mapping; benefit sign convention
+  tests/test_campaign13_results.py (2 passed)
+    - outcome C traces to all 21 raw records (macros recomputed;
+      parents unchanged; test_metrics null; positive_control true;
+      F self-reconstruction labeled and worse than native host)
+    - post-training control validity traces to initialization
+      records (42 tensors, exact multisets, frozen criteria)
+
+Regression note: the opt-in was serialized conditionally so that
+previously published artifact audits (incl. the checksum-pinned
+golden child archive) remain byte-identical; the full historical
+suite passing unmodified is the evidence.
+
+Note: the offline suite validates code and record integrity, not
+model capability. Scientific claims rest solely on the imported,
+SHA-256-verified Actions records (jobs 38766385142, 38767049795,
+38767422815, 38770695036, 38770694519).

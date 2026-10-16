@@ -1,0 +1,11 @@
+Campaign 14 test report (local, 2026-10-14/15)
+==============================================
+Command: PYTHONPATH=src .venv/bin/python -m pytest tests/ -q
+Result: 284 passed, 0 failed, 0 skipped (277 historical + 3 residual-seam + 4 results tests).
+Lint: ruff check . clean; ruff format --check . clean (whole repository).
+Notes: no historical test deleted or weakened. The Campaign 14 results tests
+recompute the frozen gates from the SHA-verified imported diagnostics
+(38792029752), verify the trained pair's initial scores against the
+diagnostics (V5/V6) and its historical anchor against Campaign 13's
+self-reconstruction (7.4577), and record the trained V7>V8 ordering as
+measured. CI reruns the offline suite on push.

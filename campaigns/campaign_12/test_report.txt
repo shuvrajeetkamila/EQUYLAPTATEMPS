@@ -1,0 +1,39 @@
+Campaign 12 — Test Report
+Date: 2026-10-14
+Environment: local .venv (torch 2.5.1 CPU), PYTHONPATH=src
+
+Commands:
+  .venv/bin/python -m pytest tests/ -q
+  .venv/bin/python -m ruff check .
+  .venv/bin/python -m ruff format --check .
+
+Results:
+  Full test suite: 266 passed, 0 failed
+    (258 pre-Campaign-12 baseline + 6 within-row/gate tests
+     + 2 results-tracing tests)
+  ruff check: all checks passed
+  ruff format --check: all files formatted
+
+Campaign 12-specific tests:
+  tests/test_campaign12_rowshuffle.py (6 passed)
+    - donor parent bit-identical after control application
+    - every row's exact value multiset, row mean/norms, shape and
+      dtype preserved; excluded 1D tensors bit-exact
+    - arrangement destroyed (fingerprints change); control
+      fingerprint reproducible under the frozen seed; seed-sensitive
+    - graft frozen; child executes with finite loss incl. ablations
+    - publisher benefit formula (ties/negatives) and frozen gate /
+      outcome classification mechanics
+  tests/test_campaign12_results.py (2 passed)
+    - outcome C traces to all 20 raw run records (macros recomputed;
+      parents unchanged; test_metrics null everywhere; seed-level
+      gate pattern: 42 passes, 123 and 31415 fail)
+    - control_validation.json traces to pre-training validation and
+      per-run initialization records (42 tensors, multisets exact,
+      updates >= 0.05); the two bypass>zero ordering exceptions of
+      Amendment 01 are asserted present, not hidden
+
+Note: the offline suite validates code and record integrity, not
+model capability. Scientific claims rest solely on the imported,
+SHA-256-verified Actions records (jobs 38726596264, 38726922262,
+38738479882).

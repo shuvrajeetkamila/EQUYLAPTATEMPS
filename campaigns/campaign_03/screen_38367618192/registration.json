@@ -1,0 +1,129 @@
+{
+  "campaign": 3,
+  "compute": {
+    "device": "cpu",
+    "dtype": "float32",
+    "max_session_seconds": 3300,
+    "minimum_disk_bytes": 12884901888,
+    "minimum_ram_bytes": 12884901888,
+    "parallel_experiments": 1,
+    "threads": 2
+  },
+  "data": {
+    "gsm_dev_rows": 16,
+    "gsm_train_rows": 32,
+    "seed": 42,
+    "statistic_text_windows": 8,
+    "wiki_characters": 192,
+    "wiki_dev_windows": 16,
+    "wiki_train_windows": 32
+  },
+  "experiments": [
+    {
+      "donor_sector": [
+        20,
+        22
+      ],
+      "id": "c03_dense_cov_42",
+      "initialization": "covariance_orthogonal",
+      "interface": {
+        "architecture": "layernorm_linear",
+        "family": "dense"
+      },
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 42,
+      "stage": "calibration"
+    },
+    {
+      "donor_sector": [
+        20,
+        22
+      ],
+      "id": "c03_conv_cov_42",
+      "initialization": "covariance_orthogonal",
+      "interface": {
+        "family": "sequence",
+        "kernel_size": 5,
+        "kind": "causal_conv"
+      },
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 42,
+      "stage": "calibration"
+    },
+    {
+      "donor_sector": [
+        20,
+        22
+      ],
+      "id": "c03_attn_cov_42",
+      "initialization": "covariance_orthogonal",
+      "interface": {
+        "bottleneck": 128,
+        "family": "sequence",
+        "heads": 4,
+        "kind": "causal_attention",
+        "max_positions": 512
+      },
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 42,
+      "stage": "calibration"
+    },
+    {
+      "donor_sector": [
+        20,
+        22
+      ],
+      "id": "c03_gru_cov_42",
+      "initialization": "covariance_orthogonal",
+      "interface": {
+        "bottleneck": 128,
+        "family": "sequence",
+        "kind": "bottleneck_gru"
+      },
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 42,
+      "stage": "calibration"
+    }
+  ],
+  "parents": {
+    "donor": {
+      "id": "Qwen/Qwen2.5-Math-1.5B",
+      "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"
+    },
+    "recipient": {
+      "id": "state-spaces/mamba-130m-hf",
+      "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"
+    }
+  },
+  "phase": "screen",
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "registered_date": "2026-10-13",
+  "registration_revision": "1: screen phase frozen before any Campaign 3 real-parent run; confirm-phase experiments (seed replication, matched random-sector twin) are preregistered in campaign_03_preregistration.md and will be registered in a separate append-only confirm registry naming the screen winner",
+  "selection": {
+    "maximum_candidates_promoted": 1,
+    "maximum_dev_language_parent_ratio": 1.5,
+    "rule": "development only; frozen gates in campaign_03_preregistration.md"
+  },
+  "training": {
+    "batch_size": 1,
+    "checkpoint_every": 8,
+    "diagnostic_train_rows": 8,
+    "gradient_checkpointing": true,
+    "learning_rate": 0.0003,
+    "max_length": 512,
+    "objective": "direct child real-text and human GSM8K TRAIN next-token targets only",
+    "steps": 32
+  }
+}

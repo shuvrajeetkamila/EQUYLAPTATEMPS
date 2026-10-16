@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "campaign": 2,
+  "registry_sha256": "4781cc16732c888102f36a90b5aa6af7cabf3f641ffec5d0a0e8712c07cc6d5d",
+  "records": {
+    "c13_self_42": {
+      "config_sha256": "360cc711736573a1877e921cee366cb87556d36cef9faed0d523424c0e098dda",
+      "execution_status": "COMPLETED",
+      "evaluation_status": "NOT_RUN",
+      "reason": "Campaign 13 frozen-protocol run complete; gates evaluated by publisher",
+      "metrics": {
+        "ablation": "none",
+        "groups": {
+          "overall": {
+            "nll_sum": 21665.571044921875,
+            "target_tokens": 3051,
+            "examples": 32,
+            "token_nll": 7.101137674507334,
+            "perplexity": 1213.3466831609585
+          },
+          "domain:math": {
+            "nll_sum": 14872.257049560547,
+            "target_tokens": 2226,
+            "examples": 16,
+            "token_nll": 6.681157704205098,
+            "perplexity": 797.2415478513819
+          },
+          "domain:language": {
+            "nll_sum": 6793.313995361328,
+            "target_tokens": 825,
+            "examples": 16,
+            "token_nll": 8.234319994377367,
+            "perplexity": 3768.076712291314
+          }
+        },
+        "metric": "recipient-token response NLL; not proof of task mastery",
+        "ablations": {
+          "bypass_graft": {
+            "ablation": "bypass_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 25384.723236083984,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 8.320132165219267,
+                "perplexity": 4105.702603502128
+              },
+              "domain:math": {
+                "nll_sum": 17451.01837158203,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 7.83963089469094,
+                "perplexity": 2539.267403752414
+              },
+              "domain:language": {
+                "nll_sum": 7933.704864501953,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 9.616611956972065,
+                "perplexity": 15012.102032664652
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          },
+          "zero_graft": {
+            "ablation": "zero_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 24470.117279052734,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 8.020359645707222,
+                "perplexity": 3042.2712760203
+              },
+              "domain:math": {
+                "nll_sum": 17115.5908203125,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 7.688944663213163,
+                "perplexity": 2184.0684178164684
+              },
+              "domain:language": {
+                "nll_sum": 7354.526458740234,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 8.914577525745738,
+                "perplexity": 7439.638409301489
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          }
+        },
+        "graft_delta": {
+          "mean_relative_update": 0.3227610094472766,
+          "mean_input_rms": 551.2999744415283,
+          "mean_output_rms": 570.6171436309814,
+          "texts": 16,
+          "interpretation": "descriptive only; magnitude alone is not usefulness evidence"
+        },
+        "initial_validation": {
+          "ablation": "none",
+          "groups": {
+            "overall": {
+              "nll_sum": 44602.949157714844,
+              "target_tokens": 3051,
+              "examples": 32,
+              "token_nll": 14.619124601020925,
+              "perplexity": 2233598.680994222
+            },
+            "domain:math": {
+              "nll_sum": 33514.91540527344,
+              "target_tokens": 2226,
+              "examples": 16,
+              "token_nll": 15.056116534264797,
+              "perplexity": 3457708.119217471
+            },
+            "domain:language": {
+              "nll_sum": 11088.033752441406,
+              "target_tokens": 825,
+              "examples": 16,
+              "token_nll": 13.44004091205019,
+              "perplexity": 686966.5719742946
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        }
+      },
+      "artifacts": {
+        "runs/c13_self_42/config.json": "f2235f21a0bc34eb19d6680b30c07e7f83c241ce4f96cb7fb3f7fa8d70dfa746",
+        "runs/c13_self_42/results.json": "d756dd5aa2b6ed82c25ab9e21c50d59e2b1927a9f8bbf8e82b94fef15e871d78",
+        "runs/c13_self_42/reference/reference.json": "1aeb50740d09f5f854c17e755b3d19469cf69d27ba6cc235ba8b5fa7dd41ce9a",
+        "runs/c13_self_42/reference/interfaces.safetensors": "aa32a93ad1e9c8109621ca83b4c58136de3de8b37b6325fcf2f3ad15517f1254"
+      },
+      "updated_clock_seconds": 1792082462.3027434,
+      "metadata": {
+        "source_commit": "c6c970fd7fdde6c2fde354ac040c8f8c8d8b28ab",
+        "structure": {
+          "recipient_family": "llama",
+          "donor_family": "llama",
+          "recipient_width": 576,
+          "donor_width": 576,
+          "prefix_blocks": 11,
+          "transplanted_blocks": 6,
+          "suffix_blocks": 17,
+          "removed_recipient_blocks": 2,
+          "unique_parameters": 149342400,
+          "trainable_dense_seam_parameters": 667008,
+          "frozen_parameters": 148675392,
+          "context_limit": 2048,
+          "production_bypass": false,
+          "parent_weight_arithmetic": false,
+          "positive_control": true
+        },
+        "reproduction": "python scripts/campaign12_runner.py --registry campaigns/campaign_13/experiment_registry_self.json --out artifacts/campaign13-selftest"
+      }
+    }
+  }
+}

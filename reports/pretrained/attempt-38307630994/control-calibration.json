@@ -1,0 +1,230 @@
+{
+  "batch_size": 1,
+  "capability_claim": "none; calibration loss is not a capability benchmark",
+  "donor_sector_sha256": "2cd97a8930759b9dfa4add54ee3b0c640e0903611214cef230f3601139b07300",
+  "elapsed_seconds": 425.9598072,
+  "final_train": {
+    "ablation": "none",
+    "groups": {
+      "domain:language": {
+        "examples": 8,
+        "nll_sum": 3543.0475463867188,
+        "perplexity": 12684.382488062158,
+        "target_tokens": 375,
+        "token_nll": 9.448126790364583
+      },
+      "domain:math": {
+        "examples": 16,
+        "nll_sum": 9383.922607421875,
+        "perplexity": 584.4197981107743,
+        "target_tokens": 1473,
+        "token_nll": 6.3706195569734385
+      },
+      "overall": {
+        "examples": 24,
+        "nll_sum": 12926.970153808594,
+        "perplexity": 1091.2877714783722,
+        "target_tokens": 1848,
+        "token_nll": 6.995113719593395
+      }
+    },
+    "metric": "recipient-token response NLL; not proof of task mastery"
+  },
+  "frozen_tensors_sha256": "24d5ab3a4d75ea4ae78c2c3be6647729f016f937f255b19b5e7909f5cad0b353",
+  "frozen_tensors_unchanged": true,
+  "gradient_checkpointing": true,
+  "initial_train": {
+    "ablation": "none",
+    "groups": {
+      "domain:language": {
+        "examples": 8,
+        "nll_sum": 5445.6290283203125,
+        "perplexity": 2026209.5905388172,
+        "target_tokens": 375,
+        "token_nll": 14.521677408854167
+      },
+      "domain:math": {
+        "examples": 16,
+        "nll_sum": 49018.571044921875,
+        "perplexity": 283448709757867.1,
+        "target_tokens": 1473,
+        "token_nll": 33.27805230476706
+      },
+      "overall": {
+        "examples": 24,
+        "nll_sum": 54464.20007324219,
+        "perplexity": 6302514121362.21,
+        "target_tokens": 1848,
+        "token_nll": 29.471969736602915
+      }
+    },
+    "metric": "recipient-token response NLL; not proof of task mastery"
+  },
+  "learning_rate": 0.0003,
+  "max_length": 512,
+  "objective": "explicit real-text/human-reference next-token cross entropy",
+  "optimizer": {
+    "betas": [
+      0.9,
+      0.999
+    ],
+    "eps": 1e-08,
+    "name": "AdamW",
+    "weight_decay": 0
+  },
+  "optimizer_scope": "two newly initialized full-rank dense seams only",
+  "parameter_counts": {
+    "context_limit": 4096,
+    "donor_family": "qwen2",
+    "donor_width": 1536,
+    "frozen_parameters": 215187712,
+    "parent_weight_arithmetic": false,
+    "prefix_blocks": 11,
+    "production_bypass": false,
+    "recipient_family": "mamba",
+    "recipient_width": 768,
+    "removed_recipient_blocks": 2,
+    "suffix_blocks": 11,
+    "trainable_dense_seam_parameters": 2366208,
+    "transplanted_blocks": 2,
+    "unique_parameters": 217553920
+  },
+  "parent_kind": "random_sector_control",
+  "seed": 42,
+  "steps": 16,
+  "trace": [
+    {
+      "batch_token_nll": 11.572880744934082,
+      "step": 1
+    },
+    {
+      "batch_token_nll": 12.801351547241211,
+      "step": 2
+    },
+    {
+      "batch_token_nll": 10.007584571838379,
+      "step": 3
+    },
+    {
+      "batch_token_nll": 10.556685447692871,
+      "step": 4
+    },
+    {
+      "batch_token_nll": 94.47706604003906,
+      "step": 5
+    },
+    {
+      "batch_token_nll": 9.736882209777832,
+      "step": 6
+    },
+    {
+      "batch_token_nll": 8.09060287475586,
+      "step": 7
+    },
+    {
+      "batch_token_nll": 9.180063247680664,
+      "step": 8
+    },
+    {
+      "batch_token_nll": 7.784887313842773,
+      "step": 9
+    },
+    {
+      "batch_token_nll": 10.086662292480469,
+      "step": 10
+    },
+    {
+      "batch_token_nll": 8.054948806762695,
+      "step": 11
+    },
+    {
+      "batch_token_nll": 7.634951114654541,
+      "step": 12
+    },
+    {
+      "batch_token_nll": 8.112639427185059,
+      "step": 13
+    },
+    {
+      "batch_token_nll": 7.197617530822754,
+      "step": 14
+    },
+    {
+      "batch_token_nll": 7.08096170425415,
+      "step": 15
+    },
+    {
+      "batch_token_nll": 7.106266021728516,
+      "step": 16
+    }
+  ],
+  "trainable_tensors": [
+    {
+      "dtype": "torch.float32",
+      "name": "input_seam.norm.weight",
+      "parameters": 768,
+      "shape": [
+        768
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "input_seam.norm.bias",
+      "parameters": 768,
+      "shape": [
+        768
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "input_seam.projection.weight",
+      "parameters": 1179648,
+      "shape": [
+        1536,
+        768
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "input_seam.projection.bias",
+      "parameters": 1536,
+      "shape": [
+        1536
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "output_seam.norm.weight",
+      "parameters": 1536,
+      "shape": [
+        1536
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "output_seam.norm.bias",
+      "parameters": 1536,
+      "shape": [
+        1536
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "output_seam.projection.weight",
+      "parameters": 1179648,
+      "shape": [
+        768,
+        1536
+      ]
+    },
+    {
+      "dtype": "torch.float32",
+      "name": "output_seam.projection.bias",
+      "parameters": 768,
+      "shape": [
+        768
+      ]
+    }
+  ],
+  "validation": null
+}

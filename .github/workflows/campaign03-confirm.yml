@@ -1,0 +1,42 @@
+name: Campaign 3 diagnostic confirm
+
+on:
+  push:
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  confirm:
+    if: contains(github.event.head_commit.message, '[campaign03-confirm]')
+    runs-on: ubuntu-22.04
+    timeout-minutes: 75
+    env:
+      TOKENIZERS_PARALLELISM: 'false'
+      OMP_NUM_THREADS: '2'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: |
+          python -m pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+          python -m pip install -e '.[dev]'
+      - name: Run registered diagnostic confirm phase
+        id: research
+        timeout-minutes: 65
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/campaign03_confirm.py --out artifacts/campaign03-confirm --post-pr 1
+      - name: Publish partial research metadata
+        if: always() && steps.research.outcome != 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/publish_campaign02.py --out artifacts/campaign03-confirm --post-pr 1
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: campaign03-confirm-recovery
+          path: artifacts/campaign03-confirm/
+          # New-parameter/optimizer states and metadata only; never parent weights.

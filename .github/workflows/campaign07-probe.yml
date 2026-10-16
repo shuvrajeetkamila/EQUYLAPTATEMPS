@@ -1,0 +1,23 @@
+name: Campaign 7 candidate probe (opt-in)
+on:
+  workflow_dispatch:
+  push:
+    branches: [arena/97efdf4a-equylaptatemps]
+permissions:
+  contents: read
+  pull-requests: write
+jobs:
+  probe:
+    if: contains(github.event.head_commit.message, '[campaign07-probe]')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -q huggingface_hub
+      - name: Probe candidates and post results to PR
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/campaign07_probe2.py

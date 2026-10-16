@@ -1,0 +1,33 @@
+name: Preserve actual pretrained child interfaces
+
+on:
+  push:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  preserve:
+    if: contains(github.event.head_commit.message, '[preserve-pretrained]') && github.ref == 'refs/heads/arena/97efdf4a-equylaptatemps'
+    runs-on: ubuntu-22.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/97efdf4a-equylaptatemps
+      - name: Retrieve measured run, not newly generated weights
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 38290378364 --name pretrained-cpu-lightweight-evidence --dir artifacts/measured-pretrained
+      - name: Check and preserve only the 9 MB newly trained interfaces
+        run: python scripts/preserve_probe_reference.py
+      - name: Publish on the existing session branch only
+        run: |
+          test "$(git branch --show-current)" = arena/97efdf4a-equylaptatemps
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -f examples/pretrained-structural-reference/
+          git diff --cached --check
+          git commit -m 'Preserve measured pretrained interfaces without parent tensors'
+          git push origin arena/97efdf4a-equylaptatemps

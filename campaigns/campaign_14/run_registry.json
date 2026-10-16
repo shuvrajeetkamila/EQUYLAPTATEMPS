@@ -1,0 +1,101 @@
+{
+  "campaign": 14,
+  "runs": {
+    "V0": {
+      "status": "COMPLETED",
+      "kind": "diagnostic_untrained",
+      "job": 38792029752
+    },
+    "V1": {
+      "status": "COMPLETED",
+      "kind": "diagnostic_untrained",
+      "job": 38792029752
+    },
+    "V2": {
+      "status": "COMPLETED",
+      "kind": "diagnostic_untrained",
+      "job": 38792029752
+    },
+    "V3": {
+      "status": "COMPLETED",
+      "kind": "diagnostic_untrained",
+      "job": 38792029752
+    },
+    "V4": {
+      "status": "COMPLETED",
+      "kind": "diagnostic_untrained",
+      "job": 38792029752
+    },
+    "V5": {
+      "status": "COMPLETED",
+      "kind": "diagnostic_untrained",
+      "job": 38792029752
+    },
+    "V6": {
+      "status": "COMPLETED",
+      "kind": "diagnostic_untrained",
+      "job": 38792029752
+    },
+    "V7": {
+      "status": "COMPLETED",
+      "kind": "diagnostic_trained_seed42_32steps",
+      "job": 38796151693
+    },
+    "V8": {
+      "status": "COMPLETED",
+      "kind": "diagnostic_trained_seed42_32steps",
+      "job": 38796151693
+    }
+  },
+  "diagnose_job": 38792029752,
+  "attempts": [
+    {
+      "job": 38785606164,
+      "scope": "V0-V6 diagnostics",
+      "status": "FAILED",
+      "note": "Diagnose step failed before diagnostics.json was written (only provenance.json, 1247-byte artifact). Sandbox cannot read Actions logs; script hardened to self-report failures via bundle. Retry is a new attempt, not a rerun of a completed experiment."
+    },
+    {
+      "job": 38787291809,
+      "scope": "V0-V6 diagnostics",
+      "status": "FAILED",
+      "note": "Failed again with no bundle posted; failure channel itself unreliable. Workflow now posts the log tail to PR #1 on failure. Diagnostic retry under the frozen design (no scientific change)."
+    },
+    {
+      "job": 38788676940,
+      "scope": "V0-V6 diagnostics",
+      "status": "FAILED",
+      "note": "Same evidence-posting failure family (failure-comment step committed this time but used gh CLI, which failed silently). Superseded by the permissions fix."
+    },
+    {
+      "job": 38789761846,
+      "scope": "V0-V6 diagnostics",
+      "status": "FAILED",
+      "note": "Failure-log step ran but its `gh issue comment` call failed silently (masked by || true); also the diagnose step lacked GH_TOKEN, which publish_bundle requires. Workflow fixed to post via the proven urllib mechanism; GH_TOKEN added. Diagnostic retry, no scientific change."
+    },
+    {
+      "job": 38790902919,
+      "scope": "V0-V6 diagnostics",
+      "status": "FAILED",
+      "note": "Root cause of silence found: workflow permissions declared issues:write, but PR-comment posting uses the proven pull-requests:write configuration (all Campaign 11-13 workflows); failure reporting therefore 403'd. Fixed; added the established partial-metadata fallback publisher. Diagnostic retry, no scientific change."
+    },
+    {
+      "job": 38793216559,
+      "scope": "V7-V8 trained pair",
+      "status": "FAILED",
+      "note": "KeyError 'compute': the Campaign 14 registry omitted the compute block the derived runner requires; both experiments NOT_RUN, zero compute spent. Registry fixed; retry under the frozen design."
+    },
+    {
+      "job": 38794801368,
+      "scope": "V7-V8 trained pair",
+      "status": "FAILED",
+      "note": "Benchmark acquisition requires GH_TOKEN for the gh CLI (data download); the trained workflow's main step lacked it. Both experiments NOT_RUN, zero compute spent. Fixed; retry under the frozen design."
+    }
+  ],
+  "gates": {
+    "gate1_baseline_reproducibility": "PASS (repeat diff 0.0)",
+    "gate2_exact_native_reconstruction": "PASS (degradation 0.0, max logit diff 0.0, 273/273 tensors identical)",
+    "gate3_function_preserving_connector": "PASS (residual seams: degradation 0.0)"
+  },
+  "trained_job": 38796151693
+}

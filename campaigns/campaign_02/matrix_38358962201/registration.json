@@ -1,0 +1,198 @@
+{
+  "acceptance": {
+    "language_parent_ratio": 1.1,
+    "matched_random_and_ablation_paired_ci_lower_gt": 0,
+    "math_donor_retention_fraction": 0.5,
+    "maximum_language_bpb": 3.0,
+    "minimum_independent_seeds_for_outcome_A": 2,
+    "minimum_language_windows": 64,
+    "minimum_math_accuracy": 0.1,
+    "require_genuine_frozen_blocks": true
+  },
+  "campaign": 2,
+  "compute": {
+    "device": "cpu",
+    "dtype": "float32",
+    "max_session_seconds": 3000,
+    "minimum_disk_bytes": 12884901888,
+    "minimum_ram_bytes": 12884901888,
+    "parallel_experiments": 1,
+    "threads": 2
+  },
+  "data": {
+    "final_math_questions": 16,
+    "final_wiki_offset": 80,
+    "final_wiki_windows": 64,
+    "gsm_dev_rows": 8,
+    "gsm_train_rows": 32,
+    "seed": 42,
+    "statistic_text_windows": 8,
+    "wiki_characters": 192,
+    "wiki_dev_windows": 8,
+    "wiki_train_windows": 32
+  },
+  "experiments": [
+    {
+      "architecture": "layernorm_linear",
+      "donor_sector": [
+        20,
+        21
+      ],
+      "id": "one_block_screen_42",
+      "initialization": "random",
+      "recipient_cut": [
+        11,
+        12
+      ],
+      "seed": 42,
+      "stage": "structural_screen"
+    },
+    {
+      "architecture": "layernorm_linear",
+      "donor_sector": [
+        3,
+        5
+      ],
+      "id": "early_screen_42",
+      "initialization": "random",
+      "recipient_cut": [
+        3,
+        5
+      ],
+      "seed": 42,
+      "stage": "structural_screen"
+    },
+    {
+      "architecture": "layernorm_linear",
+      "donor_sector": [
+        11,
+        13
+      ],
+      "id": "reverse_screen_42",
+      "initialization": "random",
+      "recipient_cut": [
+        13,
+        15
+      ],
+      "reverse": true,
+      "seed": 42,
+      "stage": "structural_screen"
+    },
+    {
+      "id": "identity_bridge",
+      "reason": "768 and1536 unequal; true identity has incompatible shape/semantics; no fake identity claim",
+      "stage": "invalid_control"
+    },
+    {
+      "architecture": "layernorm_linear",
+      "donor_sector": [
+        20,
+        22
+      ],
+      "id": "primary_legacy_42",
+      "initialization": "random",
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 42,
+      "stage": "calibration"
+    },
+    {
+      "architecture": "layernorm_linear",
+      "donor_sector": [
+        20,
+        22
+      ],
+      "id": "primary_scale_42",
+      "initialization": "residual_scale",
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 42,
+      "stage": "calibration"
+    },
+    {
+      "architecture": "layernorm_linear",
+      "donor_sector": [
+        20,
+        22
+      ],
+      "id": "primary_covariance_42",
+      "initialization": "covariance_orthogonal",
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 42,
+      "stage": "calibration"
+    },
+    {
+      "architecture": "linear",
+      "donor_sector": [
+        20,
+        22
+      ],
+      "id": "primary_linear_42",
+      "initialization": "fixed_orthogonal",
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "seed": 42,
+      "stage": "calibration"
+    },
+    {
+      "id": "two_layer_bridge",
+      "reason": "More trainable parameters confound attribution; first evaluate statistical initialization at equal dense budget",
+      "stage": "deferred"
+    },
+    {
+      "id": "larger_sector",
+      "reason": "No scaling before credible development retention; current learned sector failed matched random control",
+      "stage": "deferred"
+    },
+    {
+      "id": "general_reasoning",
+      "reason": "Bounded CPU campaign prioritizes genuine negative replay/alignment/dual-task testing",
+      "stage": "deferred"
+    },
+    {
+      "id": "second_seed",
+      "reason": "Only promote if development criterion succeeds within resource budget",
+      "seed": 43,
+      "stage": "conditional"
+    }
+  ],
+  "parents": {
+    "donor": {
+      "id": "Qwen/Qwen2.5-Math-1.5B",
+      "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"
+    },
+    "recipient": {
+      "id": "state-spaces/mamba-130m-hf",
+      "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"
+    }
+  },
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "registered_date": "2026-10-13",
+  "registration_revision": "2: inexpensive topology screening before equal-budget interface calibration",
+  "selection": {
+    "maximum_candidates_promoted": 1,
+    "maximum_dev_language_parent_ratio": 1.5,
+    "maximum_math_dev_ratio_vs_legacy": 1.05,
+    "minimum_dev_improvement_vs_matched_legacy": 0.05,
+    "rule": "lowest macro development language BPB and human-answer byte NLL; no TEST selection"
+  },
+  "training": {
+    "batch_size": 1,
+    "checkpoint_every": 8,
+    "diagnostic_train_rows": 8,
+    "gradient_checkpointing": true,
+    "learning_rate": 0.0003,
+    "max_length": 512,
+    "objective": "direct child real-text and human GSM8K TRAIN next-token targets only",
+    "steps": 32
+  }
+}

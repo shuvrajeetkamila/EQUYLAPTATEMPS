@@ -1,0 +1,40 @@
+{
+  "campaign": 18,
+  "frozen_before_primary_outcomes": true,
+  "recipient": "HuggingFaceTB/SmolLM-135M@1d461723eec654e65efdc40cf49301c89c0c92f4",
+  "metric": "macro dev NLL (16 math + 16 text frozen panel), damage = condition - native",
+  "native_reference": 2.773126,
+  "tolerances": {
+    "macro_exactness_max_abs_delta": 0.01,
+    "logits_max_abs_max": 0.02,
+    "logits_mean_abs_max": 0.001,
+    "native_repeat_max_delta": 0.001
+  },
+  "placement_sets": {
+    "file": "placement_sets.json",
+    "sha256": "bcd997475652bb03874be413fdfc295734dec09a1a306e39b4b06a12aa9afaae",
+    "development": 48,
+    "validation": 5,
+    "heldout": 30,
+    "heldout_sealed_until_predictor_frozen": true
+  },
+  "predictor": {
+    "candidates": [
+      "P0_constant",
+      "P1_distance_only",
+      "P2_position_aware"
+    ],
+    "fit_on": "development",
+    "select_on": "validation MAE, ties toward simpler",
+    "heldout_success": "chosen heldout MAE <= 0.8 * P0 heldout MAE",
+    "heldout_evaluated_once": true
+  },
+  "anchors": {
+    "val-xchg-a11-c24-L2_expected_damage": 8.395283,
+    "val-swap-15_expected_damage": 0.154746,
+    "anchor_tolerance": 0.05
+  },
+  "training": "none",
+  "foreign_donor_in_scored_conditions": false,
+  "held_out_capability": "NOT_RUN_NO_PROMOTION"
+}

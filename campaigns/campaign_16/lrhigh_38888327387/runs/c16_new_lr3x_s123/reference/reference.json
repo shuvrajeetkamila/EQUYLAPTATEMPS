@@ -1,0 +1,2641 @@
+{
+  "capability_status": "UNPROVEN",
+  "dtype": "float32",
+  "execution_contract": {
+    "donor_config": {
+      "_attn_implementation_autoset": true,
+      "add_cross_attention": false,
+      "architectures": [
+        "LlamaForCausalLM"
+      ],
+      "attention_bias": false,
+      "attention_dropout": 0.0,
+      "bad_words_ids": null,
+      "begin_suppress_tokens": null,
+      "bos_token_id": 0,
+      "chunk_size_feed_forward": 0,
+      "cross_attention_hidden_size": null,
+      "decoder_start_token_id": null,
+      "diversity_penalty": 0.0,
+      "do_sample": false,
+      "early_stopping": false,
+      "encoder_no_repeat_ngram_size": 0,
+      "eos_token_id": 0,
+      "exponential_decay_length_penalty": null,
+      "finetuning_task": null,
+      "forced_bos_token_id": null,
+      "forced_eos_token_id": null,
+      "head_dim": 64,
+      "hidden_act": "silu",
+      "hidden_size": 576,
+      "id2label": {
+        "0": "LABEL_0",
+        "1": "LABEL_1"
+      },
+      "initializer_range": 0.02,
+      "intermediate_size": 1536,
+      "is_decoder": false,
+      "is_encoder_decoder": false,
+      "label2id": {
+        "LABEL_0": 0,
+        "LABEL_1": 1
+      },
+      "length_penalty": 1.0,
+      "max_length": 20,
+      "max_position_embeddings": 2048,
+      "min_length": 0,
+      "mlp_bias": false,
+      "model_type": "llama",
+      "no_repeat_ngram_size": 0,
+      "num_attention_heads": 9,
+      "num_beam_groups": 1,
+      "num_beams": 1,
+      "num_hidden_layers": 30,
+      "num_key_value_heads": 3,
+      "num_return_sequences": 1,
+      "output_attentions": false,
+      "output_hidden_states": false,
+      "output_scores": false,
+      "pad_token_id": null,
+      "prefix": null,
+      "pretraining_tp": 1,
+      "problem_type": null,
+      "pruned_heads": {},
+      "remove_invalid_values": false,
+      "repetition_penalty": 1.0,
+      "return_dict": true,
+      "return_dict_in_generate": false,
+      "rms_norm_eps": 1e-05,
+      "rope_scaling": null,
+      "rope_theta": 10000.0,
+      "sep_token_id": null,
+      "suppress_tokens": null,
+      "task_specific_params": null,
+      "temperature": 1.0,
+      "tf_legacy_loss": false,
+      "tie_encoder_decoder": false,
+      "tie_word_embeddings": true,
+      "tokenizer_class": null,
+      "top_k": 50,
+      "top_p": 1.0,
+      "torch_dtype": "float32",
+      "torchscript": false,
+      "typical_p": 1.0,
+      "use_bfloat16": false,
+      "use_cache": false,
+      "vocab_size": 49152
+    },
+    "operations": {
+      "": {
+        "attributes": {},
+        "class": "equylaptatemps.model.SurgicalChild"
+      },
+      "embedding": {
+        "attributes": {},
+        "class": "torch.nn.modules.sparse.Embedding"
+      },
+      "final_norm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft": {
+        "attributes": {},
+        "class": "equylaptatemps.backbones.StackSegment"
+      },
+      "graft.layers": {
+        "attributes": {},
+        "class": "torch.nn.modules.container.ModuleList"
+      },
+      "graft.layers.0": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "graft.layers.0.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft.layers.0.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "graft.layers.0.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "graft.layers.0.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.0.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.0.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.0.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft.layers.0.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 24,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "graft.layers.0.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.0.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.0.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.0.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "graft.layers.1.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft.layers.1.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "graft.layers.1.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "graft.layers.1.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft.layers.1.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 25,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "graft.layers.1.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.1.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.2": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "graft.layers.2.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft.layers.2.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "graft.layers.2.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "graft.layers.2.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.2.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.2.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.2.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft.layers.2.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 26,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "graft.layers.2.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.2.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.2.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.2.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.3": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "graft.layers.3.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft.layers.3.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "graft.layers.3.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "graft.layers.3.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.3.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.3.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.3.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft.layers.3.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 27,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "graft.layers.3.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.3.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.3.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.3.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.4": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "graft.layers.4.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft.layers.4.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "graft.layers.4.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "graft.layers.4.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.4.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.4.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.4.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft.layers.4.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 28,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "graft.layers.4.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.4.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.4.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.4.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.5": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "graft.layers.5.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft.layers.5.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "graft.layers.5.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "graft.layers.5.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.5.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.5.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.5.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "graft.layers.5.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 29,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "graft.layers.5.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.5.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.5.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.layers.5.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "graft.rotary": {
+        "attributes": {},
+        "class": "transformers.models.llama.modeling_llama.LlamaRotaryEmbedding"
+      },
+      "input_seam": {
+        "attributes": {},
+        "class": "equylaptatemps.model.ResidualDenseSeam"
+      },
+      "input_seam.norm": {
+        "attributes": {
+          "eps": 1e-05,
+          "normalized_shape": [
+            576
+          ]
+        },
+        "class": "torch.nn.modules.normalization.LayerNorm"
+      },
+      "input_seam.projection": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "lm_head": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "output_seam": {
+        "attributes": {},
+        "class": "equylaptatemps.model.ResidualDenseSeam"
+      },
+      "output_seam.norm": {
+        "attributes": {
+          "eps": 1e-05,
+          "normalized_shape": [
+            576
+          ]
+        },
+        "class": "torch.nn.modules.normalization.LayerNorm"
+      },
+      "output_seam.projection": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix": {
+        "attributes": {},
+        "class": "equylaptatemps.backbones.StackSegment"
+      },
+      "prefix.layers": {
+        "attributes": {},
+        "class": "torch.nn.modules.container.ModuleList"
+      },
+      "prefix.layers.0": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "prefix.layers.0.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.0.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "prefix.layers.0.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.0.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.0.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.0.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.0.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.0.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 0,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "prefix.layers.0.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.0.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.0.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.0.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.1": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "prefix.layers.1.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.1.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "prefix.layers.1.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.1.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.1.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.1.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.1.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.1.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 1,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "prefix.layers.1.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.1.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.1.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.1.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.10": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "prefix.layers.10.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.10.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "prefix.layers.10.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.10.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.10.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.10.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.10.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.10.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 10,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "prefix.layers.10.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.10.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.10.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.10.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.2": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "prefix.layers.2.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.2.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "prefix.layers.2.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.2.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.2.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.2.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.2.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.2.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 2,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "prefix.layers.2.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.2.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.2.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.2.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.3": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "prefix.layers.3.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.3.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "prefix.layers.3.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.3.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.3.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.3.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.3.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.3.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 3,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "prefix.layers.3.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.3.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.3.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.3.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.4": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "prefix.layers.4.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.4.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "prefix.layers.4.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.4.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.4.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.4.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.4.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.4.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 4,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "prefix.layers.4.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.4.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.4.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.4.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.5": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "prefix.layers.5.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.5.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "prefix.layers.5.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.5.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.5.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.5.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.5.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.5.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 5,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "prefix.layers.5.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.5.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.5.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.5.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.6": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "prefix.layers.6.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.6.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "prefix.layers.6.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.6.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.6.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.6.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.6.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.6.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 6,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "prefix.layers.6.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.6.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.6.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.6.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.7": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "prefix.layers.7.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.7.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "prefix.layers.7.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.7.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.7.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.7.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.7.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.7.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 7,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "prefix.layers.7.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.7.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.7.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.7.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.8": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "prefix.layers.8.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.8.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "prefix.layers.8.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.8.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.8.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.8.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.8.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.8.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 8,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "prefix.layers.8.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.8.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.8.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.8.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.9": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "prefix.layers.9.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.9.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "prefix.layers.9.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "prefix.layers.9.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.9.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.9.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.9.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "prefix.layers.9.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 9,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "prefix.layers.9.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.9.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.9.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.layers.9.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "prefix.rotary": {
+        "attributes": {},
+        "class": "transformers.models.llama.modeling_llama.LlamaRotaryEmbedding"
+      },
+      "suffix": {
+        "attributes": {},
+        "class": "equylaptatemps.backbones.StackSegment"
+      },
+      "suffix.layers": {
+        "attributes": {},
+        "class": "torch.nn.modules.container.ModuleList"
+      },
+      "suffix.layers.0": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.0.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.0.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.0.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.0.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.0.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.0.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.0.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.0.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 13,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.0.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.0.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.0.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.0.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.1": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.1.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.1.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.1.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.1.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.1.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.1.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.1.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.1.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 14,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.1.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.1.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.1.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.1.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.10": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.10.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.10.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.10.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.10.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.10.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.10.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.10.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.10.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 23,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.10.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.10.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.10.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.10.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.11": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.11.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.11.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.11.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.11.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.11.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.11.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.11.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.11.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 24,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.11.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.11.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.11.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.11.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.12": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.12.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.12.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.12.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.12.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.12.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.12.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.12.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.12.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 25,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.12.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.12.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.12.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.12.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.13": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.13.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.13.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.13.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.13.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.13.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.13.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.13.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.13.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 26,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.13.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.13.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.13.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.13.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.14": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.14.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.14.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.14.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.14.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.14.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.14.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.14.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.14.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 27,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.14.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.14.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.14.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.14.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.15": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.15.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.15.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.15.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.15.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.15.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.15.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.15.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.15.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 28,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.15.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.15.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.15.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.15.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.16": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.16.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.16.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.16.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.16.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.16.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.16.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.16.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.16.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 29,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.16.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.16.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.16.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.16.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.2": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.2.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.2.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.2.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.2.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.2.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.2.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.2.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.2.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 15,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.2.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.2.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.2.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.2.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.3": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.3.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.3.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.3.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.3.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.3.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.3.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.3.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.3.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 16,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.3.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.3.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.3.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.3.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.4": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.4.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.4.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.4.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.4.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.4.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.4.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.4.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.4.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 17,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.4.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.4.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.4.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.4.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.5": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.5.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.5.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.5.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.5.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.5.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.5.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.5.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.5.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 18,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.5.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.5.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.5.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.5.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.6": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.6.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.6.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.6.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.6.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.6.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.6.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.6.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.6.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 19,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.6.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.6.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.6.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.6.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.7": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.7.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.7.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.7.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.7.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.7.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.7.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.7.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.7.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 20,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.7.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.7.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.7.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.7.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.8": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.8.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.8.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.8.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.8.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.8.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.8.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.8.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.8.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 21,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.8.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.8.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.8.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.8.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.9": {
+        "attributes": {
+          "hidden_size": 576
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaDecoderLayer"
+      },
+      "suffix.layers.9.input_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.9.mlp": {
+        "attributes": {
+          "hidden_size": 576,
+          "intermediate_size": 1536
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaMLP"
+      },
+      "suffix.layers.9.mlp.act_fn": {
+        "attributes": {},
+        "class": "torch.nn.modules.activation.SiLU"
+      },
+      "suffix.layers.9.mlp.down_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.9.mlp.gate_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.9.mlp.up_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.9.post_attention_layernorm": {
+        "attributes": {
+          "variance_epsilon": 1e-05
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaRMSNorm"
+      },
+      "suffix.layers.9.self_attn": {
+        "attributes": {
+          "attention_dropout": 0.0,
+          "head_dim": 64,
+          "layer_idx": 22,
+          "scaling": 0.125
+        },
+        "class": "transformers.models.llama.modeling_llama.LlamaAttention"
+      },
+      "suffix.layers.9.self_attn.k_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.9.self_attn.o_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.9.self_attn.q_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.layers.9.self_attn.v_proj": {
+        "attributes": {},
+        "class": "torch.nn.modules.linear.Linear"
+      },
+      "suffix.rotary": {
+        "attributes": {},
+        "class": "transformers.models.llama.modeling_llama.LlamaRotaryEmbedding"
+      }
+    },
+    "recipe": {
+      "donor": {
+        "model_id": "HuggingFaceTB/SmolLM-135M",
+        "revision": "1d461723eec654e65efdc40cf49301c89c0c92f4"
+      },
+      "donor_sector": [
+        24,
+        30
+      ],
+      "positive_control": true,
+      "recipient": {
+        "model_id": "HuggingFaceTB/SmolLM-135M",
+        "revision": "1d461723eec654e65efdc40cf49301c89c0c92f4"
+      },
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "schema_version": 1,
+      "seed": 123
+    },
+    "recipient_config": {
+      "_attn_implementation_autoset": true,
+      "add_cross_attention": false,
+      "architectures": [
+        "LlamaForCausalLM"
+      ],
+      "attention_bias": false,
+      "attention_dropout": 0.0,
+      "bad_words_ids": null,
+      "begin_suppress_tokens": null,
+      "bos_token_id": 0,
+      "chunk_size_feed_forward": 0,
+      "cross_attention_hidden_size": null,
+      "decoder_start_token_id": null,
+      "diversity_penalty": 0.0,
+      "do_sample": false,
+      "early_stopping": false,
+      "encoder_no_repeat_ngram_size": 0,
+      "eos_token_id": 0,
+      "exponential_decay_length_penalty": null,
+      "finetuning_task": null,
+      "forced_bos_token_id": null,
+      "forced_eos_token_id": null,
+      "head_dim": 64,
+      "hidden_act": "silu",
+      "hidden_size": 576,
+      "id2label": {
+        "0": "LABEL_0",
+        "1": "LABEL_1"
+      },
+      "initializer_range": 0.02,
+      "intermediate_size": 1536,
+      "is_decoder": false,
+      "is_encoder_decoder": false,
+      "label2id": {
+        "LABEL_0": 0,
+        "LABEL_1": 1
+      },
+      "length_penalty": 1.0,
+      "max_length": 20,
+      "max_position_embeddings": 2048,
+      "min_length": 0,
+      "mlp_bias": false,
+      "model_type": "llama",
+      "no_repeat_ngram_size": 0,
+      "num_attention_heads": 9,
+      "num_beam_groups": 1,
+      "num_beams": 1,
+      "num_hidden_layers": 30,
+      "num_key_value_heads": 3,
+      "num_return_sequences": 1,
+      "output_attentions": false,
+      "output_hidden_states": false,
+      "output_scores": false,
+      "pad_token_id": null,
+      "prefix": null,
+      "pretraining_tp": 1,
+      "problem_type": null,
+      "pruned_heads": {},
+      "remove_invalid_values": false,
+      "repetition_penalty": 1.0,
+      "return_dict": true,
+      "return_dict_in_generate": false,
+      "rms_norm_eps": 1e-05,
+      "rope_scaling": null,
+      "rope_theta": 10000.0,
+      "sep_token_id": null,
+      "suppress_tokens": null,
+      "task_specific_params": null,
+      "temperature": 1.0,
+      "tf_legacy_loss": false,
+      "tie_encoder_decoder": false,
+      "tie_word_embeddings": true,
+      "tokenizer_class": null,
+      "top_k": 50,
+      "top_p": 1.0,
+      "torch_dtype": "float32",
+      "torchscript": false,
+      "typical_p": 1.0,
+      "use_bfloat16": false,
+      "use_cache": false,
+      "vocab_size": 49152
+    }
+  },
+  "execution_contract_sha256": "fcb1ff369700124ad3734435e8e5d21ccfd4d167014eecbe29287357d9e4da23",
+  "format_version": 2,
+  "frozen_sha256": "779980640a1bf54c7853eb4ff9776c9fb99ac733b78ae76cc94fc9e91189600e",
+  "graft_sha256": "82380b5e1fe70f251f69d3ec48331febdaf6897cd37a51b6aacd73cdcc1ab924",
+  "interfaces_config": {
+    "architecture": "residual_identity",
+    "initialization": "covariance_orthogonal"
+  },
+  "interfaces_sha256": "78718812540bb9900d85053ea2c32f909b8f0ee5d418b98646d16666b0cab6aa",
+  "parent_kind": "pretrained",
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "provenance": {
+    "config_files": {
+      "donor_sha256": "a1fe6f43e20f7a6c6dbc6380222af9526b5cef262446391a281c038249e3e3b7",
+      "recipient_sha256": "a1fe6f43e20f7a6c6dbc6380222af9526b5cef262446391a281c038249e3e3b7"
+    },
+    "different_architectures": false,
+    "disjoint_declared_weight_lineages": false,
+    "limitation": "Registry and local artifact checks cannot prove undisclosed weight ancestry or absence of shared training data. A revision is recorded, not remotely attested.",
+    "lineage_evidence": {
+      "donor": "https://huggingface.co/HuggingFaceTB/SmolLM-135M",
+      "recipient": "https://huggingface.co/HuggingFaceTB/SmolLM-135M"
+    },
+    "mode": "same_family_positive_control",
+    "positive_control": true,
+    "snapshots": {
+      "donor": {
+        "hub_lfs_hashes_recorded": 1,
+        "license_notices": {},
+        "redistribution_warning": "No parent license documents found. Resolve rights before redistributing weights.",
+        "revision_evidence": "locally_verified_pinned_download_record",
+        "signed_attestation": false,
+        "snapshot_files_sha256": {
+          "README.md": "362068c1516d46216f5c291d9c4827769de49aecb02d2819439263574e95faf6",
+          "config.json": "a1fe6f43e20f7a6c6dbc6380222af9526b5cef262446391a281c038249e3e3b7",
+          "generation_config.json": "d0df27778d7caa8acc0c2d8eb5cfc11135da6226dbae8c12cc85d0ce6067faaa",
+          "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+          "model.safetensors": "c7a387d6fe81ca6dd304aeb809bda3932ff1bbef3ca41c9484502f2f448dc093",
+          "special_tokens_map.json": "e786b595b9a23148bf1630df78d9037a048ea671e48bfd3549a1e3c233742bb3",
+          "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+          "tokenizer_config.json": "238ad6b60d48e471624ea70bc79e92f2611844d5016471fee8c167854bcb98e8",
+          "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        "source_record_sha256": "a31f3c392397131569ed7ca1826aea0de8b6eee94ae9382bd44e93269621a821"
+      },
+      "recipient": {
+        "hub_lfs_hashes_recorded": 1,
+        "license_notices": {},
+        "redistribution_warning": "No parent license documents found. Resolve rights before redistributing weights.",
+        "revision_evidence": "locally_verified_pinned_download_record",
+        "signed_attestation": false,
+        "snapshot_files_sha256": {
+          "README.md": "362068c1516d46216f5c291d9c4827769de49aecb02d2819439263574e95faf6",
+          "config.json": "a1fe6f43e20f7a6c6dbc6380222af9526b5cef262446391a281c038249e3e3b7",
+          "generation_config.json": "d0df27778d7caa8acc0c2d8eb5cfc11135da6226dbae8c12cc85d0ce6067faaa",
+          "merges.txt": "0b54e8aa4e53d5383e2e4bc635a56b43f9647f7b13832d5d9ecd8f82dac4f510",
+          "model.safetensors": "c7a387d6fe81ca6dd304aeb809bda3932ff1bbef3ca41c9484502f2f448dc093",
+          "special_tokens_map.json": "e786b595b9a23148bf1630df78d9037a048ea671e48bfd3549a1e3c233742bb3",
+          "tokenizer.json": "9ca9acddb6525a194ec8ac7a87f24fbba7232a9a15ffa1af0c1224fcd888e47c",
+          "tokenizer_config.json": "238ad6b60d48e471624ea70bc79e92f2611844d5016471fee8c167854bcb98e8",
+          "vocab.json": "82b84012e3add4d01d12ba14442026e49b8cbbaead1f79ecf3d919784f82dc79"
+        },
+        "source_record_sha256": "a31f3c392397131569ed7ca1826aea0de8b6eee94ae9382bd44e93269621a821"
+      }
+    },
+    "synthetic": false,
+    "tokenizers": {
+      "donor_sha256": "bd39ac003506980b9958467ae33e97829b24a018a328be299073e2137a7d00ee",
+      "recipient_sha256": "bd39ac003506980b9958467ae33e97829b24a018a328be299073e2137a7d00ee",
+      "tokenizers_identical": true
+    }
+  },
+  "recipe": {
+    "donor": {
+      "local_path": "/home/runner/work/EQUYLAPTATEMPS/EQUYLAPTATEMPS/models/pretrained/SmolLM-135M--1d461723eec6",
+      "model_id": "HuggingFaceTB/SmolLM-135M",
+      "revision": "1d461723eec654e65efdc40cf49301c89c0c92f4"
+    },
+    "donor_sector": [
+      24,
+      30
+    ],
+    "positive_control": true,
+    "recipient": {
+      "local_path": "/home/runner/work/EQUYLAPTATEMPS/EQUYLAPTATEMPS/models/pretrained/SmolLM-135M--1d461723eec6",
+      "model_id": "HuggingFaceTB/SmolLM-135M",
+      "revision": "1d461723eec654e65efdc40cf49301c89c0c92f4"
+    },
+    "recipient_cut": [
+      11,
+      13
+    ],
+    "schema_version": 1,
+    "seed": 123
+  },
+  "reconstruction": "Acquire/hash pinned parents at dtype, then call load_reference",
+  "self_contained": false,
+  "structure": {
+    "context_limit": 2048,
+    "donor_family": "llama",
+    "donor_width": 576,
+    "frozen_parameters": 148675392,
+    "parent_weight_arithmetic": false,
+    "positive_control": true,
+    "prefix_blocks": 11,
+    "production_bypass": false,
+    "recipient_family": "llama",
+    "recipient_width": 576,
+    "removed_recipient_blocks": 2,
+    "suffix_blocks": 17,
+    "trainable_dense_seam_parameters": 667008,
+    "transplanted_blocks": 6,
+    "unique_parameters": 149342400
+  }
+}

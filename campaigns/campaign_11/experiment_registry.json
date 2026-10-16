@@ -1,0 +1,86 @@
+{
+  "campaign": 11,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "registered_date": "2026-10-14",
+  "parents": {
+    "recipient": {
+      "id": "state-spaces/mamba-130m-hf",
+      "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"
+    },
+    "donor": {
+      "id": "HuggingFaceTB/SmolLM-135M",
+      "revision": "1d461723eec654e65efdc40cf49301c89c0c92f4"
+    }
+  },
+  "compute": {
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 2,
+    "parallel_experiments": 1,
+    "max_session_seconds": 5400,
+    "minimum_ram_bytes": 12884901888,
+    "minimum_disk_bytes": 12884901888
+  },
+  "data": {
+    "seed": 42,
+    "gsm_train_rows": 32,
+    "gsm_dev_rows": 16,
+    "wiki_train_windows": 32,
+    "wiki_dev_windows": 16,
+    "wiki_characters": 192,
+    "statistic_text_windows": 8
+  },
+  "training": {
+    "steps": 32,
+    "batch_size": 1,
+    "learning_rate": 0.0003,
+    "max_length": 512,
+    "gradient_checkpointing": true,
+    "diagnostic_train_rows": 8,
+    "checkpoint_every": 8,
+    "objective": "direct child real-text and human GSM8K TRAIN next-token targets only"
+  },
+  "phase": "primary_32",
+  "experiments": [
+    {
+      "id": "c11_shuf_42",
+      "stage": "primary",
+      "seed": 42,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "donor_sector": [
+        24,
+        30
+      ],
+      "interface": {
+        "architecture": "layernorm_linear"
+      },
+      "initialization": "natgeom_in_trained_out",
+      "shuffled_sector": true,
+      "shuffle_seed": 20241014,
+      "random_sector": false
+    },
+    {
+      "id": "c11_shuf_123",
+      "stage": "primary",
+      "seed": 123,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "donor_sector": [
+        24,
+        30
+      ],
+      "interface": {
+        "architecture": "layernorm_linear"
+      },
+      "initialization": "natgeom_in_trained_out",
+      "shuffled_sector": true,
+      "shuffle_seed": 20241014,
+      "random_sector": false
+    }
+  ]
+}

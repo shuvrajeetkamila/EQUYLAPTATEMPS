@@ -1,0 +1,89 @@
+{
+  "native_macro": 2.773125703364993,
+  "gates": {
+    "gate1_baseline_reproducibility": true,
+    "gate2_exact_reconstruction": true,
+    "gate3_function_preserving_connector": true
+  },
+  "variants": {
+    "V0": {
+      "macro_dev_nll": 2.773125703364993,
+      "score_degradation": 0.0,
+      "relative_degradation_percent": 0.0,
+      "max_abs_logit_diff": null,
+      "mean_abs_logit_diff": null
+    },
+    "V1": {
+      "macro_dev_nll": 2.773125703364993,
+      "score_degradation": 0.0,
+      "relative_degradation_percent": 0.0,
+      "max_abs_logit_diff": 0.0,
+      "mean_abs_logit_diff": 0.0
+    },
+    "V2": {
+      "macro_dev_nll": 24.46556289230405,
+      "score_degradation": 21.692437188939056,
+      "relative_degradation_percent": 782.2377890269023,
+      "max_abs_logit_diff": 51.70505142211914,
+      "mean_abs_logit_diff": 6.544264554977417
+    },
+    "V3": {
+      "macro_dev_nll": 2.773125703364993,
+      "score_degradation": 0.0,
+      "relative_degradation_percent": 0.0,
+      "max_abs_logit_diff": 0.0,
+      "mean_abs_logit_diff": 0.0
+    },
+    "V4": {
+      "macro_dev_nll": 2.773125703364993,
+      "score_degradation": 0.0,
+      "relative_degradation_percent": 0.0,
+      "max_abs_logit_diff": 0.0,
+      "mean_abs_logit_diff": 0.0
+    },
+    "V5": {
+      "macro_dev_nll": 12.015005577316103,
+      "score_degradation": 9.24187987395111,
+      "relative_degradation_percent": 333.26581130948153,
+      "max_abs_logit_diff": 40.75872039794922,
+      "mean_abs_logit_diff": 8.115107774734497
+    },
+    "V6": {
+      "macro_dev_nll": 14.248061544325951,
+      "score_degradation": 11.474935840960958,
+      "relative_degradation_percent": 413.7906848952765,
+      "max_abs_logit_diff": 39.48019027709961,
+      "mean_abs_logit_diff": 5.348818302154541
+    },
+    "gates": {
+      "gate1": true,
+      "gate2": true,
+      "gate3": true
+    }
+  },
+  "attribution": {
+    "standard_seams_at_native_placement (V2-V1)": 21.692437188939056,
+    "campaign13_placement_with_neutral_seams (V5-V3)": 9.24187987395111,
+    "historical_configuration_initial_total (V6-V0)": 11.474935840960958,
+    "interaction_note": "Factors interact; combined initial damage (V6) is smaller than the seams-alone damage (V2) because placement changes seam inputs. Deltas are labeled per comparison and are not assumed additive."
+  },
+  "outcome": "RECONSTRUCTION_VALIDATED",
+  "training_recovery": {
+    "V6_to_V8_standard_seams": 6.790288519485026,
+    "V5_to_V7_residual_seams": 3.5526844915096962,
+    "trained": {
+      "V7": {
+        "macro_dev_nll": 8.462321085806407,
+        "initial_macro_dev_nll": 12.015005577316103,
+        "job_dir": "trained_38796151693",
+        "bundle_sha256": "7d5f5b2e15633944aec22c0bde069c8053d937a789e042bf187a457f82585058"
+      },
+      "V8": {
+        "macro_dev_nll": 7.457773024840925,
+        "initial_macro_dev_nll": 14.248061544325951,
+        "job_dir": "trained_38796151693",
+        "bundle_sha256": "7d5f5b2e15633944aec22c0bde069c8053d937a789e042bf187a457f82585058"
+      }
+    }
+  }
+}

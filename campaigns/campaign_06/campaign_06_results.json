@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "campaign": 6,
+  "date": "2026-10-13",
+  "run": "38428594451",
+  "references_random_sector": {
+    "unconstrained_fullwidth_32_steps": 4.9024,
+    "unconstrained_fullwidth_96_steps": 4.0137,
+    "mandatory_bn128_delta_32_steps": 8.0091
+  },
+  "new_runs": {
+    "c06_bn256_delta_rand_42": {
+      "macro_dev_nll": 7.323230572164815,
+      "language_dev_nll": 7.755769653320312,
+      "math_dev_nll": 6.890691491009317,
+      "trainable_parameters": 2108160
+    },
+    "c06_bn128_delta_rand_96": {
+      "macro_dev_nll": 7.070607799103241,
+      "language_dev_nll": 7.9090097045898435,
+      "math_dev_nll": 6.232205893616638,
+      "trainable_parameters": 893696
+    }
+  },
+  "decision_rule": "remediable if macro <= 1.10x matched-budget unconstrained reference",
+  "decision": {
+    "bn256_32_threshold": 5.393,
+    "bn128_96_threshold": 4.415,
+    "capacity_remediable": false,
+    "conclusion": "Widening the bottleneck (8.0091 -> 7.3232) and tripling budget (8.0091 -> 7.0706) each help, but neither approaches the unconstrained child (4.9024/4.0137). The mandatory-use pathway is intrinsically lossy at these budgets."
+  },
+  "outcome": {
+    "classification": "C",
+    "label": "Final negative for this pairing/interface family at this scale",
+    "rationale": "Campaigns 3-6 jointly show: unconstrained bridges ignore the donor; mandatory bridges use it but destroy too much host information; width/placement do not fix this; and capacity controls prove the forced pathway itself cannot match unconstrained performance with random sectors."
+  },
+  "heldout_confirmation": {
+    "status": "NOT_RUN_NO_PROMOTION"
+  }
+}

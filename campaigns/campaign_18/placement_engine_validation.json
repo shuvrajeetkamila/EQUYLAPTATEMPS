@@ -1,0 +1,31 @@
+{
+  "invalid_probes": {
+    "duplicate_identity_rejected": true,
+    "manifest_is_permutation": true,
+    "missing_block_rejected": true,
+    "order_mismatch_detected": true,
+    "unknown_identity_rejected": true
+  },
+  "inverse_operations": [
+    {
+      "condition": "dev-swap-14",
+      "logit_max_abs_vs_native": 10.025585174560547,
+      "macro_dev_nll": 2.8867727367373393,
+      "permutation_composition_is_identity": true
+    },
+    {
+      "condition": "dev-move-b14-d+3",
+      "logit_max_abs_vs_native": 12.759485244750977,
+      "macro_dev_nll": 3.030175631840245,
+      "permutation_composition_is_identity": true
+    },
+    {
+      "condition": "dev-xchg-a4-c18-L2",
+      "logit_max_abs_vs_native": 38.031768798828125,
+      "macro_dev_nll": 8.768833118536246,
+      "permutation_composition_is_identity": true
+    }
+  ],
+  "inverse_note": "The engine is stateless (builds from the parent each time); an order composed with its inverse is the identity, and the identity control is exact, which jointly establishes restoration. The recorded inverse-child macros are the damage of the inverse permutation itself, not a restoration failure.",
+  "offline_tests": "tests/test_campaign17_native_placement.py + tests/test_campaign18_map.py"
+}

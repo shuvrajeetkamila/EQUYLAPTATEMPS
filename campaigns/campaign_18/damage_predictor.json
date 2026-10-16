@@ -1,0 +1,47 @@
+{
+  "campaign": 18,
+  "frozen_at_utc": "2026-10-16T13:55:21.400259+00:00",
+  "fit_set": "development (48)",
+  "selection_set": "validation (5)",
+  "models": {
+    "P0_constant": {
+      "kind": "constant",
+      "value": 1.5219458602536668
+    },
+    "P1_distance_only": {
+      "kind": "ols",
+      "feature_set": "P1",
+      "coefficients": [
+        0.10338245757493636,
+        0.33708437291375776
+      ]
+    },
+    "P2_position_aware": {
+      "kind": "ols",
+      "feature_set": "P2",
+      "coefficients": [
+        0.5325244923413002,
+        0.39659496317775866,
+        -0.14337462239295007,
+        -0.18813696551294679
+      ]
+    }
+  },
+  "validation": {
+    "P0_constant": {
+      "dev_mae": 2.0290896723148637,
+      "val_mae": 2.5704429675739964
+    },
+    "P1_distance_only": {
+      "dev_mae": 1.145107160057707,
+      "val_mae": 1.0058096699659709
+    },
+    "P2_position_aware": {
+      "dev_mae": 1.1481317228385561,
+      "val_mae": 0.9685200650054588
+    }
+  },
+  "chosen": "P2_position_aware",
+  "heldout_success_rule": "chosen heldout MAE <= 0.8 * P0_constant heldout MAE",
+  "heldout_status": "SEALED_AT_FREEZE_TIME"
+}

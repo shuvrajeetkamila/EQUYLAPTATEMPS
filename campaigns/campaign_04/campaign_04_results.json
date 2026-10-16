@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "campaign": 4,
+  "date": "2026-10-13",
+  "runs": {
+    "screen_failed_attempt": "38390162060 (post-training accounting defect; preserved)",
+    "screen": "38393669406",
+    "twins": "38397294665",
+    "replication": "38401090731"
+  },
+  "host_language_dev_nll": 4.559452972412109,
+  "candidates": {
+    "c04_delta_attn_42": {
+      "pretrained": {
+        "language_dev_nll": 8.280683555603026,
+        "math_dev_nll": 7.123037916841254,
+        "macro_dev_nll": 7.70186073622214,
+        "bypass_graft_macro": 9.226426669916066,
+        "zero_graft_macro": 13.831224177755423,
+        "graft_relative_update": 0.08704609563574195,
+        "trainable_parameters": 3189248,
+        "training_tokens_processed": 2160
+      },
+      "random_twin": {
+        "language_dev_nll": 8.312563400268555,
+        "math_dev_nll": 7.341225136797596,
+        "macro_dev_nll": 7.826894268533076,
+        "bypass_graft_macro": 8.383476389034671,
+        "zero_graft_macro": 13.955121247578656,
+        "graft_relative_update": 0.016958966734819114,
+        "trainable_parameters": 3189248,
+        "training_tokens_processed": 2160
+      },
+      "gates": {
+        "B_pretrained_benefit_2pct": false,
+        "C_donor_dependence_2pct": true,
+        "D_useful_performance": false
+      }
+    },
+    "c04_bn128_attn_42": {
+      "pretrained": {
+        "language_dev_nll": 8.444055213928223,
+        "math_dev_nll": 7.595556432950593,
+        "macro_dev_nll": 8.019805823439409,
+        "bypass_graft_macro": 8.025169208003025,
+        "zero_graft_macro": 47.877892956497206,
+        "graft_relative_update": 0.0744978990405798,
+        "trainable_parameters": 893696,
+        "training_tokens_processed": 2160
+      },
+      "random_twin": {
+        "language_dev_nll": 8.268395309448243,
+        "math_dev_nll": 7.241403793106167,
+        "macro_dev_nll": 7.754899551277205,
+        "bypass_graft_macro": 7.757027371438454,
+        "zero_graft_macro": 10.814441748688377,
+        "graft_relative_update": 0.01448912953492254,
+        "trainable_parameters": 893696,
+        "training_tokens_processed": 2160
+      },
+      "gates": {
+        "B_pretrained_benefit_2pct": false,
+        "C_donor_dependence_2pct": false,
+        "D_useful_performance": false
+      }
+    },
+    "c04_bn128_delta_attn_42": {
+      "pretrained": {
+        "language_dev_nll": 8.334107933044434,
+        "math_dev_nll": 7.240443210975797,
+        "macro_dev_nll": 7.787275572010115,
+        "bypass_graft_macro": 15.384032501123906,
+        "zero_graft_macro": 42.32032977147086,
+        "graft_relative_update": 0.0756483692675829,
+        "trainable_parameters": 893696,
+        "training_tokens_processed": 2160
+      },
+      "random_twin": {
+        "language_dev_nll": 8.356152153015136,
+        "math_dev_nll": 7.662011873625829,
+        "macro_dev_nll": 8.009082013320484,
+        "bypass_graft_macro": 29.44611234086333,
+        "zero_graft_macro": 70.84029527393592,
+        "graft_relative_update": 0.01439748756820336,
+        "trainable_parameters": 893696,
+        "training_tokens_processed": 2160
+      },
+      "gates": {
+        "B_pretrained_benefit_2pct": true,
+        "C_donor_dependence_2pct": true,
+        "D_useful_performance": false
+      }
+    }
+  },
+  "replication_bn128_delta": {
+    "pretrained_seed_123": {
+      "language_dev_nll": 8.516318435668945,
+      "math_dev_nll": 7.659506141108213,
+      "macro_dev_nll": 8.087912288388578,
+      "bypass_graft_macro": 10.349698382534921,
+      "zero_graft_macro": 73.85603398887343,
+      "graft_relative_update": 0.09700905857607722,
+      "trainable_parameters": 893696,
+      "training_tokens_processed": 2096
+    },
+    "random_twin_seed_123": {
+      "language_dev_nll": 8.398271293640137,
+      "math_dev_nll": 8.055332346633506,
+      "macro_dev_nll": 8.22680182013682,
+      "bypass_graft_macro": 33.08302936404359,
+      "zero_graft_macro": 68.1085654404584,
+      "graft_relative_update": 0.014780478784814477,
+      "trainable_parameters": 893696,
+      "training_tokens_processed": 2096
+    },
+    "benefit_direction_preserved": true
+  },
+  "heldout_confirmation": {
+    "status": "NOT_RUN_NO_PROMOTION",
+    "reason": "No candidate passed all frozen gates (every candidate failed Gate D)"
+  },
+  "outcome": {
+    "classification": "B",
+    "label": "Partial evidence of donor contribution without useful inheritance",
+    "structural_transplantation": "PASS",
+    "execution_and_reconstruction": "PASS",
+    "donor_dependence_under_forcing": "PASS for donor-delta candidates (bypass costs 17-49% macro NLL)",
+    "pretrained_specific_benefit": "WEAK PASS for bottleneck+delta only: +2.8% (seed 42) and +1.7% (seed 123) vs matched random twins; direction consistent, magnitude small and below the 2% gate at seed 123",
+    "useful_task_performance": "FAIL (all candidates language 1.82-1.85x host; macro 7.70-8.02 vs 5.7396 ceiling)",
+    "promotion": "NONE",
+    "rationale": "Mandatory-use architecture created genuine donor dependence and the first reproducible-direction pretrained advantage, but the forced children are far worse than the unconstrained Campaign 3 child and both parents. Partial contribution is demonstrated; useful capability inheritance is not."
+  }
+}

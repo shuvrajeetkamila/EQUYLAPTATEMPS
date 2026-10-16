@@ -1,0 +1,1212 @@
+{
+  "schema_version": 1,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "campaign": 2,
+  "registry_sha256": "20676048a644bcdc5e5b52351ecb1b027fa3837322b0fefdc087a5a4c555294a",
+  "records": {
+    "c13_pre_42_96": {
+      "config_sha256": "31731490cad0d6cd51dc4b8e3f6577b5bba740d52c4d9e83c07aa2425b5159bb",
+      "execution_status": "COMPLETED",
+      "evaluation_status": "NOT_RUN",
+      "reason": "Campaign 13 frozen-protocol run complete; gates evaluated by publisher",
+      "metrics": {
+        "ablation": "none",
+        "groups": {
+          "overall": {
+            "nll_sum": 20485.828491210938,
+            "target_tokens": 3051,
+            "examples": 32,
+            "token_nll": 6.714463615605027,
+            "perplexity": 824.2415380070759
+          },
+          "domain:math": {
+            "nll_sum": 13759.37255859375,
+            "target_tokens": 2226,
+            "examples": 16,
+            "token_nll": 6.181209595055593,
+            "perplexity": 483.57653451523305
+          },
+          "domain:language": {
+            "nll_sum": 6726.4559326171875,
+            "target_tokens": 825,
+            "examples": 16,
+            "token_nll": 8.153279918323864,
+            "perplexity": 3474.7573156038757
+          }
+        },
+        "metric": "recipient-token response NLL; not proof of task mastery",
+        "ablations": {
+          "bypass_graft": {
+            "ablation": "bypass_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 23202.117736816406,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 7.604758353594365,
+                "perplexity": 2007.7266751516495
+              },
+              "domain:math": {
+                "nll_sum": 15404.681060791016,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 6.920341896132531,
+                "perplexity": 1012.6661619992177
+              },
+              "domain:language": {
+                "nll_sum": 7797.436676025391,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 9.451438395182292,
+                "perplexity": 12726.457780136912
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          },
+          "zero_graft": {
+            "ablation": "zero_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 27135.232360839844,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 8.893881468646294,
+                "perplexity": 7287.249591136541
+              },
+              "domain:math": {
+                "nll_sum": 19095.495483398438,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 8.578389705030744,
+                "perplexity": 5315.539044096626
+              },
+              "domain:language": {
+                "nll_sum": 8039.736877441406,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 9.745135609019886,
+                "perplexity": 17070.98655896794
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          }
+        },
+        "graft_delta": {
+          "mean_relative_update": 0.2876944001764059,
+          "mean_input_rms": 659.3070602416992,
+          "mean_output_rms": 675.3860549926758,
+          "texts": 16,
+          "interpretation": "descriptive only; magnitude alone is not usefulness evidence"
+        },
+        "initial_validation": {
+          "ablation": "none",
+          "groups": {
+            "overall": {
+              "nll_sum": 44572.23474121094,
+              "target_tokens": 3051,
+              "examples": 32,
+              "token_nll": 14.609057601183526,
+              "perplexity": 2211225.84604537
+            },
+            "domain:math": {
+              "nll_sum": 33629.84747314453,
+              "target_tokens": 2226,
+              "examples": 16,
+              "token_nll": 15.107748190990355,
+              "perplexity": 3640924.5003979574
+            },
+            "domain:language": {
+              "nll_sum": 10942.387268066406,
+              "target_tokens": 825,
+              "examples": 16,
+              "token_nll": 13.26349971886837,
+              "perplexity": 575790.822804692
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        }
+      },
+      "artifacts": {
+        "runs/c13_pre_42_96/config.json": "c0b4a275bf82125544b9f113998f90c05791612bd34ea0e704b3033e95d97695",
+        "runs/c13_pre_42_96/results.json": "51f40e971753a1f25486097b3fa7bec1021b5ec2497acce0a4e8e0b6948d9cd1",
+        "runs/c13_pre_42_96/reference/reference.json": "3358f81568ca5bf8abc306e4f53eabeed1fe925b11beab390d634851cf7f1d85",
+        "runs/c13_pre_42_96/reference/interfaces.safetensors": "4d8ac013f5adcf7dfafc1213741bb1722b03c25722934bd062e82e3099bf56c0"
+      },
+      "updated_clock_seconds": 1792082540.588813,
+      "metadata": {
+        "source_commit": "c6c970fd7fdde6c2fde354ac040c8f8c8d8b28ab",
+        "structure": {
+          "recipient_family": "llama",
+          "donor_family": "llama",
+          "recipient_width": 576,
+          "donor_width": 576,
+          "prefix_blocks": 11,
+          "transplanted_blocks": 6,
+          "suffix_blocks": 17,
+          "removed_recipient_blocks": 2,
+          "unique_parameters": 149342400,
+          "trainable_dense_seam_parameters": 667008,
+          "frozen_parameters": 148675392,
+          "context_limit": 2048,
+          "production_bypass": false,
+          "parent_weight_arithmetic": false,
+          "positive_control": true
+        },
+        "reproduction": "python scripts/campaign12_runner.py --registry campaigns/campaign_13/experiment_registry_budget96.json --out artifacts/campaign13-budget96"
+      }
+    },
+    "c13_pre_123_96": {
+      "config_sha256": "d51f58022d3bf20f38c09f42b4b1c2a36140a1070be795f3471635eb96e77071",
+      "execution_status": "COMPLETED",
+      "evaluation_status": "NOT_RUN",
+      "reason": "Campaign 13 frozen-protocol run complete; gates evaluated by publisher",
+      "metrics": {
+        "ablation": "none",
+        "groups": {
+          "overall": {
+            "nll_sum": 20179.576171875,
+            "target_tokens": 3051,
+            "examples": 32,
+            "token_nll": 6.614085929818092,
+            "perplexity": 745.5229584832229
+          },
+          "domain:math": {
+            "nll_sum": 13681.42611694336,
+            "target_tokens": 2226,
+            "examples": 16,
+            "token_nll": 6.146193224143468,
+            "perplexity": 466.9364766643739
+          },
+          "domain:language": {
+            "nll_sum": 6498.150054931641,
+            "target_tokens": 825,
+            "examples": 16,
+            "token_nll": 7.876545521129262,
+            "perplexity": 2634.755114885229
+          }
+        },
+        "metric": "recipient-token response NLL; not proof of task mastery",
+        "ablations": {
+          "bypass_graft": {
+            "ablation": "bypass_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 24146.946838378906,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 7.9144368529593265,
+                "perplexity": 2736.5050416647996
+              },
+              "domain:math": {
+                "nll_sum": 16086.750244140625,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 7.226752131240173,
+                "perplexity": 1375.7469944026773
+              },
+              "domain:language": {
+                "nll_sum": 8060.196594238281,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 9.76993526574337,
+                "perplexity": 17499.63435587582
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          },
+          "zero_graft": {
+            "ablation": "zero_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 27193.323333740234,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 8.912921446653632,
+                "perplexity": 7427.327976018152
+              },
+              "domain:math": {
+                "nll_sum": 19623.953674316406,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 8.815792306521297,
+                "perplexity": 6739.845673391571
+              },
+              "domain:language": {
+                "nll_sum": 7569.369659423828,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 9.174993526574337,
+                "perplexity": 9652.705585342277
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          }
+        },
+        "graft_delta": {
+          "mean_relative_update": 0.6867902874946594,
+          "mean_input_rms": 440.43213081359863,
+          "mean_output_rms": 418.2949867248535,
+          "texts": 16,
+          "interpretation": "descriptive only; magnitude alone is not usefulness evidence"
+        },
+        "initial_validation": {
+          "ablation": "none",
+          "groups": {
+            "overall": {
+              "nll_sum": 40132.64074707031,
+              "target_tokens": 3051,
+              "examples": 32,
+              "token_nll": 13.153930103923406,
+              "perplexity": 516035.11987631465
+            },
+            "domain:math": {
+              "nll_sum": 28823.049072265625,
+              "target_tokens": 2226,
+              "examples": 16,
+              "token_nll": 12.948359870739274,
+              "perplexity": 420146.97551191575
+            },
+            "domain:language": {
+              "nll_sum": 11309.591674804688,
+              "target_tokens": 825,
+              "examples": 16,
+              "token_nll": 13.708595969460227,
+              "perplexity": 898602.4206897087
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        }
+      },
+      "artifacts": {
+        "runs/c13_pre_123_96/config.json": "b1d69f6e119a54d558d6d3f42ca6bdb72da46980e4e19a9044b848c2c063fcd1",
+        "runs/c13_pre_123_96/results.json": "aea9f59e1859b79c45700e7eb533f4786bb1f2fdf03fb2139dfa11f4bd0bb2c6",
+        "runs/c13_pre_123_96/reference/reference.json": "61ef50c5c194ea016aff493d18ea36c3b64ba4bdec09d11bbce2a3d2958713cc",
+        "runs/c13_pre_123_96/reference/interfaces.safetensors": "2d120648995ab72f306f897d9b4d81a733856638dcfbcb1b3baabe8a5f05132a"
+      },
+      "updated_clock_seconds": 1792082684.1226618,
+      "metadata": {
+        "source_commit": "c6c970fd7fdde6c2fde354ac040c8f8c8d8b28ab",
+        "structure": {
+          "recipient_family": "llama",
+          "donor_family": "llama",
+          "recipient_width": 576,
+          "donor_width": 576,
+          "prefix_blocks": 11,
+          "transplanted_blocks": 6,
+          "suffix_blocks": 17,
+          "removed_recipient_blocks": 2,
+          "unique_parameters": 149342400,
+          "trainable_dense_seam_parameters": 667008,
+          "frozen_parameters": 148675392,
+          "context_limit": 2048,
+          "production_bypass": false,
+          "parent_weight_arithmetic": false,
+          "positive_control": true
+        },
+        "reproduction": "python scripts/campaign12_runner.py --registry campaigns/campaign_13/experiment_registry_budget96.json --out artifacts/campaign13-budget96"
+      }
+    },
+    "c13_row_42_96": {
+      "config_sha256": "d9b72f3f76e5b0713dfd600a7c60df5b29b764fec1f30280a133d8f3df57eea5",
+      "execution_status": "COMPLETED",
+      "evaluation_status": "NOT_RUN",
+      "reason": "Campaign 13 frozen-protocol run complete; gates evaluated by publisher",
+      "metrics": {
+        "ablation": "none",
+        "groups": {
+          "overall": {
+            "nll_sum": 20476.768585205078,
+            "target_tokens": 3051,
+            "examples": 32,
+            "token_nll": 6.71149412822192,
+            "perplexity": 821.7975935862548
+          },
+          "domain:math": {
+            "nll_sum": 13759.437286376953,
+            "target_tokens": 2226,
+            "examples": 16,
+            "token_nll": 6.181238673125316,
+            "perplexity": 483.5905961918622
+          },
+          "domain:language": {
+            "nll_sum": 6717.331298828125,
+            "target_tokens": 825,
+            "examples": 16,
+            "token_nll": 8.142219756155303,
+            "perplexity": 3436.5376834691638
+          }
+        },
+        "metric": "recipient-token response NLL; not proof of task mastery",
+        "ablations": {
+          "bypass_graft": {
+            "ablation": "bypass_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 28730.430389404297,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 9.416725791348508,
+                "perplexity": 12292.26880560137
+              },
+              "domain:math": {
+                "nll_sum": 19798.144805908203,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 8.894045285673048,
+                "perplexity": 7288.4434644835
+              },
+              "domain:language": {
+                "nll_sum": 8932.285583496094,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 10.827012828480113,
+                "perplexity": 50363.0388302884
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          },
+          "zero_graft": {
+            "ablation": "zero_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 25457.998168945312,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 8.344148859044678,
+                "perplexity": 4205.501630229528
+              },
+              "domain:math": {
+                "nll_sum": 18291.616271972656,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 8.217257983815209,
+                "perplexity": 3704.331108132345
+              },
+              "domain:language": {
+                "nll_sum": 7166.381896972656,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 8.686523511482008,
+                "perplexity": 5922.556710868618
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          }
+        },
+        "graft_delta": {
+          "mean_relative_update": 0.4474013466387987,
+          "mean_input_rms": 679.3418769836426,
+          "mean_output_rms": 739.3789863586426,
+          "texts": 16,
+          "interpretation": "descriptive only; magnitude alone is not usefulness evidence"
+        },
+        "initial_validation": {
+          "ablation": "none",
+          "groups": {
+            "overall": {
+              "nll_sum": 44873.272521972656,
+              "target_tokens": 3051,
+              "examples": 32,
+              "token_nll": 14.707726162560688,
+              "perplexity": 2440530.917063248
+            },
+            "domain:math": {
+              "nll_sum": 31333.530700683594,
+              "target_tokens": 2226,
+              "examples": 16,
+              "token_nll": 14.0761593444221,
+              "perplexity": 1297771.7903562014
+            },
+            "domain:language": {
+              "nll_sum": 13539.741821289062,
+              "target_tokens": 825,
+              "examples": 16,
+              "token_nll": 16.411808268229166,
+              "perplexity": 13413983.535496766
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        }
+      },
+      "artifacts": {
+        "runs/c13_row_42_96/config.json": "2abc4774e0c0427ac1ef071074fc637f4bd9a73d304d50056e89865eb46abd7a",
+        "runs/c13_row_42_96/results.json": "a9bea7ed7b44c12de766aa452c91a0add8d7dc8afb5ccdc8d5f66d81e4de00a6",
+        "runs/c13_row_42_96/reference/reference.json": "6faaff9708396f289bddbdbd4b7188b00a189cc506e25505e6b0a28797e974f2",
+        "runs/c13_row_42_96/reference/interfaces.safetensors": "571d3ef3df2ad7bc5c2f6731b3535bb123e961609ac66396e041eb4b8b428966"
+      },
+      "updated_clock_seconds": 1792082830.8139002,
+      "metadata": {
+        "source_commit": "c6c970fd7fdde6c2fde354ac040c8f8c8d8b28ab",
+        "structure": {
+          "recipient_family": "llama",
+          "donor_family": "llama",
+          "recipient_width": 576,
+          "donor_width": 576,
+          "prefix_blocks": 11,
+          "transplanted_blocks": 6,
+          "suffix_blocks": 17,
+          "removed_recipient_blocks": 2,
+          "unique_parameters": 149342400,
+          "trainable_dense_seam_parameters": 667008,
+          "frozen_parameters": 148675392,
+          "context_limit": 2048,
+          "production_bypass": false,
+          "parent_weight_arithmetic": false,
+          "positive_control": true
+        },
+        "reproduction": "python scripts/campaign12_runner.py --registry campaigns/campaign_13/experiment_registry_budget96.json --out artifacts/campaign13-budget96"
+      }
+    },
+    "c13_row_123_96": {
+      "config_sha256": "3b6d422dd449d12957cd5a174222ee1a036f113afb81a06ec5e61887eb2a33a9",
+      "execution_status": "COMPLETED",
+      "evaluation_status": "NOT_RUN",
+      "reason": "Campaign 13 frozen-protocol run complete; gates evaluated by publisher",
+      "metrics": {
+        "ablation": "none",
+        "groups": {
+          "overall": {
+            "nll_sum": 20717.310089111328,
+            "target_tokens": 3051,
+            "examples": 32,
+            "token_nll": 6.790334345824755,
+            "perplexity": 889.210816058689
+          },
+          "domain:math": {
+            "nll_sum": 13956.089813232422,
+            "target_tokens": 2226,
+            "examples": 16,
+            "token_nll": 6.269582126339812,
+            "perplexity": 528.2565872359769
+          },
+          "domain:language": {
+            "nll_sum": 6761.220275878906,
+            "target_tokens": 825,
+            "examples": 16,
+            "token_nll": 8.195418516216856,
+            "perplexity": 3624.307506017258
+          }
+        },
+        "metric": "recipient-token response NLL; not proof of task mastery",
+        "ablations": {
+          "bypass_graft": {
+            "ablation": "bypass_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 33030.060791015625,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 10.82597862701266,
+                "perplexity": 50310.98022580733
+              },
+              "domain:math": {
+                "nll_sum": 23850.488220214844,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 10.714505040527783,
+                "perplexity": 45003.92740126282
+              },
+              "domain:language": {
+                "nll_sum": 9179.572570800781,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 11.126754631273673,
+                "perplexity": 67965.44078873082
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          },
+          "zero_graft": {
+            "ablation": "zero_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 24112.43096923828,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 7.903123883722806,
+                "perplexity": 2705.72149926114
+              },
+              "domain:math": {
+                "nll_sum": 16120.900604248047,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 7.242093712600201,
+                "perplexity": 1397.0158607105407
+              },
+              "domain:language": {
+                "nll_sum": 7991.530364990234,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 9.686703472715436,
+                "perplexity": 16102.075773863715
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          }
+        },
+        "graft_delta": {
+          "mean_relative_update": 0.7126301489770412,
+          "mean_input_rms": 475.1371364593506,
+          "mean_output_rms": 576.9395198822021,
+          "texts": 16,
+          "interpretation": "descriptive only; magnitude alone is not usefulness evidence"
+        },
+        "initial_validation": {
+          "ablation": "none",
+          "groups": {
+            "overall": {
+              "nll_sum": 40759.636169433594,
+              "target_tokens": 3051,
+              "examples": 32,
+              "token_nll": 13.359434994897933,
+              "perplexity": 633765.9459909508
+            },
+            "domain:math": {
+              "nll_sum": 29761.51025390625,
+              "target_tokens": 2226,
+              "examples": 16,
+              "token_nll": 13.369950698071092,
+              "perplexity": 640465.6046338247
+            },
+            "domain:language": {
+              "nll_sum": 10998.125915527344,
+              "target_tokens": 825,
+              "examples": 16,
+              "token_nll": 13.33106171579072,
+              "perplexity": 616036.6366268777
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        }
+      },
+      "artifacts": {
+        "runs/c13_row_123_96/config.json": "499163c4f12487fa3b7a58307b99e2b2ac201fc3dddfa720e8b0aa16e38530c5",
+        "runs/c13_row_123_96/results.json": "47cfd0205158655fa2f7cd5555f495b86a1067fbd7a43efeecec795b1e2c9ce6",
+        "runs/c13_row_123_96/reference/reference.json": "47315130c29ea5ecef007e38815befc7c9f86dd1522453b87f90c38763c43b23",
+        "runs/c13_row_123_96/reference/interfaces.safetensors": "d4a3a2e6b11dce0ad8db26bbe6a5bbf38c0a8e6f608b308cc70868a72dbb2276"
+      },
+      "updated_clock_seconds": 1792082975.6688607,
+      "metadata": {
+        "source_commit": "c6c970fd7fdde6c2fde354ac040c8f8c8d8b28ab",
+        "structure": {
+          "recipient_family": "llama",
+          "donor_family": "llama",
+          "recipient_width": 576,
+          "donor_width": 576,
+          "prefix_blocks": 11,
+          "transplanted_blocks": 6,
+          "suffix_blocks": 17,
+          "removed_recipient_blocks": 2,
+          "unique_parameters": 149342400,
+          "trainable_dense_seam_parameters": 667008,
+          "frozen_parameters": 148675392,
+          "context_limit": 2048,
+          "production_bypass": false,
+          "parent_weight_arithmetic": false,
+          "positive_control": true
+        },
+        "reproduction": "python scripts/campaign12_runner.py --registry campaigns/campaign_13/experiment_registry_budget96.json --out artifacts/campaign13-budget96"
+      }
+    },
+    "c13_full_42_96": {
+      "config_sha256": "1f4969b95538589de13e55103f5daa0038ff2c3b63d1ae1c45cc06324e9112a6",
+      "execution_status": "COMPLETED",
+      "evaluation_status": "NOT_RUN",
+      "reason": "Campaign 13 frozen-protocol run complete; gates evaluated by publisher",
+      "metrics": {
+        "ablation": "none",
+        "groups": {
+          "overall": {
+            "nll_sum": 20598.521362304688,
+            "target_tokens": 3051,
+            "examples": 32,
+            "token_nll": 6.751399987644932,
+            "perplexity": 855.2552715952648
+          },
+          "domain:math": {
+            "nll_sum": 13972.102722167969,
+            "target_tokens": 2226,
+            "examples": 16,
+            "token_nll": 6.276775706274918,
+            "perplexity": 532.0703440587371
+          },
+          "domain:language": {
+            "nll_sum": 6626.418640136719,
+            "target_tokens": 825,
+            "examples": 16,
+            "token_nll": 8.032022594105113,
+            "perplexity": 3077.960847184974
+          }
+        },
+        "metric": "recipient-token response NLL; not proof of task mastery",
+        "ablations": {
+          "bypass_graft": {
+            "ablation": "bypass_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 35339.37142944336,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 11.582881491131879,
+                "perplexity": 107246.10199897637
+              },
+              "domain:math": {
+                "nll_sum": 25149.40069580078,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 11.298023672866478,
+                "perplexity": 80662.06528049937
+              },
+              "domain:language": {
+                "nll_sum": 10189.970733642578,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 12.35147967714252,
+                "perplexity": 231302.0421389022
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          },
+          "zero_graft": {
+            "ablation": "zero_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 23822.503387451172,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 7.808096816601498,
+                "perplexity": 2460.4433016182657
+              },
+              "domain:math": {
+                "nll_sum": 16735.335815429688,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 7.518120312412258,
+                "perplexity": 1841.1033404011537
+              },
+              "domain:language": {
+                "nll_sum": 7087.167572021484,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 8.59050614790483,
+                "perplexity": 5380.336232255881
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          }
+        },
+        "graft_delta": {
+          "mean_relative_update": 0.44646226428449154,
+          "mean_input_rms": 663.8861351013184,
+          "mean_output_rms": 717.7784156799316,
+          "texts": 16,
+          "interpretation": "descriptive only; magnitude alone is not usefulness evidence"
+        },
+        "initial_validation": {
+          "ablation": "none",
+          "groups": {
+            "overall": {
+              "nll_sum": 36932.0339050293,
+              "target_tokens": 3051,
+              "examples": 32,
+              "token_nll": 12.104894757466173,
+              "perplexity": 180754.44965798242
+            },
+            "domain:math": {
+              "nll_sum": 26829.4384765625,
+              "target_tokens": 2226,
+              "examples": 16,
+              "token_nll": 12.052757626488095,
+              "perplexity": 171571.8874366174
+            },
+            "domain:language": {
+              "nll_sum": 10102.595428466797,
+              "target_tokens": 825,
+              "examples": 16,
+              "token_nll": 12.24557021632339,
+              "perplexity": 208057.59436145812
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        }
+      },
+      "artifacts": {
+        "runs/c13_full_42_96/config.json": "b3c093f226770a0d454b9e8879afb39c92b990ad946a4db0241424de8769f966",
+        "runs/c13_full_42_96/results.json": "c2ec91de7f85e26777aa9524a363a638e59b61d4d79eec8f8698daf94e699b3f",
+        "runs/c13_full_42_96/reference/reference.json": "45f3272d823da6f4d09850755d8ea5f5fd922c76b51d744a2c29d5b26d221380",
+        "runs/c13_full_42_96/reference/interfaces.safetensors": "6686d737b91353fbd2ddaf098c6d05d73f55fcce05c7623c3ef354e80c570b23"
+      },
+      "updated_clock_seconds": 1792083118.9595416,
+      "metadata": {
+        "source_commit": "c6c970fd7fdde6c2fde354ac040c8f8c8d8b28ab",
+        "structure": {
+          "recipient_family": "llama",
+          "donor_family": "llama",
+          "recipient_width": 576,
+          "donor_width": 576,
+          "prefix_blocks": 11,
+          "transplanted_blocks": 6,
+          "suffix_blocks": 17,
+          "removed_recipient_blocks": 2,
+          "unique_parameters": 149342400,
+          "trainable_dense_seam_parameters": 667008,
+          "frozen_parameters": 148675392,
+          "context_limit": 2048,
+          "production_bypass": false,
+          "parent_weight_arithmetic": false,
+          "positive_control": true
+        },
+        "reproduction": "python scripts/campaign12_runner.py --registry campaigns/campaign_13/experiment_registry_budget96.json --out artifacts/campaign13-budget96"
+      }
+    },
+    "c13_full_123_96": {
+      "config_sha256": "03c7cc25c39ad37b2a5bc4510ce285517c9ce052381f30946eee565b27d737b6",
+      "execution_status": "COMPLETED",
+      "evaluation_status": "NOT_RUN",
+      "reason": "Campaign 13 frozen-protocol run complete; gates evaluated by publisher",
+      "metrics": {
+        "ablation": "none",
+        "groups": {
+          "overall": {
+            "nll_sum": 20645.211212158203,
+            "target_tokens": 3051,
+            "examples": 32,
+            "token_nll": 6.766703117718192,
+            "perplexity": 868.4440113789184
+          },
+          "domain:math": {
+            "nll_sum": 14015.928192138672,
+            "target_tokens": 2226,
+            "examples": 16,
+            "token_nll": 6.296463698175504,
+            "perplexity": 542.6495405294751
+          },
+          "domain:language": {
+            "nll_sum": 6629.283020019531,
+            "target_tokens": 825,
+            "examples": 16,
+            "token_nll": 8.035494569720644,
+            "perplexity": 3088.666025497091
+          }
+        },
+        "metric": "recipient-token response NLL; not proof of task mastery",
+        "ablations": {
+          "bypass_graft": {
+            "ablation": "bypass_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 27275.36538696289,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 8.939811664032412,
+                "perplexity": 7629.759962098173
+              },
+              "domain:math": {
+                "nll_sum": 19074.55972290039,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 8.568984601482656,
+                "perplexity": 5265.780209258337
+              },
+              "domain:language": {
+                "nll_sum": 8200.8056640625,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 9.94037050189394,
+                "perplexity": 20751.431306240713
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          },
+          "zero_graft": {
+            "ablation": "zero_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 26592.982208251953,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 8.716152805064553,
+                "perplexity": 6100.663440984793
+              },
+              "domain:math": {
+                "nll_sum": 18228.29818725586,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 8.18881320182204,
+                "perplexity": 3600.4467062727163
+              },
+              "domain:language": {
+                "nll_sum": 8364.684020996094,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 10.13901093454072,
+                "perplexity": 25311.419449950936
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          }
+        },
+        "graft_delta": {
+          "mean_relative_update": 0.5714236944913864,
+          "mean_input_rms": 461.42746353149414,
+          "mean_output_rms": 524.8932266235352,
+          "texts": 16,
+          "interpretation": "descriptive only; magnitude alone is not usefulness evidence"
+        },
+        "initial_validation": {
+          "ablation": "none",
+          "groups": {
+            "overall": {
+              "nll_sum": 45097.0393371582,
+              "target_tokens": 3051,
+              "examples": 32,
+              "token_nll": 14.7810682848765,
+              "perplexity": 2626251.979497692
+            },
+            "domain:math": {
+              "nll_sum": 33774.75109863281,
+              "target_tokens": 2226,
+              "examples": 16,
+              "token_nll": 15.172844159313932,
+              "perplexity": 3885818.3352790866
+            },
+            "domain:language": {
+              "nll_sum": 11322.28823852539,
+              "target_tokens": 825,
+              "examples": 16,
+              "token_nll": 13.72398574366714,
+              "perplexity": 912538.6718653106
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        }
+      },
+      "artifacts": {
+        "runs/c13_full_123_96/config.json": "8a119b73abbe7554dcac96827eb759b63a07be3ba8dd4511fe5c5509d19cc0e1",
+        "runs/c13_full_123_96/results.json": "0e1a726cd7a2fb3e0a3f2ec2d45bee3642ac4504814d5cd55ce7b0765d216936",
+        "runs/c13_full_123_96/reference/reference.json": "4935d05a001eeeec56d92b6488d2969de2aa43066547c87be08f4ac5e5e51b31",
+        "runs/c13_full_123_96/reference/interfaces.safetensors": "ce7b2e85d449cc4f60b79ca449ba57a028538c86a6886457bf45b705ab650e33"
+      },
+      "updated_clock_seconds": 1792083261.2881644,
+      "metadata": {
+        "source_commit": "c6c970fd7fdde6c2fde354ac040c8f8c8d8b28ab",
+        "structure": {
+          "recipient_family": "llama",
+          "donor_family": "llama",
+          "recipient_width": 576,
+          "donor_width": 576,
+          "prefix_blocks": 11,
+          "transplanted_blocks": 6,
+          "suffix_blocks": 17,
+          "removed_recipient_blocks": 2,
+          "unique_parameters": 149342400,
+          "trainable_dense_seam_parameters": 667008,
+          "frozen_parameters": 148675392,
+          "context_limit": 2048,
+          "production_bypass": false,
+          "parent_weight_arithmetic": false,
+          "positive_control": true
+        },
+        "reproduction": "python scripts/campaign12_runner.py --registry campaigns/campaign_13/experiment_registry_budget96.json --out artifacts/campaign13-budget96"
+      }
+    },
+    "c13_rand_42_96": {
+      "config_sha256": "9aff80ef132d844cb8e74d7c911c4bc7885baabce778e530cd681a41c91fbe64",
+      "execution_status": "COMPLETED",
+      "evaluation_status": "NOT_RUN",
+      "reason": "Campaign 13 frozen-protocol run complete; gates evaluated by publisher",
+      "metrics": {
+        "ablation": "none",
+        "groups": {
+          "overall": {
+            "nll_sum": 20751.48944091797,
+            "target_tokens": 3051,
+            "examples": 32,
+            "token_nll": 6.801537017672229,
+            "perplexity": 899.228359895908
+          },
+          "domain:math": {
+            "nll_sum": 14055.204162597656,
+            "target_tokens": 2226,
+            "examples": 16,
+            "token_nll": 6.314107889756359,
+            "perplexity": 552.3091201219221
+          },
+          "domain:language": {
+            "nll_sum": 6696.2852783203125,
+            "target_tokens": 825,
+            "examples": 16,
+            "token_nll": 8.116709428267045,
+            "perplexity": 3349.9792416148907
+          }
+        },
+        "metric": "recipient-token response NLL; not proof of task mastery",
+        "ablations": {
+          "bypass_graft": {
+            "ablation": "bypass_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 20751.435150146484,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 6.801519223253519,
+                "perplexity": 899.2123587923217
+              },
+              "domain:math": {
+                "nll_sum": 14055.819580078125,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 6.31438435762719,
+                "perplexity": 552.461836958079
+              },
+              "domain:language": {
+                "nll_sum": 6695.615570068359,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 8.11589766068892,
+                "perplexity": 3347.2609405427697
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          },
+          "zero_graft": {
+            "ablation": "zero_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 36343.20373535156,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 11.91189896275043,
+                "perplexity": 149029.4121981645
+              },
+              "domain:math": {
+                "nll_sum": 25653.472900390625,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 11.524471204128762,
+                "perplexity": 101161.26484627348
+              },
+              "domain:language": {
+                "nll_sum": 10689.730834960938,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 12.957249496922348,
+                "perplexity": 423898.5755210418
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          }
+        },
+        "graft_delta": {
+          "mean_relative_update": 0.0008638182225695346,
+          "mean_input_rms": 647.3629875183105,
+          "mean_output_rms": 647.369270324707,
+          "texts": 16,
+          "interpretation": "descriptive only; magnitude alone is not usefulness evidence"
+        },
+        "initial_validation": {
+          "ablation": "none",
+          "groups": {
+            "overall": {
+              "nll_sum": 43315.45294189453,
+              "target_tokens": 3051,
+              "examples": 32,
+              "token_nll": 14.197133052079492,
+              "perplexity": 1464659.0633394264
+            },
+            "domain:math": {
+              "nll_sum": 31010.0322265625,
+              "target_tokens": 2226,
+              "examples": 16,
+              "token_nll": 13.930832087404537,
+              "perplexity": 1122234.2109068832
+            },
+            "domain:language": {
+              "nll_sum": 12305.420715332031,
+              "target_tokens": 825,
+              "examples": 16,
+              "token_nll": 14.915661473129735,
+              "perplexity": 3004619.432371251
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        }
+      },
+      "artifacts": {
+        "runs/c13_rand_42_96/config.json": "71ef05023a467ebf3d569c298a68007f709c54eff16b8b4f82c50d6697db368b",
+        "runs/c13_rand_42_96/results.json": "54c7c499508b2b7fce28084d777f63e3ff1246ded7ee1f15790a3eda22e0ec9f"
+      },
+      "updated_clock_seconds": 1792083400.3430672,
+      "metadata": {
+        "source_commit": "c6c970fd7fdde6c2fde354ac040c8f8c8d8b28ab",
+        "structure": {
+          "recipient_family": "llama",
+          "donor_family": "llama",
+          "recipient_width": 576,
+          "donor_width": 576,
+          "prefix_blocks": 11,
+          "transplanted_blocks": 6,
+          "suffix_blocks": 17,
+          "removed_recipient_blocks": 2,
+          "unique_parameters": 149342400,
+          "trainable_dense_seam_parameters": 667008,
+          "frozen_parameters": 148675392,
+          "context_limit": 2048,
+          "production_bypass": false,
+          "parent_weight_arithmetic": false,
+          "positive_control": true
+        },
+        "reproduction": "python scripts/campaign12_runner.py --registry campaigns/campaign_13/experiment_registry_budget96.json --out artifacts/campaign13-budget96"
+      }
+    },
+    "c13_rand_123_96": {
+      "config_sha256": "1e033b3131b54b0e366a268ec495d9d36d59deb5378d9930adb8620f3dbd8f45",
+      "execution_status": "COMPLETED",
+      "evaluation_status": "NOT_RUN",
+      "reason": "Campaign 13 frozen-protocol run complete; gates evaluated by publisher",
+      "metrics": {
+        "ablation": "none",
+        "groups": {
+          "overall": {
+            "nll_sum": 20516.007446289062,
+            "target_tokens": 3051,
+            "examples": 32,
+            "token_nll": 6.724355111861377,
+            "perplexity": 832.4349759701892
+          },
+          "domain:math": {
+            "nll_sum": 13864.806610107422,
+            "target_tokens": 2226,
+            "examples": 16,
+            "token_nll": 6.228574398071618,
+            "perplexity": 507.0321420203832
+          },
+          "domain:language": {
+            "nll_sum": 6651.200836181641,
+            "target_tokens": 825,
+            "examples": 16,
+            "token_nll": 8.06206161961411,
+            "perplexity": 3171.8224898849817
+          }
+        },
+        "metric": "recipient-token response NLL; not proof of task mastery",
+        "ablations": {
+          "bypass_graft": {
+            "ablation": "bypass_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 20514.966796875,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 6.724014027163225,
+                "perplexity": 832.1510935544053
+              },
+              "domain:math": {
+                "nll_sum": 13864.731018066406,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 6.228540439382932,
+                "perplexity": 507.01492416606766
+              },
+              "domain:language": {
+                "nll_sum": 6650.235778808594,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 8.060891853101326,
+                "perplexity": 3168.1143673934157
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          },
+          "zero_graft": {
+            "ablation": "zero_graft",
+            "groups": {
+              "overall": {
+                "nll_sum": 25490.301635742188,
+                "target_tokens": 3051,
+                "examples": 32,
+                "token_nll": 8.354736688214418,
+                "perplexity": 4250.265320039198
+              },
+              "domain:math": {
+                "nll_sum": 17888.03778076172,
+                "target_tokens": 2226,
+                "examples": 16,
+                "token_nll": 8.035955876352974,
+                "perplexity": 3090.0911763101926
+              },
+              "domain:language": {
+                "nll_sum": 7602.263854980469,
+                "target_tokens": 825,
+                "examples": 16,
+                "token_nll": 9.214865278764204,
+                "perplexity": 10045.351596373044
+              }
+            },
+            "metric": "recipient-token response NLL; not proof of task mastery"
+          }
+        },
+        "graft_delta": {
+          "mean_relative_update": 0.0009281846505473368,
+          "mean_input_rms": 461.15652656555176,
+          "mean_output_rms": 461.1516990661621,
+          "texts": 16,
+          "interpretation": "descriptive only; magnitude alone is not usefulness evidence"
+        },
+        "initial_validation": {
+          "ablation": "none",
+          "groups": {
+            "overall": {
+              "nll_sum": 41809.492614746094,
+              "target_tokens": 3051,
+              "examples": 32,
+              "token_nll": 13.703537402407767,
+              "perplexity": 894068.2579430452
+            },
+            "domain:math": {
+              "nll_sum": 31352.480041503906,
+              "target_tokens": 2226,
+              "examples": 16,
+              "token_nll": 14.084672076147307,
+              "perplexity": 1308866.529718162
+            },
+            "domain:language": {
+              "nll_sum": 10457.012573242188,
+              "target_tokens": 825,
+              "examples": 16,
+              "token_nll": 12.675166755445076,
+              "perplexity": 319709.08613008185
+            }
+          },
+          "metric": "recipient-token response NLL; not proof of task mastery"
+        }
+      },
+      "artifacts": {
+        "runs/c13_rand_123_96/config.json": "c9de755623b5481a21a1f062b4d92cfd4aeb8b96d34556bceac1dcf87bfaba60",
+        "runs/c13_rand_123_96/results.json": "18e12b62b4990c0dd14b8454171d2c83e90f0372740999e6d705757d2f92197d"
+      },
+      "updated_clock_seconds": 1792083539.1070132,
+      "metadata": {
+        "source_commit": "c6c970fd7fdde6c2fde354ac040c8f8c8d8b28ab",
+        "structure": {
+          "recipient_family": "llama",
+          "donor_family": "llama",
+          "recipient_width": 576,
+          "donor_width": 576,
+          "prefix_blocks": 11,
+          "transplanted_blocks": 6,
+          "suffix_blocks": 17,
+          "removed_recipient_blocks": 2,
+          "unique_parameters": 149342400,
+          "trainable_dense_seam_parameters": 667008,
+          "frozen_parameters": 148675392,
+          "context_limit": 2048,
+          "production_bypass": false,
+          "parent_weight_arithmetic": false,
+          "positive_control": true
+        },
+        "reproduction": "python scripts/campaign12_runner.py --registry campaigns/campaign_13/experiment_registry_budget96.json --out artifacts/campaign13-budget96"
+      }
+    }
+  }
+}

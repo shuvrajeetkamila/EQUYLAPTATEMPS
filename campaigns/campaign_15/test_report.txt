@@ -1,0 +1,11 @@
+Campaign 15 test report (local, 2026-10-15)
+============================================
+Command: PYTHONPATH=src .venv/bin/python -m pytest tests/ -q
+Result: 288 passed, 0 failed, 0 skipped (284 historical + 1 segmentation
+equivalence + 3 panel/decision-rule tests).
+Lint: ruff check . clean; ruff format --check . clean (whole repository).
+The Campaign 15 tests recompute gate outcomes and paired orderings from
+the SHA-verified raw records (jobs 38865626143/38865628701/38865631168),
+verify exact data-order pairing from the training traces, and unit-test
+the frozen decision function on hand-computed cases. CI reruns the
+offline suite on push.

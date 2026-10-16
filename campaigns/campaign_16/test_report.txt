@@ -1,0 +1,10 @@
+Campaign 16 test report (local, 2026-10-16)
+============================================
+Command: PYTHONPATH=src .venv/bin/python -m pytest tests/ -q
+Result: 291 passed, 0 failed, 0 skipped (288 historical + 3 Campaign 16).
+Lint: ruff check . clean; ruff format --check . clean (whole repository).
+The Campaign 16 tests verify the frozen ranking/decision rules on
+hand-computed cases, recompute the LR-monotone paired pattern from the
+SHA-verified records (jobs 38882548685/38885462762/38888327387), and check
+the baseline-LR cells against Campaign 15's independent records.
+CI reruns the offline suite on push.

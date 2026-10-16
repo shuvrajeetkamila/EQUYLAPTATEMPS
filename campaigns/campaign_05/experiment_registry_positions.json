@@ -1,0 +1,139 @@
+{
+  "campaign": 5,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "registered_date": "2026-10-13",
+  "parents": {
+    "recipient": {
+      "id": "state-spaces/mamba-130m-hf",
+      "revision": "1e76775f628fbf1350fbe4dbb3d971ba64af25a1"
+    },
+    "donor": {
+      "id": "Qwen/Qwen2.5-Math-1.5B",
+      "revision": "4a83ca6e4526a4f2da3aa259ec36c259f66b2ab2"
+    }
+  },
+  "compute": {
+    "device": "cpu",
+    "dtype": "float32",
+    "threads": 2,
+    "parallel_experiments": 1,
+    "max_session_seconds": 3300,
+    "minimum_ram_bytes": 12884901888,
+    "minimum_disk_bytes": 12884901888
+  },
+  "data": {
+    "seed": 42,
+    "gsm_train_rows": 32,
+    "gsm_dev_rows": 16,
+    "wiki_train_windows": 32,
+    "wiki_dev_windows": 16,
+    "wiki_characters": 192,
+    "statistic_text_windows": 8
+  },
+  "training": {
+    "steps": 32,
+    "batch_size": 1,
+    "learning_rate": 0.0003,
+    "max_length": 512,
+    "gradient_checkpointing": true,
+    "diagnostic_train_rows": 8,
+    "checkpoint_every": 8,
+    "objective": "direct child real-text and human GSM8K TRAIN next-token targets only"
+  },
+  "phase": "positions",
+  "experiments": [
+    {
+      "id": "c05_w4_early_42",
+      "stage": "calibration",
+      "seed": 42,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "donor_sector": [
+        2,
+        6
+      ],
+      "interface": {
+        "family": "bottleneck",
+        "kind": "causal_attention",
+        "bottleneck": 128,
+        "heads": 4,
+        "max_positions": 512,
+        "donor_delta": true
+      },
+      "initialization": "bottleneck_covariance"
+    },
+    {
+      "id": "c05_w4_early_42_randomtwin",
+      "stage": "calibration",
+      "seed": 42,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "donor_sector": [
+        2,
+        6
+      ],
+      "interface": {
+        "family": "bottleneck",
+        "kind": "causal_attention",
+        "bottleneck": 128,
+        "heads": 4,
+        "max_positions": 512,
+        "donor_delta": true
+      },
+      "initialization": "bottleneck_covariance",
+      "random_sector": true,
+      "random_sector_seed": 2024
+    },
+    {
+      "id": "c05_w4_mid_42",
+      "stage": "calibration",
+      "seed": 42,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "donor_sector": [
+        12,
+        16
+      ],
+      "interface": {
+        "family": "bottleneck",
+        "kind": "causal_attention",
+        "bottleneck": 128,
+        "heads": 4,
+        "max_positions": 512,
+        "donor_delta": true
+      },
+      "initialization": "bottleneck_covariance"
+    },
+    {
+      "id": "c05_w4_mid_42_randomtwin",
+      "stage": "calibration",
+      "seed": 42,
+      "recipient_cut": [
+        11,
+        13
+      ],
+      "donor_sector": [
+        12,
+        16
+      ],
+      "interface": {
+        "family": "bottleneck",
+        "kind": "causal_attention",
+        "bottleneck": 128,
+        "heads": 4,
+        "max_positions": 512,
+        "donor_delta": true
+      },
+      "initialization": "bottleneck_covariance",
+      "random_sector": true,
+      "random_sector_seed": 2024
+    }
+  ],
+  "registration_revision": "positions frozen in campaign_05_preregistration.md"
+}

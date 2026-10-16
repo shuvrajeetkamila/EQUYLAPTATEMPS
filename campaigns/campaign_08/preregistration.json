@@ -1,0 +1,31 @@
+{
+  "campaign": 8,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "frozen_date": "2026-10-14",
+  "status": "FROZEN_BEFORE_TRAINING",
+  "pairing": {
+    "recipient": "state-spaces/mamba-130m-hf@1e76775f628fbf1350fbe4dbb3d971ba64af25a1",
+    "donor": "HuggingFaceTB/SmolLM-135M@1d461723eec654e65efdc40cf49301c89c0c92f4",
+    "recipient_cut": [11, 13],
+    "donor_sector": [24, 30]
+  },
+  "calibration": {
+    "method": "covariance_orthogonal",
+    "definition": "orthogonal variance-preserving seam pair + input-seam covariance whitening + residual-RMS scale matching; statistics from 8 unlabeled TRAIN windows per child; no hidden-activation targets",
+    "applied_identically_to": ["pretrained child", "random-sector twin"]
+  },
+  "conditions": {
+    "1_original_pretrained": "stored Campaign 7 c07_dense_pre_42",
+    "2_calibrated_pretrained": "c08_cal_pre_42 (new)",
+    "3_original_twin": "stored Campaign 7 c07_dense_rand_42",
+    "4_calibrated_twin": "c08_cal_rand_42 (new)"
+  },
+  "protocol": {"steps_primary": 32, "steps_stage_E": 96, "seeds": [42, 123], "random_sector_seed": 1234, "learning_rate": 0.0003, "batch_size": 1},
+  "gates": {
+    "G_B": "macro_pretrained <= 0.98 * macro_twin (same condition)",
+    "G_C": "language_ratio_vs_host <= 1.50 AND macro_pretrained <= 6.00",
+    "promotion": "G_B and G_C at seed 42 AND seed-123 replication benefit >= 1%",
+    "held_out": "NOT_RUN_NO_PROMOTION unless promoted"
+  },
+  "outcomes": {"A": "reproducible advantage + usefulness", "B": "reproducible advantage, not useful", "C": "valid, no reliable useful advantage", "D": "inconclusive (documented limitation)"}
+}

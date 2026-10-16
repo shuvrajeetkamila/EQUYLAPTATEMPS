@@ -1,0 +1,32 @@
+{
+  "campaign": 10,
+  "project": "HETEROGENEOUS AI MODEL SURGERY",
+  "frozen_date": "2026-10-14",
+  "status": "FROZEN_BEFORE_TRAINING",
+  "hypothesis": "H10: Campaign 9's donor-specific advantage survives an awake (activity-calibrated) random twin and a generic trained output pathway",
+  "pairing": {
+    "recipient": "state-spaces/mamba-130m-hf@1e76775f628fbf1350fbe4dbb3d971ba64af25a1",
+    "donor": "HuggingFaceTB/SmolLM-135M@1d461723eec654e65efdc40cf49301c89c0c92f4",
+    "recipient_cut": [11, 13],
+    "donor_sector": [24, 30]
+  },
+  "interface": {
+    "input_init": "donor_native_geometry (Campaign 9, input seam only)",
+    "output_init": "generic DenseSeam default (trained); no geometry preconditioning",
+    "trainable": "input_seam and output_seam only (888768 params), identical in B/C/D"
+  },
+  "awake_calibration": {
+    "metric": "mean ||graft_out-graft_in||/||graft_in|| over 8 TRAIN windows at initialization",
+    "target": "native donor sector relative update on the same windows",
+    "adjustment": "single scalar on each graft block's o_proj/down_proj weights, bounds [0.05, 100], one correction allowed",
+    "success": "achieved activity within [0.5, 2.0] x target, all finite; else AWAKE_CALIBRATION_FAILED / INVALID_CONTROL"
+  },
+  "conditions": {"A": "stored Campaign 9 (historical)", "B": "trained-output pretrained", "C": "trained-output raw twin", "D": "trained-output awake twin"},
+  "protocol": {"steps_primary": 32, "steps_secondary": 96, "seeds": [42, 123], "random_sector_seed": 1234},
+  "gates": {
+    "G_B": "benefit vs awake twin >= 2% (seed 42) and >= 1% (seed 123)",
+    "G_C": "language_ratio_vs_host <= 1.50 AND macro <= 6.00",
+    "held_out": "NOT_RUN_NO_PROMOTION unless all promotion gates pass"
+  },
+  "outcomes": {"A": "gates pass + usefulness", "B": "replicated advantage vs awake twin, not useful", "C": "no reliable advantage vs awake twin", "D": "awake calibration/validity failure"}
+}

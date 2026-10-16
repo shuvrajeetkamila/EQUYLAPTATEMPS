@@ -1,0 +1,33 @@
+{
+  "consistent": true,
+  "frozen_jobs": [
+    {
+      "id": "c19-diagnose-1",
+      "covers": [
+        "D0 donor validity",
+        "A native",
+        "B identity control",
+        "C/D/E step-0"
+      ],
+      "training": false
+    },
+    {
+      "id": "c19-train-1",
+      "covers": [
+        "C/D/E x seeds {42,123,31415} (9 runs)",
+        "H seed 42 (1 run)"
+      ],
+      "training": true,
+      "steps": 96
+    },
+    {
+      "id": "c19-heldout-1",
+      "covers": [
+        "step-96 C/D/E all seeds on sealed slice"
+      ],
+      "training": false,
+      "condition": "only if primary success rule met"
+    }
+  ],
+  "note": "10 training runs confirmed; held-out folded into train job post-decision (checkpoint locality), rule unchanged"
+}

@@ -1,0 +1,18 @@
+{
+  "campaign": 19,
+  "failures": [
+    {
+      "id": "F-C19-001",
+      "experiment": "c19-train-1 attempt 1 (run 38947619114)",
+      "category": "implementation_failure_pre_results",
+      "stage": "train_C_s42 segment 2",
+      "detail": "fit_resumable rejected the second segment: the runner changed TrainingOptions.steps between segments (32 then 96), violating the resumable identity contract. Segment 1 (32 steps) had completed; no run scores were produced.",
+      "compute_completed": "partial (32/96 steps of first run; unscored)",
+      "usable_evidence": "failure.json + training journal preserved in train_38947619114/",
+      "root_cause": "runner bug: must keep steps=96 and stop via interrupt_after (the Campaign 15/16 procedure)",
+      "corrective_action": "runner fixed; frozen design, seeds, LR, and budget unchanged",
+      "rerun_justification": "no completed experiment repeated; the matrix had produced no scores",
+      "replacement_run": "38950005531"
+    }
+  ]
+}
